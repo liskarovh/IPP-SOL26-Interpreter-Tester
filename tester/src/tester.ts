@@ -218,9 +218,12 @@ function main(): void {
   }
 
   // TODO: Your code for discovering and executing the test cases goes here.
+  const report = new TestReport({
+    discovered_test_cases: [],
+    unexecuted: {},
+    results: null,
+  });
 
-  // Example of how to write the final report:
-  const report = new TestReport({ discovered_test_cases: [], unexecuted: {}, results: {} });
   writeResult(report, args.output);
 }
 

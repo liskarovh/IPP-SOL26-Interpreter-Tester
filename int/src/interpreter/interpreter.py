@@ -15,9 +15,9 @@ from lxml import etree
 from lxml.etree import ParseError
 from pydantic import ValidationError
 
-from interpreter.error_codes import ErrorCode
-from interpreter.exceptions import InterpreterError
-from interpreter.input_model import Program
+from .error_codes import ErrorCode
+from .exceptions import InterpreterError
+from .input_model import Program
 
 logger = logging.getLogger(__name__)
 
@@ -58,4 +58,3 @@ class Interpreter:
         """
         logger.info("Executing program")
         # TODO: Your logic goes here.
-

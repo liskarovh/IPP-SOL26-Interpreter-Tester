@@ -6,35 +6,24 @@ ARG NODE_IMAGE=node:24.12-bookworm-slim
 # -----------------------------------------------------------------------------
 # Shared Node.js toolchain
 # -----------------------------------------------------------------------------
-# Tato stage slouží jen jako zdroj Node.js runtime a npm toolingu
-# pro další stages.
 FROM ${NODE_IMAGE} AS node_toolchain
 
 
 # -----------------------------------------------------------------------------
 # check
 # -----------------------------------------------------------------------------
-# Tato stage vytváří prostředí pro kontroly kvality obou částí projektu.
-# Musí umět:
-#   - Python quality tools pro int
-#   - TypeScript quality tools pro tester
-#   - bash jako entrypoint
-#   - wrappery ./ruff, ./mypy, ./eslint, ./prettier v bind mountnutých adresářích
 FROM ${PYTHON_IMAGE} AS check
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends bash ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Z Node image se zkopíruje pouze runtime a globální toolchain.
+
 COPY --from=node_toolchain /usr/local/bin/ /usr/local/bin/
 COPY --from=node_toolchain /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
 WORKDIR /src
 
-# Python check prostředí:
-# nejdřív runtime dependencies interpretu (kvůli mypy pluginům),
-# potom quality tools.
 COPY int/requirements.txt /tmp/int-requirements.txt
 RUN python -m venv /opt/check-python \
     && /opt/check-python/bin/pip install --no-cache-dir --upgrade pip \
@@ -45,8 +34,7 @@ RUN python -m venv /opt/check-python \
         "types-lxml>=2026.2.16" \
     && rm -f /tmp/int-requirements.txt
 
-# /src se použije i jako místo pro npm tooling,
-# aby modulové rozlišení fungovalo i pro mountnutý tester.
+
 RUN mkdir -p /src/int /src/tester /usr/local/lib/ipp
 COPY <<'JSON' /src/package.json
 {
@@ -65,14 +53,11 @@ COPY <<'JSON' /src/package.json
 JSON
 RUN npm install --prefix /src --no-fund --no-audit
 
-# Stabilní cíle, na které budou ukazovat wrappery vytvářené v bind mountech.
 RUN ln -s /opt/check-python/bin/ruff /usr/local/bin/ruff-real \
     && ln -s /opt/check-python/bin/mypy /usr/local/bin/mypy-real \
     && ln -s /src/node_modules/.bin/eslint /usr/local/bin/eslint-real \
     && ln -s /src/node_modules/.bin/prettier /usr/local/bin/prettier-real
 
-# Tento skript se spustí při startu bash a vytvoří wrappery přímo
-# v /src/int a /src/tester, aby šly nástroje volat jako ./ruff atd.
 COPY <<'BASH' /usr/local/lib/ipp/check-shell-init.sh
 #!/bin/bash
 set -euo pipefail
@@ -103,7 +88,6 @@ ENTRYPOINT ["/bin/bash"]
 # -----------------------------------------------------------------------------
 # build-test
 # -----------------------------------------------------------------------------
-# Tester je v TypeScriptu, proto má vlastní build stage.
 FROM ${NODE_IMAGE} AS build-test
 
 WORKDIR /work/tester
@@ -119,8 +103,6 @@ RUN npm run build
 # -----------------------------------------------------------------------------
 # runtime
 # -----------------------------------------------------------------------------
-# Finální běhová image interpretu.
-# Musí být co nejjednodušší a nemá obsahovat quality tools.
 FROM ${PYTHON_IMAGE} AS runtime
 
 ENV VIRTUAL_ENV=/opt/runtime-python
@@ -148,8 +130,6 @@ ENTRYPOINT ["/usr/local/bin/solint"]
 # -----------------------------------------------------------------------------
 # test
 # -----------------------------------------------------------------------------
-# Finální image pro integrační testování.
-# Musí vycházet z runtime a spouštět tester.
 FROM runtime AS test
 
 COPY --from=node_toolchain /usr/local/bin/ /usr/local/bin/

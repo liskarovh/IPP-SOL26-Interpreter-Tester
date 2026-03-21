@@ -123,6 +123,15 @@ ENTRYPOINT ["/usr/local/bin/solint"]
 # -----------------------------------------------------------------------------
 FROM runtime AS test
 
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        build-essential \
+        diffutils \
+        libxml2-dev \
+        libxslt1-dev \
+        zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=node_toolchain /usr/local/bin/ /usr/local/bin/
 COPY --from=node_toolchain /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
@@ -132,6 +141,12 @@ COPY --from=tester-runtime-deps /work/tester/package.json ./package.json
 COPY --from=tester-runtime-deps /work/tester/node_modules ./node_modules
 COPY --from=build-test /work/tester/dist ./dist
 
+COPY tester/tools/sol2xml ./tools/sol2xml
+
+RUN /opt/runtime-python/bin/pip install --no-cache-dir -r /app/tester/tools/sol2xml/requirements.txt
+
 ENV SOL26_INTERPRETER=/usr/local/bin/solint
+ENV SOL26_COMPILER_PYTHON=/opt/runtime-python/bin/python
+ENV SOL26_COMPILER_SCRIPT=/app/tester/tools/sol2xml/sol_to_xml.py
 
 ENTRYPOINT ["node", "/app/tester/dist/tester.js"]

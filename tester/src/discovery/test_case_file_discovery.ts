@@ -27,9 +27,9 @@ import { TestCaseDefinitionFile } from "../models.js";
  * @returns Sorted directory entries.
  */
 function getSortedDirectoryEntries(directoryPath: string): Dirent[] {
-    const entries = readdirSync(directoryPath, { withFileTypes: true });
-    entries.sort((left, right) => left.name.localeCompare(right.name));
-    return entries;
+  const entries = readdirSync(directoryPath, { withFileTypes: true });
+  entries.sort((left, right) => left.name.localeCompare(right.name));
+  return entries;
 }
 
 /**
@@ -44,17 +44,17 @@ function getSortedDirectoryEntries(directoryPath: string): Dirent[] {
  * @returns Path to the sibling file, or null when the file does not exist.
  */
 function getSiblingFilePathIfExists(
-    directoryPath: string,
-    testCaseName: string,
-    extension: ".in" | ".out"
+  directoryPath: string,
+  testCaseName: string,
+  extension: ".in" | ".out"
 ): string | null {
-    const siblingFilePath = join(directoryPath, `${testCaseName}${extension}`);
+  const siblingFilePath = join(directoryPath, `${testCaseName}${extension}`);
 
-    if (!existsSync(siblingFilePath)) {
-        return null;
-    }
+  if (!existsSync(siblingFilePath)) {
+    return null;
+  }
 
-    return siblingFilePath;
+  return siblingFilePath;
 }
 
 /**
@@ -68,20 +68,20 @@ function getSiblingFilePathIfExists(
  * @returns Created discovered test case file model.
  */
 function createDiscoveredTestCaseFile(
-    directoryPath: string,
-    testFileName: string
+  directoryPath: string,
+  testFileName: string
 ): TestCaseDefinitionFile {
-    const testCaseName = basename(testFileName, ".test");
-    const testSourcePath = join(directoryPath, testFileName);
-    const stdinFilePath = getSiblingFilePathIfExists(directoryPath, testCaseName, ".in");
-    const expectedStdoutFilePath = getSiblingFilePathIfExists(directoryPath, testCaseName, ".out");
+  const testCaseName = basename(testFileName, ".test");
+  const testSourcePath = join(directoryPath, testFileName);
+  const stdinFilePath = getSiblingFilePathIfExists(directoryPath, testCaseName, ".in");
+  const expectedStdoutFilePath = getSiblingFilePathIfExists(directoryPath, testCaseName, ".out");
 
-    return new TestCaseDefinitionFile({
-        name: testCaseName,
-        test_source_path: testSourcePath,
-        stdin_file: stdinFilePath,
-        expected_stdout_file: expectedStdoutFilePath,
-    });
+  return new TestCaseDefinitionFile({
+    name: testCaseName,
+    test_source_path: testSourcePath,
+    stdin_file: stdinFilePath,
+    expected_stdout_file: expectedStdoutFilePath,
+  });
 }
 
 /**
@@ -95,46 +95,43 @@ function createDiscoveredTestCaseFile(
  * @returns Discovered test case file models from the processed directory tree.
  */
 function discoverTestCaseFilesInDirectory(
-    directoryPath: string,
-    recursive: boolean
+  directoryPath: string,
+  recursive: boolean
 ): TestCaseDefinitionFile[] {
-    const discoveredFiles: TestCaseDefinitionFile[] = [];
-    const entries = getSortedDirectoryEntries(directoryPath);
+  const discoveredFiles: TestCaseDefinitionFile[] = [];
+  const entries = getSortedDirectoryEntries(directoryPath);
 
-    for (const entry of entries) {
-        if (!entry.isFile()) {
-            continue;
-        }
-
-        if (!entry.name.endsWith(".test")) {
-            continue;
-        }
-
-        const discoveredFile = createDiscoveredTestCaseFile(directoryPath, entry.name);
-        discoveredFiles.push(discoveredFile);
+  for (const entry of entries) {
+    if (!entry.isFile()) {
+      continue;
     }
 
-    if (!recursive) {
-        return discoveredFiles;
+    if (!entry.name.endsWith(".test")) {
+      continue;
     }
 
-    for (const entry of entries) {
-        if (!entry.isDirectory()) {
-            continue;
-        }
+    const discoveredFile = createDiscoveredTestCaseFile(directoryPath, entry.name);
+    discoveredFiles.push(discoveredFile);
+  }
 
-        const subdirectoryPath = join(directoryPath, entry.name);
-        const discoveredFilesInSubdirectory = discoverTestCaseFilesInDirectory(
-            subdirectoryPath,
-            true
-        );
-
-        for (const discoveredFile of discoveredFilesInSubdirectory) {
-            discoveredFiles.push(discoveredFile);
-        }
-    }
-
+  if (!recursive) {
     return discoveredFiles;
+  }
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) {
+      continue;
+    }
+
+    const subdirectoryPath = join(directoryPath, entry.name);
+    const discoveredFilesInSubdirectory = discoverTestCaseFilesInDirectory(subdirectoryPath, true);
+
+    for (const discoveredFile of discoveredFilesInSubdirectory) {
+      discoveredFiles.push(discoveredFile);
+    }
+  }
+
+  return discoveredFiles;
 }
 
 /**
@@ -148,14 +145,14 @@ function discoverTestCaseFilesInDirectory(
  * @returns Discovered test case file models.
  */
 export function discoverTestCaseFiles(
-    testsDir: string,
-    recursive: boolean
+  testsDir: string,
+  recursive: boolean
 ): TestCaseDefinitionFile[] {
-    const discoveredFiles = discoverTestCaseFilesInDirectory(testsDir, recursive);
+  const discoveredFiles = discoverTestCaseFilesInDirectory(testsDir, recursive);
 
-    discoveredFiles.sort((left, right) =>
-        left.test_source_path.localeCompare(right.test_source_path)
-    );
+  discoveredFiles.sort((left, right) =>
+    left.test_source_path.localeCompare(right.test_source_path)
+  );
 
-    return discoveredFiles;
+  return discoveredFiles;
 }

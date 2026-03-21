@@ -18,9 +18,18 @@ import { existsSync, lstatSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
 
-import { TestReport } from "./models.js";
-
 import { pino } from "pino";
+
+import { TestReport, UnexecutedReason, UnexecutedReasonCode } from "./models.js";
+import {
+  loadTestCaseDefinitions,
+  type LoadedTestCase,
+} from "./discovery/load_test_case_definitions.js";
+import { matchesConfiguredFilters } from "./discovery/filter_matcher.js";
+import { executeTestCase } from "./execution/test_case_executor.js";
+import { resolveTestCase } from "./evaluation/test_resolver.js";
+import { buildReport, buildUnexecuted, type ResolvedTestCase } from "./report/report_builder.js";
+import { buildDryRunReport } from "./report/build_dry_run_report.js";
 
 const logger = pino({
   transport: {
@@ -124,6 +133,72 @@ function listOrNull(values: string[] | undefined): string[] | null {
   return values;
 }
 
+/**
+ * @brief CLI filter values are normalized before validation is performed.
+ *
+ * Null is converted into an empty array. Individual values are trimmed, and
+ * empty values are removed so that validation is performed over the same
+ * effective values that are later used by filter matching.
+ *
+ * @param values Raw CLI filter values.
+ * @returns Normalized non-empty filter values.
+ */
+function normalizeCliFilterValues(values: string[] | null): string[] {
+  if (values === null) {
+    return [];
+  }
+
+  const normalizedValues: string[] = [];
+
+  for (const value of values) {
+    const trimmedValue = value.trim();
+
+    if (trimmedValue === "") {
+      continue;
+    }
+
+    normalizedValues.push(trimmedValue);
+  }
+
+  return normalizedValues;
+}
+
+/**
+ * @brief Regex filter syntax is validated when regex matching is enabled.
+ *
+ * All configured include and exclude filters are normalized and then compiled
+ * as regular expressions. When one of them is invalid, a CLI validation error
+ * is reported and the process is terminated with exit code 2.
+ *
+ * @param args Parsed CLI arguments.
+ */
+function validateRegexFilters(args: CliArguments): void {
+  if (!args.regex_filters) {
+    return;
+  }
+
+  const filterGroups = [
+    ...normalizeCliFilterValues(args.include),
+    ...normalizeCliFilterValues(args.include_category),
+    ...normalizeCliFilterValues(args.include_test),
+    ...normalizeCliFilterValues(args.exclude),
+    ...normalizeCliFilterValues(args.exclude_category),
+    ...normalizeCliFilterValues(args.exclude_test),
+  ];
+
+  for (const filterValue of filterGroups) {
+    try {
+      void new RegExp(filterValue);
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown regular expression error";
+
+      console.error(`Invalid regular expression filter "${filterValue}": ${errorMessage}`);
+      process.exit(2);
+    }
+  }
+}
+
 function parseCliArgumentsRaw(argv: string[]) {
   return parseArgs({
     args: normalizeArgv(argv),
@@ -193,38 +268,212 @@ function parseArguments(): CliArguments {
     }
   }
 
+  validateRegexFilters(args);
   return args;
 }
 
-function main(): void {
-  /**
-   * The main entry point for the SOL26 integration testing script.
-   * It parses command-line arguments and executes the testing process.
-   */
-
-  // Set up logging
-  // IPP: You do not have to use logging - but it is the recommended practice.
-  //      See https://getpino.io/#/docs/api for more information.
+/**
+ * @brief Logging level is configured from parsed CLI arguments.
+ *
+ * The default logging level is set to warn. When one verbose flag is provided,
+ * info logging is enabled. When two or more verbose flags are provided, debug
+ * logging is enabled.
+ *
+ * @param args Parsed CLI arguments.
+ */
+function configureLogging(args: CliArguments): void {
   logger.level = "warn";
 
-  // Parse the CLI arguments
-  const args = parseArguments();
-
-  // Enable debug or info logging if the verbose flag was set twice or once
   if (args.verbose >= 2) {
     logger.level = "debug";
-  } else if (args.verbose === 1) {
-    logger.level = "info";
+    return;
   }
 
-  // TODO: Your code for discovering and executing the test cases goes here.
-  const report = new TestReport({
-    discovered_test_cases: [],
-    unexecuted: {},
-    results: null,
-  });
-
-  writeResult(report, args.output);
+  if (args.verbose === 1) {
+    logger.level = "info";
+  }
 }
 
-main();
+/**
+ * @brief Execution failure type is derived from the error message.
+ *
+ * Errors caused by missing commands, failed process spawning, or missing
+ * execution permissions are treated as cannot-execute failures. All other
+ * errors are treated as generic execution failures.
+ *
+ * @param errorMessage Human-readable execution error message.
+ * @returns Matching unexecuted reason code.
+ */
+function getExecutionFailureReasonCode(errorMessage: string): UnexecutedReasonCode {
+  const normalizedMessage = errorMessage.toLowerCase();
+
+  if (normalizedMessage.includes("enoent")) {
+    return UnexecutedReasonCode.CANNOT_EXECUTE;
+  }
+
+  if (normalizedMessage.includes("eacces")) {
+    return UnexecutedReasonCode.CANNOT_EXECUTE;
+  }
+
+  if (normalizedMessage.includes("spawn")) {
+    return UnexecutedReasonCode.CANNOT_EXECUTE;
+  }
+
+  return UnexecutedReasonCode.OTHER;
+}
+
+/**
+ * @brief Full tester execution pipeline is performed.
+ *
+ * Test cases are loaded first. In dry-run mode, only discovery and filtering
+ * results are reported. Otherwise, selected test cases are executed and
+ * resolved into the final report.
+ *
+ * @param args Parsed CLI arguments.
+ * @returns Final tester report.
+ */
+async function runTester(args: CliArguments): Promise<TestReport> {
+  const loadedTestCases = loadTestCaseDefinitions(args.tests_dir, args.recursive);
+
+  logger.info(
+    {
+      loaded_test_case_count: loadedTestCases.loaded_test_cases.length,
+      failed_test_case_count: loadedTestCases.failed_test_cases.length,
+    },
+    "Test case definitions were loaded."
+  );
+
+  if (args.dry_run) {
+    return buildDryRunReport(loadedTestCases, args);
+  }
+
+  const selectedTestCases: LoadedTestCase[] = [];
+
+  for (const loadedTestCase of loadedTestCases.loaded_test_cases) {
+    if (!matchesConfiguredFilters(loadedTestCase.definition, args)) {
+      continue;
+    }
+
+    selectedTestCases.push(loadedTestCase);
+  }
+
+  logger.info(
+    {
+      selected_test_case_count: selectedTestCases.length,
+    },
+    "Test cases were selected for execution."
+  );
+
+  const environment = process.env;
+
+  let compilerCommand = "/opt/runtime-python/bin/python";
+  const configuredCompilerCommand = environment["SOL26_COMPILER_PYTHON"];
+  if (configuredCompilerCommand !== undefined) {
+    compilerCommand = configuredCompilerCommand;
+  }
+
+  let compilerScript = "/app/tester/tools/sol2xml/sol_to_xml.py";
+  const configuredCompilerScript = environment["SOL26_COMPILER_SCRIPT"];
+  if (configuredCompilerScript !== undefined) {
+    compilerScript = configuredCompilerScript;
+  }
+
+  let interpreterCommand = "/usr/local/bin/solint";
+  const configuredInterpreterCommand = environment["SOL26_INTERPRETER"];
+  if (configuredInterpreterCommand !== undefined) {
+    interpreterCommand = configuredInterpreterCommand;
+  }
+
+  const resolvedTestCases: ResolvedTestCase[] = [];
+  const executionFailures: Record<string, UnexecutedReason> = {};
+
+  for (const selectedTestCase of selectedTestCases) {
+    const testCaseName = selectedTestCase.definition.name;
+
+    logger.info({ test_case_name: testCaseName }, "Test case execution started.");
+
+    try {
+      const executionResult = await executeTestCase({
+        loaded_test_case: selectedTestCase,
+        compiler_command: compilerCommand,
+        compiler_args: [compilerScript],
+        interpreter_command: interpreterCommand,
+        interpreter_args: [],
+      });
+
+      const resolvedReport = await resolveTestCase(selectedTestCase.definition, executionResult);
+
+      resolvedTestCases.push({
+        definition: selectedTestCase.definition,
+        report: resolvedReport,
+      });
+
+      logger.info({ test_case_name: testCaseName }, "Test case execution finished.");
+    } catch (error: unknown) {
+      let errorMessage = "An unknown error occurred.";
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
+      const reasonCode = getExecutionFailureReasonCode(errorMessage);
+
+      executionFailures[testCaseName] = new UnexecutedReason(reasonCode, errorMessage);
+
+      logger.warn(
+        {
+          test_case_name: testCaseName,
+          reason_code: reasonCode,
+          reason_message: errorMessage,
+        },
+        "Test case execution failed."
+      );
+    }
+  }
+
+  const unexecuted = buildUnexecuted(loadedTestCases, args);
+
+  for (const [testCaseName, reason] of Object.entries(executionFailures)) {
+    unexecuted[testCaseName] = reason;
+  }
+
+  return buildReport({
+    discovered_test_cases: loadedTestCases.loaded_test_cases.map(
+      (loadedTestCase) => loadedTestCase.definition
+    ),
+    unexecuted,
+    resolved_test_cases: resolvedTestCases,
+  });
+}
+
+/**
+ * @brief The tester entry point is executed.
+ *
+ * CLI arguments are parsed, logging is configured, the tester pipeline is run,
+ * and the final report is written. Fatal errors are reported to stderr and
+ * terminate the process with exit code 1.
+ */
+async function main(): Promise<void> {
+  try {
+    const args = parseArguments();
+    configureLogging(args);
+
+    const report = await runTester(args);
+    writeResult(report, args.output);
+  } catch (error: unknown) {
+    let errorMessage = "An unknown error occurred.";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (typeof error === "string") {
+      errorMessage = error;
+    }
+
+    console.error(errorMessage);
+    process.exit(1);
+  }
+}
+
+await main();

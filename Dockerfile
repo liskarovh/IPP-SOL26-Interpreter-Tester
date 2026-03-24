@@ -15,6 +15,8 @@ FROM ${NODE_IMAGE} AS node_toolchain
 # -----------------------------------------------------------------------------
 FROM ${PYTHON_IMAGE} AS check
 
+ENV VIRTUAL_ENV=/opt/check-python
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends bash ca-certificates \
     && rm -rf /var/lib/apt/lists/*
@@ -26,8 +28,10 @@ WORKDIR /src
 
 COPY int/requirements.txt /tmp/int-requirements.txt
 COPY int/requirements-dev.txt /tmp/int-requirements-dev.txt
-RUN python -m venv /opt/check-python \
-    && /opt/check-python/bin/pip install --no-cache-dir -r /tmp/int-requirements.txt -r /tmp/int-requirements-dev.txt \
+RUN python -m venv "${VIRTUAL_ENV}" \
+    && "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir \
+        -r /tmp/int-requirements.txt \
+        -r /tmp/int-requirements-dev.txt \
     && rm -f /tmp/int-requirements.txt /tmp/int-requirements-dev.txt
 
 COPY tester/package.json /src/package.json
@@ -40,6 +44,10 @@ COPY <<'BASH' /usr/local/lib/ipp/check-shell-init.sh
 #!/bin/bash
 set -euo pipefail
 
+export VIRTUAL_ENV="${VIRTUAL_ENV:-/opt/check-python}"
+export PATH="${VIRTUAL_ENV}/bin:${PATH}"
+hash -r
+
 link_tool() {
     local directory="$1"
     local link_name="$2"
@@ -50,8 +58,8 @@ link_tool() {
     fi
 }
 
-link_tool /src/int ruff /opt/check-python/bin/ruff
-link_tool /src/int mypy /opt/check-python/bin/mypy
+link_tool /src/int ruff "${VIRTUAL_ENV}/bin/ruff"
+link_tool /src/int mypy "${VIRTUAL_ENV}/bin/mypy"
 
 link_tool /src/tester eslint /src/node_modules/.bin/eslint
 link_tool /src/tester prettier /src/node_modules/.bin/prettier

@@ -260,8 +260,7 @@ def _read_xml_prefix(source_file_path: Path) -> bytes:
     with source_file_path.open("rb") as source_file:
         return source_file.read(512)
 
-
-def _validate_root_language(xml_root) -> None:
+def _validate_root_language(xml_root: etree._Element) -> None:
     """
     @brief The root language attribute is validated.
 
@@ -276,7 +275,7 @@ def _validate_root_language(xml_root) -> None:
         )
 
 
-def _validate_root_tag(xml_root) -> None:
+def _validate_root_tag(xml_root: etree._Element) -> None:
     """
     @brief The XML root tag is validated.
 
@@ -291,8 +290,10 @@ def _validate_root_tag(xml_root) -> None:
             "Root tag must be 'program'.",
         )
 
-
-def _validate_xml_declaration(xml_prefix: bytes, xml_tree) -> None:
+def _validate_xml_declaration(
+        xml_prefix: bytes,
+        xml_tree: etree._ElementTree,
+) -> None:
     """
     @brief The XML declaration is validated.
 
@@ -329,11 +330,10 @@ def _validate_xml_declaration(xml_prefix: bytes, xml_tree) -> None:
             'XML declaration must specify encoding "UTF-8".',
         )
 
-
 def _validate_sol_xml_document(
-    xml_prefix: bytes,
-    xml_tree,
-    xml_root,
+        xml_prefix: bytes,
+        xml_tree: etree._ElementTree,
+        xml_root: etree._Element,
 ) -> None:
     """
     @brief Document-level SOL-XML rules are validated.

@@ -507,10 +507,7 @@ class ProgramValidator:
         if class_name in self._builtin_class_names:
             return True
 
-        if class_name in self._class_index:
-            return True
-
-        return False
+        return class_name in self._class_index
 
     def _class_understands_class_side_selector(
         self,

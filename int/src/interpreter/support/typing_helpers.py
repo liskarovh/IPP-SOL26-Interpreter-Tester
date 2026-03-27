@@ -1,16 +1,34 @@
 """
 @file typing_helpers.py
 @brief Shared typing aliases are defined for the interpreter package.
-@author Hana Liškařová xliskah00
+@author  Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Only aliases that are already needed in the current implementation phase
-are kept in this module. Runtime-specific aliases will be added later,
-once the referenced modules really exist.
+Only shared aliases needed across multiple interpreter modules are stored
+in this file. Forward references are used so that import cycles are avoided.
 """
+
+from __future__ import annotations
+
+from collections.abc import Callable
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..model.invocation_context import InvocationContext
+    from ..model.runtime_methods import RuntimeMethod
+    from ..model.values import RuntimeValue
 
 type Selector = str
 type ClassName = str
 type VariableName = str
 type SlotName = str
+
+type RuntimeValueList = list["RuntimeValue"]
+type BuiltinMethodKey = tuple[ClassName, Selector]
+
+type MethodTable = dict[Selector, "RuntimeMethod"]
+type BuiltinCallback = Callable[
+    ["RuntimeValue", RuntimeValueList, "InvocationContext"],
+    "RuntimeValue",
+]

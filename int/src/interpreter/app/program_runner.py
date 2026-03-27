@@ -4,42 +4,45 @@
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME.
 
-A loaded AST program is forwarded through the first execution pipeline step.
-At this stage, only static program validation is performed.
+A loaded AST program is validated, converted into a runtime, and resolved
+to the program entry point. No execution is started yet at this stage.
 """
 
 from ..input_model import Program
+from .entry_point_resolver import EntryPointResolver
 from .program_validator import ProgramValidator
+from .runtime_builder import RuntimeBuilder
 
 
 class ProgramRunner:
     """
-    @brief A minimal orchestration object is provided for the interpreter.
-
-    The execution pipeline is intentionally kept simple at this stage.
-    Only static validation is delegated from here.
+    @brief The current interpreter pipeline is orchestrated by this class.
     """
 
     def __init__(self) -> None:
         """
-        @brief A phase-2 runner is initialized.
+        @brief A program runner is initialized.
 
-        The program validator is created here so that the first real pipeline
-        step can be executed from one orchestration point.
+        The current pipeline collaborators are created here.
         """
         self.program_validator = ProgramValidator()
+        self.runtime_builder = RuntimeBuilder()
+        self.entry_point_resolver = EntryPointResolver()
 
     def run(self, program: Program, input_io: object) -> None:
         """
-        @brief A loaded program is validated.
+        @brief A loaded program is processed through the current pipeline.
 
-        No runtime is built yet, and no method execution is performed yet.
-        The input/output adapter is accepted only because it already belongs
-        to the planned runner interface.
+        The program is validated first. A runtime is then built, and the
+        runtime entry point is resolved. No execution is started yet.
 
         @param program A previously loaded AST program.
         @param input_io An input/output adapter passed from the interpreter.
         """
-        _ = input_io
-
         self.program_validator.validate(program)
+
+        runtime = self.runtime_builder.build(program, input_io)
+
+        entry_receiver, entry_method = self.entry_point_resolver.resolve(runtime)
+        _ = entry_receiver
+        _ = entry_method

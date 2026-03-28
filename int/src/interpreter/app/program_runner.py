@@ -9,6 +9,7 @@ to the program entry point. No execution is started yet at this stage.
 """
 
 from ..input_model import Program
+from ..runtime.runtime_io import RuntimeIO
 from .entry_point_resolver import EntryPointResolver
 from .program_validator import ProgramValidator
 from .runtime_builder import RuntimeBuilder
@@ -29,7 +30,7 @@ class ProgramRunner:
         self.runtime_builder = RuntimeBuilder()
         self.entry_point_resolver = EntryPointResolver()
 
-    def run(self, program: Program, input_io: object) -> None:
+    def run(self, program: Program, input_io: RuntimeIO) -> None:
         """
         @brief A loaded program is processed through the current pipeline.
 

@@ -8,7 +8,9 @@ Author:
 """
 
 import logging
+import sys
 from pathlib import Path
+from typing import TextIO
 
 from lxml import etree
 from lxml.etree import ParseError
@@ -21,6 +23,7 @@ from .input_model import Arg, Assign, Block, ClassDef, Expr, Method, Program
 from .input_model import Literal as AstLiteral
 from .input_model import Send as AstSend
 from .input_model import Var as AstVar
+from .runtime.runtime_io import RuntimeIO
 
 logger = logging.getLogger(__name__)
 
@@ -704,15 +707,22 @@ class Interpreter:
         _validate_sol_xml_ast(parsed_program)
         self.loaded_program = parsed_program
 
-    def execute(self, input_io: object) -> None:
+    def execute(self, input_io: TextIO) -> None:
         """
         @brief A previously loaded program is forwarded to the runner.
 
         @param input_io An input/output adapter.
         """
+
+        runtime_io = RuntimeIO(
+            stdin=input_io,
+            stdout=sys.stdout,
+            stderr=sys.stderr,
+        )
+
         program = self.loaded_program
         if program is None:
             return
 
         dump_program_ast(program)
-        self.program_runner.run(program, input_io)
+        self.program_runner.run(program, runtime_io)

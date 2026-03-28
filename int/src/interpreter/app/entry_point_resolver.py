@@ -14,7 +14,7 @@ from __future__ import annotations
 from ..error_codes import ErrorCode
 from ..exceptions import InterpreterError
 from ..model.runtime_methods import RuntimeMethod
-from ..model.values import UserObject
+from ..model.user_object import UserObject
 from ..runtime.runtime import Runtime
 
 
@@ -45,7 +45,14 @@ class EntryPointResolver:
         entry_class_name = "Main"
         entry_method_name = "run"
 
-        entry_class = runtime.require_class(entry_class_name)
+        entry_class = runtime.class_registry.get(entry_class_name)
+
+        if entry_class is None:
+            raise InterpreterError(
+                ErrorCode.INT_DNU,
+                f"Entry class '{entry_class_name}' was not found.",
+            )
+
         entry_receiver = runtime.object_factory.new_user_object(entry_class)
         entry_method = entry_class.lookup(entry_method_name)
 

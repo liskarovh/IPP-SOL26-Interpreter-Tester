@@ -13,8 +13,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from ..error_codes import ErrorCode
-from ..exceptions import InterpreterError
 from .values import RuntimeValue
 
 if TYPE_CHECKING:
@@ -44,13 +42,6 @@ class UserObject(RuntimeValue):
         @param name Requested slot name.
         @return Value stored in the requested slot.
         """
-        has_slot = self.slots.has(name)
-
-        if not has_slot:
-            raise InterpreterError(
-                ErrorCode.INT_INST_ATTR,
-                f"Slot '{name}' does not exist.",
-            )
 
         return self.slots.get(name)
 
@@ -61,12 +52,5 @@ class UserObject(RuntimeValue):
         @param name Target slot name.
         @param value Value to be stored into the slot.
         """
-        has_slot = self.slots.has(name)
-
-        if not has_slot:
-            raise InterpreterError(
-                ErrorCode.INT_INST_ATTR,
-                f"Slot '{name}' does not exist.",
-            )
 
         self.slots.set(name, value)

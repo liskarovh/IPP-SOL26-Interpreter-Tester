@@ -165,7 +165,7 @@ class RuntimeBuilder:
 
             for method_ast in class_ast.methods:
                 user_method = self._build_user_method(method_ast, runtime_class)
-                runtime_class.add_method(user_method)
+                runtime_class.add_instance_method(user_method)
 
     @staticmethod
     def _resolve_parent_runtime_class(

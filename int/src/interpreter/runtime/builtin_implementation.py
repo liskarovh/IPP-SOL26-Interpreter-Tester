@@ -6,7 +6,8 @@
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
 Built-in method behavior is represented here through a small strategy layer.
-A callback-backed adapter is provided for simple built-in implementations.
+Callback-backed adapters are provided separately for instance-side and
+class-side built-in implementations.
 """
 
 from __future__ import annotations
@@ -14,12 +15,17 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
-from ..support.typing_helpers import BuiltinCallback, RuntimeValueList
+from ..support.typing_helpers import (
+    ClassBuiltinCallback,
+    InstanceBuiltinCallback,
+    MethodReceiver,
+    RuntimeValueList,
+)
 
 if TYPE_CHECKING:
     from ..model.invocation_context import InvocationContext
+    from ..model.runtime_class import RuntimeClass
     from ..model.values import RuntimeValue
-
 
 
 class BuiltinImplementation(ABC):
@@ -28,15 +34,9 @@ class BuiltinImplementation(ABC):
     """
 
     @abstractmethod
-    def __init__(self) -> None:
-        """
-        @brief One built-in method implementation strategy is initialized.
-        """
-
-    @abstractmethod
     def invoke(
         self,
-        receiver: RuntimeValue,
+        receiver: MethodReceiver,
         args: RuntimeValueList,
         ctx: InvocationContext,
     ) -> RuntimeValue:
@@ -50,34 +50,71 @@ class BuiltinImplementation(ABC):
         """
 
 
-class CallbackBuiltinImplementation(BuiltinImplementation):
+class InstanceCallbackBuiltinImplementation(BuiltinImplementation):
     """
-    @brief One callback-backed built-in implementation is represented.
+    @brief One instance-side callback-backed built-in implementation is represented.
     """
 
-    callback: BuiltinCallback
+    callback: InstanceBuiltinCallback
 
-    def __init__(self, callback: BuiltinCallback) -> None:
+    def __init__(self, callback: InstanceBuiltinCallback) -> None:
         """
-        @brief One callback-backed built-in implementation is initialized.
+        @brief One instance-side callback-backed built-in implementation is initialized.
 
-        @param callback A callback implementing built-in behavior.
+        @param callback A callback implementing instance-side built-in behavior.
         """
-        super().__init__()
         self.callback = callback
 
     def invoke(
         self,
-        receiver: RuntimeValue,
+        receiver: MethodReceiver,
         args: RuntimeValueList,
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One callback-backed built-in implementation is invoked.
+        @brief One instance-side callback-backed built-in implementation is invoked.
 
         @param receiver A method receiver.
         @param args Runtime call arguments.
         @param ctx An invocation context.
         @return A produced runtime value.
         """
+        if isinstance(receiver, RuntimeClass):
+            raise TypeError("Instance-side builtin received a class receiver.")
+
+        return self.callback(receiver, args, ctx)
+
+
+class ClassCallbackBuiltinImplementation(BuiltinImplementation):
+    """
+    @brief One class-side callback-backed built-in implementation is represented.
+    """
+
+    callback: ClassBuiltinCallback
+
+    def __init__(self, callback: ClassBuiltinCallback) -> None:
+        """
+        @brief One class-side callback-backed built-in implementation is initialized.
+
+        @param callback A callback implementing class-side built-in behavior.
+        """
+        self.callback = callback
+
+    def invoke(
+        self,
+        receiver: MethodReceiver,
+        args: RuntimeValueList,
+        ctx: InvocationContext,
+    ) -> RuntimeValue:
+        """
+        @brief One class-side callback-backed built-in implementation is invoked.
+
+        @param receiver A method receiver.
+        @param args Runtime call arguments.
+        @param ctx An invocation context.
+        @return A produced runtime value.
+        """
+        if not isinstance(receiver, RuntimeClass):
+            raise TypeError("Class-side builtin received an instance receiver.")
+
         return self.callback(receiver, args, ctx)

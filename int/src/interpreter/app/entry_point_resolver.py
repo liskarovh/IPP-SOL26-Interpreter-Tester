@@ -54,7 +54,7 @@ class EntryPointResolver:
             )
 
         entry_receiver = runtime.object_factory.new_user_object(entry_class)
-        entry_method = entry_class.lookup(entry_method_name)
+        entry_method = entry_class.lookup_class(entry_method_name)
 
         if entry_method is None:
             raise (InterpreterError(

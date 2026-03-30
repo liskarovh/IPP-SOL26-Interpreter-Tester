@@ -54,3 +54,12 @@ class UserObject(RuntimeValue):
         """
 
         self.slots.set(name, value)
+
+    def define_slot(self, name: str, value: RuntimeValue) -> None:
+        """
+        @brief A new slot is defined.
+
+        @param name Name of the new slot.
+        @param value Initial value of the new slot.
+        """
+        self.slots.define(name, value)

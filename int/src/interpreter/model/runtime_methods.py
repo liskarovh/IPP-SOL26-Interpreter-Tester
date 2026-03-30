@@ -16,7 +16,7 @@ from typing import TYPE_CHECKING
 
 from ..input_model import Method as AstMethod
 from ..runtime.builtin_implementation import BuiltinImplementation
-from ..support.typing_helpers import RuntimeValueList
+from ..support.typing_helpers import MethodReceiver, RuntimeValueList
 
 if TYPE_CHECKING:
     from .invocation_context import InvocationContext
@@ -42,7 +42,7 @@ class RuntimeMethod(ABC):
     @abstractmethod
     def call(
         self,
-        receiver: RuntimeValue,
+        receiver: MethodReceiver,
         args: RuntimeValueList,
         ctx: InvocationContext,
     ) -> RuntimeValue:
@@ -87,7 +87,7 @@ class UserMethod(RuntimeMethod):
 
     def call(
         self,
-        receiver: RuntimeValue,
+        receiver: MethodReceiver,
         args: RuntimeValueList,
         ctx: InvocationContext,
     ) -> RuntimeValue:
@@ -100,7 +100,11 @@ class UserMethod(RuntimeMethod):
         @return A produced runtime value.
         """
         # TODO:
-        # implement
+        # 1. Create or request the execution context for this user method call.
+        # 2. Ensure the current owner is this method's owning runtime class.
+        # 3. Bind method arguments to the method frame.
+        # 4. Delegate execution of method_ast.block to MethodExecutor / BlockExecutor.
+        # 5. Return the produced RuntimeValue.
         _ = receiver
         _ = args
         _ = ctx
@@ -131,7 +135,6 @@ class BuiltinMethod(RuntimeMethod):
 
         @param selector A method selector.
         @param owner An owning runtime class.
-        @param builtin_arity An explicitly stored built-in arity.
         @param impl A built-in implementation strategy.
         """
         super().__init__(selector, owner)
@@ -139,7 +142,7 @@ class BuiltinMethod(RuntimeMethod):
 
     def call(
         self,
-        receiver: RuntimeValue,
+        receiver: MethodReceiver,
         args: RuntimeValueList,
         ctx: InvocationContext,
     ) -> RuntimeValue:

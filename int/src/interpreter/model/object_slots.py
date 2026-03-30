@@ -63,6 +63,21 @@ class ObjectSlots:
         self._require_existing_slot(name)
         self.slots_by_name[name] = value
 
+    def define(self, name: str, value: RuntimeValue) -> None:
+        """
+        @brief A new slot is defined.
+
+        @param name Name of the new slot.
+        @param value Initial value of the new slot.
+        """
+
+        if name in self.slots_by_name:
+            raise InterpreterError(
+                ErrorCode.INT_INST_ATTR,
+                f"Slot '{name}' is already defined.",
+            )
+        self.slots_by_name[name] = value
+
     def _require_existing_slot(self, name: str) -> None:
         """
         @brief Existence of a slot is required.

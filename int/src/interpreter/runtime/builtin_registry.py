@@ -28,7 +28,8 @@ class BuiltinRegistry:
     true_value: BooleanValue | None
     false_value: BooleanValue | None
     nil_value: NilValue | None
-    builtin_methods: dict[tuple[str, str], BuiltinMethod]
+    class_builtin_methods: dict[tuple[str, str], BuiltinMethod]
+    instance_builtin_methods: dict[tuple[str, str], BuiltinMethod]
 
     def __init__(self) -> None:
         """
@@ -37,7 +38,8 @@ class BuiltinRegistry:
         self.true_value = None
         self.false_value = None
         self.nil_value = None
-        self.builtin_methods = {}
+        self.class_builtin_methods = {}
+        self.instance_builtin_methods = {}
 
     def set_true_value(self, value: BooleanValue) -> None:
         """
@@ -102,14 +104,14 @@ class BuiltinRegistry:
             )
         return self.nil_value
 
-    def register_builtin_method(
+    def register_instance_builtin_method(
         self,
         class_name: str,
         selector: str,
         method: BuiltinMethod,
     ) -> None:
         """
-        @brief One built-in method is registered.
+        @brief One instance built-in method is registered.
 
         @param class_name A runtime class name owning the built-in method.
         @param selector A built-in method selector.
@@ -117,20 +119,43 @@ class BuiltinRegistry:
         """
 
         dict_key = (class_name, selector)
-        if dict_key in self.builtin_methods:
+        if dict_key in self.instance_builtin_methods:
             raise InterpreterError(
                 ErrorCode.INT_OTHER,
                 f"A built-in method {selector} is already registered for class {class_name}."
             )
-        self.builtin_methods[dict_key] = method
+        self.instance_builtin_methods[dict_key] = method
 
-    def get_builtin_method(
+
+    def register_class_builtin_method(
         self,
         class_name: str,
         selector: str,
+        method: BuiltinMethod,
+    ) -> None:
+        """
+        @brief One class built-in method is registered.
+
+        @param class_name A runtime class name owning the built-in method.
+        @param selector A built-in method selector.
+        @param method A built-in runtime method instance.
+        """
+
+        dict_key = (class_name, selector)
+        if dict_key in self.class_builtin_methods:
+            raise InterpreterError(
+                ErrorCode.INT_OTHER,
+                f"A built-in method {selector} is already registered for class {class_name}."
+            )
+        self.class_builtin_methods[dict_key] = method
+
+    def get_instance_builtin_method(
+            self,
+            class_name: str,
+            selector: str,
     ) -> BuiltinMethod | None:
         """
-        @brief One built-in method is looked up.
+        @brief One instance built-in method is looked up.
 
         @param class_name A runtime class name owning the built-in method.
         @param selector A requested built-in method selector.
@@ -138,4 +163,20 @@ class BuiltinRegistry:
         """
 
         dict_key = (class_name, selector)
-        return self.builtin_methods.get(dict_key)
+        return self.instance_builtin_methods.get(dict_key)
+
+    def get_class_builtin_method(
+        self,
+        class_name: str,
+        selector: str,
+    ) -> BuiltinMethod | None:
+        """
+        @brief One class built-in method is looked up.
+
+        @param class_name A runtime class name owning the built-in method.
+        @param selector A requested built-in method selector.
+        @return A matching built-in runtime method, or None when not found.
+        """
+
+        dict_key = (class_name, selector)
+        return self.class_builtin_methods.get(dict_key)

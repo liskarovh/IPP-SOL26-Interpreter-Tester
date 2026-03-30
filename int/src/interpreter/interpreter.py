@@ -377,13 +377,13 @@ def _validate_block_xml_ast(block: Block) -> None:
     @param block A block AST node to be inspected.
     """
     parameter_orders = [parameter.order for parameter in block.parameters]
-    _validate_contiguous_order_values(parameter_orders, "block parameter order")
+    _validate_order_values(parameter_orders, "block parameter order")
 
     for parameter in block.parameters:
         _validate_identifier_lexeme(parameter.name, "parameter name")
 
     assign_orders = [assign.order for assign in block.assigns]
-    _validate_contiguous_order_values(assign_orders, "assign order")
+    _validate_order_values(assign_orders, "assign order")
 
     for assign in block.assigns:
         _validate_assign_target_lexeme(assign.target.name)
@@ -426,7 +426,7 @@ def _validate_send_xml_ast(send: AstSend) -> None:
     _validate_expr_xml_ast(send.receiver)
 
     arg_orders = [arg.order for arg in send.args]
-    _validate_contiguous_order_values(arg_orders, "send argument order")
+    _validate_order_values(arg_orders, "send argument order")
 
     for arg in send.args:
         _validate_expr_xml_ast(arg.expr)
@@ -637,7 +637,7 @@ def _validate_selector_lexeme(selector: str) -> None:
         _validate_identifier_lexeme(keyword_part, "selector keyword part")
 
 
-def _validate_contiguous_order_values(order_values: list[int], what: str) -> None:
+def _validate_order_values(order_values: list[int], what: str) -> None:
     """
     @brief A list of order values is validated as contiguous from one.
 
@@ -722,7 +722,10 @@ class Interpreter:
 
         program = self.loaded_program
         if program is None:
-            return
+            raise InterpreterError(
+                ErrorCode.GENERAL_OTHER,
+                "No program loaded.",
+            )
 
         dump_program_ast(program)
         self.program_runner.run(program, runtime_io)

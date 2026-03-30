@@ -17,7 +17,9 @@ from ..input_model import Method as AstMethod
 from ..input_model import Program
 from ..model.runtime_class import RuntimeClass
 from ..model.runtime_methods import UserMethod
+from ..model.values import BooleanValue, NilValue
 from ..runtime.builtin_registry import BuiltinRegistry
+from ..runtime.builtins import register_builtins
 from ..runtime.class_registry import ClassRegistry
 from ..runtime.object_factory import ObjectFactory
 from ..runtime.runtime import Runtime
@@ -44,7 +46,6 @@ class RuntimeBuilder:
         @param input_io A runtime input/output adapter.
         @return A newly built runtime container.
         """
-
         new_runtime = self._create_empty_runtime(input_io)
         self._register_builtin_runtime_content(new_runtime)
         self._register_user_runtime_classes(program, new_runtime)
@@ -59,10 +60,10 @@ class RuntimeBuilder:
         @param input_io A runtime input/output adapter.
         @return A runtime container with empty runtime services.
         """
-
         class_registry = ClassRegistry()
         builtin_registry = BuiltinRegistry()
-        object_factory = ObjectFactory()
+        object_factory = ObjectFactory(class_registry, builtin_registry)
+
         return Runtime(
             class_registry,
             builtin_registry,
@@ -73,7 +74,18 @@ class RuntimeBuilder:
     @staticmethod
     def _register_builtin_runtime_content(runtime: Runtime) -> None:
         """
-        @brief Built-in runtime classes and methods are registered.
+        @brief Built-in runtime classes, values, and methods are registered.
+
+        @param runtime A runtime container that is being built.
+        """
+        RuntimeBuilder._register_builtin_runtime_classes(runtime)
+        RuntimeBuilder._register_canonical_builtin_values(runtime)
+        RuntimeBuilder._register_builtin_runtime_methods(runtime)
+
+    @staticmethod
+    def _register_builtin_runtime_classes(runtime: Runtime) -> None:
+        """
+        @brief Built-in runtime classes are registered.
 
         @param runtime A runtime container that is being built.
         """
@@ -93,6 +105,39 @@ class RuntimeBuilder:
         runtime.class_registry.add(true_class)
         runtime.class_registry.add(false_class)
 
+    @staticmethod
+    def _register_canonical_builtin_values(runtime: Runtime) -> None:
+        """
+        @brief Canonical built-in runtime values are registered.
+
+        @param runtime A runtime container that is being built.
+        """
+        true_class = runtime.class_registry.require("True")
+        false_class = runtime.class_registry.require("False")
+        nil_class = runtime.class_registry.require("Nil")
+
+        true_value = BooleanValue(true_class, True)
+        false_value = BooleanValue(false_class, False)
+        nil_value = NilValue(nil_class)
+
+        runtime.builtin_registry.set_true_value(true_value)
+        runtime.builtin_registry.set_false_value(false_value)
+        runtime.builtin_registry.set_nil_value(nil_value)
+
+    @staticmethod
+    def _register_builtin_runtime_methods(runtime: Runtime) -> None:
+        """
+        @brief Built-in runtime methods are registered.
+
+        @param runtime A runtime container that is being built.
+        """
+        register_builtins(
+            runtime.class_registry,
+            runtime.builtin_registry,
+            runtime.object_factory,
+            runtime.io,
+        )
+
     def _register_user_runtime_classes(self, program: Program, runtime: Runtime) -> None:
         """
         @brief User-defined runtime classes are registered.
@@ -100,7 +145,6 @@ class RuntimeBuilder:
         @param program A validated AST program.
         @param runtime A runtime container that is being built.
         """
-
         for class_ast in program.classes:
             runtime_class = RuntimeClass(class_ast.name, None)
             runtime.class_registry.add(runtime_class)
@@ -116,16 +160,16 @@ class RuntimeBuilder:
         @param program A validated AST program.
         @param runtime A runtime container that is being built.
         """
-
         for class_ast in program.classes:
             runtime_class = runtime.class_registry.require(class_ast.name)
+
             for method_ast in class_ast.methods:
                 user_method = self._build_user_method(method_ast, runtime_class)
                 runtime_class.add_method(user_method)
 
     @staticmethod
     def _resolve_parent_runtime_class(
-            class_ast: AstClassDef,
+        class_ast: AstClassDef,
         runtime: Runtime,
     ) -> RuntimeClass:
         """
@@ -135,13 +179,12 @@ class RuntimeBuilder:
         @param runtime A partially built runtime container.
         @return A resolved parent runtime class.
         """
-
         parent_name = class_ast.parent
         return runtime.class_registry.require(parent_name)
 
     @staticmethod
     def _build_user_method(
-            method_ast: AstMethod,
+        method_ast: AstMethod,
         owner: RuntimeClass,
     ) -> UserMethod:
         """
@@ -151,7 +194,5 @@ class RuntimeBuilder:
         @param owner An owning runtime class.
         @return A runtime user method.
         """
-
         selector = method_ast.selector
-
         return UserMethod(selector, owner, method_ast)

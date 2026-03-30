@@ -15,7 +15,8 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 from ..input_model import Method as AstMethod
-from ..support.typing_helpers import BuiltinCallback, RuntimeValueList
+from ..runtime.builtin_implementation import BuiltinImplementation
+from ..support.typing_helpers import RuntimeValueList
 
 if TYPE_CHECKING:
     from .invocation_context import InvocationContext
@@ -123,7 +124,7 @@ class BuiltinMethod(RuntimeMethod):
         self,
         selector: str,
         owner: RuntimeClass,
-        impl: BuiltinCallback,
+        impl: BuiltinImplementation,
     ) -> None:
         """
         @brief A built-in runtime method is initialized.
@@ -131,7 +132,7 @@ class BuiltinMethod(RuntimeMethod):
         @param selector A method selector.
         @param owner An owning runtime class.
         @param builtin_arity An explicitly stored built-in arity.
-        @param impl A built-in implementation callback.
+        @param impl A built-in implementation strategy.
         """
         super().__init__(selector, owner)
         self.impl = impl
@@ -150,7 +151,7 @@ class BuiltinMethod(RuntimeMethod):
         @param ctx An invocation context.
         @return A produced runtime value.
         """
-        return self.impl(receiver, args, ctx)
+        return self.impl.invoke(receiver, args, ctx)
 
     def arity(self) -> int:
         """

@@ -27,6 +27,7 @@ class BuiltinImplementation(ABC):
     @brief One built-in method implementation strategy is represented.
     """
 
+    @abstractmethod
     def __init__(self) -> None:
         """
         @brief One built-in method implementation strategy is initialized.

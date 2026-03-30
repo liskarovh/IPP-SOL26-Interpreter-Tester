@@ -12,14 +12,13 @@ their own files.
 
 from __future__ import annotations
 
-from abc import ABC
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .runtime_class import RuntimeClass
 
 
-class RuntimeValue(ABC):
+class RuntimeValue:
     """
     @brief A common base class for runtime values is represented.
     """

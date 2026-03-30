@@ -1,7 +1,7 @@
 """
 @file typing_helpers.py
 @brief Shared typing aliases are defined for the interpreter package.
-@author  Hana Liškařová xliskah00
+@author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
@@ -24,11 +24,11 @@ type ClassName = str
 type VariableName = str
 type SlotName = str
 
-type RuntimeValueList = list["RuntimeValue"]
+type RuntimeValueList = list[RuntimeValue]
 type BuiltinMethodKey = tuple[ClassName, Selector]
 
-type MethodTable = dict[Selector, "RuntimeMethod"]
+type MethodTable = dict[Selector, RuntimeMethod]
 type BuiltinCallback = Callable[
-    ["RuntimeValue", RuntimeValueList, "InvocationContext"],
-    "RuntimeValue",
+    [RuntimeValue, RuntimeValueList, InvocationContext],
+    RuntimeValue,
 ]

@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING
 
 from ..error_codes import ErrorCode
 from ..exceptions import InterpreterError
+from .binding_record import BindingRecord
 from .scope_frame import ScopeFrame
 from .values import RuntimeValue
 
@@ -23,6 +24,8 @@ if TYPE_CHECKING:
     from ..input_model import Block as AstBlock
     from .invocation_context import InvocationContext
     from .runtime_class import RuntimeClass
+    from .values import RuntimeValue
+
 
 class BlockClosure(RuntimeValue):
     """
@@ -57,32 +60,66 @@ class BlockClosure(RuntimeValue):
         @param block_executor Executor used for block execution.
         @return Result of the executed block.
         """
-        expected_arity = self.block_ast.arity
-        actual_arity = len(args)
+        self._validate_arity(args)
 
-        if actual_arity != expected_arity:
-            raise InterpreterError(
-                ErrorCode.INT_OTHER,
-                f"Block expected {expected_arity} arguments, "
-                f"got {actual_arity}.",
-            )
-
-        parent = self.captured_frame
-        frame = ScopeFrame(parent)
-
-        parameter_count = len(self.block_ast.parameters)
-
-        for index in range(parameter_count):
-            parameter_ast = self.block_ast.parameters[index]
-            argument_value = args[index]
-
-            frame.define(parameter_ast.name, argument_value)
-
-        receiver = self.closure_ctx.receiver
+        call_frame = self._create_call_frame()
+        self._bind_arguments(call_frame, args)
 
         return block_executor.execute(
             self.block_ast,
-            frame,
-            receiver,
+            call_frame,
             self.closure_ctx,
         )
+
+    def _validate_arity(self, args: list[RuntimeValue]) -> None:
+        """
+        @brief Block-call arity is validated.
+
+        @param args Actual runtime arguments of the block call.
+        """
+        actual_arity = len(args)
+        expected_arity = self.block_ast.arity
+
+        if actual_arity != expected_arity:
+            raise InterpreterError(
+                ErrorCode.INT_DNU,
+                (
+                    f"Block expected {expected_arity} argument(s), "
+                    f"but received {actual_arity}."
+                ),
+            )
+
+    def _create_call_frame(self) -> ScopeFrame:
+        """
+        @brief One new block-call frame is created.
+
+        @return Fresh block-call frame.
+        """
+        call_frame = ScopeFrame()
+        call_frame.parent = self.captured_frame
+        return call_frame
+
+    def _bind_arguments(
+        self,
+        call_frame: ScopeFrame,
+        args: list[RuntimeValue],
+    ) -> None:
+        """
+        @brief Block arguments are bound into the call frame.
+
+        @param call_frame Fresh call frame of the block invocation.
+        @param args Actual runtime arguments of the block call.
+        """
+        parameter_count = len(self.block_ast.parameters)
+        index = 0
+
+        while index < parameter_count:
+            parameter = self.block_ast.parameters[index]
+            argument_value = args[index]
+
+            call_frame.bindings_by_name[parameter.name] = BindingRecord(
+                argument_value,
+                True,
+                True,
+            )
+            index += 1

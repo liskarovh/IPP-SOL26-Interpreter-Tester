@@ -54,7 +54,7 @@ class CallbackBuiltinImplementation(BuiltinImplementation):
     @brief One callback-backed built-in implementation is represented.
     """
 
-    callback: object
+    callback: BuiltinCallback
 
     def __init__(self, callback: BuiltinCallback) -> None:
         """

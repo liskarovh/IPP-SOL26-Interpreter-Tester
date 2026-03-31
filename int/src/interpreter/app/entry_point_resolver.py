@@ -37,7 +37,6 @@ class EntryPointResolver:
         """
         @brief The runtime entry point is resolved.
 
-        @param program A validated AST program.
         @param runtime A built runtime container.
         @return The resolved runtime entry data needed by the execution layer.
         """
@@ -54,7 +53,7 @@ class EntryPointResolver:
             )
 
         entry_receiver = runtime.object_factory.new_user_object(entry_class)
-        entry_method = entry_class.lookup_class(entry_method_name)
+        entry_method = entry_class.lookup_instance(entry_method_name)
 
         if entry_method is None:
             raise (InterpreterError(

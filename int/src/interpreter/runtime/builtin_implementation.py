@@ -24,8 +24,8 @@ from ..support.typing_helpers import (
 
 if TYPE_CHECKING:
     from ..model.invocation_context import InvocationContext
-    from ..model.runtime_class import RuntimeClass
     from ..model.values import RuntimeValue
+    from ..model.runtime_class import RuntimeClass
 
 
 class BuiltinImplementation(ABC):
@@ -79,6 +79,7 @@ class InstanceCallbackBuiltinImplementation(BuiltinImplementation):
         @param ctx An invocation context.
         @return A produced runtime value.
         """
+        from ..model.runtime_class import RuntimeClass # Avoid circular import
         if isinstance(receiver, RuntimeClass):
             raise TypeError("Instance-side builtin received a class receiver.")
 
@@ -114,6 +115,7 @@ class ClassCallbackBuiltinImplementation(BuiltinImplementation):
         @param ctx An invocation context.
         @return A produced runtime value.
         """
+        from ..model.runtime_class import RuntimeClass # Avoid circular import
         if not isinstance(receiver, RuntimeClass):
             raise TypeError("Class-side builtin received an instance receiver.")
 

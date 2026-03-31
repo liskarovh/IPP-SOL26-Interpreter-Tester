@@ -56,25 +56,24 @@ class ObjectFactory:
         slot_storage = ObjectSlots(initial_slots)
         return UserObject(runtime_class, slot_storage)
 
-    def new_integer(self, value: int, runtime_class: RuntimeClass) -> IntegerValue:
+    def new_integer(self, value: int) -> IntegerValue:
         """
         @brief A new integer runtime value is created.
 
         @param value Wrapped integer payload.
-        @param runtime_class Runtime class of the created integer value.
         @return Newly created integer runtime value.
         """
-
+        runtime_class = self._require_builtin_class("Integer")
         return IntegerValue(runtime_class, value)
 
-    def new_string(self, value: str, runtime_class: RuntimeClass) -> StringValue:
+    def new_string(self, value: str) -> StringValue:
         """
         @brief A new string runtime value is created.
 
         @param value Wrapped string payload.
-        @param runtime_class Runtime class of the created string value.
         @return Newly created string runtime value.
         """
+        runtime_class = self._require_builtin_class("String")
         return StringValue(runtime_class, value)
 
     def new_boolean(self, value: bool) -> BooleanValue:
@@ -112,10 +111,19 @@ class ObjectFactory:
         @return Newly created block closure.
         """
 
-        runtime_class = self.class_registry.require("Block")
+        runtime_class = self._require_builtin_class("Block")
         return BlockClosure(
             runtime_class,
             ast,
             frame,
             ctx,
         )
+
+    def _require_builtin_class(self, class_name: str) -> RuntimeClass:
+        """
+        @brief One builtin runtime class is required.
+
+        @param class_name Name of the required builtin runtime class.
+        @return Resolved runtime class.
+        """
+        return self.class_registry.require(class_name)

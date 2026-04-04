@@ -727,5 +727,5 @@ class Interpreter:
                 "No program loaded.",
             )
 
-        dump_program_ast(program)
+        #dump_program_ast(program)
         self.program_runner.run(program, runtime_io)

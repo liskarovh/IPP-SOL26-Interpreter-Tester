@@ -97,7 +97,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=object_class,
         selector="asString",
-        builtin_callback=_make_object_as_string(class_registry, object_factory),
+        builtin_callback=_make_object_as_string(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -153,7 +153,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=nil_class,
         selector="asString",
-        builtin_callback=_make_nil_as_string(class_registry, object_factory),
+        builtin_callback=_make_nil_as_string(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -181,31 +181,31 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=integer_class,
         selector="plus:",
-        builtin_callback=_make_integer_plus(class_registry, object_factory),
+        builtin_callback=_make_integer_plus(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=integer_class,
         selector="minus:",
-        builtin_callback=_make_integer_minus(class_registry, object_factory),
+        builtin_callback=_make_integer_minus(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=integer_class,
         selector="multiplyBy:",
-        builtin_callback=_make_integer_multiply_by(class_registry, object_factory),
+        builtin_callback=_make_integer_multiply_by(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=integer_class,
         selector="divBy:",
-        builtin_callback=_make_integer_div_by(class_registry, object_factory),
+        builtin_callback=_make_integer_div_by(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=integer_class,
         selector="asString",
-        builtin_callback=_make_integer_as_string(class_registry, object_factory),
+        builtin_callback=_make_integer_as_string(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -251,11 +251,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=string_class,
         selector="asInteger",
-        builtin_callback=_make_string_as_integer(
-            class_registry,
-            builtin_registry,
-            object_factory,
-        ),
+        builtin_callback=_make_string_as_integer(builtin_registry, object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -267,27 +263,19 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=string_class,
         selector="concatenateWith:",
-        builtin_callback=_make_string_concatenate_with(
-            class_registry,
-            builtin_registry,
-            object_factory,
-        ),
+        builtin_callback=_make_string_concatenate_with(builtin_registry, object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=string_class,
         selector="startsWith:endsBefore:",
-        builtin_callback=_make_string_starts_with_ends_before(
-            class_registry,
-            builtin_registry,
-            object_factory,
-        ),
+        builtin_callback=_make_string_starts_with_ends_before(builtin_registry, object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=string_class,
         selector="length",
-        builtin_callback=_make_string_length(class_registry, object_factory),
+        builtin_callback=_make_string_length(object_factory),
         builtin_registry=builtin_registry,
     )
 
@@ -297,7 +285,7 @@ def register_builtins(
     _register_one_class_builtin(
         owner=string_class,
         selector="read",
-        builtin_callback=_make_string_read(class_registry, object_factory, runtime_io),
+        builtin_callback=_make_string_read(object_factory, runtime_io),
         builtin_registry=builtin_registry,
     )
 
@@ -351,7 +339,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=true_class,
         selector="asString",
-        builtin_callback=_make_true_as_string(class_registry, object_factory),
+        builtin_callback=_make_true_as_string(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -391,7 +379,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=false_class,
         selector="asString",
-        builtin_callback=_make_false_as_string(class_registry, object_factory),
+        builtin_callback=_make_false_as_string(object_factory),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -493,7 +481,9 @@ def _make_return_receiver() -> InstanceBuiltinCallback:
     return builtin_return_receiver
 
 
-def _make_return_true(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
+def _make_return_true(
+        builtin_registry: BuiltinRegistry
+) -> InstanceBuiltinCallback:
     """
     @brief One callback returning canonical true is created.
 
@@ -511,7 +501,9 @@ def _make_return_true(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallb
     return builtin_return_true
 
 
-def _make_return_false(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
+def _make_return_false(
+        builtin_registry: BuiltinRegistry
+) -> InstanceBuiltinCallback:
     """
     @brief One callback returning canonical false is created.
 
@@ -529,7 +521,9 @@ def _make_return_false(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCall
     return builtin_return_false
 
 
-def _true_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
+def _true_value(
+        builtin_registry: BuiltinRegistry
+) -> BooleanValue:
     """
     @brief The canonical true value is returned.
 
@@ -539,7 +533,9 @@ def _true_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
     return builtin_registry.get_true_value()
 
 
-def _false_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
+def _false_value(
+        builtin_registry: BuiltinRegistry
+) -> BooleanValue:
     """
     @brief The canonical false value is returned.
 
@@ -549,7 +545,9 @@ def _false_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
     return builtin_registry.get_false_value()
 
 
-def _nil_value(builtin_registry: BuiltinRegistry) -> NilValue:
+def _nil_value(
+        builtin_registry: BuiltinRegistry
+) -> NilValue:
     """
     @brief The canonical nil value is returned.
 
@@ -559,7 +557,11 @@ def _nil_value(builtin_registry: BuiltinRegistry) -> NilValue:
     return builtin_registry.get_nil_value()
 
 
-def _require_arg_count(args: RuntimeValueList, expected: int, selector: str) -> None:
+def _require_arg_count(
+        args: RuntimeValueList,
+        expected: int,
+        selector: str
+) -> None:
     """
     @brief The runtime argument count is checked.
 
@@ -571,11 +573,15 @@ def _require_arg_count(args: RuntimeValueList, expected: int, selector: str) -> 
     if actual != expected:
         raise InterpreterError(
             ErrorCode.INT_OTHER,
-            f"Built-in method {selector} expected {expected} arguments, got {actual}.",
+            f"Built-in method {selector} expected {expected} arguments, "
+            f"got {actual}.",
         )
 
 
-def _expect_integer(value: RuntimeValue, selector: str) -> IntegerValue:
+def _expect_integer(
+        value: RuntimeValue,
+        selector: str
+) -> IntegerValue:
     """
     @brief One runtime integer value is required.
 
@@ -588,11 +594,15 @@ def _expect_integer(value: RuntimeValue, selector: str) -> IntegerValue:
 
     raise InterpreterError(
         ErrorCode.INT_OTHER,
-        f"Built-in method {selector} expected Integer, got {value.get_class().name}.",
+        f"Built-in method {selector} expected Integer, "
+        f"got {value.get_class().name}.",
     )
 
 
-def _expect_string(value: RuntimeValue, selector: str) -> StringValue:
+def _expect_string(
+        value: RuntimeValue,
+        selector: str
+) -> StringValue:
     """
     @brief One runtime string value is required.
 
@@ -605,11 +615,15 @@ def _expect_string(value: RuntimeValue, selector: str) -> StringValue:
 
     raise InterpreterError(
         ErrorCode.INT_OTHER,
-        f"Built-in method {selector} expected String, got {value.get_class().name}.",
+        f"Built-in method {selector} expected String, "
+        f"got {value.get_class().name}.",
     )
 
 
-def _expect_user_object(value: RuntimeValue, selector: str) -> UserObject:
+def _expect_user_object(
+        value: RuntimeValue,
+        selector: str
+) -> UserObject:
     """
     @brief One user object is required.
 
@@ -628,25 +642,21 @@ def _expect_user_object(value: RuntimeValue, selector: str) -> UserObject:
 
 def _make_runtime_string(
     value: str,
-    class_registry: ClassRegistry,
     object_factory: ObjectFactory,
 ) -> StringValue:
     """
     @brief One runtime string value is created.
 
     @param value Wrapped textual payload.
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One runtime string value.
     """
-    string_class = class_registry.require("String")
-    return object_factory.new_string(value, string_class)
+    return object_factory.new_string(value)
 
 
 def _make_runtime_integer(
-    value: int,
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        value: int,
+        object_factory: ObjectFactory
 ) -> IntegerValue:
     """
     @brief One runtime integer value is created.
@@ -656,8 +666,7 @@ def _make_runtime_integer(
     @param object_factory A runtime value factory.
     @return One runtime integer value.
     """
-    integer_class = class_registry.require("Integer")
-    return object_factory.new_integer(value, integer_class)
+    return object_factory.new_integer(value)
 
 
 def _copy_user_slots(source: UserObject, target: UserObject) -> None:
@@ -697,7 +706,9 @@ def _make_object_identical_to(
     return builtin_object_identical_to
 
 
-def _make_object_equal_to(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
+def _make_object_equal_to(
+        builtin_registry: BuiltinRegistry
+) -> InstanceBuiltinCallback:
     """
     @brief One Object>>equalTo: callback is created.
 
@@ -740,8 +751,7 @@ def _make_object_equal_to(builtin_registry: BuiltinRegistry) -> InstanceBuiltinC
 
 
 def _make_object_as_string(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Object>>asString callback is created.
@@ -757,7 +767,7 @@ def _make_object_as_string(
         _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "asString")
-        return _make_runtime_string("", class_registry, object_factory)
+        return _make_runtime_string("", object_factory)
 
     return builtin_object_as_string
 
@@ -786,10 +796,10 @@ def _make_object_new(
             return _nil_value(builtin_registry)
 
         if target_class.name == "Integer":
-            return object_factory.new_integer(0, target_class)
+            return object_factory.new_integer(0)
 
         if target_class.name == "String":
-            return object_factory.new_string("", target_class)
+            return object_factory.new_string("")
 
         if target_class.name == "True":
             return _true_value(builtin_registry)
@@ -834,11 +844,11 @@ def _make_object_from(
 
         if target_class.name == "Integer":
             source_integer = _expect_integer(source, "from:")
-            return object_factory.new_integer(source_integer.raw(), target_class)
+            return object_factory.new_integer(source_integer.raw())
 
         if target_class.name == "String":
             source_string = _expect_string(source, "from:")
-            return object_factory.new_string(source_string.raw(), target_class)
+            return object_factory.new_string(source_string.raw())
 
         if target_class.name == "True":
             if isinstance(source, BooleanValue) and source.raw() is True:
@@ -872,8 +882,7 @@ def _make_object_from(
 
 
 def _make_nil_as_string(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Nil>>asString callback is created.
@@ -889,7 +898,7 @@ def _make_nil_as_string(
         _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "asString")
-        return _make_runtime_string("nil", class_registry, object_factory)
+        return _make_runtime_string("nil", object_factory)
 
     return builtin_nil_as_string
 
@@ -949,8 +958,7 @@ def _make_integer_greater_than(
 
 
 def _make_integer_plus(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>plus: callback is created.
@@ -968,14 +976,13 @@ def _make_integer_plus(
         _require_arg_count(args, 1, "plus:")
         left = _expect_integer(receiver, "plus:")
         right = _expect_integer(args[0], "plus:")
-        return _make_runtime_integer(left.raw() + right.raw(), class_registry, object_factory)
+        return _make_runtime_integer(left.raw() + right.raw(), object_factory)
 
     return builtin_integer_plus
 
 
 def _make_integer_minus(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>minus: callback is created.
@@ -993,14 +1000,13 @@ def _make_integer_minus(
         _require_arg_count(args, 1, "minus:")
         left = _expect_integer(receiver, "minus:")
         right = _expect_integer(args[0], "minus:")
-        return _make_runtime_integer(left.raw() - right.raw(), class_registry, object_factory)
+        return _make_runtime_integer(left.raw() - right.raw(), object_factory)
 
     return builtin_integer_minus
 
 
 def _make_integer_multiply_by(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>multiplyBy: callback is created.
@@ -1018,14 +1024,13 @@ def _make_integer_multiply_by(
         _require_arg_count(args, 1, "multiplyBy:")
         left = _expect_integer(receiver, "multiplyBy:")
         right = _expect_integer(args[0], "multiplyBy:")
-        return _make_runtime_integer(left.raw() * right.raw(), class_registry, object_factory)
+        return _make_runtime_integer(left.raw() * right.raw(), object_factory)
 
     return builtin_integer_multiply_by
 
 
 def _make_integer_div_by(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>divBy: callback is created.
@@ -1050,14 +1055,13 @@ def _make_integer_div_by(
                 "Division by zero is not allowed.",
             )
 
-        return _make_runtime_integer(left.raw() // right.raw(), class_registry, object_factory)
+        return _make_runtime_integer(left.raw() // right.raw(), object_factory)
 
     return builtin_integer_div_by
 
 
 def _make_integer_as_string(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>asString callback is created.
@@ -1074,7 +1078,7 @@ def _make_integer_as_string(
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "asString")
         integer_value = _expect_integer(receiver, "asString")
-        return _make_runtime_string(str(integer_value.raw()), class_registry, object_factory)
+        return _make_runtime_string(str(integer_value.raw()), object_factory)
 
     return builtin_integer_as_string
 
@@ -1147,9 +1151,8 @@ def _make_string_equal_to(
 
 
 def _make_string_as_integer(
-    class_registry: ClassRegistry,
-    builtin_registry: BuiltinRegistry,
-    object_factory: ObjectFactory,
+        builtin_registry: BuiltinRegistry,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>asInteger callback is created.
@@ -1174,15 +1177,14 @@ def _make_string_as_integer(
         except ValueError:
             return _nil_value(builtin_registry)
 
-        return _make_runtime_integer(parsed_value, class_registry, object_factory)
+        return _make_runtime_integer(parsed_value, object_factory)
 
     return builtin_string_as_integer
 
 
 def _make_string_concatenate_with(
-    class_registry: ClassRegistry,
-    builtin_registry: BuiltinRegistry,
-    object_factory: ObjectFactory,
+        builtin_registry: BuiltinRegistry,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>concatenateWith: callback is created.
@@ -1205,15 +1207,14 @@ def _make_string_concatenate_with(
         if not isinstance(right, StringValue):
             return _nil_value(builtin_registry)
 
-        return _make_runtime_string(left.raw() + right.raw(), class_registry, object_factory)
+        return _make_runtime_string(left.raw() + right.raw(), object_factory)
 
     return builtin_string_concatenate_with
 
 
 def _make_string_starts_with_ends_before(
-    class_registry: ClassRegistry,
-    builtin_registry: BuiltinRegistry,
-    object_factory: ObjectFactory,
+        builtin_registry: BuiltinRegistry,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>startsWith:endsBefore: callback is created.
@@ -1251,14 +1252,13 @@ def _make_string_starts_with_ends_before(
             return _nil_value(builtin_registry)
 
         sliced_text = text[start_index - 1 : end_index - 1]
-        return _make_runtime_string(sliced_text, class_registry, object_factory)
+        return _make_runtime_string(sliced_text, object_factory)
 
     return builtin_string_starts_with_ends_before
 
 
 def _make_string_length(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>length callback is created.
@@ -1275,15 +1275,14 @@ def _make_string_length(
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "length")
         string_value = _expect_string(receiver, "length")
-        return _make_runtime_integer(len(string_value.raw()), class_registry, object_factory)
+        return _make_runtime_integer(len(string_value.raw()), object_factory)
 
     return builtin_string_length
 
 
 def _make_string_read(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
-    runtime_io: RuntimeIO,
+        object_factory: ObjectFactory,
+        runtime_io: RuntimeIO
 ) -> ClassBuiltinCallback:
     """
     @brief One String class-side >>read callback is created.
@@ -1302,7 +1301,7 @@ def _make_string_read(
         _require_arg_count(args, 0, "read")
         read_text = runtime_io.read_line()
         normalized_text = read_text.removesuffix("\n")
-        return _make_runtime_string(normalized_text, class_registry, object_factory)
+        return _make_runtime_string(normalized_text, object_factory)
 
     return builtin_string_read
 
@@ -1365,8 +1364,7 @@ def _make_block_while_true_deferred() -> InstanceBuiltinCallback:
 
 
 def _make_true_as_string(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One True>>asString callback is created.
@@ -1382,12 +1380,14 @@ def _make_true_as_string(
         _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "asString")
-        return _make_runtime_string("true", class_registry, object_factory)
+        return _make_runtime_string("true", object_factory)
 
     return builtin_true_as_string
 
 
-def _make_true_not(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
+def _make_true_not(
+        builtin_registry: BuiltinRegistry
+) -> InstanceBuiltinCallback:
     """
     @brief One True>>not callback is created.
 
@@ -1463,8 +1463,7 @@ def _make_true_if_true_if_false_deferred() -> InstanceBuiltinCallback:
 
 
 def _make_false_as_string(
-    class_registry: ClassRegistry,
-    object_factory: ObjectFactory,
+        object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One False>>asString callback is created.
@@ -1480,12 +1479,14 @@ def _make_false_as_string(
         _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "asString")
-        return _make_runtime_string("false", class_registry, object_factory)
+        return _make_runtime_string("false", object_factory)
 
     return builtin_false_as_string
 
 
-def _make_false_not(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
+def _make_false_not(
+        builtin_registry: BuiltinRegistry
+) -> InstanceBuiltinCallback:
     """
     @brief One False>>not callback is created.
 

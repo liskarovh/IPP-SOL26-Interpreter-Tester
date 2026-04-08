@@ -15,6 +15,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from .object_slots import ObjectSlots
     from .runtime_class import RuntimeClass
 
 
@@ -23,13 +24,19 @@ class RuntimeValue:
     @brief A common base class for runtime values is represented.
     """
 
-    def __init__(self, runtime_class: RuntimeClass) -> None:
+    def __init__(
+            self,
+            runtime_class: RuntimeClass,
+            slots: ObjectSlots | None = None,
+    ) -> None:
         """
         @brief A runtime value is initialized.
 
         @param runtime_class Runtime class of the represented value.
+        @param slots Optional instance slot storage of the value.
         """
         self.runtime_class = runtime_class
+        self.slots = slots
 
     def get_class(self) -> RuntimeClass:
         """
@@ -67,14 +74,20 @@ class IntegerValue(RuntimeValue):
     @brief A runtime integer value is represented.
     """
 
-    def __init__(self, runtime_class: RuntimeClass, value: int) -> None:
+    def __init__(
+            self,
+            runtime_class: RuntimeClass,
+            value: int,
+            slots: ObjectSlots | None = None,
+    ) -> None:
         """
         @brief An integer runtime value is initialized.
 
         @param runtime_class Runtime class of the integer value.
         @param value Wrapped integer payload.
+        @param slots Optional instance slot storage of the value.
         """
-        super().__init__(runtime_class)
+        super().__init__(runtime_class, slots)
         self.value = value
 
     def raw(self) -> int:
@@ -91,14 +104,20 @@ class StringValue(RuntimeValue):
     @brief A runtime string value is represented.
     """
 
-    def __init__(self, runtime_class: RuntimeClass, value: str) -> None:
+    def __init__(
+            self,
+            runtime_class: RuntimeClass,
+            value: str,
+            slots: ObjectSlots | None = None,
+    ) -> None:
         """
-        @brief A string runtime value is initialized.
+        @brief An string runtime value is initialized.
 
         @param runtime_class Runtime class of the string value.
-        @param value Wrapped string payload.
+        @param value Wrapped integer payload.
+        @param slots Optional instance slot storage of the value.
         """
-        super().__init__(runtime_class)
+        super().__init__(runtime_class, slots)
         self.value = value
 
     def raw(self) -> str:

@@ -19,7 +19,11 @@ from ..model.runtime_class import RuntimeClass
 from ..model.runtime_methods import UserMethod
 from ..model.values import BooleanValue, NilValue
 from ..runtime.builtin_registry import BuiltinRegistry
-from ..runtime.builtins import register_builtins
+from ..runtime.builtins import (
+    SendOneArgMessageCallback,
+    SendZeroArgMessageCallback,
+    register_builtins,
+)
 from ..runtime.class_registry import ClassRegistry
 from ..runtime.object_factory import ObjectFactory
 from ..runtime.runtime import Runtime
@@ -38,16 +42,28 @@ class RuntimeBuilder:
         The builder is intentionally kept simple at this stage.
         """
 
-    def build(self, program: Program, input_io: RuntimeIO) -> Runtime:
+    def build(
+        self,
+        program: Program,
+        input_io: RuntimeIO,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+        send_one_arg_message: SendOneArgMessageCallback,
+    ) -> Runtime:
         """
         @brief A runtime is built from the validated AST program.
 
         @param program A validated AST program.
         @param input_io A runtime input/output adapter.
+        @param send_zero_arg_message A helper sending one zero-argument runtime message.
+        @param send_one_arg_message A helper sending one one-argument runtime message.
         @return A newly built runtime container.
         """
         new_runtime = self._create_empty_runtime(input_io)
-        self._register_builtin_runtime_content(new_runtime)
+        self._register_builtin_runtime_content(
+            new_runtime,
+            send_zero_arg_message,
+            send_one_arg_message,
+        )
         self._register_user_runtime_classes(program, new_runtime)
         self._attach_user_runtime_methods(program, new_runtime)
         return new_runtime
@@ -72,15 +88,25 @@ class RuntimeBuilder:
         )
 
     @staticmethod
-    def _register_builtin_runtime_content(runtime: Runtime) -> None:
+    def _register_builtin_runtime_content(
+        runtime: Runtime,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+        send_one_arg_message: SendOneArgMessageCallback,
+    ) -> None:
         """
         @brief Built-in runtime classes, values, and methods are registered.
 
         @param runtime A runtime container that is being built.
+        @param send_zero_arg_message A helper sending one zero-argument runtime message.
+        @param send_one_arg_message A helper sending one one-argument runtime message.
         """
         RuntimeBuilder._register_builtin_runtime_classes(runtime)
         RuntimeBuilder._register_canonical_builtin_values(runtime)
-        RuntimeBuilder._register_builtin_runtime_methods(runtime)
+        RuntimeBuilder._register_builtin_runtime_methods(
+            runtime,
+            send_zero_arg_message,
+            send_one_arg_message,
+        )
 
     @staticmethod
     def _register_builtin_runtime_classes(runtime: Runtime) -> None:
@@ -125,17 +151,25 @@ class RuntimeBuilder:
         runtime.builtin_registry.set_nil_value(nil_value)
 
     @staticmethod
-    def _register_builtin_runtime_methods(runtime: Runtime) -> None:
+    def _register_builtin_runtime_methods(
+        runtime: Runtime,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+        send_one_arg_message: SendOneArgMessageCallback,
+    ) -> None:
         """
         @brief Built-in runtime methods are registered.
 
         @param runtime A runtime container that is being built.
+        @param send_zero_arg_message A helper sending one zero-argument runtime message.
+        @param send_one_arg_message A helper sending one one-argument runtime message.
         """
         register_builtins(
             runtime.class_registry,
             runtime.builtin_registry,
             runtime.object_factory,
             runtime.io,
+            send_zero_arg_message,
+            send_one_arg_message,
         )
 
     def _register_user_runtime_classes(self, program: Program, runtime: Runtime) -> None:

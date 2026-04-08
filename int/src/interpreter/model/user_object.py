@@ -33,7 +33,7 @@ class UserObject(RuntimeValue):
         @param slots Slot storage owned by the object instance.
         """
         super().__init__(runtime_class)
-        self.slots = slots
+        self.slots: ObjectSlots = slots
 
     def read_slot(self, name: str) -> RuntimeValue:
         """

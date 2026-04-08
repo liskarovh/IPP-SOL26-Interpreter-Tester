@@ -14,8 +14,12 @@ from ..execution.block_executor import BlockExecutor
 from ..execution.expression_dispatcher import ExpressionDispatcher
 from ..execution.method_executor import MethodExecutor
 from ..input_model import Program
-from ..runtime.runtime import Runtime
+from ..model.invocation_context import InvocationContext
+from ..model.values import RuntimeValue
 from ..runtime.runtime_io import RuntimeIO
+from ..send.attribute_accessor import AttributeAccessor
+from ..send.attribute_dispatch_resolver import AttributeDispatchResolver
+from ..send.send_expr_evaluator import ClassSendExprEvaluator, InstanceSendExprEvaluator
 from .entry_point_resolver import EntryPointResolver
 from .program_validator import ProgramValidator
 from .runtime_builder import RuntimeBuilder
@@ -49,23 +53,70 @@ class ProgramRunner:
         """
         self.program_validator.validate(program)
 
-        runtime = self.runtime_builder.build(program, input_io)
-        method_executor = self._create_method_executor(runtime)
+        attribute_resolver = AttributeDispatchResolver()
+        attribute_accessor = AttributeAccessor()
+
+        instance_send_evaluator = InstanceSendExprEvaluator(
+            attribute_resolver,
+            None,
+            attribute_accessor,
+        )
+
+        class_send_evaluator = ClassSendExprEvaluator(
+            attribute_resolver,
+            None,
+            attribute_accessor,
+        )
+
+        def send_zero_arg_message(
+            target_value: RuntimeValue,
+            selector: str,
+            ctx: InvocationContext,
+        ) -> RuntimeValue:
+            from ..send.resolved_receiver import ResolvedReceiver
+            from ..support.send_types import LookupMode
+
+            return instance_send_evaluator.dispatch_send(
+                ResolvedReceiver(target_value, LookupMode.NORMAL),
+                selector,
+                [],
+                ctx,
+            )
+
+        def send_one_arg_message(
+            target_value: RuntimeValue,
+            selector: str,
+            arg_value: RuntimeValue,
+            ctx: InvocationContext,
+        ) -> RuntimeValue:
+            from ..send.resolved_receiver import ResolvedReceiver
+            from ..support.send_types import LookupMode
+
+            return instance_send_evaluator.dispatch_send(
+                ResolvedReceiver(target_value, LookupMode.NORMAL),
+                selector,
+                [arg_value],
+                ctx,
+            )
+
+        runtime = self.runtime_builder.build(
+            program,
+            input_io,
+            send_zero_arg_message,
+            send_one_arg_message,
+        )
+
+        expression_dispatcher = ExpressionDispatcher(
+            runtime.object_factory,
+            instance_send_evaluator,
+            class_send_evaluator,
+        )
+
+        block_executor = BlockExecutor(expression_dispatcher)
+        method_executor = MethodExecutor(block_executor)
+
+        instance_send_evaluator.wire_method_executor(method_executor)
+        class_send_evaluator.wire_method_executor(method_executor)
 
         entry_receiver, entry_method = self.entry_point_resolver.resolve(runtime)
         _ = method_executor.execute(entry_method, entry_receiver, [])
-
-    @staticmethod
-    def _create_method_executor(runtime: Runtime) -> MethodExecutor:
-        """
-        @brief One execution chain is created for the supplied runtime.
-
-        The created chain is bound to the runtime object factory so that
-        execution uses the same runtime world that was built from the AST.
-
-        @param runtime A runtime prepared for one program run.
-        @return A method executor wired for this runtime.
-        """
-        expression_dispatcher = ExpressionDispatcher(runtime.object_factory)
-        block_executor = BlockExecutor(expression_dispatcher)
-        return MethodExecutor(block_executor)

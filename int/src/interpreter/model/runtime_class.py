@@ -33,6 +33,23 @@ class RuntimeClass:
         self.class_methods_by_selector: dict[str, RuntimeMethod] = {}
         self.instance_methods_by_selector: dict[str, RuntimeMethod] = {}
 
+    def inherits_from_name(self, ancestor_name: str) -> bool:
+        """
+        @brief Whether this runtime class is one named ancestor or inherits from it is checked.
+
+        @param ancestor_name One ancestor class name to be checked.
+        @return True when this class is the named ancestor or inherits from it, otherwise False.
+        """
+        current: RuntimeClass | None = self
+
+        while current is not None:
+            if current.name == ancestor_name:
+                return True
+
+            current = current.parent
+
+        return False
+
     def add_instance_method(self, method: RuntimeMethod) -> None:
         """
         @brief A runtime instance method is added to this class.

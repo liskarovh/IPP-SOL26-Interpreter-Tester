@@ -31,10 +31,12 @@ FUTURE ADJUSTMENTS:
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import TYPE_CHECKING
 
 from ..error_codes import ErrorCode
 from ..exceptions import InterpreterError
+from ..model.block_closure import BlockClosure
 from ..model.runtime_class import RuntimeClass
 from ..model.runtime_methods import BuiltinMethod
 from ..model.user_object import UserObject
@@ -43,6 +45,15 @@ from .builtin_implementation import (
     ClassCallbackBuiltinImplementation,
     InstanceCallbackBuiltinImplementation,
 )
+
+SendZeroArgMessageCallback = Callable[
+    [RuntimeValue, str, "InvocationContext"],
+    RuntimeValue
+]
+SendOneArgMessageCallback = Callable[
+    [RuntimeValue, str, RuntimeValue, "InvocationContext"],
+    RuntimeValue
+]
 
 if TYPE_CHECKING:
     from ..model.invocation_context import InvocationContext
@@ -62,6 +73,8 @@ def register_builtins(
     builtin_registry: BuiltinRegistry,
     object_factory: ObjectFactory,
     runtime_io: RuntimeIO,
+    send_zero_arg_message: SendZeroArgMessageCallback,
+    send_one_arg_message: SendOneArgMessageCallback,
 ) -> None:
     """
     @brief Built-in runtime methods are registered.
@@ -70,6 +83,8 @@ def register_builtins(
     @param builtin_registry A registry of canonical built-in values and methods.
     @param object_factory A runtime value factory.
     @param runtime_io A runtime input/output service.
+    @param send_zero_arg_message A helper sending one zero-argument runtime message.
+    @param send_one_arg_message A helper sending one one-argument runtime message.
     """
     object_class = class_registry.require("Object")
     nil_class = class_registry.require("Nil")
@@ -223,7 +238,11 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=integer_class,
         selector="timesRepeat:",
-        builtin_callback=_make_integer_times_repeat_deferred(),
+        builtin_callback=_make_integer_times_repeat(
+            value_registry=builtin_registry,
+            object_factory=object_factory,
+            send_one_arg_message=send_one_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
 
@@ -289,15 +308,6 @@ def register_builtins(
         builtin_registry=builtin_registry,
     )
 
-    #
-    # Block class-side methods
-    #
-    _register_one_class_builtin(
-        owner=block_class,
-        selector="new",
-        builtin_callback=_make_block_new_deferred(),
-        builtin_registry=builtin_registry,
-    )
 
     #
     # Block instance-side methods
@@ -310,26 +320,11 @@ def register_builtins(
     )
     _register_one_instance_builtin(
         owner=block_class,
-        selector="value",
-        builtin_callback=_make_block_value_deferred(),
-        builtin_registry=builtin_registry,
-    )
-    _register_one_instance_builtin(
-        owner=block_class,
-        selector="value:",
-        builtin_callback=_make_block_value_deferred(),
-        builtin_registry=builtin_registry,
-    )
-    _register_one_instance_builtin(
-        owner=block_class,
-        selector="value:value:",
-        builtin_callback=_make_block_value_deferred(),
-        builtin_registry=builtin_registry,
-    )
-    _register_one_instance_builtin(
-        owner=block_class,
         selector="whileTrue:",
-        builtin_callback=_make_block_while_true_deferred(),
+        builtin_callback=_make_block_while_true(
+            value_registry=builtin_registry,
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
 
@@ -357,19 +352,27 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=true_class,
         selector="and:",
-        builtin_callback=_make_true_and_deferred(),
+        builtin_callback=_make_boolean_and(
+            value_registry=builtin_registry,
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=true_class,
         selector="or:",
-        builtin_callback=_make_true_or_deferred(),
+        builtin_callback=_make_boolean_or(
+            value_registry=builtin_registry,
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=true_class,
         selector="ifTrue:ifFalse:",
-        builtin_callback=_make_true_if_true_if_false_deferred(),
+        builtin_callback=_make_boolean_if_true_if_false(
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
 
@@ -397,19 +400,27 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=false_class,
         selector="and:",
-        builtin_callback=_make_false_and_deferred(),
+        builtin_callback=_make_boolean_and(
+            value_registry=builtin_registry,
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=false_class,
         selector="or:",
-        builtin_callback=_make_false_or_deferred(),
+        builtin_callback=_make_boolean_or(
+            value_registry=builtin_registry,
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=false_class,
         selector="ifTrue:ifFalse:",
-        builtin_callback=_make_false_if_true_if_false_deferred(),
+        builtin_callback=_make_boolean_if_true_if_false(
+            send_zero_arg_message=send_zero_arg_message,
+        ),
         builtin_registry=builtin_registry,
     )
 
@@ -557,6 +568,44 @@ def _nil_value(
     return builtin_registry.get_nil_value()
 
 
+def _send_zero_arg_runtime_message(
+        target_value: RuntimeValue,
+        selector: str,
+        ctx: InvocationContext,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+) -> RuntimeValue:
+    """
+    @brief One zero-argument runtime message is sent.
+
+    @param target_value One runtime object receiving the message.
+    @param selector One selector of the sent message.
+    @param ctx One invocation context of the current built-in call.
+    @param send_zero_arg_message One injected zero-argument send helper.
+    @return One runtime value returned by the sent message.
+    """
+    return send_zero_arg_message(target_value, selector, ctx)
+
+
+def _send_one_arg_runtime_message(
+        target_value: RuntimeValue,
+        selector: str,
+        arg_value: RuntimeValue,
+        ctx: InvocationContext,
+        send_one_arg_message: SendOneArgMessageCallback,
+) -> RuntimeValue:
+    """
+    @brief One one-argument runtime message is sent.
+
+    @param target_value One runtime object receiving the message.
+    @param selector One selector of the sent message.
+    @param arg_value One runtime argument value.
+    @param ctx One invocation context of the current built-in call.
+    @param send_one_arg_message One injected one-argument send helper.
+    @return One runtime value returned by the sent message.
+    """
+    return send_one_arg_message(target_value, selector, arg_value, ctx)
+
+
 def _require_arg_count(
         args: RuntimeValueList,
         expected: int,
@@ -578,6 +627,46 @@ def _require_arg_count(
         )
 
 
+def _expect_block_closure(
+        value: RuntimeValue,
+        selector: str,
+) -> BlockClosure:
+    """
+    @brief One runtime block closure is required.
+
+    @param value One runtime value.
+    @param selector Current built-in selector.
+    @return The checked block closure.
+    """
+    if isinstance(value, BlockClosure):
+        return value
+
+    raise InterpreterError(
+        ErrorCode.INT_INVALID_ARG,
+        f"Built-in method {selector} expected Block, got {value.get_class().name}.",
+    )
+
+def _expect_boolean(
+        value: RuntimeValue,
+        selector: str
+) -> BooleanValue:
+    """
+    @brief One runtime boolean value is required.
+
+    @param value One runtime value.
+    @param selector Current built-in selector.
+    @return The checked runtime boolean value.
+    """
+    if isinstance(value, BooleanValue):
+        return value
+
+    raise InterpreterError(
+        ErrorCode.INT_INVALID_ARG,
+        f"Built-in method {selector} expected Boolean, "
+        f"got {value.get_class().name}.",
+    )
+
+
 def _expect_integer(
         value: RuntimeValue,
         selector: str
@@ -593,7 +682,7 @@ def _expect_integer(
         return value
 
     raise InterpreterError(
-        ErrorCode.INT_OTHER,
+        ErrorCode.INT_INVALID_ARG,
         f"Built-in method {selector} expected Integer, "
         f"got {value.get_class().name}.",
     )
@@ -614,7 +703,7 @@ def _expect_string(
         return value
 
     raise InterpreterError(
-        ErrorCode.INT_OTHER,
+        ErrorCode.INT_INVALID_ARG,
         f"Built-in method {selector} expected String, "
         f"got {value.get_class().name}.",
     )
@@ -635,7 +724,7 @@ def _expect_user_object(
         return value
 
     raise InterpreterError(
-        ErrorCode.INT_OTHER,
+        ErrorCode.INT_INVALID_ARG,
         f"Built-in method {selector} expected a user object, got {value.get_class().name}.",
     )
 
@@ -662,22 +751,29 @@ def _make_runtime_integer(
     @brief One runtime integer value is created.
 
     @param value Wrapped integer payload.
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One runtime integer value.
     """
     return object_factory.new_integer(value)
 
 
-def _copy_user_slots(source: UserObject, target: UserObject) -> None:
+def _copy_runtime_slots(source: RuntimeValue, target: RuntimeValue) -> None:
     """
     @brief Regular instance slots are copied with shallow-copy semantics.
 
-    @param source One source user object.
-    @param target One target user object.
+    @param source One source runtime value.
+    @param target One target runtime value.
     """
-    for slot_name, slot_value in source.slots.slots_by_name.items():
-        target.define_slot(slot_name, slot_value)
+    source_slots = source.slots
+    if source_slots is None:
+        return
+
+    target_slots = target.slots
+    if target_slots is None:
+        return
+
+    for slot_name, slot_value in source_slots.slots_by_name.items():
+        target_slots.define(slot_name, slot_value)
 
 
 def _make_object_identical_to(
@@ -756,7 +852,6 @@ def _make_object_as_string(
     """
     @brief One Object>>asString callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Object>>asString callback.
     """
@@ -795,11 +890,11 @@ def _make_object_new(
         if target_class.name == "Nil":
             return _nil_value(builtin_registry)
 
-        if target_class.name == "Integer":
-            return object_factory.new_integer(0)
+        if target_class.inherits_from_name("Integer"):
+            return object_factory.new_integer(0, target_class)
 
-        if target_class.name == "String":
-            return object_factory.new_string("")
+        if target_class.inherits_from_name("String"):
+            return object_factory.new_string("", target_class)
 
         if target_class.name == "True":
             return _true_value(builtin_registry)
@@ -808,10 +903,7 @@ def _make_object_new(
             return _false_value(builtin_registry)
 
         if target_class.name == "Block":
-            raise NotImplementedError(
-                "Block class-side >>new must be finalized after the execution layer "
-                "and empty-block representation are settled.",
-            )
+            return object_factory.new_empty_block_closure()
 
         return object_factory.new_user_object(target_class)
 
@@ -842,13 +934,17 @@ def _make_object_from(
         if target_class.name == "Nil":
             return _nil_value(builtin_registry)
 
-        if target_class.name == "Integer":
+        if target_class.inherits_from_name("Integer"):
             source_integer = _expect_integer(source, "from:")
-            return object_factory.new_integer(source_integer.raw())
+            new_integer = object_factory.new_integer(source_integer.raw(), target_class)
+            _copy_runtime_slots(source_integer, new_integer)
+            return new_integer
 
-        if target_class.name == "String":
+        if target_class.inherits_from_name("String"):
             source_string = _expect_string(source, "from:")
-            return object_factory.new_string(source_string.raw())
+            new_string = object_factory.new_string(source_string.raw(), target_class)
+            _copy_runtime_slots(source_string, new_string)
+            return new_string
 
         if target_class.name == "True":
             if isinstance(source, BooleanValue) and source.raw() is True:
@@ -867,14 +963,12 @@ def _make_object_from(
             )
 
         if target_class.name == "Block":
-            raise NotImplementedError(
-                "Block class-side >>from: requires the future block representation.",
-            )
+            source_block = _expect_block_closure(source, "from:")
+            return object_factory.copy_block_closure(source_block)
 
         new_object = object_factory.new_user_object(target_class)
 
-        if isinstance(source, UserObject):
-            _copy_user_slots(source, new_object)
+        _copy_runtime_slots(source, new_object)
 
         return new_object
 
@@ -887,7 +981,6 @@ def _make_nil_as_string(
     """
     @brief One Nil>>asString callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Nil>>asString callback.
     """
@@ -963,7 +1056,6 @@ def _make_integer_plus(
     """
     @brief One Integer>>plus: callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Integer>>plus: callback.
     """
@@ -987,7 +1079,6 @@ def _make_integer_minus(
     """
     @brief One Integer>>minus: callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Integer>>minus: callback.
     """
@@ -1011,7 +1102,6 @@ def _make_integer_multiply_by(
     """
     @brief One Integer>>multiplyBy: callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Integer>>multiplyBy: callback.
     """
@@ -1035,7 +1125,6 @@ def _make_integer_div_by(
     """
     @brief One Integer>>divBy: callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Integer>>divBy: callback.
     """
@@ -1066,7 +1155,6 @@ def _make_integer_as_string(
     """
     @brief One Integer>>asString callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One Integer>>asString callback.
     """
@@ -1083,21 +1171,48 @@ def _make_integer_as_string(
     return builtin_integer_as_string
 
 
-def _make_integer_times_repeat_deferred() -> InstanceBuiltinCallback:
+def _make_integer_times_repeat(
+        value_registry: BuiltinRegistry,
+        object_factory: ObjectFactory,
+        send_one_arg_message: SendOneArgMessageCallback,
+) -> InstanceBuiltinCallback:
     """
-    @brief One deferred Integer>>timesRepeat: callback is created.
+    @brief One Integer>>timesRepeat: callback is created.
 
-    @return One deferred Integer>>timesRepeat: callback.
+    @param value_registry A registry of canonical built-in values.
+    @param object_factory A runtime value factory.
+    @param send_one_arg_message One injected one-argument send helper.
+    @return One Integer>>timesRepeat: callback.
     """
 
     def builtin_integer_times_repeat(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        ctx: InvocationContext,
     ) -> RuntimeValue:
-        raise NotImplementedError(
-            "Integer>>timesRepeat: requires the future execution layer.",
-        )
+        _require_arg_count(args, 1, "timesRepeat:")
+
+        integer_receiver = _expect_integer(receiver, "timesRepeat:")
+        delayed_value = args[0]
+        repeat_count = integer_receiver.raw()
+
+        if repeat_count <= 0:
+            return _nil_value(value_registry)
+
+        last_result: RuntimeValue = _nil_value(value_registry)
+
+        for iteration_index in range(1, repeat_count + 1):
+            iteration_value = _make_runtime_integer(iteration_index, object_factory)
+            current_result: RuntimeValue = _send_one_arg_runtime_message(
+                delayed_value,
+                "value:",
+                iteration_value,
+                ctx,
+                send_one_arg_message,
+            )
+            last_result = current_result
+
+        return last_result
 
     return builtin_integer_times_repeat
 
@@ -1134,13 +1249,16 @@ def _make_string_equal_to(
     """
 
     def builtin_string_equal_to(
-        receiver: RuntimeValue,
-        args: RuntimeValueList,
-        _ctx: InvocationContext,
+            receiver: RuntimeValue,
+            args: RuntimeValueList,
+            _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 1, "equalTo:")
         left = _expect_string(receiver, "equalTo:")
-        right = _expect_string(args[0], "equalTo:")
+        right = args[0]
+
+        if not isinstance(right, StringValue):
+            return _false_value(builtin_registry)
 
         if left.raw() == right.raw():
             return _true_value(builtin_registry)
@@ -1157,7 +1275,6 @@ def _make_string_as_integer(
     """
     @brief One String>>asInteger callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param builtin_registry A registry of canonical built-in values.
     @param object_factory A runtime value factory.
     @return One String>>asInteger callback.
@@ -1189,7 +1306,6 @@ def _make_string_concatenate_with(
     """
     @brief One String>>concatenateWith: callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param builtin_registry A registry of canonical built-in values.
     @param object_factory A runtime value factory.
     @return One String>>concatenateWith: callback.
@@ -1219,16 +1335,15 @@ def _make_string_starts_with_ends_before(
     """
     @brief One String>>startsWith:endsBefore: callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param builtin_registry A registry of canonical built-in values.
     @param object_factory A runtime value factory.
     @return One String>>startsWith:endsBefore: callback.
     """
 
     def builtin_string_starts_with_ends_before(
-        receiver: RuntimeValue,
-        args: RuntimeValueList,
-        _ctx: InvocationContext,
+            receiver: RuntimeValue,
+            args: RuntimeValueList,
+            _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 2, "startsWith:endsBefore:")
         string_value = _expect_string(receiver, "startsWith:endsBefore:")
@@ -1246,12 +1361,14 @@ def _make_string_starts_with_ends_before(
 
         if start_index <= 0 or end_index <= 0:
             return _nil_value(builtin_registry)
-        if start_index > end_index:
-            return _nil_value(builtin_registry)
-        if end_index > len(text) + 1:
-            return _nil_value(builtin_registry)
 
-        sliced_text = text[start_index - 1 : end_index - 1]
+        slice_start = start_index - 1
+        slice_end = min(end_index - 1, len(text))
+
+        if slice_end - slice_start <= 0:
+            return _make_runtime_string("", object_factory)
+
+        sliced_text = text[slice_start:slice_end]
         return _make_runtime_string(sliced_text, object_factory)
 
     return builtin_string_starts_with_ends_before
@@ -1263,7 +1380,6 @@ def _make_string_length(
     """
     @brief One String>>length callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One String>>length callback.
     """
@@ -1287,78 +1403,68 @@ def _make_string_read(
     """
     @brief One String class-side >>read callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @param runtime_io A runtime input/output service.
     @return One String class-side >>read callback.
     """
 
     def builtin_string_read(
-        _receiver: RuntimeClass,
+        receiver: RuntimeClass,
         args: RuntimeValueList,
         _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "read")
         read_text = runtime_io.read_line()
         normalized_text = read_text.removesuffix("\n")
-        return _make_runtime_string(normalized_text, object_factory)
+        return object_factory.new_string(normalized_text, receiver)
 
     return builtin_string_read
 
 
-def _make_block_new_deferred() -> ClassBuiltinCallback:
+def _make_block_while_true(
+        value_registry: BuiltinRegistry,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+) -> InstanceBuiltinCallback:
     """
-    @brief One deferred Block class-side >>new callback is created.
+    @brief One Block>>whileTrue: callback is created.
 
-    @return One deferred Block class-side >>new callback.
-    """
-
-    def builtin_block_new(
-        _receiver: RuntimeClass,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
-    ) -> RuntimeValue:
-        raise NotImplementedError(
-            "Block class-side >>new requires the future execution layer.",
-        )
-
-    return builtin_block_new
-
-
-def _make_block_value_deferred() -> InstanceBuiltinCallback:
-    """
-    @brief One deferred Block>>value... callback is created.
-
-    @return One deferred Block>>value... callback.
-    """
-
-    def builtin_block_value(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
-    ) -> RuntimeValue:
-        raise NotImplementedError(
-            "Block>>value... requires the future execution layer.",
-        )
-
-    return builtin_block_value
-
-
-def _make_block_while_true_deferred() -> InstanceBuiltinCallback:
-    """
-    @brief One deferred Block>>whileTrue: callback is created.
-
-    @return One deferred Block>>whileTrue: callback.
+    @param value_registry A registry of canonical built-in values.
+    @param send_zero_arg_message One injected zero-argument send helper.
+    @return One Block>>whileTrue: callback.
     """
 
     def builtin_block_while_true(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        ctx: InvocationContext,
     ) -> RuntimeValue:
-        raise NotImplementedError(
-            "Block>>whileTrue: requires the future execution layer.",
-        )
+        _require_arg_count(args, 1, "whileTrue:")
+
+        condition_target = receiver
+        body_target = args[0]
+        last_result: RuntimeValue = _nil_value(value_registry)
+
+        while True:
+            condition_value = _send_zero_arg_runtime_message(
+                target_value=condition_target,
+                selector="value",
+                ctx=ctx,
+                send_zero_arg_message=send_zero_arg_message,
+            )
+            condition_boolean = _expect_boolean(
+                condition_value,
+                "whileTrue:",
+            )
+
+            if not condition_boolean.raw():
+                return last_result
+
+            last_result = _send_zero_arg_runtime_message(
+                target_value=body_target,
+                selector="value",
+                ctx=ctx,
+                send_zero_arg_message=send_zero_arg_message,
+            )
 
     return builtin_block_while_true
 
@@ -1369,7 +1475,6 @@ def _make_true_as_string(
     """
     @brief One True>>asString callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One True>>asString callback.
     """
@@ -1405,61 +1510,110 @@ def _make_true_not(
     return builtin_true_not
 
 
-def _make_true_and_deferred() -> InstanceBuiltinCallback:
+def _make_boolean_and(
+        value_registry: BuiltinRegistry,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+) -> InstanceBuiltinCallback:
     """
-    @brief One deferred True>>and: callback is created.
+    @brief One Boolean>>and: callback is created.
 
-    @return One deferred True>>and: callback.
+    @param value_registry A registry of canonical built-in values.
+    @param send_zero_arg_message One injected zero-argument send helper.
+    @return One Boolean>>and: callback.
     """
 
-    def builtin_true_and(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
+    def builtin_boolean_and(
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        ctx: InvocationContext,
     ) -> RuntimeValue:
-        raise NotImplementedError(
-            "True>>and: requires the future execution layer.",
+        _require_arg_count(args, 1, "and:")
+
+        boolean_receiver = _expect_boolean(receiver, "and:")
+        delayed_value = args[0]
+
+        if not boolean_receiver.raw():
+            return _false_value(value_registry)
+
+        return _send_zero_arg_runtime_message(
+            target_value=delayed_value,
+            selector="value",
+            ctx=ctx,
+            send_zero_arg_message=send_zero_arg_message,
         )
 
-    return builtin_true_and
+
+    return builtin_boolean_and
 
 
-def _make_true_or_deferred() -> InstanceBuiltinCallback:
+def _make_boolean_or(
+        value_registry: BuiltinRegistry,
+        send_zero_arg_message: SendZeroArgMessageCallback,
+) -> InstanceBuiltinCallback:
     """
-    @brief One deferred True>>or: callback is created.
+    @brief One Boolean>>or: callback is created.
 
-    @return One deferred True>>or: callback.
+    @param value_registry A registry of canonical built-in values.
+    @param send_zero_arg_message One injected zero-argument send helper.
+    @return One Boolean>>or: callback.
     """
 
-    def builtin_true_or(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
+    def builtin_boolean_or(
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        ctx: InvocationContext,
     ) -> RuntimeValue:
-        raise NotImplementedError(
-            "True>>or: requires the future execution layer.",
+        _require_arg_count(args, 1, "or:")
+
+        boolean_receiver = _expect_boolean(receiver, "or:")
+        delayed_value = args[0]
+
+        if boolean_receiver.raw():
+            return _true_value(value_registry)
+
+        return _send_zero_arg_runtime_message(
+            target_value=delayed_value,
+            selector="value",
+            ctx=ctx,
+            send_zero_arg_message=send_zero_arg_message,
         )
 
-    return builtin_true_or
+    return builtin_boolean_or
 
 
-def _make_true_if_true_if_false_deferred() -> InstanceBuiltinCallback:
+def _make_boolean_if_true_if_false(
+        send_zero_arg_message: SendZeroArgMessageCallback,
+) -> InstanceBuiltinCallback:
     """
-    @brief One deferred True>>ifTrue:ifFalse: callback is created.
+    @brief One Boolean>>ifTrue:ifFalse: callback is created.
 
-    @return One deferred True>>ifTrue:ifFalse: callback.
+    @param send_zero_arg_message One injected zero-argument send helper.
+    @return One Boolean>>ifTrue:ifFalse: callback.
     """
 
-    def builtin_true_if_true_if_false(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
+    def builtin_boolean_if_true_if_false(
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        ctx: InvocationContext,
     ) -> RuntimeValue:
-        raise NotImplementedError(
-            "True>>ifTrue:ifFalse: requires the future execution layer.",
+        _require_arg_count(args, 2, "ifTrue:ifFalse:")
+
+        boolean_receiver = _expect_boolean(receiver, "ifTrue:ifFalse:")
+        true_branch = args[0]
+        false_branch = args[1]
+
+        selected_branch = false_branch
+        if boolean_receiver.raw():
+            selected_branch = true_branch
+
+        return _send_zero_arg_runtime_message(
+            target_value=selected_branch,
+            selector="value",
+            ctx=ctx,
+            send_zero_arg_message=send_zero_arg_message,
         )
 
-    return builtin_true_if_true_if_false
+    return builtin_boolean_if_true_if_false
 
 
 def _make_false_as_string(
@@ -1468,7 +1622,6 @@ def _make_false_as_string(
     """
     @brief One False>>asString callback is created.
 
-    @param class_registry A registry of runtime classes.
     @param object_factory A runtime value factory.
     @return One False>>asString callback.
     """
@@ -1502,60 +1655,3 @@ def _make_false_not(
         return _true_value(builtin_registry)
 
     return builtin_false_not
-
-
-def _make_false_and_deferred() -> InstanceBuiltinCallback:
-    """
-    @brief One deferred False>>and: callback is created.
-
-    @return One deferred False>>and: callback.
-    """
-
-    def builtin_false_and(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
-    ) -> RuntimeValue:
-        raise NotImplementedError(
-            "False>>and: requires the future execution layer.",
-        )
-
-    return builtin_false_and
-
-
-def _make_false_or_deferred() -> InstanceBuiltinCallback:
-    """
-    @brief One deferred False>>or: callback is created.
-
-    @return One deferred False>>or: callback.
-    """
-
-    def builtin_false_or(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
-    ) -> RuntimeValue:
-        raise NotImplementedError(
-            "False>>or: requires the future execution layer.",
-        )
-
-    return builtin_false_or
-
-
-def _make_false_if_true_if_false_deferred() -> InstanceBuiltinCallback:
-    """
-    @brief One deferred False>>ifTrue:ifFalse: callback is created.
-
-    @return One deferred False>>ifTrue:ifFalse: callback.
-    """
-
-    def builtin_false_if_true_if_false(
-        _receiver: RuntimeValue,
-        _args: RuntimeValueList,
-        _ctx: InvocationContext,
-    ) -> RuntimeValue:
-        raise NotImplementedError(
-            "False>>ifTrue:ifFalse: requires the future execution layer.",
-        )
-
-    return builtin_false_if_true_if_false

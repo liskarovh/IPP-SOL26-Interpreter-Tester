@@ -14,8 +14,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from ..support.typing_helpers import MethodReceiver
     from .runtime_class import RuntimeClass
-    from .values import RuntimeValue
 
 
 class InvocationContext:
@@ -25,7 +25,7 @@ class InvocationContext:
 
     def __init__(
         self,
-        receiver: RuntimeValue,
+        receiver: MethodReceiver,
         current_owner: RuntimeClass,
     ) -> None:
         """
@@ -37,7 +37,7 @@ class InvocationContext:
         self.receiver = receiver
         self.current_owner = current_owner
 
-    def self_value(self) -> RuntimeValue:
+    def self_value(self) -> MethodReceiver:
         """
         @brief The current self value is returned.
 

@@ -14,10 +14,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from ..execution.expression_dispatcher import ExpressionDispatcher
 from ..model.values import RuntimeValue
 
 if TYPE_CHECKING:
+    from ..execution.expression_dispatcher import ExpressionDispatcher
     from ..input_model import Assign as AstAssign
     from ..input_model import Block as AstBlock
     from ..model.invocation_context import InvocationContext

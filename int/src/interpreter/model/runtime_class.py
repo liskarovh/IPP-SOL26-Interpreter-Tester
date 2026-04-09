@@ -98,6 +98,33 @@ class RuntimeClass:
         """
         return self.class_methods_by_selector.get(selector)
 
+    def _lookup_in_hierarchy(
+        self,
+        selector: str,
+        class_side: bool,
+    ) -> RuntimeMethod | None:
+        """
+        @brief One runtime method is looked up through the inheritance chain.
+
+        @param selector A selector to be looked up.
+        @param class_side True for class-method lookup, False for instance-method lookup.
+        @return A runtime method, or None when no match is found.
+        """
+        current: RuntimeClass | None = self
+
+        while current is not None:
+            if class_side:
+                local_method = current._lookup_class_local(selector)
+            else:
+                local_method = current._lookup_instance_local(selector)
+
+            if local_method is not None:
+                return local_method
+
+            current = current.parent
+
+        return None
+
     def lookup_instance(self, selector: str) -> RuntimeMethod | None:
         """
         @brief A runtime instance method is looked up through the inheritance chain.
@@ -105,12 +132,7 @@ class RuntimeClass:
         @param selector A selector to be looked up.
         @return A runtime method, or None when no match is found.
         """
-        local_method = self._lookup_instance_local(selector)
-        if local_method is not None:
-            return local_method
-        if self.parent is None:
-            return None
-        return self.parent.lookup_instance(selector)
+        return self._lookup_in_hierarchy(selector, class_side=False)
 
     def lookup_class(self, selector: str) -> RuntimeMethod | None:
         """
@@ -119,9 +141,4 @@ class RuntimeClass:
         @param selector A selector to be looked up.
         @return A runtime method, or None when no match is found.
         """
-        local_method = self._lookup_class_local(selector)
-        if local_method is not None:
-            return local_method
-        if self.parent is None:
-            return None
-        return self.parent.lookup_class(selector)
+        return self._lookup_in_hierarchy(selector, class_side=True)

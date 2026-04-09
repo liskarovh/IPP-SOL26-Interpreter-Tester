@@ -114,15 +114,7 @@ class UserMethod(RuntimeMethod):
             )
 
         frame = ScopeFrame()
-
-        parameter_count = len(self.method_ast.block.parameters)
-        index = 0
-
-        while index < parameter_count:
-            parameter = self.method_ast.block.parameters[index]
-            argument_value = args[index]
-            frame.define(parameter.name, argument_value)
-            index += 1
+        frame.bind_method_parameters(self.method_ast.block.parameters, args)
 
         return block_executor.execute(self.method_ast.block, frame, ctx)
 

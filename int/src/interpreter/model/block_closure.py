@@ -106,12 +106,4 @@ class BlockClosure(RuntimeValue):
         @param call_frame Fresh call frame of the block invocation.
         @param args Actual runtime arguments of the block call.
         """
-        parameter_count = len(self.block_ast.parameters)
-        index = 0
-
-        while index < parameter_count:
-            parameter = self.block_ast.parameters[index]
-            argument_value = args[index]
-
-            call_frame.define_parameter(parameter.name, argument_value)
-            index += 1
+        call_frame.bind_block_parameters(self.block_ast.parameters, args)

@@ -18,6 +18,7 @@ from ..exceptions import InterpreterError
 from .binding_record import BindingRecord
 
 if TYPE_CHECKING:
+    from ..input_model import Parameter
     from .values import RuntimeValue
 
 
@@ -120,9 +121,62 @@ class ScopeFrame:
         """
         self.bindings_by_name[name] = BindingRecord(value, True, True)
 
+    def bind_method_parameters(
+        self,
+        parameters: list[Parameter],
+        args: list[RuntimeValue],
+    ) -> None:
+        """
+        @brief Method parameters are bound into the current frame.
+
+        @param parameters Declared AST parameters of the method block.
+        @param args Actual runtime arguments of the method call.
+        """
+        self._bind_parameters(parameters, args, False)
+
+    def bind_block_parameters(
+        self,
+        parameters: list[Parameter],
+        args: list[RuntimeValue],
+    ) -> None:
+        """
+        @brief Block parameters are bound into the current frame.
+
+        @param parameters Declared AST parameters of the block.
+        @param args Actual runtime arguments of the block call.
+        """
+        self._bind_parameters(parameters, args, True)
+
     def _resolve(self, name: str) -> BindingRecord:
         if name in self.bindings_by_name:
             return self.bindings_by_name[name]
         if self.parent is not None:
             return self.parent._resolve(name)
         raise InterpreterError(ErrorCode.SEM_UNDEF, f"Variable {name} is not defined.")
+
+    def _bind_parameters(
+        self,
+        parameters: list[Parameter],
+        args: list[RuntimeValue],
+        bind_as_parameters: bool,
+    ) -> None:
+        """
+        @brief Runtime arguments are bound to declared parameters.
+
+        @param parameters Declared AST parameters.
+        @param args Actual runtime arguments.
+        @param bind_as_parameters True for immutable parameter bindings.
+        """
+        parameter_count = len(parameters)
+        index = 0
+
+        while index < parameter_count:
+            parameter = parameters[index]
+            argument_value = args[index]
+
+            if bind_as_parameters:
+                self.define_parameter(parameter.name, argument_value)
+            else:
+                self.define(parameter.name, argument_value)
+
+            index += 1

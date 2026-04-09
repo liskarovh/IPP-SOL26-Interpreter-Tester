@@ -13,18 +13,7 @@ from __future__ import annotations
 
 from ..error_codes import ErrorCode
 from ..exceptions import InterpreterError
-from ..model.object_slots import ObjectSlots
 from ..model.values import RuntimeValue
-
-
-def _get_receiver_slots(receiver: RuntimeValue) -> ObjectSlots | None:
-    """
-    @brief Attribute slots of one runtime receiver are returned when available.
-
-    @param receiver A runtime receiver whose slots are to be accessed.
-    @return Slot storage of the receiver, or None when no slot storage exists.
-    """
-    return receiver.slots
 
 
 class AttributeAccessor:
@@ -41,7 +30,7 @@ class AttributeAccessor:
         @param name A slot name to be read.
         @return A runtime value stored in the requested attribute slot.
         """
-        slots = _get_receiver_slots(receiver)
+        slots = receiver.slots
         if slots is None:
             raise InterpreterError(
                 ErrorCode.INT_STRUCTURE,
@@ -64,7 +53,7 @@ class AttributeAccessor:
         @param value A runtime value to be stored into the requested attribute slot.
         @return The receiver after the attribute slot is written.
         """
-        slots = _get_receiver_slots(receiver)
+        slots = receiver.slots
         if slots is None:
             raise InterpreterError(
                 ErrorCode.INT_STRUCTURE,

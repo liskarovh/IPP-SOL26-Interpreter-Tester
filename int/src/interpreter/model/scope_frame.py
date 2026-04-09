@@ -69,6 +69,19 @@ class ScopeFrame:
             )
         self.bindings_by_name[name] = BindingRecord(value, True, False)
 
+    def assign_or_define(self, name: str, value: RuntimeValue) -> None:
+        """
+        @brief One binding is updated or newly defined.
+
+        @param name Name of the assigned binding.
+        @param value Runtime value to be stored.
+        """
+
+        if self.contains(name):
+            self.set(name, value)
+        else:
+            self.define(name, value)
+
     def set(self, name: str, value: RuntimeValue) -> None:
         """
         @brief One existing binding is updated.
@@ -80,12 +93,10 @@ class ScopeFrame:
         resolved_binding = self._resolve(name)
         if resolved_binding.is_parameter:
             raise InterpreterError(
-                ErrorCode.SEM_COLLISION,
-                f"Parameter {name} cannot be assigned."
+                ErrorCode.SEM_COLLISION, f"Parameter {name} cannot be assigned."
             )
         resolved_binding.value = value
         resolved_binding.initialized = True
-
 
     def get(self, name: str) -> RuntimeValue | None:
         """
@@ -97,18 +108,21 @@ class ScopeFrame:
 
         resolved_binding = self._resolve(name)
         if not resolved_binding.initialized:
-            raise InterpreterError(
-                ErrorCode.SEM_UNDEF,
-                f"Variable {name} is not initialized."
-            )
+            raise InterpreterError(ErrorCode.SEM_UNDEF, f"Variable {name} is not initialized.")
         return resolved_binding.value
+
+    def define_parameter(self, name: str, value: RuntimeValue) -> None:
+        """
+        @brief One parameter binding is defined in the current frame.
+
+        @param name Name of the parameter binding.
+        @param value Runtime value bound to the parameter.
+        """
+        self.bindings_by_name[name] = BindingRecord(value, True, True)
 
     def _resolve(self, name: str) -> BindingRecord:
         if name in self.bindings_by_name:
             return self.bindings_by_name[name]
         if self.parent is not None:
             return self.parent._resolve(name)
-        raise InterpreterError(
-            ErrorCode.SEM_UNDEF,
-            f"Variable {name} is not defined."
-        )
+        raise InterpreterError(ErrorCode.SEM_UNDEF, f"Variable {name} is not defined.")

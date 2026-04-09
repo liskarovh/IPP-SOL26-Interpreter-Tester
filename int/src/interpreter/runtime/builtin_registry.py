@@ -72,10 +72,7 @@ class BuiltinRegistry:
         @return A canonical true runtime value.
         """
         if self.true_value is None:
-            raise InterpreterError(
-                ErrorCode.INT_OTHER,
-                "The true value is not set."
-            )
+            raise InterpreterError(ErrorCode.INT_OTHER, "The true value is not set.")
         return self.true_value
 
     def get_false_value(self) -> BooleanValue:
@@ -85,10 +82,7 @@ class BuiltinRegistry:
         @return A canonical false runtime value.
         """
         if self.false_value is None:
-            raise InterpreterError(
-                ErrorCode.INT_OTHER,
-                "The false value is not set."
-            )
+            raise InterpreterError(ErrorCode.INT_OTHER, "The false value is not set.")
         return self.false_value
 
     def get_nil_value(self) -> NilValue:
@@ -98,10 +92,7 @@ class BuiltinRegistry:
         @return A canonical nil runtime value.
         """
         if self.nil_value is None:
-            raise InterpreterError(
-                ErrorCode.INT_OTHER,
-                "The nil value is not set."
-            )
+            raise InterpreterError(ErrorCode.INT_OTHER, "The nil value is not set.")
         return self.nil_value
 
     def register_instance_builtin_method(
@@ -122,10 +113,9 @@ class BuiltinRegistry:
         if dict_key in self.instance_builtin_methods:
             raise InterpreterError(
                 ErrorCode.INT_OTHER,
-                f"A built-in method {selector} is already registered for class {class_name}."
+                f"A built-in method {selector} is already registered for class {class_name}.",
             )
         self.instance_builtin_methods[dict_key] = method
-
 
     def register_class_builtin_method(
         self,
@@ -145,38 +135,6 @@ class BuiltinRegistry:
         if dict_key in self.class_builtin_methods:
             raise InterpreterError(
                 ErrorCode.INT_OTHER,
-                f"A built-in method {selector} is already registered for class {class_name}."
+                f"A built-in method {selector} is already registered for class {class_name}.",
             )
         self.class_builtin_methods[dict_key] = method
-
-    def get_instance_builtin_method(
-            self,
-            class_name: str,
-            selector: str,
-    ) -> BuiltinMethod | None:
-        """
-        @brief One instance built-in method is looked up.
-
-        @param class_name A runtime class name owning the built-in method.
-        @param selector A requested built-in method selector.
-        @return A matching built-in runtime method, or None when not found.
-        """
-
-        dict_key = (class_name, selector)
-        return self.instance_builtin_methods.get(dict_key)
-
-    def get_class_builtin_method(
-        self,
-        class_name: str,
-        selector: str,
-    ) -> BuiltinMethod | None:
-        """
-        @brief One class built-in method is looked up.
-
-        @param class_name A runtime class name owning the built-in method.
-        @param selector A requested built-in method selector.
-        @return A matching built-in runtime method, or None when not found.
-        """
-
-        dict_key = (class_name, selector)
-        return self.class_builtin_methods.get(dict_key)

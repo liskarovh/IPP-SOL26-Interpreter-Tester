@@ -34,15 +34,13 @@ if TYPE_CHECKING:
     from ..execution.method_executor import MethodExecutor
     from ..model.invocation_context import InvocationContext
 
-#regex was made by ai - https://chatgpt.com/share/69d39320-00bc-8387-bb25-1ee66b02d9ed
+# regex was made by ai - https://chatgpt.com/share/69d39320-00bc-8387-bb25-1ee66b02d9ed
 BLOCK_VALUE_SELECTOR_REGEX = re.compile(r"^(?:value|(?:value:)+)$")
 
 
 def _if_receiver_block_check_arity(
-        target: ResolvedReceiver,
-        selector: str,
-        args: list[RuntimeValue]
-) -> BlockClosure | None :
+    target: ResolvedReceiver, selector: str, args: list[RuntimeValue]
+) -> BlockClosure | None:
     receiver = target.receiver
     if isinstance(receiver, BlockClosure):
         if not BLOCK_VALUE_SELECTOR_REGEX.fullmatch(selector):
@@ -50,19 +48,14 @@ def _if_receiver_block_check_arity(
 
         selector_arity = selector.count(":")
         if selector_arity != len(args):
-            raise InterpreterError(
-                ErrorCode.INT_DNU,
-                "Wrong number of arguments for selector"
-            )
+            raise InterpreterError(ErrorCode.INT_DNU, "Wrong number of arguments for selector")
         block_arity = receiver.block_ast.arity
         if block_arity != len(args):
-            raise InterpreterError(
-                ErrorCode.INT_DNU,
-                "Wrong number of arguments for block"
-            )
+            raise InterpreterError(ErrorCode.INT_DNU, "Wrong number of arguments for block")
         return receiver
 
     return None
+
 
 def _require_attribute_receiver(receiver: MethodReceiver) -> RuntimeValue:
     """
@@ -85,6 +78,7 @@ def _require_attribute_receiver(receiver: MethodReceiver) -> RuntimeValue:
 
     return receiver
 
+
 def _require_class_receiver(receiver: MethodReceiver) -> RuntimeClass:
     """
     @brief One class-side receiver is required.
@@ -99,6 +93,7 @@ def _require_class_receiver(receiver: MethodReceiver) -> RuntimeClass:
         )
 
     return receiver
+
 
 def _attribute_name_from_selector(selector: str) -> str:
     """
@@ -139,7 +134,6 @@ class SendExprEvaluator(ABC):
         self.method_executor = method_executor
         self.attribute_accessor = attribute_accessor
 
-
     @abstractmethod
     def dispatch_send(
         self,
@@ -159,10 +153,10 @@ class SendExprEvaluator(ABC):
         """
 
     def _execute_resolved_method(
-            self,
-            method: RuntimeMethod,
-            receiver: MethodReceiver,
-            args: list[RuntimeValue],
+        self,
+        method: RuntimeMethod,
+        receiver: MethodReceiver,
+        args: list[RuntimeValue],
     ) -> RuntimeValue:
         """
         @brief One resolved method is executed with the given receiver and arguments.
@@ -226,7 +220,7 @@ class InstanceSendExprEvaluator(SendExprEvaluator):
         )
 
         block = _if_receiver_block_check_arity(target, selector, args)
-        #has to be with _require helper because of circular imports
+        # has to be with _require helper because of circular imports
         block_executor = self._require_method_executor().block_executor
         if block is not None:
             return block.call(args, block_executor)
@@ -263,10 +257,7 @@ class InstanceSendExprEvaluator(SendExprEvaluator):
 
         method = lookup_start.lookup_instance(selector)
         if method is None:
-            raise InterpreterError(
-                ErrorCode.INT_DNU,
-                f"No method found for selector {selector}"
-            )
+            raise InterpreterError(ErrorCode.INT_DNU, f"No method found for selector {selector}")
 
         return self._execute_resolved_method(method, receiver, args)
 
@@ -277,11 +268,11 @@ class ClassSendExprEvaluator(SendExprEvaluator):
     """
 
     def dispatch_send(
-            self,
-            target: ResolvedReceiver,
-            selector: str,
-            args: list[RuntimeValue],
-            ctx: InvocationContext,
+        self,
+        target: ResolvedReceiver,
+        selector: str,
+        args: list[RuntimeValue],
+        ctx: InvocationContext,
     ) -> RuntimeValue:
         """
         @brief One resolved class-side send is dispatched.

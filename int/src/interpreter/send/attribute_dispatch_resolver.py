@@ -74,6 +74,7 @@ def _has_matching_write_method(
     start_class = resolve_lookup_start_class(receiver, lookup_mode, ctx)
     return start_class.lookup_instance(selector) is not None
 
+
 def _has_conflicting_zero_arg_method_for_new_write(
     receiver: RuntimeValue,
     attribute_name: str,
@@ -99,6 +100,7 @@ def _has_conflicting_zero_arg_method_for_new_write(
 
     return start_class.lookup_instance(attribute_name) is not None
 
+
 def _has_matching_zero_arg_method(
     receiver: RuntimeValue,
     attribute_name: str,
@@ -123,18 +125,13 @@ class AttributeDispatchResolver:
     @brief Attribute-dispatch resolution is coordinated by this class.
     """
 
-    def __init__(self) -> None:
-        """
-        @brief One attribute-dispatch resolver is initialized.
-        """
-
     @staticmethod
     def resolve(
-            receiver: MethodReceiver,
-            selector: str,
-            lookup_mode: LookupMode,
-            receiver_origin: ReceiverOrigin,
-            ctx: InvocationContext,
+        receiver: MethodReceiver,
+        selector: str,
+        lookup_mode: LookupMode,
+        receiver_origin: ReceiverOrigin,
+        ctx: InvocationContext,
     ) -> AttributeDispatchDecision:
         """
         @brief One attribute-dispatch decision is resolved.
@@ -185,11 +182,11 @@ class AttributeDispatchResolver:
             return AttributeDispatchDecision.ATTRIBUTE_WRITE
 
         if _has_conflicting_zero_arg_method_for_new_write(
-                runtime_receiver,
-                attribute_name,
-                lookup_mode,
-                receiver_origin,
-                ctx,
+            runtime_receiver,
+            attribute_name,
+            lookup_mode,
+            receiver_origin,
+            ctx,
         ):
             return AttributeDispatchDecision.CONFLICT
 

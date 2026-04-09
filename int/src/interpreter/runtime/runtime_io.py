@@ -50,27 +50,3 @@ class RuntimeIO:
         @param text Text to be written.
         """
         self.stdout.write(text)
-
-    def write_line(self, text: str) -> None:
-        """
-        @brief A text line is written to standard output.
-
-        @param text Text to be written as a full line.
-        """
-        self.stdout.write(text + "\n")
-
-    def write_error(self, text: str) -> None:
-        """
-        @brief Text is written to standard error output.
-
-        @param text Text to be written.
-        """
-        self.stderr.write(text)
-
-    def write_error_line(self, text: str) -> None:
-        """
-        @brief A text line is written to standard error output.
-
-        @param text Text to be written as a full error line.
-        """
-        self.stderr.write(text + "\n")

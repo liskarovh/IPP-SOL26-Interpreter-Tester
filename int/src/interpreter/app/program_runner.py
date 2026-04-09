@@ -15,7 +15,9 @@ from ..execution.expression_dispatcher import ExpressionDispatcher
 from ..execution.method_executor import MethodExecutor
 from ..input_model import Program
 from ..model.invocation_context import InvocationContext
+from ..model.runtime_methods import UserMethod
 from ..model.values import RuntimeValue
+from ..runtime.runtime import Runtime
 from ..runtime.runtime_io import RuntimeIO
 from ..send.attribute_accessor import AttributeAccessor
 from ..send.attribute_dispatch_resolver import AttributeDispatchResolver
@@ -39,7 +41,26 @@ class ProgramRunner:
         """
         self.program_validator = ProgramValidator()
         self.runtime_builder = RuntimeBuilder()
-        self.entry_point_resolver = EntryPointResolver()
+
+    def _wire_user_methods(
+        self,
+        runtime: Runtime,
+        block_executor: BlockExecutor,
+    ) -> None:
+        """
+        @brief One block executor is wired into all user-defined runtime methods.
+
+        @param runtime A runtime containing registered runtime classes.
+        @param block_executor A block executor used for user-method execution.
+        """
+        for runtime_class in runtime.class_registry.classes.values():
+            for method in runtime_class.instance_methods_by_selector.values():
+                if isinstance(method, UserMethod):
+                    method.wire_block_executor(block_executor)
+
+            for method in runtime_class.class_methods_by_selector.values():
+                if isinstance(method, UserMethod):
+                    method.wire_block_executor(block_executor)
 
     def run(self, program: Program, input_io: RuntimeIO) -> None:
         """
@@ -118,5 +139,7 @@ class ProgramRunner:
         instance_send_evaluator.wire_method_executor(method_executor)
         class_send_evaluator.wire_method_executor(method_executor)
 
-        entry_receiver, entry_method = self.entry_point_resolver.resolve(runtime)
+        self._wire_user_methods(runtime, block_executor)
+
+        entry_receiver, entry_method = EntryPointResolver.resolve(runtime)
         _ = method_executor.execute(entry_method, entry_receiver, [])

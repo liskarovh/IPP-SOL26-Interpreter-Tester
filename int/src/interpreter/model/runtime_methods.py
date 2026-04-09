@@ -14,11 +14,15 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
+from ..error_codes import ErrorCode
+from ..exceptions import InterpreterError
 from ..input_model import Method as AstMethod
 from ..runtime.builtin_implementation import BuiltinImplementation
 from ..support.typing_helpers import MethodReceiver, RuntimeValueList
+from .scope_frame import ScopeFrame
 
 if TYPE_CHECKING:
+    from ..execution.block_executor import BlockExecutor
     from .invocation_context import InvocationContext
     from .runtime_class import RuntimeClass
     from .values import RuntimeValue
@@ -84,6 +88,7 @@ class UserMethod(RuntimeMethod):
         """
         super().__init__(selector, owner)
         self.method_ast = method_ast
+        self.block_executor: BlockExecutor | None = None
 
     def call(
         self,
@@ -99,16 +104,27 @@ class UserMethod(RuntimeMethod):
         @param ctx An invocation context.
         @return A produced runtime value.
         """
-        # TODO:
-        # 1. Create or request the execution context for this user method call.
-        # 2. Ensure the current owner is this method's owning runtime class.
-        # 3. Bind method arguments to the method frame.
-        # 4. Delegate execution of method_ast.block to MethodExecutor / BlockExecutor.
-        # 5. Return the produced RuntimeValue.
         _ = receiver
-        _ = args
-        _ = ctx
-        raise NotImplementedError("User method execution has not been implemented yet.")
+
+        block_executor = self.block_executor
+        if block_executor is None:
+            raise InterpreterError(
+                ErrorCode.GENERAL_OTHER,
+                "User method block executor is not wired.",
+            )
+
+        frame = ScopeFrame()
+
+        parameter_count = len(self.method_ast.block.parameters)
+        index = 0
+
+        while index < parameter_count:
+            parameter = self.method_ast.block.parameters[index]
+            argument_value = args[index]
+            frame.define(parameter.name, argument_value)
+            index += 1
+
+        return block_executor.execute(self.method_ast.block, frame, ctx)
 
     def arity(self) -> int:
         """
@@ -117,6 +133,13 @@ class UserMethod(RuntimeMethod):
         @return The number of block parameters of the source AST method.
         """
         return self.method_ast.block.arity
+
+    def wire_block_executor(self, block_executor: BlockExecutor) -> None:
+        """
+        @brief A user-defined runtime method wire_block_executor is performed.
+        @param block_executor A block executor.
+        """
+        self.block_executor = block_executor
 
 
 class BuiltinMethod(RuntimeMethod):

@@ -15,7 +15,6 @@ from typing import TYPE_CHECKING
 
 from ..error_codes import ErrorCode
 from ..exceptions import InterpreterError
-from .binding_record import BindingRecord
 from .scope_frame import ScopeFrame
 from .values import RuntimeValue
 
@@ -83,10 +82,7 @@ class BlockClosure(RuntimeValue):
         if actual_arity != expected_arity:
             raise InterpreterError(
                 ErrorCode.INT_DNU,
-                (
-                    f"Block expected {expected_arity} argument(s), "
-                    f"but received {actual_arity}."
-                ),
+                f"Block expected {expected_arity} argument(s), but received {actual_arity}.",
             )
 
     def _create_call_frame(self) -> ScopeFrame:
@@ -117,9 +113,5 @@ class BlockClosure(RuntimeValue):
             parameter = self.block_ast.parameters[index]
             argument_value = args[index]
 
-            call_frame.bindings_by_name[parameter.name] = BindingRecord(
-                argument_value,
-                True,
-                True,
-            )
+            call_frame.define_parameter(parameter.name, argument_value)
             index += 1

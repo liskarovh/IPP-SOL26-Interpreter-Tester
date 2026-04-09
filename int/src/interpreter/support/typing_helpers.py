@@ -17,22 +17,9 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ..model.invocation_context import InvocationContext
     from ..model.runtime_class import RuntimeClass
-    from ..model.runtime_methods import RuntimeMethod
     from ..model.values import RuntimeValue
 
-type Selector = str
-type ClassName = str
-type VariableName = str
-type SlotName = str
-
 type RuntimeValueList = list[RuntimeValue]
-type BuiltinMethodKey = tuple[ClassName, Selector]
-
-type MethodTable = dict[Selector, RuntimeMethod]
-type BuiltinCallback = Callable[
-    [MethodReceiver, RuntimeValueList, InvocationContext],
-    RuntimeValue,
-]
 type MethodReceiver = RuntimeValue | RuntimeClass
 type InstanceBuiltinCallback = Callable[
     ["RuntimeValue", RuntimeValueList, "InvocationContext"],

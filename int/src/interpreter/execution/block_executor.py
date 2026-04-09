@@ -81,8 +81,5 @@ class BlockExecutor:
         target_name = assign_ast.target.name
         expr_ast = assign_ast.expr
         value = self.expression_dispatcher.evaluate(expr_ast, frame, ctx)
-        if frame.contains(target_name):
-            frame.set(target_name, value)
-        else:
-            frame.define(target_name, value)
+        frame.assign_or_define(target_name, value)
         return value

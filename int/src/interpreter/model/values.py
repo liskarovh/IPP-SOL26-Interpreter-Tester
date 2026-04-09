@@ -25,9 +25,9 @@ class RuntimeValue:
     """
 
     def __init__(
-            self,
-            runtime_class: RuntimeClass,
-            slots: ObjectSlots | None = None,
+        self,
+        runtime_class: RuntimeClass,
+        slots: ObjectSlots | None = None,
     ) -> None:
         """
         @brief A runtime value is initialized.
@@ -75,10 +75,10 @@ class IntegerValue(RuntimeValue):
     """
 
     def __init__(
-            self,
-            runtime_class: RuntimeClass,
-            value: int,
-            slots: ObjectSlots | None = None,
+        self,
+        runtime_class: RuntimeClass,
+        value: int,
+        slots: ObjectSlots | None = None,
     ) -> None:
         """
         @brief An integer runtime value is initialized.
@@ -105,10 +105,10 @@ class StringValue(RuntimeValue):
     """
 
     def __init__(
-            self,
-            runtime_class: RuntimeClass,
-            value: str,
-            slots: ObjectSlots | None = None,
+        self,
+        runtime_class: RuntimeClass,
+        value: str,
+        slots: ObjectSlots | None = None,
     ) -> None:
         """
         @brief An string runtime value is initialized.

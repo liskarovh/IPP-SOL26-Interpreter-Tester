@@ -60,10 +60,7 @@ class RuntimeClass:
         if selector in self.instance_methods_by_selector:
             raise InterpreterError(
                 ErrorCode.GENERAL_OTHER,
-                (
-                    f"Runtime class '{self.name}' already contains "
-                    f"local selector '{selector}'."
-                ),
+                f"Runtime class '{self.name}' already contains local selector '{selector}'.",
             )
         self.instance_methods_by_selector[selector] = method
 
@@ -78,61 +75,12 @@ class RuntimeClass:
         if selector in self.class_methods_by_selector:
             raise InterpreterError(
                 ErrorCode.GENERAL_OTHER,
-                (
-                    f"Runtime class '{self.name}' already contains "
-                    f"local selector '{selector}'."
-                ),
+                f"Runtime class '{self.name}' already contains local selector '{selector}'.",
             )
 
         self.class_methods_by_selector[selector] = method
 
-    def has_local_instance_method(self, selector: str) -> bool:
-        """
-        @brief Existence of a local instance method is checked."
-
-        @param selector A selector to be looked up locally.
-        @return True when a local instance method exists, otherwise False.
-        """
-        return selector in self.instance_methods_by_selector
-
-    def has_local_class_method(self, selector: str) -> bool:
-        """
-        @brief Existence of a local class method is checked.
-
-        @param selector A selector to be looked up locally.
-        @return True when a local method exists, otherwise False.
-        """
-
-        return selector in self.class_methods_by_selector
-
-    def has_instance_method(self, selector: str) -> bool:
-        """
-        @brief Existence of an instance method in the inheritance chain is checked.
-
-        @param selector A selector to be looked up.
-        @return True when the method exists locally or in an ancestor.
-        """
-        if self.has_local_instance_method(selector):
-            return True
-        if self.parent is None:
-            return False
-        return self.parent.has_instance_method(selector)
-
-    def has_class_method(self, selector: str) -> bool:
-        """
-        @brief Existence of a class method in the inheritance chain is checked.
-
-        @param selector A selector to be looked up.
-        @return True when the method exists locally or in an ancestor.
-        """
-
-        if self.has_local_class_method(selector):
-            return True
-        if self.parent is None:
-            return False
-        return self.parent.has_class_method(selector)
-
-    def lookup_instance_local(self, selector: str) -> RuntimeMethod | None:
+    def _lookup_instance_local(self, selector: str) -> RuntimeMethod | None:
         """
         @brief A local instance runtime method is looked up by selector.
 
@@ -141,7 +89,7 @@ class RuntimeClass:
         """
         return self.instance_methods_by_selector.get(selector)
 
-    def lookup_class_local(self, selector: str) -> RuntimeMethod | None:
+    def _lookup_class_local(self, selector: str) -> RuntimeMethod | None:
         """
         @brief A local class runtime method is looked up by selector.
 
@@ -157,13 +105,12 @@ class RuntimeClass:
         @param selector A selector to be looked up.
         @return A runtime method, or None when no match is found.
         """
-        local_method = self.lookup_instance_local(selector)
+        local_method = self._lookup_instance_local(selector)
         if local_method is not None:
             return local_method
         if self.parent is None:
             return None
         return self.parent.lookup_instance(selector)
-
 
     def lookup_class(self, selector: str) -> RuntimeMethod | None:
         """
@@ -172,7 +119,7 @@ class RuntimeClass:
         @param selector A selector to be looked up.
         @return A runtime method, or None when no match is found.
         """
-        local_method = self.lookup_class_local(selector)
+        local_method = self._lookup_class_local(selector)
         if local_method is not None:
             return local_method
         if self.parent is None:

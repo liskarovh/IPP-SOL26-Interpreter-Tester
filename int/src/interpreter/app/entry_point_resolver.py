@@ -23,16 +23,9 @@ class EntryPointResolver:
     @brief The runtime entry point is resolved by this class.
     """
 
-    def __init__(self) -> None:
-        """
-        @brief An entry-point resolver is initialized.
-
-        The resolver is intentionally kept simple and nearly stateless.
-        """
-
     @staticmethod
     def resolve(
-            runtime: Runtime,
+        runtime: Runtime,
     ) -> tuple[UserObject, RuntimeMethod]:
         """
         @brief The runtime entry point is resolved.
@@ -56,8 +49,11 @@ class EntryPointResolver:
         entry_method = entry_class.lookup_instance(entry_method_name)
 
         if entry_method is None:
-            raise (InterpreterError(
-                ErrorCode.GENERAL_OTHER,
-                f"Entry point method {entry_method_name} "
-                f"is not defined in class {entry_class_name}."))
+            raise (
+                InterpreterError(
+                    ErrorCode.GENERAL_OTHER,
+                    f"Entry point method {entry_method_name} "
+                    f"is not defined in class {entry_class_name}.",
+                )
+            )
         return entry_receiver, entry_method

@@ -29,16 +29,15 @@ class ClassRegistry:
 
     def add(self, runtime_class: RuntimeClass) -> None:
         """
-        @brief A runtime class is added to the registry.
+        @brief A runtime class is registered.
 
-        @param runtime_class A runtime class to be registered.
+        @param runtime_class A runtime class to be stored.
         """
-
         name = runtime_class.name
-        if name in self.classes:
+        if self.contains(name):
             raise InterpreterError(
                 ErrorCode.GENERAL_OTHER,
-                f"Class {name} is already defined.",
+                f"Class '{name}' is already defined.",
             )
         self.classes[name] = runtime_class
 
@@ -50,9 +49,7 @@ class ClassRegistry:
         @return A runtime class, or None when no class is found.
         """
 
-        if name in self.classes:
-            return self.classes[name]
-        return None
+        return self.classes.get(name)
 
     def require(self, name: str) -> RuntimeClass:
         """

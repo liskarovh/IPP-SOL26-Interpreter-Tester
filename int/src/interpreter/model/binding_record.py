@@ -25,6 +25,7 @@ class BindingRecord:
     value: RuntimeValue | None
     initialized: bool
     is_parameter: bool
+
     def __init__(
         self,
         value: RuntimeValue | None,

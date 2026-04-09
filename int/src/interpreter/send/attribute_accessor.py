@@ -26,25 +26,11 @@ def _get_receiver_slots(receiver: RuntimeValue) -> ObjectSlots | None:
     """
     return receiver.slots
 
+
 class AttributeAccessor:
     """
     @brief Attribute slot access is coordinated by this class.
     """
-
-    @staticmethod
-    def has(receiver: RuntimeValue, name: str) -> bool:
-        """
-        @brief Existence of one attribute slot is checked.
-
-        @param receiver A runtime receiver whose attribute space is to be checked.
-        @param name A slot name to be checked.
-        @return True when the slot exists, otherwise False.
-        """
-        slots = _get_receiver_slots(receiver)
-        if slots is None:
-            return False
-
-        return slots.has(name)
 
     @staticmethod
     def read(receiver: RuntimeValue, name: str) -> RuntimeValue:
@@ -60,12 +46,6 @@ class AttributeAccessor:
             raise InterpreterError(
                 ErrorCode.INT_STRUCTURE,
                 "Attribute read was requested on a non-user object.",
-            )
-
-        if not slots.has(name):
-            raise InterpreterError(
-                ErrorCode.INT_STRUCTURE,
-                f"Attribute {name} was requested, but no such slot exists.",
             )
 
         return slots.get(name)

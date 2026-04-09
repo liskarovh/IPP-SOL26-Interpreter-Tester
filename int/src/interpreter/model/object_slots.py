@@ -71,12 +71,21 @@ class ObjectSlots:
         @param value Initial value of the new slot.
         """
 
-        if name in self.slots_by_name:
+        if self.has(name):
             raise InterpreterError(
                 ErrorCode.INT_INST_ATTR,
                 f"Slot '{name}' is already defined.",
             )
         self.slots_by_name[name] = value
+
+    def copy_into(self, target: ObjectSlots) -> None:
+        """
+        @brief All currently defined slots are shallow-copied into a target slot store.
+
+        @param target A target slot store receiving all current slot bindings.
+        """
+        for slot_name, slot_value in self.slots_by_name.items():
+            target.define(slot_name, slot_value)
 
     def _require_existing_slot(self, name: str) -> None:
         """

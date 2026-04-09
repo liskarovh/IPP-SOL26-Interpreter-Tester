@@ -8,25 +8,6 @@ DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 Registration of built-in runtime methods is centralized here.
 Concrete built-in behavior is represented through callback functions that are
 wrapped into CallbackBuiltinImplementation instances.
-
-FUTURE ADJUSTMENTS:
-- This module intentionally contains both already implementable runtime-only
-  builtins and placeholders for builtins that still depend on the future
-  execution layer.
-- Block-related builtins cannot be considered final until BlockExecutor,
-  MethodExecutor, ExpressionDispatcher, SendExprEvaluator, ScopeFrame, and
-  InvocationContext are fully implemented and wired together.
-- The SOL26 language defines the Block family value:...: for general block
-  arity. The current runtime registry stores builtins under explicit selector
-  strings, so support for arbitrary-arity selectors must be extended later
-  together with the final execution and dispatch design.
-- Lazy boolean builtins (and:, or:, ifTrue:ifFalse:) must stay aligned with
-  the final execution semantics so that blocks are evaluated only when the
-  language specification requires it.
-- Integer>>timesRepeat: and Block>>whileTrue: must be revisited once block
-  execution is final, because their behavior depends on real block invocation.
-- Block class-side >>new and Block class-side >>from: must also be revisited
-  once the final representation of runtime blocks is settled.
 """
 
 from __future__ import annotations
@@ -46,13 +27,9 @@ from .builtin_implementation import (
     InstanceCallbackBuiltinImplementation,
 )
 
-SendZeroArgMessageCallback = Callable[
-    [RuntimeValue, str, "InvocationContext"],
-    RuntimeValue
-]
+SendZeroArgMessageCallback = Callable[[RuntimeValue, str, "InvocationContext"], RuntimeValue]
 SendOneArgMessageCallback = Callable[
-    [RuntimeValue, str, RuntimeValue, "InvocationContext"],
-    RuntimeValue
+    [RuntimeValue, str, RuntimeValue, "InvocationContext"], RuntimeValue
 ]
 
 if TYPE_CHECKING:
@@ -308,7 +285,6 @@ def register_builtins(
         builtin_registry=builtin_registry,
     )
 
-
     #
     # Block instance-side methods
     #
@@ -424,14 +400,6 @@ def register_builtins(
         builtin_registry=builtin_registry,
     )
 
-    #
-    # FUTURE ADJUSTMENT:
-    # The SOL26 language defines the Block>>value:...: family for general block
-    # arity. The current runtime registry stores explicit selector strings, so
-    # support for arbitrary-arity selectors must be extended later together
-    # with the final execution and dispatch design.
-    #
-
 
 def _register_one_instance_builtin(
     owner: RuntimeClass,
@@ -492,9 +460,7 @@ def _make_return_receiver() -> InstanceBuiltinCallback:
     return builtin_return_receiver
 
 
-def _make_return_true(
-        builtin_registry: BuiltinRegistry
-) -> InstanceBuiltinCallback:
+def _make_return_true(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
     @brief One callback returning canonical true is created.
 
@@ -512,9 +478,7 @@ def _make_return_true(
     return builtin_return_true
 
 
-def _make_return_false(
-        builtin_registry: BuiltinRegistry
-) -> InstanceBuiltinCallback:
+def _make_return_false(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
     @brief One callback returning canonical false is created.
 
@@ -532,9 +496,7 @@ def _make_return_false(
     return builtin_return_false
 
 
-def _true_value(
-        builtin_registry: BuiltinRegistry
-) -> BooleanValue:
+def _true_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
     """
     @brief The canonical true value is returned.
 
@@ -544,9 +506,7 @@ def _true_value(
     return builtin_registry.get_true_value()
 
 
-def _false_value(
-        builtin_registry: BuiltinRegistry
-) -> BooleanValue:
+def _false_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
     """
     @brief The canonical false value is returned.
 
@@ -556,9 +516,7 @@ def _false_value(
     return builtin_registry.get_false_value()
 
 
-def _nil_value(
-        builtin_registry: BuiltinRegistry
-) -> NilValue:
+def _nil_value(builtin_registry: BuiltinRegistry) -> NilValue:
     """
     @brief The canonical nil value is returned.
 
@@ -569,10 +527,10 @@ def _nil_value(
 
 
 def _send_zero_arg_runtime_message(
-        target_value: RuntimeValue,
-        selector: str,
-        ctx: InvocationContext,
-        send_zero_arg_message: SendZeroArgMessageCallback,
+    target_value: RuntimeValue,
+    selector: str,
+    ctx: InvocationContext,
+    send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> RuntimeValue:
     """
     @brief One zero-argument runtime message is sent.
@@ -587,11 +545,11 @@ def _send_zero_arg_runtime_message(
 
 
 def _send_one_arg_runtime_message(
-        target_value: RuntimeValue,
-        selector: str,
-        arg_value: RuntimeValue,
-        ctx: InvocationContext,
-        send_one_arg_message: SendOneArgMessageCallback,
+    target_value: RuntimeValue,
+    selector: str,
+    arg_value: RuntimeValue,
+    ctx: InvocationContext,
+    send_one_arg_message: SendOneArgMessageCallback,
 ) -> RuntimeValue:
     """
     @brief One one-argument runtime message is sent.
@@ -606,11 +564,7 @@ def _send_one_arg_runtime_message(
     return send_one_arg_message(target_value, selector, arg_value, ctx)
 
 
-def _require_arg_count(
-        args: RuntimeValueList,
-        expected: int,
-        selector: str
-) -> None:
+def _require_arg_count(args: RuntimeValueList, expected: int, selector: str) -> None:
     """
     @brief The runtime argument count is checked.
 
@@ -622,14 +576,13 @@ def _require_arg_count(
     if actual != expected:
         raise InterpreterError(
             ErrorCode.INT_OTHER,
-            f"Built-in method {selector} expected {expected} arguments, "
-            f"got {actual}.",
+            f"Built-in method {selector} expected {expected} arguments, got {actual}.",
         )
 
 
 def _expect_block_closure(
-        value: RuntimeValue,
-        selector: str,
+    value: RuntimeValue,
+    selector: str,
 ) -> BlockClosure:
     """
     @brief One runtime block closure is required.
@@ -646,10 +599,8 @@ def _expect_block_closure(
         f"Built-in method {selector} expected Block, got {value.get_class().name}.",
     )
 
-def _expect_boolean(
-        value: RuntimeValue,
-        selector: str
-) -> BooleanValue:
+
+def _expect_boolean(value: RuntimeValue, selector: str) -> BooleanValue:
     """
     @brief One runtime boolean value is required.
 
@@ -662,15 +613,11 @@ def _expect_boolean(
 
     raise InterpreterError(
         ErrorCode.INT_INVALID_ARG,
-        f"Built-in method {selector} expected Boolean, "
-        f"got {value.get_class().name}.",
+        f"Built-in method {selector} expected Boolean, got {value.get_class().name}.",
     )
 
 
-def _expect_integer(
-        value: RuntimeValue,
-        selector: str
-) -> IntegerValue:
+def _expect_integer(value: RuntimeValue, selector: str) -> IntegerValue:
     """
     @brief One runtime integer value is required.
 
@@ -683,15 +630,11 @@ def _expect_integer(
 
     raise InterpreterError(
         ErrorCode.INT_INVALID_ARG,
-        f"Built-in method {selector} expected Integer, "
-        f"got {value.get_class().name}.",
+        f"Built-in method {selector} expected Integer, got {value.get_class().name}.",
     )
 
 
-def _expect_string(
-        value: RuntimeValue,
-        selector: str
-) -> StringValue:
+def _expect_string(value: RuntimeValue, selector: str) -> StringValue:
     """
     @brief One runtime string value is required.
 
@@ -704,15 +647,11 @@ def _expect_string(
 
     raise InterpreterError(
         ErrorCode.INT_INVALID_ARG,
-        f"Built-in method {selector} expected String, "
-        f"got {value.get_class().name}.",
+        f"Built-in method {selector} expected String, got {value.get_class().name}.",
     )
 
 
-def _expect_user_object(
-        value: RuntimeValue,
-        selector: str
-) -> UserObject:
+def _expect_user_object(value: RuntimeValue, selector: str) -> UserObject:
     """
     @brief One user object is required.
 
@@ -743,10 +682,7 @@ def _make_runtime_string(
     return object_factory.new_string(value)
 
 
-def _make_runtime_integer(
-        value: int,
-        object_factory: ObjectFactory
-) -> IntegerValue:
+def _make_runtime_integer(value: int, object_factory: ObjectFactory) -> IntegerValue:
     """
     @brief One runtime integer value is created.
 
@@ -772,8 +708,7 @@ def _copy_runtime_slots(source: RuntimeValue, target: RuntimeValue) -> None:
     if target_slots is None:
         return
 
-    for slot_name, slot_value in source_slots.slots_by_name.items():
-        target_slots.define(slot_name, slot_value)
+    source_slots.copy_into(target_slots)
 
 
 def _make_object_identical_to(
@@ -802,9 +737,7 @@ def _make_object_identical_to(
     return builtin_object_identical_to
 
 
-def _make_object_equal_to(
-        builtin_registry: BuiltinRegistry
-) -> InstanceBuiltinCallback:
+def _make_object_equal_to(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
     @brief One Object>>equalTo: callback is created.
 
@@ -846,9 +779,7 @@ def _make_object_equal_to(
     return builtin_object_equal_to
 
 
-def _make_object_as_string(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_object_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Object>>asString callback is created.
 
@@ -975,9 +906,7 @@ def _make_object_from(
     return builtin_object_from
 
 
-def _make_nil_as_string(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_nil_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Nil>>asString callback is created.
 
@@ -1050,9 +979,7 @@ def _make_integer_greater_than(
     return builtin_integer_greater_than
 
 
-def _make_integer_plus(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_integer_plus(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>plus: callback is created.
 
@@ -1073,9 +1000,7 @@ def _make_integer_plus(
     return builtin_integer_plus
 
 
-def _make_integer_minus(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_integer_minus(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>minus: callback is created.
 
@@ -1096,9 +1021,7 @@ def _make_integer_minus(
     return builtin_integer_minus
 
 
-def _make_integer_multiply_by(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_integer_multiply_by(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>multiplyBy: callback is created.
 
@@ -1119,9 +1042,7 @@ def _make_integer_multiply_by(
     return builtin_integer_multiply_by
 
 
-def _make_integer_div_by(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_integer_div_by(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>divBy: callback is created.
 
@@ -1149,9 +1070,7 @@ def _make_integer_div_by(
     return builtin_integer_div_by
 
 
-def _make_integer_as_string(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_integer_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>asString callback is created.
 
@@ -1172,9 +1091,9 @@ def _make_integer_as_string(
 
 
 def _make_integer_times_repeat(
-        value_registry: BuiltinRegistry,
-        object_factory: ObjectFactory,
-        send_one_arg_message: SendOneArgMessageCallback,
+    value_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+    send_one_arg_message: SendOneArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>timesRepeat: callback is created.
@@ -1249,9 +1168,9 @@ def _make_string_equal_to(
     """
 
     def builtin_string_equal_to(
-            receiver: RuntimeValue,
-            args: RuntimeValueList,
-            _ctx: InvocationContext,
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 1, "equalTo:")
         left = _expect_string(receiver, "equalTo:")
@@ -1269,8 +1188,7 @@ def _make_string_equal_to(
 
 
 def _make_string_as_integer(
-        builtin_registry: BuiltinRegistry,
-        object_factory: ObjectFactory
+    builtin_registry: BuiltinRegistry, object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>asInteger callback is created.
@@ -1300,8 +1218,7 @@ def _make_string_as_integer(
 
 
 def _make_string_concatenate_with(
-        builtin_registry: BuiltinRegistry,
-        object_factory: ObjectFactory
+    builtin_registry: BuiltinRegistry, object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>concatenateWith: callback is created.
@@ -1329,8 +1246,7 @@ def _make_string_concatenate_with(
 
 
 def _make_string_starts_with_ends_before(
-        builtin_registry: BuiltinRegistry,
-        object_factory: ObjectFactory
+    builtin_registry: BuiltinRegistry, object_factory: ObjectFactory
 ) -> InstanceBuiltinCallback:
     """
     @brief One String>>startsWith:endsBefore: callback is created.
@@ -1341,9 +1257,9 @@ def _make_string_starts_with_ends_before(
     """
 
     def builtin_string_starts_with_ends_before(
-            receiver: RuntimeValue,
-            args: RuntimeValueList,
-            _ctx: InvocationContext,
+        receiver: RuntimeValue,
+        args: RuntimeValueList,
+        _ctx: InvocationContext,
     ) -> RuntimeValue:
         _require_arg_count(args, 2, "startsWith:endsBefore:")
         string_value = _expect_string(receiver, "startsWith:endsBefore:")
@@ -1374,9 +1290,7 @@ def _make_string_starts_with_ends_before(
     return builtin_string_starts_with_ends_before
 
 
-def _make_string_length(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_string_length(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One String>>length callback is created.
 
@@ -1397,8 +1311,7 @@ def _make_string_length(
 
 
 def _make_string_read(
-        object_factory: ObjectFactory,
-        runtime_io: RuntimeIO
+    object_factory: ObjectFactory, runtime_io: RuntimeIO
 ) -> ClassBuiltinCallback:
     """
     @brief One String class-side >>read callback is created.
@@ -1422,8 +1335,8 @@ def _make_string_read(
 
 
 def _make_block_while_true(
-        value_registry: BuiltinRegistry,
-        send_zero_arg_message: SendZeroArgMessageCallback,
+    value_registry: BuiltinRegistry,
+    send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Block>>whileTrue: callback is created.
@@ -1469,9 +1382,7 @@ def _make_block_while_true(
     return builtin_block_while_true
 
 
-def _make_true_as_string(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_true_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One True>>asString callback is created.
 
@@ -1490,9 +1401,7 @@ def _make_true_as_string(
     return builtin_true_as_string
 
 
-def _make_true_not(
-        builtin_registry: BuiltinRegistry
-) -> InstanceBuiltinCallback:
+def _make_true_not(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
     @brief One True>>not callback is created.
 
@@ -1511,8 +1420,8 @@ def _make_true_not(
 
 
 def _make_boolean_and(
-        value_registry: BuiltinRegistry,
-        send_zero_arg_message: SendZeroArgMessageCallback,
+    value_registry: BuiltinRegistry,
+    send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Boolean>>and: callback is created.
@@ -1542,13 +1451,12 @@ def _make_boolean_and(
             send_zero_arg_message=send_zero_arg_message,
         )
 
-
     return builtin_boolean_and
 
 
 def _make_boolean_or(
-        value_registry: BuiltinRegistry,
-        send_zero_arg_message: SendZeroArgMessageCallback,
+    value_registry: BuiltinRegistry,
+    send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Boolean>>or: callback is created.
@@ -1582,7 +1490,7 @@ def _make_boolean_or(
 
 
 def _make_boolean_if_true_if_false(
-        send_zero_arg_message: SendZeroArgMessageCallback,
+    send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Boolean>>ifTrue:ifFalse: callback is created.
@@ -1616,9 +1524,7 @@ def _make_boolean_if_true_if_false(
     return builtin_boolean_if_true_if_false
 
 
-def _make_false_as_string(
-        object_factory: ObjectFactory
-) -> InstanceBuiltinCallback:
+def _make_false_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
     @brief One False>>asString callback is created.
 
@@ -1637,9 +1543,7 @@ def _make_false_as_string(
     return builtin_false_as_string
 
 
-def _make_false_not(
-        builtin_registry: BuiltinRegistry
-) -> InstanceBuiltinCallback:
+def _make_false_not(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
     @brief One False>>not callback is created.
 

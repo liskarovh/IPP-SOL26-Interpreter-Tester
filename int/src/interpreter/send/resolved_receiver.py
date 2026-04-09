@@ -25,10 +25,10 @@ class ResolvedReceiver:
     origin: ReceiverOrigin
 
     def __init__(
-            self,
-            receiver: MethodReceiver,
-            lookup_mode: LookupMode,
-            origin: ReceiverOrigin = ReceiverOrigin.ORDINARY,
+        self,
+        receiver: MethodReceiver,
+        lookup_mode: LookupMode,
+        origin: ReceiverOrigin = ReceiverOrigin.ORDINARY,
     ) -> None:
         """
         @brief One resolved send receiver is initialized.

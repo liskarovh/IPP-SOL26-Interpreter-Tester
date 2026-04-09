@@ -68,9 +68,9 @@ class ObjectFactory:
         return ObjectSlots({})
 
     def new_integer(
-            self,
-            value: int,
-            runtime_class: RuntimeClass | None = None,
+        self,
+        value: int,
+        runtime_class: RuntimeClass | None = None,
     ) -> IntegerValue:
         """
         @brief One new integer runtime value is created.
@@ -90,9 +90,9 @@ class ObjectFactory:
         return IntegerValue(effective_class, value, slot_storage)
 
     def new_string(
-            self,
-            value: str,
-            runtime_class: RuntimeClass | None = None,
+        self,
+        value: str,
+        runtime_class: RuntimeClass | None = None,
     ) -> StringValue:
         """
         @brief One new string runtime value is created.

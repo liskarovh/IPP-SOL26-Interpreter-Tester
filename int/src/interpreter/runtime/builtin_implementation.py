@@ -79,6 +79,7 @@ class InstanceCallbackBuiltinImplementation(BuiltinImplementation):
         @return A produced runtime value.
         """
         from ..model.runtime_class import RuntimeClass  # Avoid circular import
+
         if isinstance(receiver, RuntimeClass):
             raise TypeError("Instance-side builtin received a class receiver.")
 
@@ -115,6 +116,7 @@ class ClassCallbackBuiltinImplementation(BuiltinImplementation):
         @return A produced runtime value.
         """
         from ..model.runtime_class import RuntimeClass  # Avoid circular import
+
         if not isinstance(receiver, RuntimeClass):
             raise TypeError("Class-side builtin received an instance receiver.")
 

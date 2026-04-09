@@ -32,34 +32,4 @@ class UserObject(RuntimeValue):
         @param runtime_class Runtime class of the object instance.
         @param slots Slot storage owned by the object instance.
         """
-        super().__init__(runtime_class)
-        self.slots: ObjectSlots = slots
-
-    def read_slot(self, name: str) -> RuntimeValue:
-        """
-        @brief A slot value is read by name.
-
-        @param name Requested slot name.
-        @return Value stored in the requested slot.
-        """
-
-        return self.slots.get(name)
-
-    def write_slot(self, name: str, value: RuntimeValue) -> None:
-        """
-        @brief A slot value is written by name.
-
-        @param name Target slot name.
-        @param value Value to be stored into the slot.
-        """
-
-        self.slots.set(name, value)
-
-    def define_slot(self, name: str, value: RuntimeValue) -> None:
-        """
-        @brief A new slot is defined.
-
-        @param name Name of the new slot.
-        @param value Initial value of the new slot.
-        """
-        self.slots.define(name, value)
+        super().__init__(runtime_class, slots)

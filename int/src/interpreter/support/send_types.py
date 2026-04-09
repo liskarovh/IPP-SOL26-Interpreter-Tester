@@ -34,6 +34,7 @@ class AttributeDispatchDecision(Enum):
     CONFLICT = auto()
     NOT_APPLICABLE = auto()
 
+
 class ReceiverOrigin(Enum):
     """
     @brief Receiver-origin variants for send resolution are represented.

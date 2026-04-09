@@ -34,6 +34,7 @@ if TYPE_CHECKING:
         InstanceSendExprEvaluator,
     )
 
+
 def _decode_string_literal(raw_value: str) -> str:
     """
     @brief One SOL26 string literal payload is decoded.
@@ -75,6 +76,7 @@ def _decode_string_literal(raw_value: str) -> str:
 
     return "".join(decoded_chars)
 
+
 def _if_var_get_name(expr: AstExpr) -> str | None:
     if expr.var is not None:
         return expr.var.name
@@ -99,6 +101,7 @@ def _set_lookup_mode(expr: AstExpr) -> LookupMode:
         return LookupMode.SUPER
     return LookupMode.NORMAL
 
+
 def _resolve_receiver_origin(expr: AstExpr) -> ReceiverOrigin:
     """
     @brief One syntactic receiver origin is resolved.
@@ -116,6 +119,7 @@ def _resolve_receiver_origin(expr: AstExpr) -> ReceiverOrigin:
 
     return ReceiverOrigin.ORDINARY
 
+
 def _require_runtime_self_value(receiver: MethodReceiver) -> RuntimeValue:
     if isinstance(receiver, RuntimeClass):
         raise InterpreterError(
@@ -123,6 +127,8 @@ def _require_runtime_self_value(receiver: MethodReceiver) -> RuntimeValue:
             "Class receiver leaked into ordinary self/super expression evaluation.",
         )
     return receiver
+
+
 class ExpressionDispatcher:
     """
     @brief Non-send expression evaluation is coordinated by this class.

@@ -19,8 +19,9 @@ if TYPE_CHECKING:
     from ..model.runtime_class import RuntimeClass
     from ..model.values import RuntimeValue
 
-type RuntimeValueList = list[RuntimeValue]
-type MethodReceiver = RuntimeValue | RuntimeClass
+type RuntimeValueList = list["RuntimeValue"]
+type MethodReceiver = "RuntimeValue" | "RuntimeClass"
+
 type InstanceBuiltinCallback = Callable[
     ["RuntimeValue", RuntimeValueList, "InvocationContext"],
     "RuntimeValue",
@@ -28,5 +29,15 @@ type InstanceBuiltinCallback = Callable[
 
 type ClassBuiltinCallback = Callable[
     ["RuntimeClass", RuntimeValueList, "InvocationContext"],
+    "RuntimeValue",
+]
+
+type SendZeroArgMessageCallback = Callable[
+    ["RuntimeValue", str, "InvocationContext"],
+    "RuntimeValue",
+]
+
+type SendOneArgMessageCallback = Callable[
+    ["RuntimeValue", str, "RuntimeValue", "InvocationContext"],
     "RuntimeValue",
 ]

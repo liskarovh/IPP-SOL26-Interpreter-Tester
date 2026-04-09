@@ -4,6 +4,7 @@
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
+REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
 Registration of built-in runtime methods is centralized here.
 Concrete built-in behavior is represented through callback functions that are
@@ -12,7 +13,6 @@ wrapped into CallbackBuiltinImplementation instances.
 
 from __future__ import annotations
 
-from collections.abc import Callable
 from typing import TYPE_CHECKING
 
 from ..error_codes import ErrorCode
@@ -20,17 +20,12 @@ from ..exceptions import InterpreterError
 from ..model.block_closure import BlockClosure
 from ..model.runtime_class import RuntimeClass
 from ..model.runtime_methods import BuiltinMethod
-from ..model.user_object import UserObject
 from ..model.values import BooleanValue, IntegerValue, NilValue, RuntimeValue, StringValue
+from ..support.typing_helpers import SendOneArgMessageCallback, SendZeroArgMessageCallback
 from .builtin_implementation import (
     ClassCallbackBuiltinImplementation,
     InstanceCallbackBuiltinImplementation,
 )
-
-SendZeroArgMessageCallback = Callable[[RuntimeValue, str, "InvocationContext"], RuntimeValue]
-SendOneArgMessageCallback = Callable[
-    [RuntimeValue, str, RuntimeValue, "InvocationContext"], RuntimeValue
-]
 
 if TYPE_CHECKING:
     from ..model.invocation_context import InvocationContext
@@ -71,6 +66,61 @@ def register_builtins(
     true_class = class_registry.require("True")
     false_class = class_registry.require("False")
 
+    _register_object_builtins(
+        object_class=object_class,
+        builtin_registry=builtin_registry,
+        object_factory=object_factory,
+    )
+    _register_nil_builtins(
+        nil_class=nil_class,
+        builtin_registry=builtin_registry,
+        object_factory=object_factory,
+    )
+    _register_integer_builtins(
+        integer_class=integer_class,
+        builtin_registry=builtin_registry,
+        object_factory=object_factory,
+        send_one_arg_message=send_one_arg_message,
+    )
+    _register_string_builtins(
+        string_class=string_class,
+        builtin_registry=builtin_registry,
+        object_factory=object_factory,
+        runtime_io=runtime_io,
+    )
+    _register_block_builtins(
+        block_class=block_class,
+        builtin_registry=builtin_registry,
+        send_zero_arg_message=send_zero_arg_message,
+    )
+    _register_true_builtins(
+        true_class=true_class,
+        builtin_registry=builtin_registry,
+        object_factory=object_factory,
+        send_zero_arg_message=send_zero_arg_message,
+    )
+    _register_false_builtins(
+        false_class=false_class,
+        builtin_registry=builtin_registry,
+        object_factory=object_factory,
+        send_zero_arg_message=send_zero_arg_message,
+    )
+
+
+def _register_object_builtins(
+    object_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+) -> None:
+    """
+    @brief Object built-ins are registered.
+
+    @param object_class The runtime class Object.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param object_factory A runtime value factory.
+    """
+    return_false = _make_return_false(builtin_registry)
+
     #
     # Object instance-side methods
     #
@@ -95,31 +145,31 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=object_class,
         selector="isNumber",
-        builtin_callback=_make_return_false(builtin_registry),
+        builtin_callback=return_false,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=object_class,
         selector="isString",
-        builtin_callback=_make_return_false(builtin_registry),
+        builtin_callback=return_false,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=object_class,
         selector="isBlock",
-        builtin_callback=_make_return_false(builtin_registry),
+        builtin_callback=return_false,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=object_class,
         selector="isNil",
-        builtin_callback=_make_return_false(builtin_registry),
+        builtin_callback=return_false,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=object_class,
         selector="isBoolean",
-        builtin_callback=_make_return_false(builtin_registry),
+        builtin_callback=return_false,
         builtin_registry=builtin_registry,
     )
 
@@ -139,6 +189,21 @@ def register_builtins(
         builtin_registry=builtin_registry,
     )
 
+
+def _register_nil_builtins(
+    nil_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+) -> None:
+    """
+    @brief Nil built-ins are registered.
+
+    @param nil_class The runtime class Nil.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param object_factory A runtime value factory.
+    """
+    return_true = _make_return_true(builtin_registry)
+
     #
     # Nil instance-side methods
     #
@@ -151,9 +216,27 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=nil_class,
         selector="isNil",
-        builtin_callback=_make_return_true(builtin_registry),
+        builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
+
+
+def _register_integer_builtins(
+    integer_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+    send_one_arg_message: SendOneArgMessageCallback,
+) -> None:
+    """
+    @brief Integer built-ins are registered.
+
+    @param integer_class The runtime class Integer.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param object_factory A runtime value factory.
+    @param send_one_arg_message A helper sending one one-argument runtime message.
+    """
+    return_true = _make_return_true(builtin_registry)
+    return_receiver = _make_return_receiver()
 
     #
     # Integer instance-side methods
@@ -203,25 +286,43 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=integer_class,
         selector="asInteger",
-        builtin_callback=_make_return_receiver(),
+        builtin_callback=return_receiver,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=integer_class,
         selector="isNumber",
-        builtin_callback=_make_return_true(builtin_registry),
+        builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=integer_class,
         selector="timesRepeat:",
         builtin_callback=_make_integer_times_repeat(
-            value_registry=builtin_registry,
+            builtin_registry=builtin_registry,
             object_factory=object_factory,
             send_one_arg_message=send_one_arg_message,
         ),
         builtin_registry=builtin_registry,
     )
+
+
+def _register_string_builtins(
+    string_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+    runtime_io: RuntimeIO,
+) -> None:
+    """
+    @brief String built-ins are registered.
+
+    @param string_class The runtime class String.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param object_factory A runtime value factory.
+    @param runtime_io A runtime input/output service.
+    """
+    return_true = _make_return_true(builtin_registry)
+    return_receiver = _make_return_receiver()
 
     #
     # String instance-side methods
@@ -241,7 +342,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=string_class,
         selector="asString",
-        builtin_callback=_make_return_receiver(),
+        builtin_callback=return_receiver,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -253,7 +354,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=string_class,
         selector="isString",
-        builtin_callback=_make_return_true(builtin_registry),
+        builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -285,24 +386,56 @@ def register_builtins(
         builtin_registry=builtin_registry,
     )
 
+
+def _register_block_builtins(
+    block_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    send_zero_arg_message: SendZeroArgMessageCallback,
+) -> None:
+    """
+    @brief Block built-ins are registered.
+
+    @param block_class The runtime class Block.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param send_zero_arg_message A helper sending one zero-argument runtime message.
+    """
+    return_true = _make_return_true(builtin_registry)
+
     #
     # Block instance-side methods
     #
     _register_one_instance_builtin(
         owner=block_class,
         selector="isBlock",
-        builtin_callback=_make_return_true(builtin_registry),
+        builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
         owner=block_class,
         selector="whileTrue:",
         builtin_callback=_make_block_while_true(
-            value_registry=builtin_registry,
+            builtin_registry=builtin_registry,
             send_zero_arg_message=send_zero_arg_message,
         ),
         builtin_registry=builtin_registry,
     )
+
+
+def _register_true_builtins(
+    true_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+    send_zero_arg_message: SendZeroArgMessageCallback,
+) -> None:
+    """
+    @brief True built-ins are registered.
+
+    @param true_class The runtime class True.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param object_factory A runtime value factory.
+    @param send_zero_arg_message A helper sending one zero-argument runtime message.
+    """
+    return_true = _make_return_true(builtin_registry)
 
     #
     # True instance-side methods
@@ -316,7 +449,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=true_class,
         selector="isBoolean",
-        builtin_callback=_make_return_true(builtin_registry),
+        builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -329,7 +462,7 @@ def register_builtins(
         owner=true_class,
         selector="and:",
         builtin_callback=_make_boolean_and(
-            value_registry=builtin_registry,
+            builtin_registry=builtin_registry,
             send_zero_arg_message=send_zero_arg_message,
         ),
         builtin_registry=builtin_registry,
@@ -338,7 +471,7 @@ def register_builtins(
         owner=true_class,
         selector="or:",
         builtin_callback=_make_boolean_or(
-            value_registry=builtin_registry,
+            builtin_registry=builtin_registry,
             send_zero_arg_message=send_zero_arg_message,
         ),
         builtin_registry=builtin_registry,
@@ -352,6 +485,23 @@ def register_builtins(
         builtin_registry=builtin_registry,
     )
 
+
+def _register_false_builtins(
+    false_class: RuntimeClass,
+    builtin_registry: BuiltinRegistry,
+    object_factory: ObjectFactory,
+    send_zero_arg_message: SendZeroArgMessageCallback,
+) -> None:
+    """
+    @brief False built-ins are registered.
+
+    @param false_class The runtime class False.
+    @param builtin_registry A registry of canonical built-in values and methods.
+    @param object_factory A runtime value factory.
+    @param send_zero_arg_message A helper sending one zero-argument runtime message.
+    """
+    return_true = _make_return_true(builtin_registry)
+
     #
     # False instance-side methods
     #
@@ -364,7 +514,7 @@ def register_builtins(
     _register_one_instance_builtin(
         owner=false_class,
         selector="isBoolean",
-        builtin_callback=_make_return_true(builtin_registry),
+        builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
     _register_one_instance_builtin(
@@ -377,7 +527,7 @@ def register_builtins(
         owner=false_class,
         selector="and:",
         builtin_callback=_make_boolean_and(
-            value_registry=builtin_registry,
+            builtin_registry=builtin_registry,
             send_zero_arg_message=send_zero_arg_message,
         ),
         builtin_registry=builtin_registry,
@@ -386,7 +536,7 @@ def register_builtins(
         owner=false_class,
         selector="or:",
         builtin_callback=_make_boolean_or(
-            value_registry=builtin_registry,
+            builtin_registry=builtin_registry,
             send_zero_arg_message=send_zero_arg_message,
         ),
         builtin_registry=builtin_registry,
@@ -651,23 +801,6 @@ def _expect_string(value: RuntimeValue, selector: str) -> StringValue:
     )
 
 
-def _expect_user_object(value: RuntimeValue, selector: str) -> UserObject:
-    """
-    @brief One user object is required.
-
-    @param value One runtime value.
-    @param selector Current built-in selector.
-    @return The checked user object.
-    """
-    if isinstance(value, UserObject):
-        return value
-
-    raise InterpreterError(
-        ErrorCode.INT_INVALID_ARG,
-        f"Built-in method {selector} expected a user object, got {value.get_class().name}.",
-    )
-
-
 def _make_runtime_string(
     value: str,
     object_factory: ObjectFactory,
@@ -756,19 +889,13 @@ def _make_object_equal_to(builtin_registry: BuiltinRegistry) -> InstanceBuiltinC
         if type(receiver) is not type(other):
             return _false_value(builtin_registry)
 
-        if isinstance(receiver, IntegerValue) and isinstance(other, IntegerValue):
+        if isinstance(receiver, (IntegerValue, StringValue, BooleanValue)) and isinstance(
+            other,
+            (IntegerValue, StringValue, BooleanValue),
+        ):
             if receiver.raw() == other.raw():
                 return _true_value(builtin_registry)
-            return _false_value(builtin_registry)
 
-        if isinstance(receiver, StringValue) and isinstance(other, StringValue):
-            if receiver.raw() == other.raw():
-                return _true_value(builtin_registry)
-            return _false_value(builtin_registry)
-
-        if isinstance(receiver, BooleanValue) and isinstance(other, BooleanValue):
-            if receiver.raw() == other.raw():
-                return _true_value(builtin_registry)
             return _false_value(builtin_registry)
 
         if receiver is other:
@@ -1091,14 +1218,14 @@ def _make_integer_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCal
 
 
 def _make_integer_times_repeat(
-    value_registry: BuiltinRegistry,
+    builtin_registry: BuiltinRegistry,
     object_factory: ObjectFactory,
     send_one_arg_message: SendOneArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Integer>>timesRepeat: callback is created.
 
-    @param value_registry A registry of canonical built-in values.
+    @param builtin_registry A registry of canonical built-in values.
     @param object_factory A runtime value factory.
     @param send_one_arg_message One injected one-argument send helper.
     @return One Integer>>timesRepeat: callback.
@@ -1116,9 +1243,9 @@ def _make_integer_times_repeat(
         repeat_count = integer_receiver.raw()
 
         if repeat_count <= 0:
-            return _nil_value(value_registry)
+            return _nil_value(builtin_registry)
 
-        last_result: RuntimeValue = _nil_value(value_registry)
+        last_result: RuntimeValue = _nil_value(builtin_registry)
 
         for iteration_index in range(1, repeat_count + 1):
             iteration_value = _make_runtime_integer(iteration_index, object_factory)
@@ -1335,13 +1462,13 @@ def _make_string_read(
 
 
 def _make_block_while_true(
-    value_registry: BuiltinRegistry,
+    builtin_registry: BuiltinRegistry,
     send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Block>>whileTrue: callback is created.
 
-    @param value_registry A registry of canonical built-in values.
+    @param builtin_registry A registry of canonical built-in values.
     @param send_zero_arg_message One injected zero-argument send helper.
     @return One Block>>whileTrue: callback.
     """
@@ -1355,7 +1482,7 @@ def _make_block_while_true(
 
         condition_target = receiver
         body_target = args[0]
-        last_result: RuntimeValue = _nil_value(value_registry)
+        last_result: RuntimeValue = _nil_value(builtin_registry)
 
         while True:
             condition_value = _send_zero_arg_runtime_message(
@@ -1420,13 +1547,13 @@ def _make_true_not(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback
 
 
 def _make_boolean_and(
-    value_registry: BuiltinRegistry,
+    builtin_registry: BuiltinRegistry,
     send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Boolean>>and: callback is created.
 
-    @param value_registry A registry of canonical built-in values.
+    @param builtin_registry A registry of canonical built-in values.
     @param send_zero_arg_message One injected zero-argument send helper.
     @return One Boolean>>and: callback.
     """
@@ -1442,7 +1569,7 @@ def _make_boolean_and(
         delayed_value = args[0]
 
         if not boolean_receiver.raw():
-            return _false_value(value_registry)
+            return _false_value(builtin_registry)
 
         return _send_zero_arg_runtime_message(
             target_value=delayed_value,
@@ -1455,13 +1582,13 @@ def _make_boolean_and(
 
 
 def _make_boolean_or(
-    value_registry: BuiltinRegistry,
+    builtin_registry: BuiltinRegistry,
     send_zero_arg_message: SendZeroArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
     @brief One Boolean>>or: callback is created.
 
-    @param value_registry A registry of canonical built-in values.
+    @param builtin_registry A registry of canonical built-in values.
     @param send_zero_arg_message One injected zero-argument send helper.
     @return One Boolean>>or: callback.
     """
@@ -1477,7 +1604,7 @@ def _make_boolean_or(
         delayed_value = args[0]
 
         if boolean_receiver.raw():
-            return _true_value(value_registry)
+            return _true_value(builtin_registry)
 
         return _send_zero_arg_runtime_message(
             target_value=delayed_value,

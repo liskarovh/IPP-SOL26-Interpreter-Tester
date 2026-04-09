@@ -46,28 +46,6 @@ class RuntimeValue:
         """
         return self.runtime_class
 
-    def debug_repr(self) -> str:
-        """
-        @brief A debug representation of the value is returned.
-
-        @return Debug string representation of the value.
-        """
-        child_type = self.__class__.__name__
-        runtime_class_name = self.runtime_class.name
-
-        parts: list[str] = [f"runtime_class={runtime_class_name!r}"]
-
-        for attribute_name in sorted(self.__dict__.keys()):
-            if attribute_name == "runtime_class":
-                continue
-
-            attribute_value = self.__dict__[attribute_name]
-            parts.append(f"{attribute_name}={attribute_value!r}")
-
-        joined_parts = ", ".join(parts)
-
-        return f"{child_type}({joined_parts})"
-
 
 class IntegerValue(RuntimeValue):
     """

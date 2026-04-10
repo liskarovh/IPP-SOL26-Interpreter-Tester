@@ -5,8 +5,10 @@
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-A runtime method is executed here. The minimum version supports only
-user-defined methods needed for the first simple programs.
+A runtime method is executed here by validating the supplied argument count,
+creating one invocation context for the method call and then calling
+the method with the effective receiver, the evaluated arguments and the
+created invocation context.
 """
 
 from __future__ import annotations
@@ -74,8 +76,8 @@ class MethodExecutor:
         """
         self.block_executor = block_executor
 
+    @staticmethod
     def execute(
-        self,
         method: RuntimeMethod,
         receiver: MethodReceiver,
         args: list[RuntimeValue],

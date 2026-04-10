@@ -4,9 +4,6 @@
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
-
-The BlockClosure runtime value is declared here according to the current
-UML class diagram.
 """
 
 from __future__ import annotations

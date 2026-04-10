@@ -12,8 +12,6 @@ No execution of the program is expected to be started here.
 
 from __future__ import annotations
 
-from ..input_model import ClassDef as AstClassDef
-from ..input_model import Method as AstMethod
 from ..input_model import Program
 from ..model.runtime_class import RuntimeClass
 from ..model.runtime_methods import UserMethod
@@ -166,6 +164,24 @@ class RuntimeBuilder:
         """
         @brief User-defined runtime classes are registered.
 
+        Registration is performed in two phases. First, empty runtime class
+        shells are created for all user classes. Then parent links are
+        attached after all classes are already present in the registry.
+
+        @param program A validated AST program.
+        @param runtime A runtime container that is being built.
+        """
+        self._register_user_runtime_class_shells(program, runtime)
+        self._attach_user_runtime_class_parents(program, runtime)
+
+    @staticmethod
+    def _register_user_runtime_class_shells(
+        program: Program,
+        runtime: Runtime,
+    ) -> None:
+        """
+        @brief Empty runtime class shells are registered for user classes.
+
         @param program A validated AST program.
         @param runtime A runtime container that is being built.
         """
@@ -173,11 +189,24 @@ class RuntimeBuilder:
             runtime_class = RuntimeClass(class_ast.name, None)
             runtime.class_registry.add(runtime_class)
 
+    @staticmethod
+    def _attach_user_runtime_class_parents(
+        program: Program,
+        runtime: Runtime,
+    ) -> None:
+        """
+        @brief Parent links are attached to registered user runtime classes.
+
+        @param program A validated AST program.
+        @param runtime A runtime container that is being built.
+        """
         for class_ast in program.classes:
             runtime_class = runtime.class_registry.require(class_ast.name)
-            runtime_class.parent = self._resolve_parent_runtime_class(class_ast, runtime)
+            parent_runtime_class = runtime.class_registry.require(class_ast.parent)
+            runtime_class.parent = parent_runtime_class
 
-    def _attach_user_runtime_methods(self, program: Program, runtime: Runtime) -> None:
+    @staticmethod
+    def _attach_user_runtime_methods(program: Program, runtime: Runtime) -> None:
         """
         @brief User-defined runtime methods are attached to runtime classes.
 
@@ -188,35 +217,9 @@ class RuntimeBuilder:
             runtime_class = runtime.class_registry.require(class_ast.name)
 
             for method_ast in class_ast.methods:
-                user_method = self._build_user_method(method_ast, runtime_class)
+                user_method = UserMethod(
+                    method_ast.selector,
+                    runtime_class,
+                    method_ast,
+                )
                 runtime_class.add_instance_method(user_method)
-
-    @staticmethod
-    def _resolve_parent_runtime_class(
-        class_ast: AstClassDef,
-        runtime: Runtime,
-    ) -> RuntimeClass:
-        """
-        @brief A parent runtime class is resolved for one AST class.
-
-        @param class_ast One source AST class definition.
-        @param runtime A partially built runtime container.
-        @return A resolved parent runtime class.
-        """
-        parent_name = class_ast.parent
-        return runtime.class_registry.require(parent_name)
-
-    @staticmethod
-    def _build_user_method(
-        method_ast: AstMethod,
-        owner: RuntimeClass,
-    ) -> UserMethod:
-        """
-        @brief One user-defined runtime method is built from AST.
-
-        @param method_ast One source AST method definition.
-        @param owner An owning runtime class.
-        @return A runtime user method.
-        """
-        selector = method_ast.selector
-        return UserMethod(selector, owner, method_ast)

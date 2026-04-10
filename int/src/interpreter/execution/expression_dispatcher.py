@@ -231,8 +231,7 @@ class ExpressionDispatcher:
             return self.object_factory.new_integer(int(value))
 
         if class_id == "String":
-            value = _decode_string_literal(literal.value)
-            return self.object_factory.new_string(value)
+            return self.object_factory.new_string(literal.value)
 
         if class_id == "True":
             return self.object_factory.new_boolean(True)

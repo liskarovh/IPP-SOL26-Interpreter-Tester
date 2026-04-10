@@ -5,7 +5,7 @@
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Helpers shared by the send layer are intended to be stored here.
+Helpers shared by the send layer are stored here.
 """
 
 from __future__ import annotations

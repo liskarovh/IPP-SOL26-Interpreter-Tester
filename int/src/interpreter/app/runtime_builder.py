@@ -19,28 +19,18 @@ from ..model.runtime_class import RuntimeClass
 from ..model.runtime_methods import UserMethod
 from ..model.values import BooleanValue, NilValue
 from ..runtime.builtin_registry import BuiltinRegistry
-from ..runtime.builtins import (
-    SendOneArgMessageCallback,
-    SendZeroArgMessageCallback,
-    register_builtins,
-)
+from ..runtime.builtins import register_builtins
 from ..runtime.class_registry import ClassRegistry
 from ..runtime.object_factory import ObjectFactory
 from ..runtime.runtime import Runtime
 from ..runtime.runtime_io import RuntimeIO
+from ..support.typing_helpers import SendOneArgMessageCallback, SendZeroArgMessageCallback
 
 
 class RuntimeBuilder:
     """
     @brief A validated AST program is converted into a runtime here.
     """
-
-    def __init__(self) -> None:
-        """
-        @brief A runtime builder is initialized.
-
-        The builder is intentionally kept simple at this stage.
-        """
 
     def build(
         self,

@@ -126,6 +126,85 @@ class AttributeDispatchResolver:
     """
 
     @staticmethod
+    def _resolve_read_dispatch(
+        runtime_receiver: RuntimeValue,
+        attribute_name: str,
+        lookup_mode: LookupMode,
+        ctx: InvocationContext,
+    ) -> AttributeDispatchDecision:
+        """
+        @brief One read-form attribute-dispatch decision is resolved.
+
+        @param runtime_receiver One runtime receiver whose selector meaning is to be resolved.
+        @param attribute_name One resolved attribute name.
+        @param lookup_mode One lookup mode of the current send.
+        @param ctx An invocation context carrying self/super information.
+        @return One resolved read-form attribute-dispatch decision.
+        """
+        slot_storage = runtime_receiver.slots
+        if slot_storage is None:
+            return AttributeDispatchDecision.METHOD
+
+        if _has_matching_zero_arg_method(
+            runtime_receiver,
+            attribute_name,
+            lookup_mode,
+            ctx,
+        ):
+            return AttributeDispatchDecision.METHOD
+
+        if slot_storage.has(attribute_name):
+            return AttributeDispatchDecision.ATTRIBUTE_READ
+
+        return AttributeDispatchDecision.METHOD
+
+    @staticmethod
+    def _resolve_write_dispatch(
+        runtime_receiver: RuntimeValue,
+        selector: str,
+        attribute_name: str,
+        lookup_mode: LookupMode,
+        receiver_origin: ReceiverOrigin,
+        ctx: InvocationContext,
+    ) -> AttributeDispatchDecision:
+        """
+        @brief One write-form attribute-dispatch decision is resolved.
+
+        @param runtime_receiver One runtime receiver whose selector meaning is to be resolved.
+        @param selector One write selector whose meaning is to be resolved.
+        @param attribute_name One resolved attribute name.
+        @param lookup_mode One lookup mode of the current send.
+        @param receiver_origin One syntactic origin of the current receiver.
+        @param ctx An invocation context carrying self/super information.
+        @return One resolved write-form attribute-dispatch decision.
+        """
+        slot_storage = runtime_receiver.slots
+        if slot_storage is None:
+            return AttributeDispatchDecision.METHOD
+
+        if _has_matching_write_method(
+            runtime_receiver,
+            selector,
+            lookup_mode,
+            ctx,
+        ):
+            return AttributeDispatchDecision.METHOD
+
+        if slot_storage.has(attribute_name):
+            return AttributeDispatchDecision.ATTRIBUTE_WRITE
+
+        if _has_conflicting_zero_arg_method_for_new_write(
+            runtime_receiver,
+            attribute_name,
+            lookup_mode,
+            receiver_origin,
+            ctx,
+        ):
+            return AttributeDispatchDecision.CONFLICT
+
+        return AttributeDispatchDecision.ATTRIBUTE_WRITE
+
+    @staticmethod
     def resolve(
         receiver: MethodReceiver,
         selector: str,
@@ -151,43 +230,20 @@ class AttributeDispatchResolver:
             return AttributeDispatchDecision.METHOD
 
         runtime_receiver = receiver
-        slot_storage = runtime_receiver.slots
 
-        if slot_storage is None:
-            return AttributeDispatchDecision.METHOD
-
-        if not _is_write_selector(selector):
-            if _has_matching_zero_arg_method(
+        if _is_write_selector(selector):
+            return AttributeDispatchResolver._resolve_write_dispatch(
                 runtime_receiver,
+                selector,
                 attribute_name,
                 lookup_mode,
+                receiver_origin,
                 ctx,
-            ):
-                return AttributeDispatchDecision.METHOD
+            )
 
-            if slot_storage.has(attribute_name):
-                return AttributeDispatchDecision.ATTRIBUTE_READ
-
-            return AttributeDispatchDecision.METHOD
-
-        if _has_matching_write_method(
-            runtime_receiver,
-            selector,
-            lookup_mode,
-            ctx,
-        ):
-            return AttributeDispatchDecision.METHOD
-
-        if slot_storage.has(attribute_name):
-            return AttributeDispatchDecision.ATTRIBUTE_WRITE
-
-        if _has_conflicting_zero_arg_method_for_new_write(
+        return AttributeDispatchResolver._resolve_read_dispatch(
             runtime_receiver,
             attribute_name,
             lookup_mode,
-            receiver_origin,
             ctx,
-        ):
-            return AttributeDispatchDecision.CONFLICT
-
-        return AttributeDispatchDecision.ATTRIBUTE_WRITE
+        )

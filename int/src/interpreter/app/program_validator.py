@@ -1,8 +1,9 @@
 """
 @file program_validator.py
 @brief Static validation of a loaded AST program is defined.
+@author Hana Liškařová xliskah00
 
-DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY THE AUTHOR.
+DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
 The validator is responsible only for static checks over the AST model.
 No runtime structures are built here, and no expressions are executed here.
@@ -66,12 +67,18 @@ class ProgramValidator:
 
         @param program A loaded AST program to be validated.
         """
+        self._reset_validation_state()
         self._validate_program_header(program)
-        self._validate_unique_class_names(program)
-        self._build_class_index(program)
-        self._validate_class_definitions(program)
-        self._validate_methods_in_program(program)
-        self._validate_entry_point(program)
+        self._validate_program_shape(program)
+        self._validate_class_semantics(program)
+        self._validate_method_semantics(program)
+        self._validate_entry_point()
+
+    def _reset_validation_state(self) -> None:
+        """
+        @brief Validator state from one previous run is cleared.
+        """
+        self._class_index = {}
 
     @staticmethod
     def _validate_program_header(program: Program) -> None:
@@ -88,6 +95,18 @@ class ProgramValidator:
                 ErrorCode.INT_STRUCTURE,
                 "Unsupported program language, must be 'SOL26'.",
             )
+
+    def _validate_program_shape(self, program: Program) -> None:
+        """
+        @brief Program-shape validation is executed.
+
+        Class-name uniqueness is validated first. After that, the class index
+        is prepared for later validation phases.
+
+        @param program A loaded AST program to be inspected.
+        """
+        self._validate_unique_class_names(program)
+        self._prepare_program_index(program)
 
     @staticmethod
     def _validate_unique_class_names(program: Program) -> None:
@@ -107,40 +126,68 @@ class ProgramValidator:
 
             seen_class_names.add(class_def.name)
 
-    def _validate_class_definitions(self, program: Program) -> None:
+    def _prepare_program_index(self, program: Program) -> None:
         """
-        @brief Class-level static rules are validated.
+        @brief A user-defined class index is prepared for later validation steps.
 
-        Parent references and other class-definition rules are expected to be
-        validated here. Method signatures should not be handled here.
+        @param program A loaded AST program whose classes are to be indexed.
+        """
+        for class_def in program.classes:
+            self._class_index[class_def.name] = class_def
+
+    def _validate_class_semantics(self, program: Program) -> None:
+        """
+        @brief Class-level semantic validation is executed.
 
         @param program A loaded AST program to be inspected.
         """
         for class_def in program.classes:
-            self._validate_builtin_class_redefinition(class_def)
-            self._validate_parent_reference(class_def)
+            self._validate_one_class_semantics(class_def)
 
         self._validate_inheritance_cycles(program)
 
-    def _validate_methods_in_program(self, program: Program) -> None:
+    def _validate_one_class_semantics(self, class_def: AstClassDef) -> None:
         """
-        @brief Method-level validation is executed for all classes.
+        @brief One class definition is validated.
+
+        Built-in class-name redefinition and parent-reference validity are
+        checked here.
+
+        @param class_def A class definition to be inspected.
+        """
+        self._validate_builtin_class_redefinition(class_def)
+        self._validate_parent_reference(class_def)
+
+    def _validate_method_semantics(self, program: Program) -> None:
+        """
+        @brief Method-level semantic validation is executed.
 
         @param program A loaded AST program to be inspected.
         """
         for class_def in program.classes:
-            seen_selectors: set[str] = set()
+            self._validate_one_class_method_semantics(class_def)
 
-            for method in class_def.methods:
-                if method.selector in seen_selectors:
-                    raise InterpreterError(
-                        ErrorCode.SEM_ERROR,
-                        f"Duplicate selector {method.selector} in class {class_def.name}.",
-                    )
+    def _validate_one_class_method_semantics(self, class_def: AstClassDef) -> None:
+        """
+        @brief All methods of one class are validated.
 
-                seen_selectors.add(method.selector)
-                self._validate_method_signature(method)
-                self._validate_method_block(method)
+        Duplicate selectors are checked first. After that, method signatures
+        and method bodies are validated in the original program order.
+
+        @param class_def A class whose methods are to be inspected.
+        """
+        seen_selectors: set[str] = set()
+
+        for method in class_def.methods:
+            if method.selector in seen_selectors:
+                raise InterpreterError(
+                    ErrorCode.SEM_ERROR,
+                    f"Duplicate selector {method.selector} in class {class_def.name}.",
+                )
+
+            seen_selectors.add(method.selector)
+            self._validate_method_signature(method)
+            self._validate_method_body(method)
 
     def _validate_method_signature(self, method: AstMethod) -> None:
         """
@@ -157,13 +204,11 @@ class ProgramValidator:
                 f"expected {expected_arity}.",
             )
 
-    def _validate_entry_point(self, program: Program) -> None:
+    def _validate_entry_point(self) -> None:
         """
         @brief The required program entry point is validated.
-
-        @param program A loaded AST program to be inspected.
         """
-        main_class = self._find_class_by_name(program, "Main")
+        main_class = self._class_index.get("Main")
 
         if main_class is None:
             raise InterpreterError(
@@ -185,15 +230,15 @@ class ProgramValidator:
                 "Entry point method 'Main>>run' must not accept arguments.",
             )
 
-    def _validate_method_block(self, method: AstMethod) -> None:
+    def _validate_method_body(self, method: AstMethod) -> None:
         """
-        @brief The top-level block of one method is validated.
+        @brief The body of one method is validated.
 
-        @param method A method whose block is to be validated.
+        @param method A method whose body is to be validated.
         """
-        visible_names = set(self._special_immutable_names)
-        parameter_names: set[str] = set()
-        special_immutable_names = set(self._special_immutable_names)
+        visible_names = self._create_initial_method_visible_names()
+        parameter_names = self._create_initial_method_parameter_names()
+        special_immutable_names = self._create_initial_method_immutable_names()
 
         self._validate_block(
             method.block,
@@ -201,6 +246,31 @@ class ProgramValidator:
             parameter_names,
             special_immutable_names,
         )
+
+    def _create_initial_method_visible_names(self) -> set[str]:
+        """
+        @brief Initial visible names for one method body are created.
+
+        @return One initial set of names visible in one method body.
+        """
+        return set(self._special_immutable_names)
+
+    @staticmethod
+    def _create_initial_method_parameter_names() -> set[str]:
+        """
+        @brief Initial method-parameter name storage is created.
+
+        @return One empty set of method-parameter names.
+        """
+        return set()
+
+    def _create_initial_method_immutable_names(self) -> set[str]:
+        """
+        @brief Initial immutable names for one method body are created.
+
+        @return One initial set of immutable names in one method body.
+        """
+        return set(self._special_immutable_names)
 
     def _validate_block(
         self,
@@ -221,26 +291,28 @@ class ProgramValidator:
         @param parameter_names Formal block parameters visible in the current scope.
         @param special_immutable_names Special names that must never be assigned to.
         """
-        local_block_parameter_names = self._validate_block_parameters(block)
+        local_block_parameter_names = self._validate_one_block_parameters(block)
 
-        local_visible_names = set(visible_names)
-        local_parameter_names = set(parameter_names)
-        local_special_immutable_names = set(special_immutable_names)
+        (
+            local_visible_names,
+            local_parameter_names,
+            local_special_immutable_names,
+        ) = self._extend_scope_for_block(
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+            local_block_parameter_names,
+        )
 
-        local_visible_names.update(local_block_parameter_names)
-        local_parameter_names.update(local_block_parameter_names)
-
-        for assign in block.assigns:
-            target_name = self._validate_assign(
-                assign,
-                local_visible_names,
-                local_parameter_names,
-                local_special_immutable_names,
-            )
-            local_visible_names.add(target_name)
+        self._validate_block_assignments(
+            block,
+            local_visible_names,
+            local_parameter_names,
+            local_special_immutable_names,
+        )
 
     @staticmethod
-    def _validate_block_parameters(block: AstBlock) -> set[str]:
+    def _validate_one_block_parameters(block: AstBlock) -> set[str]:
         """
         @brief Parameter-name uniqueness in one block is validated.
 
@@ -259,6 +331,63 @@ class ProgramValidator:
             seen_params.add(param.name)
 
         return seen_params
+
+    @staticmethod
+    def _extend_scope_for_block(
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+        local_block_parameter_names: set[str],
+    ) -> tuple[set[str], set[str], set[str]]:
+        """
+        @brief Lexical scope for one nested block is created.
+
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        @param local_block_parameter_names Unique parameter names of the current block.
+        @return Extended local visible names, local parameter names,
+                and local immutable names.
+        """
+        local_visible_names = set(visible_names)
+        local_parameter_names = set(parameter_names)
+        local_special_immutable_names = set(special_immutable_names)
+
+        local_visible_names.update(local_block_parameter_names)
+        local_parameter_names.update(local_block_parameter_names)
+
+        return (
+            local_visible_names,
+            local_parameter_names,
+            local_special_immutable_names,
+        )
+
+    def _validate_block_assignments(
+        self,
+        block: AstBlock,
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> None:
+        """
+        @brief All assignments of one block are validated.
+
+        Assignment targets are added to visible names only after the
+        corresponding assignment has been validated.
+
+        @param block A block whose assignments are to be inspected.
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        """
+        for assign in block.assigns:
+            target_name = self._validate_assign(
+                assign,
+                visible_names,
+                parameter_names,
+                special_immutable_names,
+            )
+            visible_names.add(target_name)
 
     def _validate_assign(
         self,
@@ -281,27 +410,68 @@ class ProgramValidator:
         @param special_immutable_names Special names that must never be assigned to.
         @return The validated assignment target name.
         """
-        assign_target = assign.target.name
+        target_name = assign.target.name
 
-        if assign_target in parameter_names:
+        self._validate_assignment_target(
+            target_name,
+            parameter_names,
+            special_immutable_names,
+        )
+        self._validate_assignment_expr(
+            assign,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        )
+
+        return target_name
+
+    @staticmethod
+    def _validate_assignment_target(
+        target_name: str,
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> None:
+        """
+        @brief One assignment target is validated.
+
+        @param target_name One assignment target name to be inspected.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        """
+        if target_name in parameter_names:
             raise InterpreterError(
                 ErrorCode.SEM_COLLISION,
-                f"Cannot assign to block parameter {assign_target}.",
+                f"Cannot assign to block parameter {target_name}.",
             )
 
-        if assign_target in special_immutable_names:
+        if target_name in special_immutable_names:
             raise InterpreterError(
                 ErrorCode.SEM_ERROR,
-                f"Cannot assign to special name {assign_target}.",
+                f"Cannot assign to special name {target_name}.",
             )
 
+    def _validate_assignment_expr(
+        self,
+        assign: AstAssign,
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> None:
+        """
+        @brief The right-hand side of one assignment is validated.
+
+        @param assign One assignment whose expression is to be inspected.
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        """
         self._validate_expr(
             assign.expr,
             visible_names,
             parameter_names,
             special_immutable_names,
         )
-        return assign_target
 
     def _validate_expr(
         self,
@@ -318,30 +488,112 @@ class ProgramValidator:
         @param parameter_names Formal block parameters visible in the current scope.
         @param special_immutable_names Special names that must never be assigned to.
         """
-        if expr.literal is not None:
+        if self._validate_literal_expr(expr):
             return
 
-        if expr.var is not None:
-            self._validate_variable_read(expr.var, visible_names)
+        if self._validate_var_expr(expr, visible_names):
             return
 
-        if expr.block is not None:
-            self._validate_block(
-                expr.block,
-                visible_names,
-                parameter_names,
-                special_immutable_names,
-            )
+        if self._validate_block_expr(
+            expr,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        ):
             return
 
-        if expr.send is not None:
-            self._validate_send(
-                expr.send,
-                visible_names,
-                parameter_names,
-                special_immutable_names,
-            )
+        if self._validate_send_expr(
+            expr,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        ):
             return
+
+    @staticmethod
+    def _validate_literal_expr(expr: AstExpr) -> bool:
+        """
+        @brief One literal expression shape is checked.
+
+        @param expr An expression to be inspected.
+        @return True when the expression is one literal, otherwise False.
+        """
+        return expr.literal is not None
+
+    def _validate_var_expr(
+        self,
+        expr: AstExpr,
+        visible_names: set[str],
+    ) -> bool:
+        """
+        @brief One variable-read expression is validated.
+
+        @param expr An expression to be inspected.
+        @param visible_names Names that may currently be read.
+        @return True when the expression is one variable-read expression,
+                otherwise False.
+        """
+        if expr.var is None:
+            return False
+
+        self._validate_variable_read(expr.var, visible_names)
+        return True
+
+    def _validate_block_expr(
+        self,
+        expr: AstExpr,
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> bool:
+        """
+        @brief One block expression is validated.
+
+        @param expr An expression to be inspected.
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        @return True when the expression is one block expression,
+                otherwise False.
+        """
+        if expr.block is None:
+            return False
+
+        self._validate_block(
+            expr.block,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        )
+        return True
+
+    def _validate_send_expr(
+        self,
+        expr: AstExpr,
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> bool:
+        """
+        @brief One send expression is validated.
+
+        @param expr An expression to be inspected.
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        @return True when the expression is one send expression,
+                otherwise False.
+        """
+        if expr.send is None:
+            return False
+
+        self._validate_send(
+            expr.send,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        )
+        return True
 
     @staticmethod
     def _validate_variable_read(
@@ -383,6 +635,35 @@ class ProgramValidator:
         @param parameter_names Formal block parameters visible in the current scope.
         @param special_immutable_names Special names that must never be assigned to.
         """
+        self._validate_send_receiver(
+            send,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        )
+        self._validate_send_arguments(
+            send,
+            visible_names,
+            parameter_names,
+            special_immutable_names,
+        )
+        self._validate_send_class_literal_rules(send)
+
+    def _validate_send_receiver(
+        self,
+        send: AstSend,
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> None:
+        """
+        @brief The receiver of one send expression is validated.
+
+        @param send A send expression whose receiver is to be inspected.
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        """
         self._validate_expr(
             send.receiver,
             visible_names,
@@ -390,6 +671,21 @@ class ProgramValidator:
             special_immutable_names,
         )
 
+    def _validate_send_arguments(
+        self,
+        send: AstSend,
+        visible_names: set[str],
+        parameter_names: set[str],
+        special_immutable_names: set[str],
+    ) -> None:
+        """
+        @brief All argument expressions of one send are validated.
+
+        @param send A send expression whose arguments are to be inspected.
+        @param visible_names Names that may currently be read.
+        @param parameter_names Formal block parameters visible in the current scope.
+        @param special_immutable_names Special names that must never be assigned to.
+        """
         for arg in send.args:
             self._validate_expr(
                 arg.expr,
@@ -398,6 +694,12 @@ class ProgramValidator:
                 special_immutable_names,
             )
 
+    def _validate_send_class_literal_rules(self, send: AstSend) -> None:
+        """
+        @brief Static class-literal receiver rules of one send are validated.
+
+        @param send A send expression to be inspected.
+        """
         receiver_literal = send.receiver.literal
         if receiver_literal is None:
             return
@@ -406,17 +708,6 @@ class ProgramValidator:
             return
 
         self._validate_class_literal_send(send)
-
-    def _build_class_index(self, program: Program) -> None:
-        """
-        @brief A user-defined class index is built for later validation steps.
-
-        @param program A loaded AST program whose classes are to be indexed.
-        """
-        self._class_index = {}
-
-        for class_def in program.classes:
-            self._class_index[class_def.name] = class_def
 
     def _validate_builtin_class_redefinition(self, class_def: AstClassDef) -> None:
         """
@@ -559,24 +850,6 @@ class ProgramValidator:
                 return False
 
             current_class_name = current_class_def.parent
-
-    @staticmethod
-    def _find_class_by_name(
-        program: Program,
-        class_name: str,
-    ) -> AstClassDef | None:
-        """
-        @brief A class is searched by name in the loaded program.
-
-        @param program A loaded AST program whose classes are to be searched.
-        @param class_name A class name to be looked up.
-        @return The matching class definition, or ``None`` when no match is found.
-        """
-        for class_def in program.classes:
-            if class_def.name == class_name:
-                return class_def
-
-        return None
 
     @staticmethod
     def _find_method_by_selector(

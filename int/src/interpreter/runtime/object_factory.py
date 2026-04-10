@@ -18,13 +18,10 @@ from ..model.invocation_context import InvocationContext
 from ..model.object_slots import ObjectSlots
 from ..model.scope_frame import ScopeFrame
 from ..model.user_object import UserObject
-from ..model.values import BooleanValue, IntegerValue, NilValue, RuntimeValue, StringValue
+from ..model.values import BooleanValue, IntegerValue, NilValue, StringValue
 
 if TYPE_CHECKING:
-    from ..input_model import Block as AstBlock
-    from ..model.invocation_context import InvocationContext
     from ..model.runtime_class import RuntimeClass
-    from ..model.scope_frame import ScopeFrame
     from ..runtime.builtin_registry import BuiltinRegistry
     from ..runtime.class_registry import ClassRegistry
 
@@ -55,8 +52,7 @@ class ObjectFactory:
         @param runtime_class Runtime class of the created user object.
         @return Newly created user object.
         """
-        initial_slots: dict[str, RuntimeValue] = {}
-        slot_storage = ObjectSlots(initial_slots)
+        slot_storage = self._new_slot_storage()
         return UserObject(runtime_class, slot_storage)
 
     def _new_slot_storage(self) -> ObjectSlots:

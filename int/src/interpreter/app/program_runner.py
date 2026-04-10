@@ -42,8 +42,8 @@ class ProgramRunner:
         self.program_validator = ProgramValidator()
         self.runtime_builder = RuntimeBuilder()
 
+    @staticmethod
     def _wire_user_methods(
-        self,
         runtime: Runtime,
         block_executor: BlockExecutor,
     ) -> None:
@@ -142,4 +142,4 @@ class ProgramRunner:
         self._wire_user_methods(runtime, block_executor)
 
         entry_receiver, entry_method = EntryPointResolver.resolve(runtime)
-        _ = method_executor.execute(entry_method, entry_receiver, [])
+        method_executor.execute(entry_method, entry_receiver, [])

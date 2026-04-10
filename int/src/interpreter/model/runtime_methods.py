@@ -113,10 +113,12 @@ class UserMethod(RuntimeMethod):
                 "User method block executor is not wired.",
             )
 
-        frame = ScopeFrame()
-        frame.bind_method_parameters(self.method_ast.block.parameters, args)
+        method_block = self.method_ast.block
 
-        return block_executor.execute(self.method_ast.block, frame, ctx)
+        frame = ScopeFrame()
+        frame.bind_method_parameters(method_block.parameters, args)
+
+        return block_executor.execute(method_block, frame, ctx)
 
     def arity(self) -> int:
         """
@@ -128,7 +130,7 @@ class UserMethod(RuntimeMethod):
 
     def wire_block_executor(self, block_executor: BlockExecutor) -> None:
         """
-        @brief A user-defined runtime method wire_block_executor is performed.
+        @brief A block executor is wired into this user-defined runtime method.
         @param block_executor A block executor.
         """
         self.block_executor = block_executor

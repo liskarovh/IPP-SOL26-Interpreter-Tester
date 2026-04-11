@@ -2,31 +2,24 @@
  * @file test_case_executor.ts
  * @brief Execution of one loaded test case is implemented.
  * @author Hana Liškařová xliskah00
- * DOXYGEN COMMENTS ARE AI GENERATED AND PROOF READ BY ME
  *
- * One already loaded test case is executed according to its resolved test case
- * type. Parse-only, execute-only, and combined execution flows are handled here.
+ * DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
  *
- * Source code is taken directly from the loaded test case, so the original
- * SOLtest file does not have to be parsed again. Temporary XML files are
- * created only when they are needed by the interpreter interface.
+ * One already loaded test case is executed here according to its resolved
+ * test case type.
  */
 
-import { rmSync, writeFileSync } from "fs";
-import { tmpdir } from "os";
-import { join } from "path";
+import { existsSync, readFileSync } from "fs";
 
-import { TestCaseType } from "../models.js";
 import { LoadedTestCase } from "../discovery/load_test_case_definitions.js";
+import { TestCaseType } from "../models.js";
 import { CommandResult } from "./process_runner.js";
-import { runCompiler, runInterpreter } from "./runner.js";
+import { runCompiler } from "./compiler_runner.js";
+import { runInterpreter } from "./interpreter_runner.js";
+import { removeTemporaryFile, writeTemporaryFile } from "../temporary_file.js";
 
 /**
  * @brief Input data needed to execute one loaded test case are described.
- *
- * Compiler and interpreter commands are provided explicitly together with their
- * base argument lists. Interpreter arguments are constructed by appending the
- * XML file path and then the optional input file path.
  */
 export interface TestCaseExecutorRequest {
   /** Loaded test case that is to be executed. */
@@ -43,10 +36,6 @@ export interface TestCaseExecutorRequest {
 
 /**
  * @brief Collected execution result of one test case is described.
- *
- * Parser result is present for parse-only and combined test cases.
- * Interpreter result is present for execute-only test cases and for combined
- * test cases whose parser stage finished successfully.
  */
 export interface TestCaseExecutionResult {
   /** Result of the parser/compiler stage, or null when no parser stage was executed. */
@@ -55,89 +44,108 @@ export interface TestCaseExecutionResult {
   interpreter_result: CommandResult | null;
 }
 
-let temporaryXmlFileCounter = 0;
-
 /**
- * @brief A temporary XML file path is created.
- *
- * A simple unique file name is built from the current process identifier,
- * current time, and a local counter.
- *
- * @returns Path to a temporary XML file.
- */
-function createTemporaryXmlFilePath(): string {
-  temporaryXmlFileCounter += 1;
-
-  const processIdText = String(process.pid);
-  const currentTimeText = String(Date.now());
-  const counterText = String(temporaryXmlFileCounter);
-
-  const fileName = `sol26-tester-${processIdText}-${currentTimeText}-${counterText}.xml`;
-
-  return join(tmpdir(), fileName);
-}
-
-/**
- * @brief A temporary XML file is created from XML text.
- *
- * The file is created in the operating system temporary directory and is
- * intended to exist only for the duration of one interpreter run.
- *
- * @param xmlSourceCode XML source code written to the temporary file.
- * @returns Path to the created temporary XML file.
- */
-function createTemporaryXmlFile(xmlSourceCode: string): string {
-  const xmlFilePath = createTemporaryXmlFilePath();
-
-  writeFileSync(xmlFilePath, xmlSourceCode, "utf8");
-
-  return xmlFilePath;
-}
-
-/**
- * @brief A temporary file is removed when it exists.
- *
- * Forced removal is used so that cleanup does not fail when the file was
- * already removed or was never created successfully.
- *
- * @param filePath Path to the temporary file.
- */
-function removeTemporaryFile(filePath: string): void {
-  rmSync(filePath, { force: true });
-}
-
-/**
- * @brief Interpreter arguments are built from base arguments and file paths.
- *
- * The XML file path is appended after the configured base interpreter
- * arguments. When an input file path is present, it is appended after the XML
- * file path.
+ * @brief Interpreter arguments are built from base arguments and XML file path.
  *
  * @param baseArgs Base interpreter arguments.
  * @param xmlFilePath Path to the XML source file.
- * @param inputFilePath Optional path to the input file.
  * @returns Final interpreter argument list.
  */
-function buildInterpreterArgs(
-  baseArgs: string[],
-  xmlFilePath: string,
-  inputFilePath: string | null
-): string[] {
-  const finalArgs = [...baseArgs, "-s", xmlFilePath];
+function buildInterpreterArgs(baseArgs: string[], xmlFilePath: string): string[] {
+  return [...baseArgs, "-s", xmlFilePath];
+}
 
-  if (inputFilePath !== null) {
-    finalArgs.push("-i");
-    finalArgs.push(inputFilePath);
+/**
+ * @brief Program input for the interpreter is loaded from the optional stdin file.
+ *
+ * If the loaded test case definition does not reference any stdin file,
+ * null is returned. Otherwise, file content is loaded as UTF-8 text.
+ *
+ * @param request Input data needed to execute one loaded test case.
+ * @returns Program input text, or null when no stdin file is defined.
+ */
+function loadInterpreterInput(request: TestCaseExecutorRequest): string | null {
+  const inputFilePath = request.loaded_test_case.definition.stdin_file;
+
+  //no interpreter input
+  if (inputFilePath === null) {
+    return null;
   }
 
-  return finalArgs;
+  return readFileSync(inputFilePath, "utf8");
+}
+
+/**
+ * @brief One compiler step is executed.
+ *
+ * @param request Input data needed to execute one loaded test case.
+ * @returns Promise resolving to the compiler command result.
+ */
+function runCompilerStep(request: TestCaseExecutorRequest): Promise<CommandResult> {
+  validateCompilerScriptAvailability(request);
+
+  return runCompiler({
+    command: request.compiler_command,
+    args: request.compiler_args,
+    source_code: request.loaded_test_case.source_code,
+  });
+}
+
+/**
+ * @brief One interpreter step is executed over an XML file.
+ *
+ * @param request Input data needed to execute one loaded test case.
+ * @param xmlFilePath Path to the XML file passed to the interpreter.
+ * @returns Promise resolving to the interpreter command result.
+ */
+function runInterpreterStep(
+  request: TestCaseExecutorRequest,
+  xmlFilePath: string
+): Promise<CommandResult> {
+  return runInterpreter({
+    command: request.interpreter_command,
+    args: buildInterpreterArgs(request.interpreter_args, xmlFilePath),
+    input: loadInterpreterInput(request),
+  });
+}
+
+/**
+ * @brief Interpreter execution over temporary XML source is performed.
+ *
+ * XML text is written to a temporary file, the interpreter is run over that
+ * file, and the file is removed afterwards.
+ *
+ * @param request Input data needed to execute one loaded test case.
+ * @param xmlSourceCode XML source code written to the temporary file.
+ * @param parserResult Parser result associated with this execution, or null.
+ * @returns Promise resolving to the collected test case execution result.
+ */
+async function executeInterpreterFromXmlSource(
+  request: TestCaseExecutorRequest,
+  xmlSourceCode: string,
+  parserResult: CommandResult | null
+): Promise<TestCaseExecutionResult> {
+  const xmlFilePath = writeTemporaryFile({
+    file_name_prefix: "sol26-tester",
+    file_extension: "xml",
+    content: xmlSourceCode,
+  });
+
+  try {
+    const interpreterResult = await runInterpreterStep(request, xmlFilePath);
+
+    return {
+      parser_result: parserResult,
+      interpreter_result: interpreterResult,
+    };
+    //remove temp file
+  } finally {
+    removeTemporaryFile(xmlFilePath);
+  }
 }
 
 /**
  * @brief One parse-only test case is executed.
- *
- * Only the compiler stage is run here. No interpreter stage is executed for
- * parse-only test cases.
  *
  * @param request Input data needed to execute one loaded test case.
  * @returns Promise resolving to the collected test case execution result.
@@ -145,11 +153,7 @@ function buildInterpreterArgs(
 async function executeParseOnlyTestCase(
   request: TestCaseExecutorRequest
 ): Promise<TestCaseExecutionResult> {
-  const parserResult = await runCompiler({
-    command: request.compiler_command,
-    args: request.compiler_args,
-    source_code: request.loaded_test_case.source_code,
-  });
+  const parserResult = await runCompilerStep(request);
 
   return {
     parser_result: parserResult,
@@ -160,42 +164,17 @@ async function executeParseOnlyTestCase(
 /**
  * @brief One execute-only test case is executed.
  *
- * XML source code is written to a temporary file and the interpreter is then
- * started over that file. The temporary file is removed afterwards.
- *
  * @param request Input data needed to execute one loaded test case.
  * @returns Promise resolving to the collected test case execution result.
  */
-async function executeExecuteOnlyTestCase(
+function executeExecuteOnlyTestCase(
   request: TestCaseExecutorRequest
 ): Promise<TestCaseExecutionResult> {
-  const xmlFilePath = createTemporaryXmlFile(request.loaded_test_case.source_code);
-
-  try {
-    const interpreterResult = await runInterpreter({
-      command: request.interpreter_command,
-      args: buildInterpreterArgs(
-        request.interpreter_args,
-        xmlFilePath,
-        request.loaded_test_case.definition.stdin_file
-      ),
-    });
-
-    return {
-      parser_result: null,
-      interpreter_result: interpreterResult,
-    };
-  } finally {
-    removeTemporaryFile(xmlFilePath);
-  }
+  return executeInterpreterFromXmlSource(request, request.loaded_test_case.source_code, null);
 }
 
 /**
  * @brief One combined test case is executed.
- *
- * The compiler is run first. When the compiler does not finish with exit code
- * zero, the interpreter is not started. Otherwise, the produced XML output is
- * written to a temporary file and the interpreter is run over that file.
  *
  * @param request Input data needed to execute one loaded test case.
  * @returns Promise resolving to the collected test case execution result.
@@ -203,12 +182,9 @@ async function executeExecuteOnlyTestCase(
 async function executeCombinedTestCase(
   request: TestCaseExecutorRequest
 ): Promise<TestCaseExecutionResult> {
-  const parserResult = await runCompiler({
-    command: request.compiler_command,
-    args: request.compiler_args,
-    source_code: request.loaded_test_case.source_code,
-  });
+  const parserResult = await runCompilerStep(request);
 
+  //parser failed, no interpreter execution
   if (parserResult.exit_code !== 0) {
     return {
       parser_result: parserResult,
@@ -216,32 +192,11 @@ async function executeCombinedTestCase(
     };
   }
 
-  const xmlFilePath = createTemporaryXmlFile(parserResult.stdout);
-
-  try {
-    const interpreterResult = await runInterpreter({
-      command: request.interpreter_command,
-      args: buildInterpreterArgs(
-        request.interpreter_args,
-        xmlFilePath,
-        request.loaded_test_case.definition.stdin_file
-      ),
-    });
-
-    return {
-      parser_result: parserResult,
-      interpreter_result: interpreterResult,
-    };
-  } finally {
-    removeTemporaryFile(xmlFilePath);
-  }
+  return executeInterpreterFromXmlSource(request, parserResult.stdout, parserResult);
 }
 
 /**
  * @brief One loaded test case is executed according to its test case type.
- *
- * The execution flow is selected from the resolved test case type stored in
- * the final test case definition.
  *
  * @param request Input data needed to execute one loaded test case.
  * @returns Promise resolving to the collected test case execution result.
@@ -260,4 +215,27 @@ export async function executeTestCase(
   }
 
   return executeCombinedTestCase(request);
+}
+
+/**
+ * @brief Availability of the configured compiler script is validated.
+ *
+ * The first compiler argument is treated as the compiler script path.
+ * If that file does not exist, execution of the current test case fails
+ * immediately.
+ *
+ * @param request Input data needed to execute one loaded test case.
+ * @throws Error If the configured compiler script does not exist.
+ */
+function validateCompilerScriptAvailability(request: TestCaseExecutorRequest): void {
+  const compilerScriptPath = request.compiler_args[0];
+
+  if (compilerScriptPath === undefined) {
+    return;
+  }
+
+  //missing compiler script - execution failure
+  if (!existsSync(compilerScriptPath)) {
+    throw new Error(`ENOENT: compiler script was not found: ${compilerScriptPath}`);
+  }
 }

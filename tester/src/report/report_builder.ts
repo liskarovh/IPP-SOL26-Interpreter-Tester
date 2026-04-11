@@ -1,14 +1,12 @@
 /**
  * @file report_builder.ts
- * @brief Construction of the final execution report is implemented.
+ * @brief Construction of final tester reports is implemented.
  * @author Hana Liškařová xliskah00
- * DOXYGEN COMMENTS ARE AI GENERATED AND PROOF READ BY ME
  *
- * Already resolved executed test cases are grouped by category and converted
- * into the final report structures defined by the provided project template.
+ * DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
  *
- * Only final report construction is implemented here. Test loading, filtering,
- * execution, and result resolution are intentionally left to earlier layers.
+ * Final report construction is centralized in this module.
+ * Both the normal execution report and the dry-run report are built here.
  */
 
 import {
@@ -27,8 +25,7 @@ import { matchesConfiguredFilters, TestCaseFilterOptions } from "../discovery/fi
 /**
  * @brief One resolved executed test case is described.
  *
- * The final test case definition is paired with its already resolved
- * individual test case report.
+ * Final test case definition is paired with its resolved test case report.
  */
 export interface ResolvedTestCase {
   /** Final test case definition. */
@@ -38,7 +35,7 @@ export interface ResolvedTestCase {
 }
 
 /**
- * @brief Input data needed to build the final report are described.
+ * @brief Input data needed to build the final execution report are described.
  */
 export interface ReportBuilderRequest {
   /** All successfully discovered test case definitions. */
@@ -52,10 +49,10 @@ export interface ReportBuilderRequest {
 /**
  * @brief Mutable category data are described.
  *
- * Category totals are first collected into this internal structure and are
- * converted into the final CategoryReport model afterwards.
+ * Category totals are collected into this internal structure first
+ * and converted into the final CategoryReport model afterwards.
  */
-interface CategoryBucket {
+interface Category {
   /** Sum of points for all executed test cases in the category. */
   total_points: number;
   /** Sum of points for all passed test cases in the category. */
@@ -65,11 +62,23 @@ interface CategoryBucket {
 }
 
 /**
+ * @brief One named category entry is described.
+ *
+ * Category data are stored together with category name.
+ */
+interface NamedCategory {
+  /** Category name. */
+  name: string;
+  /** Mutable category data. */
+  category: Category;
+}
+
+/**
  * @brief Empty mutable category data are created.
  *
  * @returns Empty mutable category data.
  */
-function createEmptyCategoryBucket(): CategoryBucket {
+function createEmptyCategory(): Category {
   return {
     total_points: 0,
     passed_points: 0,
@@ -78,12 +87,29 @@ function createEmptyCategoryBucket(): CategoryBucket {
 }
 
 /**
+ * @brief Existing category data are found by category name.
+ *
+ * @param categories Existing named categories.
+ * @param categoryName Name of the searched category.
+ * @returns Found category data, or undefined if no such category exists.
+ */
+function findCategory(categories: NamedCategory[], categoryName: string): Category | undefined {
+  for (const namedCategory of categories) {
+    if (namedCategory.name === categoryName) {
+      return namedCategory.category;
+    }
+  }
+
+  return undefined;
+}
+
+/**
  * @brief One load failure is converted into an unexecuted reason.
  *
- * Parsing failures are treated as malformed test case files. Type-resolution
- * failures are mapped to the dedicated cannot-determine-type code when the
- * error message clearly indicates that situation. All remaining loading
- * failures are mapped to the generic other reason code.
+ * Parse failures are treated as malformed test case files.
+ * Type-resolution failures are mapped to the dedicated cannot-determine-type
+ * code when the error message clearly indicates that situation.
+ * All remaining loading failures use the generic other reason code.
  *
  * @param loadFailure Failed test case load information.
  * @returns Unexecuted reason corresponding to the failure.
@@ -91,6 +117,7 @@ function createEmptyCategoryBucket(): CategoryBucket {
 function createUnexecutedReasonFromLoadFailure(
   loadFailure: TestCaseLoadFailure
 ): UnexecutedReason {
+  //malformed test file
   if (loadFailure.stage === "parse") {
     return new UnexecutedReason(
       UnexecutedReasonCode.MALFORMED_TEST_CASE_FILE,
@@ -111,9 +138,9 @@ function createUnexecutedReasonFromLoadFailure(
 /**
  * @brief Unexecuted test cases are built from loading failures and filters.
  *
- * Failed test case loads are first converted into unexecuted reasons. Afterwards,
- * loaded test cases are checked against configured filters and filtered-out
- * test cases are added to the same mapping.
+ * Failed test case loads are converted into unexecuted reasons first.
+ * Afterwards, loaded test cases are checked against configured filters and
+ * filtered-out test cases are added to the same mapping.
  *
  * @param loadedTestCases Loaded test cases and loading failures.
  * @param filterOptions Configured test case filter options.
@@ -130,13 +157,14 @@ export function buildUnexecuted(
   }
 
   for (const loadedTestCase of loadedTestCases.loaded_test_cases) {
+    //skip tests that stay selected
     if (matchesConfiguredFilters(loadedTestCase.definition, filterOptions)) {
       continue;
     }
 
     unexecuted[loadedTestCase.definition.name] = new UnexecutedReason(
       UnexecutedReasonCode.FILTERED_OUT,
-      "The test case was excluded by the configured include/exclude filters."
+      "Test case was excluded by include/exclude filters."
     );
   }
 
@@ -144,33 +172,33 @@ export function buildUnexecuted(
 }
 
 /**
- * @brief One resolved test case is added into a category bucket.
+ * @brief One resolved test case is added into a category.
  *
- * Category totals are updated and the individual test case report is stored
+ * Category totals are updated and individual test case report is stored
  * under the test case name.
  *
- * @param bucket Mutable category bucket.
+ * @param category Mutable category data.
  * @param resolvedTestCase One resolved executed test case.
  */
-function addResolvedTestCaseToBucket(
-  bucket: CategoryBucket,
+function addResolvedTestCaseToCategory(
+  category: Category,
   resolvedTestCase: ResolvedTestCase
 ): void {
   const testCasePoints = resolvedTestCase.definition.points;
 
-  bucket.total_points += testCasePoints;
-  bucket.test_results[resolvedTestCase.definition.name] = resolvedTestCase.report;
+  category.total_points += testCasePoints;
+  category.test_results[resolvedTestCase.definition.name] = resolvedTestCase.report;
 
   if (resolvedTestCase.report.result === TestResult.PASSED) {
-    bucket.passed_points += testCasePoints;
+    category.passed_points += testCasePoints;
   }
 }
 
 /**
  * @brief Final category reports are built from resolved test cases.
  *
- * Resolved test cases are grouped by category and converted into the
- * final CategoryReport model defined by the template.
+ * Resolved test cases are grouped by category and converted into
+ * the final CategoryReport model.
  *
  * @param resolvedTestCases Already resolved executed test cases.
  * @returns Final mapping from category names to category reports.
@@ -178,25 +206,30 @@ function addResolvedTestCaseToBucket(
 function buildCategoryReports(
   resolvedTestCases: ResolvedTestCase[]
 ): Record<string, CategoryReport> {
-  const categoryBuckets: Record<string, CategoryBucket> = {};
+  const categories: NamedCategory[] = [];
 
   for (const resolvedTestCase of resolvedTestCases) {
     const categoryName = resolvedTestCase.definition.category;
+    let category = findCategory(categories, categoryName);
 
-    if (categoryBuckets[categoryName] === undefined) {
-      categoryBuckets[categoryName] = createEmptyCategoryBucket();
+    if (category === undefined) {
+      category = createEmptyCategory();
+      categories.push({
+        name: categoryName,
+        category,
+      });
     }
 
-    addResolvedTestCaseToBucket(categoryBuckets[categoryName], resolvedTestCase);
+    addResolvedTestCaseToCategory(category, resolvedTestCase);
   }
 
   const categoryReports: Record<string, CategoryReport> = {};
 
-  for (const [categoryName, bucket] of Object.entries(categoryBuckets)) {
-    categoryReports[categoryName] = new CategoryReport(
-      bucket.total_points,
-      bucket.passed_points,
-      bucket.test_results
+  for (const namedCategory of categories) {
+    categoryReports[namedCategory.name] = new CategoryReport(
+      namedCategory.category.total_points,
+      namedCategory.category.passed_points,
+      namedCategory.category.test_results
     );
   }
 
@@ -204,16 +237,61 @@ function buildCategoryReports(
 }
 
 /**
- * @brief The final execution report is built.
+ * @brief Discovered test case definitions are extracted from loaded test cases.
  *
- * Already resolved executed test cases are grouped into category reports and
- * are combined with discovered test cases and unexecuted test cases into the
- * final TestReport model.
+ * Only successfully loaded test case definitions are included
+ * in the final discovered test case list.
+ *
+ * @param loadedTestCases Loaded test cases and loading failures.
+ * @returns Successfully discovered test case definitions.
+ */
+function getDiscoveredTestCaseDefinitions(loadedTestCases: LoadedTestCases): TestCaseDefinition[] {
+  const discoveredTestCases: TestCaseDefinition[] = [];
+
+  //keep only successfully loaded definitions
+  for (const loadedTestCase of loadedTestCases.loaded_test_cases) {
+    discoveredTestCases.push(loadedTestCase.definition);
+  }
+
+  return discoveredTestCases;
+}
+
+/**
+ * @brief Final dry-run report is built.
+ *
+ * Successfully loaded test case definitions are included in the discovered
+ * test case list. Unexecuted reasons are created for failed loads and for
+ * filtered-out test cases.
+ *
+ * @param loadedTestCases Loaded test cases and loading failures.
+ * @param filterOptions Configured test case filter options.
+ * @returns Final dry-run test report.
+ */
+export function buildDryRunReport(
+  loadedTestCases: LoadedTestCases,
+  filterOptions: TestCaseFilterOptions
+): TestReport {
+  const unexecuted = buildUnexecuted(loadedTestCases, filterOptions);
+
+  return new TestReport({
+    discovered_test_cases: getDiscoveredTestCaseDefinitions(loadedTestCases),
+    unexecuted,
+    results: null,
+  });
+}
+
+/**
+ * @brief Final execution report is built.
+ *
+ * Already resolved executed test cases are grouped into category reports
+ * and combined with discovered and unexecuted test cases into
+ * the final TestReport model.
  *
  * @param request Input data needed to build the final report.
  * @returns Final execution report.
  */
 export function buildReport(request: ReportBuilderRequest): TestReport {
+  //group resolved tests before final report assembly
   const categoryReports = buildCategoryReports(request.resolved_test_cases);
 
   return new TestReport({

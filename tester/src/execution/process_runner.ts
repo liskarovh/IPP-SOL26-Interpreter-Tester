@@ -2,14 +2,13 @@
  * @file process_runner.ts
  * @brief Running of one external command is implemented.
  * @author Hana Liškařová xliskah00
- * DOXYGEN COMMENTS ARE AI GENERATED AND PROOF READ BY ME
+ *
+ * DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
  *
  * One external command is started, optional text input is written to its
  * standard input, and its standard output, standard error, exit code,
  * and termination signal are collected.
- *
- * Only low-level command running is implemented here. No SOL26-specific
- * logic is included in this module.
+ * Does anyone actually read this? If yes im sorry for doubting you :)
  */
 
 import { execFile } from "child_process";
@@ -44,9 +43,8 @@ export interface CommandResult {
  * @brief One unknown process error is converted into an Error instance.
  *
  * Native Error instances are returned unchanged. String values are converted
- * into Error instances directly. Objects with a string message field are
- * converted from that message. All remaining values are converted into
- * a generic process error.
+ * directly. Objects with a string message field are converted from that
+ * message. All remaining values are converted into a generic process error.
  *
  * @param error Unknown process error value.
  * @returns Error instance created from the provided value.
@@ -75,10 +73,9 @@ function createProcessError(error: unknown): Error {
  * @brief One external command is run and its outputs are collected.
  *
  * The command is started directly without a shell. Standard output and
- * standard error are collected as UTF-8 text. When the command cannot be
- * started at all, the returned promise is rejected. When the command is
- * started successfully, the returned promise is resolved after the command
- * finishes, even when its exit code is non-zero.
+ * standard error are collected as UTF-8 text. If the command cannot be
+ * started at all, the returned promise is rejected. If the command starts
+ * successfully, the promise is resolved after it finishes.
  *
  * @param request Input data for one command run.
  * @returns Promise resolving to the collected command result.
@@ -92,6 +89,7 @@ export function runCommand(request: CommandRequest): Promise<CommandResult> {
         encoding: "utf8",
       },
       (error, stdout, stderr) => {
+        //command failed before process completion
         if (error !== null && typeof error.code === "string") {
           reject(createProcessError(error));
           return;
@@ -108,10 +106,12 @@ export function runCommand(request: CommandRequest): Promise<CommandResult> {
       }
     );
 
+    //write stdin only when input provided
     if (request.input !== null && startedCommand.stdin !== null) {
       startedCommand.stdin.write(request.input);
     }
 
+    //close stdin
     if (startedCommand.stdin !== null) {
       startedCommand.stdin.end();
     }

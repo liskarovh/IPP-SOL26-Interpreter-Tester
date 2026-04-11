@@ -1,15 +1,12 @@
 /**
  * @file test_case_file_discovery.ts
  * @brief Discovery of test case files in the SOLtest directory structure is implemented.
- * @author  Hana Liškařová xliskah00
- * DOXYGEN COMMENTS ARE AI GENERATED AND PROOF READ BY ME
+ * @author Hana Liškařová xliskah00
  *
- * Test case source files with the ".test" extension are searched for in the provided
- * directory. Matching sibling ".in" and ".out" files are also looked up. Recursive
- * traversal is supported when it is requested.
+ * DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
  *
- * The result is returned as an array of TestCaseDefinitionFile instances defined by
- * the provided project template.
+ * Test case source files with the ".test" extension are searched for here.
+ * Matching sibling ".in" and ".out" files are resolved as well.
  */
 
 import { Dirent, existsSync, readdirSync } from "node:fs";
@@ -20,10 +17,7 @@ import { TestCaseDefinitionFile } from "../models.js";
 /**
  * @brief Directory entries are loaded and sorted by name.
  *
- * A deterministic processing order is ensured by sorting the loaded entries.
- * This makes debugging and later testing easier.
- *
- * @param directoryPath Path to the directory whose entries are to be read.
+ * @param directoryPath Path to the directory whose entries are read.
  * @returns Sorted directory entries.
  */
 function getSortedDirectoryEntries(directoryPath: string): Dirent[] {
@@ -36,12 +30,12 @@ function getSortedDirectoryEntries(directoryPath: string): Dirent[] {
  * @brief A sibling input or output file path is returned when the file exists.
  *
  * A path with the requested extension is constructed next to the test case file.
- * When the file is not present, null is returned instead.
+ * If the file does not exist, null is returned.
  *
  * @param directoryPath Path to the directory where the sibling file is expected.
  * @param testCaseName Test case name without the ".test" extension.
  * @param extension Expected sibling file extension.
- * @returns Path to the sibling file, or null when the file does not exist.
+ * @returns Path to the sibling file, or null if the file does not exist.
  */
 function getSiblingFilePathIfExists(
   directoryPath: string,
@@ -50,6 +44,7 @@ function getSiblingFilePathIfExists(
 ): string | null {
   const siblingFilePath = join(directoryPath, `${testCaseName}${extension}`);
 
+  //missing sibling file
   if (!existsSync(siblingFilePath)) {
     return null;
   }
@@ -60,8 +55,8 @@ function getSiblingFilePathIfExists(
 /**
  * @brief A discovered test case file model is created from one ".test" file.
  *
- * The base test case name is derived from the file name. Paths to matching
- * ".in" and ".out" files are also resolved when such files are present.
+ * The base test case name is derived from the file name.
+ * Matching ".in" and ".out" files are resolved when present.
  *
  * @param directoryPath Path to the directory containing the test file.
  * @param testFileName Name of the ".test" file.
@@ -85,13 +80,13 @@ function createDiscoveredTestCaseFile(
 }
 
 /**
- * @brief Test case files are discovered in one directory and optionally in its subdirectories.
+ * @brief Test case files are discovered in one directory and optionally in subdirectories.
  *
- * First, all ".test" files in the current directory are collected. When recursive
- * traversal is enabled, subdirectories are then processed in the same way.
+ * All ".test" files in the current directory are collected first.
+ * If recursive traversal is enabled, subdirectories are processed afterwards.
  *
- * @param directoryPath Path to the directory that is to be searched.
- * @param recursive Flag indicating whether subdirectories are also to be searched.
+ * @param directoryPath Path to the directory being searched.
+ * @param recursive Indicates whether subdirectories are also searched.
  * @returns Discovered test case file models from the processed directory tree.
  */
 function discoverTestCaseFilesInDirectory(
@@ -106,6 +101,7 @@ function discoverTestCaseFilesInDirectory(
       continue;
     }
 
+    //only .test files for test cases
     if (!entry.name.endsWith(".test")) {
       continue;
     }
@@ -114,6 +110,7 @@ function discoverTestCaseFilesInDirectory(
     discoveredFiles.push(discoveredFile);
   }
 
+  //stop if recursive traversal is not enabled
   if (!recursive) {
     return discoveredFiles;
   }
@@ -137,11 +134,11 @@ function discoverTestCaseFilesInDirectory(
 /**
  * @brief Test case files are discovered in the provided test directory.
  *
- * Discovery is delegated to the internal directory traversal function. The final
- * result is sorted by full test source path so that a stable output order is produced.
+ * Discovery is delegated to the internal directory traversal helper.
+ * The final result is sorted by full test source path.
  *
  * @param testsDir Path to the root directory with test cases.
- * @param recursive Flag indicating whether subdirectories are also to be searched.
+ * @param recursive Indicates whether subdirectories are also searched.
  * @returns Discovered test case file models.
  */
 export function discoverTestCaseFiles(

@@ -1,13 +1,12 @@
 """
 @file builtin_implementation.py
-@brief Built-in method implementation strategies are defined.
+@brief Built-in method implementation strategies are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
 Built-in method behavior is represented here through a small strategy layer.
-Callback-backed adapters are provided separately for instance-side and
-class-side built-in implementations.
+Separate adapters are provided for instance-side and class-side callbacks.
 """
 
 from __future__ import annotations
@@ -40,27 +39,27 @@ class BuiltinImplementation(ABC):
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One built-in method implementation is invoked.
+        @brief Built-in behavior is invoked.
 
-        @param receiver A method receiver.
+        @param receiver Method receiver.
         @param args Runtime call arguments.
-        @param ctx An invocation context.
-        @return A produced runtime value.
+        @param ctx Invocation context.
+        @return Produced runtime value.
         """
 
 
 class InstanceCallbackBuiltinImplementation(BuiltinImplementation):
     """
-    @brief One instance-side callback-backed built-in implementation is represented.
+    @brief One instance-side callback adapter is represented.
     """
 
     callback: InstanceBuiltinCallback
 
     def __init__(self, callback: InstanceBuiltinCallback) -> None:
         """
-        @brief One instance-side callback-backed built-in implementation is initialized.
+        @brief One instance-side callback adapter is initialized.
 
-        @param callback A callback implementing instance-side built-in behavior.
+        @param callback Callback implementing instance-side built-in behavior.
         """
         self.callback = callback
 
@@ -71,12 +70,12 @@ class InstanceCallbackBuiltinImplementation(BuiltinImplementation):
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One instance-side callback-backed built-in implementation is invoked.
+        @brief One instance-side callback adapter is invoked.
 
-        @param receiver A method receiver.
+        @param receiver Method receiver.
         @param args Runtime call arguments.
-        @param ctx An invocation context.
-        @return A produced runtime value.
+        @param ctx Invocation context.
+        @return Produced runtime value.
         """
         from ..model.runtime_class import RuntimeClass  # Avoid circular import
 
@@ -88,16 +87,16 @@ class InstanceCallbackBuiltinImplementation(BuiltinImplementation):
 
 class ClassCallbackBuiltinImplementation(BuiltinImplementation):
     """
-    @brief One class-side callback-backed built-in implementation is represented.
+    @brief One class-side callback adapter is represented.
     """
 
     callback: ClassBuiltinCallback
 
     def __init__(self, callback: ClassBuiltinCallback) -> None:
         """
-        @brief One class-side callback-backed built-in implementation is initialized.
+        @brief One class-side callback adapter is initialized.
 
-        @param callback A callback implementing class-side built-in behavior.
+        @param callback Callback implementing class-side built-in behavior.
         """
         self.callback = callback
 
@@ -108,12 +107,12 @@ class ClassCallbackBuiltinImplementation(BuiltinImplementation):
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One class-side callback-backed built-in implementation is invoked.
+        @brief One class-side callback adapter is invoked.
 
-        @param receiver A method receiver.
+        @param receiver Method receiver.
         @param args Runtime call arguments.
-        @param ctx An invocation context.
-        @return A produced runtime value.
+        @param ctx Invocation context.
+        @return Produced runtime value.
         """
         from ..model.runtime_class import RuntimeClass  # Avoid circular import
 

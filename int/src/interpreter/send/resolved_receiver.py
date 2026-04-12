@@ -1,12 +1,12 @@
 """
 @file resolved_receiver.py
-@brief Resolved send-receiver data is defined.
+@brief Resolved send-receiver data is represented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-A resolved receiver is intended to carry the effective method receiver
-together with the lookup mode chosen for one send operation.
+A resolved receiver carries the effective method receiver together with
+the lookup mode and receiver origin selected for one send operation.
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from ..support.typing_helpers import MethodReceiver
 
 class ResolvedReceiver:
     """
-    @brief One resolved send receiver is represented by this class.
+    @brief One resolved send receiver is represented.
     """
 
     receiver: MethodReceiver
@@ -33,9 +33,9 @@ class ResolvedReceiver:
         """
         @brief One resolved send receiver is initialized.
 
-        @param receiver An effective method receiver for the send.
-        @param lookup_mode A lookup mode selected for the send.
-        @param origin A syntactic receiver origin selected for the send.
+        @param receiver Effective method receiver for the send.
+        @param lookup_mode Lookup mode selected for the send.
+        @param origin Syntactic receiver origin selected for the send.
         """
         self.receiver = receiver
         self.lookup_mode = lookup_mode

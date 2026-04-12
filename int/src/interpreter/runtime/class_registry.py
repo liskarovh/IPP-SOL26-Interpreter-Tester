@@ -1,12 +1,12 @@
 """
 @file class_registry.py
-@brief Runtime class registry is defined.
+@brief Runtime class registry is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Runtime classes are stored by name in this registry. Controlled lookup is
-intended to be centralized here.
+Runtime classes are stored by name here.
+Controlled lookup is centralized in this registry.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ from ..model.runtime_class import RuntimeClass
 
 class ClassRegistry:
     """
-    @brief Runtime classes are stored in this registry.
+    @brief Runtime classes are stored by name in this registry.
     """
 
     def __init__(self) -> None:
@@ -31,7 +31,7 @@ class ClassRegistry:
         """
         @brief A runtime class is registered.
 
-        @param runtime_class A runtime class to be stored.
+        @param runtime_class Runtime class to store.
         """
         name = runtime_class.name
         if self.contains(name):
@@ -45,8 +45,8 @@ class ClassRegistry:
         """
         @brief A runtime class is looked up by name.
 
-        @param name A runtime class name.
-        @return A runtime class, or None when no class is found.
+        @param name Runtime class name.
+        @return Matching runtime class, or None when it is not present.
         """
 
         return self.classes.get(name)
@@ -55,8 +55,8 @@ class ClassRegistry:
         """
         @brief A runtime class is required by name.
 
-        @param name A runtime class name.
-        @return A runtime class that must exist.
+        @param name Runtime class name.
+        @return Matching runtime class that must exist.
         """
 
         found = self.get(name)
@@ -68,7 +68,7 @@ class ClassRegistry:
         """
         @brief Presence of a runtime class is checked.
 
-        @param name A runtime class name.
+        @param name Runtime class name.
         @return True when the class exists, otherwise False.
         """
         return name in self.classes

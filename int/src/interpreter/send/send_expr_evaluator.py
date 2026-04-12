@@ -1,14 +1,13 @@
 """
 @file send_expr_evaluator.py
-@brief Send expression evaluation is coordinated here.
+@brief Send expression evaluation is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Send expression semantics are intended to be handled here separately from
-ordinary expression evaluation. Shared send dependencies are stored in the
-abstract base class, while instance-side and class-side send behavior is
-intended to be split into dedicated subclasses.
+Send expression semantics are handled here separately from ordinary expression evaluation.
+Block activation, attribute dispatch, and method dispatch are split between shared helpers
+and dedicated instance-side and class-side evaluators.
 """
 
 from __future__ import annotations
@@ -41,8 +40,17 @@ BLOCK_VALUE_SELECTOR_REGEX = re.compile(r"^(?:value|(?:value:)+)$")
 def _if_receiver_block_check_arity(
     target: ResolvedReceiver, selector: str, args: list[RuntimeValue]
 ) -> BlockClosure | None:
+    """
+    @brief A block receiver is detected and its value-selector arity is checked.
+
+    @param target Resolved receiver of the current send.
+    @param selector Selector used by the send.
+    @param args Evaluated send arguments.
+    @return Block receiver when block-call dispatch applies, otherwise None.
+    """
     receiver = target.receiver
     if isinstance(receiver, BlockClosure):
+        # only value/value:/value:value:... can activate a block receiver
         if not BLOCK_VALUE_SELECTOR_REGEX.fullmatch(selector):
             return None
 
@@ -110,7 +118,7 @@ def _attribute_name_from_selector(selector: str) -> str:
 
 class SendExprEvaluator(ABC):
     """
-    @brief A shared base class for send expression evaluation is represented.
+    @brief Shared base for send expression evaluators is implemented.
     """
 
     attribute_resolver: AttributeDispatchResolver
@@ -126,9 +134,9 @@ class SendExprEvaluator(ABC):
         """
         @brief Shared send-evaluation dependencies are stored.
 
-        @param attribute_resolver A resolver used for attribute-dispatch decisions.
-        @param method_executor A method executor used for method activation.
-        @param attribute_accessor An accessor used for low-level attribute slot access.
+        @param attribute_resolver Resolver used for attribute-dispatch decisions.
+        @param method_executor Method executor used for method activation.
+        @param attribute_accessor Accessor used for low-level attribute slot access.
         """
         self.attribute_resolver = attribute_resolver
         self.method_executor = method_executor
@@ -143,13 +151,13 @@ class SendExprEvaluator(ABC):
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One resolved send is dispatched.
+        @brief A resolved send is dispatched.
 
-        @param target A resolved receiver carrying effective receiver and lookup mode.
-        @param selector A selector to be dispatched.
+        @param target Resolved receiver carrying effective receiver and lookup mode.
+        @param selector Selector to dispatch.
         @param args Evaluated send arguments.
-        @param ctx An invocation context carrying self/super information.
-        @return A runtime value produced by the dispatched send.
+        @param ctx Invocation context carrying self/super information.
+        @return Runtime value produced by the dispatched send.
         """
 
     def _execute_resolved_method(
@@ -159,28 +167,28 @@ class SendExprEvaluator(ABC):
         args: list[RuntimeValue],
     ) -> RuntimeValue:
         """
-        @brief One resolved method is executed with the given receiver and arguments.
+        @brief A resolved method is executed with the given receiver and arguments.
 
-        @param method A resolved runtime method to be executed.
-        @param receiver A method receiver.
+        @param method Resolved runtime method to execute.
+        @param receiver Method receiver.
         @param args Runtime call arguments.
-        @return A runtime value produced by the executed method.
+        @return Runtime value produced by the executed method.
         """
         return self._require_method_executor().execute(method, receiver, args)
 
     def wire_method_executor(self, method_executor: MethodExecutor) -> None:
         """
-        @brief One method executor dependency is wired after construction.
+        @brief A method executor dependency is wired after construction.
 
-        @param method_executor A method executor to be stored for later dispatch use.
+        @param method_executor Method executor stored for later dispatch use.
         """
         self.method_executor = method_executor
 
     def _require_method_executor(self) -> MethodExecutor:
         """
-        @brief One wired method executor is required.
+        @brief A wired method executor is required.
 
-        @return A previously wired method executor.
+        @return Previously wired method executor.
         """
         if self.method_executor is None:
             raise InterpreterError(
@@ -203,13 +211,13 @@ class InstanceSendExprEvaluator(SendExprEvaluator):
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One resolved instance-side send is dispatched.
+        @brief A resolved instance-side send is dispatched.
 
-        @param target A resolved receiver carrying effective receiver and lookup mode.
-        @param selector A selector to be dispatched.
+        @param target Resolved receiver carrying effective receiver and lookup mode.
+        @param selector Selector to dispatch.
         @param args Evaluated send arguments.
-        @param ctx An invocation context carrying self/super information.
-        @return A runtime value produced by the dispatched send.
+        @param ctx Invocation context carrying self/super information.
+        @return Runtime value produced by the dispatched send.
         """
 
         receiver = target.receiver
@@ -219,12 +227,13 @@ class InstanceSendExprEvaluator(SendExprEvaluator):
             ctx,
         )
 
+        # block receivers handle value/value:/... before attribute or method dispatch
         block = _if_receiver_block_check_arity(target, selector, args)
-        # has to be with _require helper because of circular imports
         block_executor = self._require_method_executor().block_executor
         if block is not None:
             return block.call(args, block_executor)
 
+        # instance sends try attribute dispatch rules before method lookup
         decision = self.attribute_resolver.resolve(
             receiver,
             selector,
@@ -255,6 +264,7 @@ class InstanceSendExprEvaluator(SendExprEvaluator):
                 f"Instance attribute '{attribute_name}' collides with a method.",
             )
 
+        # ordinary instance method lookup as final fallback after block and attribute rules
         method = lookup_start.lookup_instance(selector)
         if method is None:
             raise InterpreterError(ErrorCode.INT_DNU, f"No method found for selector {selector}")
@@ -275,13 +285,13 @@ class ClassSendExprEvaluator(SendExprEvaluator):
         ctx: InvocationContext,
     ) -> RuntimeValue:
         """
-        @brief One resolved class-side send is dispatched.
+        @brief A resolved class-side send is dispatched.
 
-        @param target A resolved receiver carrying effective receiver and lookup mode.
-        @param selector A selector to be dispatched.
+        @param target Resolved receiver carrying effective receiver and lookup mode.
+        @param selector Selector to dispatch.
         @param args Evaluated send arguments.
-        @param ctx An invocation context carrying self/super information.
-        @return A runtime value produced by the dispatched send.
+        @param ctx Invocation context carrying self/super information.
+        @return Runtime value produced by the dispatched send.
         """
         receiver = _require_class_receiver(target.receiver)
 

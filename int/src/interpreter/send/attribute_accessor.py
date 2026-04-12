@@ -1,12 +1,12 @@
 """
 @file attribute_accessor.py
-@brief Attribute slot access is coordinated here.
+@brief Attribute slot access is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Low-level attribute presence checks and slot reads/writes are intended to
-be performed here. Selector meaning is not intended to be decided here.
+Low-level attribute slot reads and writes are handled here.
+Selector meaning is resolved elsewhere.
 """
 
 from __future__ import annotations
@@ -18,17 +18,17 @@ from ..model.values import RuntimeValue
 
 class AttributeAccessor:
     """
-    @brief Attribute slot access is coordinated by this class.
+    @brief Low-level attribute slot access is handled by this class.
     """
 
     @staticmethod
     def read(receiver: RuntimeValue, name: str) -> RuntimeValue:
         """
-        @brief One attribute slot value is read.
+        @brief An attribute slot value is read.
 
-        @param receiver A runtime receiver whose attribute is to be read.
-        @param name A slot name to be read.
-        @return A runtime value stored in the requested attribute slot.
+        @param receiver Runtime receiver whose attribute is read.
+        @param name Slot name to read.
+        @return Runtime value stored in the requested attribute slot.
         """
         slots = receiver.slots
         if slots is None:
@@ -46,12 +46,12 @@ class AttributeAccessor:
         value: RuntimeValue,
     ) -> RuntimeValue:
         """
-        @brief One attribute slot value is written.
+        @brief An attribute slot value is written.
 
-        @param receiver A runtime receiver whose attribute is to be written.
-        @param name A slot name to be written.
-        @param value A runtime value to be stored into the requested attribute slot.
-        @return The receiver after the attribute slot is written.
+        @param receiver Runtime receiver whose attribute is written.
+        @param name Slot name to write.
+        @param value Runtime value to store in the requested attribute slot.
+        @return Receiver after the attribute slot is written.
         """
         slots = receiver.slots
         if slots is None:

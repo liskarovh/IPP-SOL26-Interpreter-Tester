@@ -1,18 +1,13 @@
 """
 @file builtins_by_values.py
-@brief Built-in method callbacks and registration are defined.
+@brief Built-in registration orchestration and shared runtime helpers are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
-Registration of built-in runtime methods is centralized here.
-Concrete built-in behavior is represented through callback functions that are
-wrapped into CallbackBuiltinImplementation instances.
-
-This module now serves as the orchestration entry point for built-in
-registration and as the home of shared helper utilities reused by
-class-specific built-in modules.
+Built-in registration is coordinated here.
+Shared helper utilities reused by class-specific built-in modules are also kept here.
 """
 
 from __future__ import annotations
@@ -55,15 +50,14 @@ def register_builtins(
     """
     @brief Built-in runtime methods are registered.
 
-    Registration is coordinated here, while concrete built-in groups are
-    implemented in dedicated modules grouped by built-in classes.
+    This function coordinates registration of built-in groups split by built-in class.
 
-    @param class_registry A registry of runtime classes.
-    @param builtin_registry A registry of canonical built-in values and methods.
-    @param object_factory A runtime value factory.
-    @param runtime_io A runtime input/output service.
-    @param send_zero_arg_message A helper sending one zero-argument runtime message.
-    @param send_one_arg_message A helper sending one one-argument runtime message.
+    @param class_registry Registry of runtime classes.
+    @param builtin_registry Registry of canonical built-in values and methods.
+    @param object_factory Factory used for runtime values.
+    @param runtime_io Runtime input/output service.
+    @param send_zero_arg_message Injected helper for zero-argument runtime sends.
+    @param send_one_arg_message Injected helper for one-argument runtime sends.
     """
 
     from .builtins_by_values.block_builtins import register_block_builtins
@@ -76,6 +70,7 @@ def register_builtins(
     from .builtins_by_values.object_builtins import register_object_builtins
     from .builtins_by_values.string_builtins import register_string_builtins
 
+    # all builtin root classes must exist in runtime before registration
     object_class = class_registry.require("Object")
     nil_class = class_registry.require("Nil")
     integer_class = class_registry.require("Integer")
@@ -132,16 +127,17 @@ def _register_one_instance_builtin(
     builtin_registry: BuiltinRegistry,
 ) -> None:
     """
-    @brief One instance-side built-in runtime method is created and registered.
+    @brief One instance-side built-in method is created and registered.
 
-    @param owner An owning runtime class.
-    @param selector A built-in method selector.
-    @param builtin_callback A callback implementing built-in behavior.
-    @param builtin_registry A registry receiving the built-in method.
+    @param owner Owning runtime class.
+    @param selector Built-in method selector.
+    @param builtin_callback Callback implementing built-in behavior.
+    @param builtin_registry Registry receiving the built-in method.
     """
     implementation = InstanceCallbackBuiltinImplementation(builtin_callback)
     method = BuiltinMethod(selector, owner, implementation)
 
+    # method is registered globally and attached to owning runtime class
     builtin_registry.register_instance_builtin_method(owner.name, selector, method)
     owner.add_instance_method(method)
 
@@ -153,12 +149,12 @@ def _register_one_class_builtin(
     builtin_registry: BuiltinRegistry,
 ) -> None:
     """
-    @brief One class-side built-in runtime method is created and registered.
+    @brief One class-side built-in method is created and registered.
 
-    @param owner An owning runtime class.
-    @param selector A built-in method selector.
-    @param builtin_callback A callback implementing built-in behavior.
-    @param builtin_registry A registry receiving the built-in method.
+    @param owner Owning runtime class.
+    @param selector Built-in method selector.
+    @param builtin_callback Callback implementing built-in behavior.
+    @param builtin_registry Registry receiving the built-in method.
     """
     implementation = ClassCallbackBuiltinImplementation(builtin_callback)
     method = BuiltinMethod(selector, owner, implementation)
@@ -169,9 +165,9 @@ def _register_one_class_builtin(
 
 def _make_return_receiver() -> InstanceBuiltinCallback:
     """
-    @brief One callback returning the receiver is created.
+    @brief Callback returning the receiver is created.
 
-    @return One built-in callback returning the receiver unchanged.
+    @return Built-in callback returning the receiver unchanged.
     """
 
     def builtin_return_receiver(
@@ -186,10 +182,10 @@ def _make_return_receiver() -> InstanceBuiltinCallback:
 
 def _make_return_true(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
-    @brief One callback returning canonical true is created.
+    @brief Callback returning canonical true is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One built-in callback returning canonical true.
+    @param builtin_registry Registry of canonical built-in values.
+    @return Built-in callback returning canonical true.
     """
 
     def builtin_return_true(
@@ -204,10 +200,10 @@ def _make_return_true(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallb
 
 def _make_return_false(builtin_registry: BuiltinRegistry) -> InstanceBuiltinCallback:
     """
-    @brief One callback returning canonical false is created.
+    @brief Callback returning canonical false is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One built-in callback returning canonical false.
+    @param builtin_registry Registry of canonical built-in values.
+    @return Built-in callback returning canonical false.
     """
 
     def builtin_return_false(
@@ -224,8 +220,8 @@ def _true_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
     """
     @brief The canonical true value is returned.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return The canonical true value.
+    @param builtin_registry Registry of canonical built-in values.
+    @return Canonical true value.
     """
     return builtin_registry.get_true_value()
 
@@ -234,8 +230,8 @@ def _false_value(builtin_registry: BuiltinRegistry) -> BooleanValue:
     """
     @brief The canonical false value is returned.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return The canonical false value.
+    @param builtin_registry Registry of canonical built-in values.
+    @return Canonical false value.
     """
     return builtin_registry.get_false_value()
 
@@ -244,8 +240,8 @@ def _nil_value(builtin_registry: BuiltinRegistry) -> NilValue:
     """
     @brief The canonical nil value is returned.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return The canonical nil value.
+    @param builtin_registry Registry of canonical built-in values.
+    @return Canonical nil value.
     """
     return builtin_registry.get_nil_value()
 
@@ -259,11 +255,11 @@ def _send_zero_arg_runtime_message(
     """
     @brief One zero-argument runtime message is sent.
 
-    @param target_value One runtime object receiving the message.
-    @param selector One selector of the sent message.
-    @param ctx One invocation context of the current built-in call.
-    @param send_zero_arg_message One injected zero-argument send helper.
-    @return One runtime value returned by the sent message.
+    @param target_value Runtime object receiving the message.
+    @param selector Selector of the sent message.
+    @param ctx Invocation context of the current built-in call.
+    @param send_zero_arg_message Injected zero-argument send helper.
+    @return Runtime value returned by the sent message.
     """
     return send_zero_arg_message(target_value, selector, ctx)
 
@@ -278,12 +274,12 @@ def _send_one_arg_runtime_message(
     """
     @brief One one-argument runtime message is sent.
 
-    @param target_value One runtime object receiving the message.
-    @param selector One selector of the sent message.
-    @param arg_value One runtime argument value.
-    @param ctx One invocation context of the current built-in call.
-    @param send_one_arg_message One injected one-argument send helper.
-    @return One runtime value returned by the sent message.
+    @param target_value Runtime object receiving the message.
+    @param selector Selector of the sent message.
+    @param arg_value Runtime argument value.
+    @param ctx Invocation context of the current built-in call.
+    @param send_one_arg_message Injected one-argument send helper.
+    @return Runtime value returned by the sent message.
     """
     return send_one_arg_message(target_value, selector, arg_value, ctx)
 
@@ -294,7 +290,7 @@ def _require_arg_count(args: RuntimeValueList, expected: int, selector: str) -> 
 
     @param args Runtime call arguments.
     @param expected Expected runtime argument count.
-    @param selector Selector used by the current built-in method.
+    @param selector Selector of the current built-in method.
     """
     actual = len(args)
     if actual != expected:
@@ -311,9 +307,9 @@ def _expect_block_closure(
     """
     @brief One runtime block closure is required.
 
-    @param value One runtime value.
+    @param value Runtime value to check.
     @param selector Current built-in selector.
-    @return The checked block closure.
+    @return Checked block closure.
     """
     if isinstance(value, BlockClosure):
         return value
@@ -328,9 +324,9 @@ def _expect_boolean(value: RuntimeValue, selector: str) -> BooleanValue:
     """
     @brief One runtime boolean value is required.
 
-    @param value One runtime value.
+    @param value Runtime value to check.
     @param selector Current built-in selector.
-    @return The checked runtime boolean value.
+    @return Checked runtime boolean value.
     """
     if isinstance(value, BooleanValue):
         return value
@@ -345,9 +341,9 @@ def _expect_integer(value: RuntimeValue, selector: str) -> IntegerValue:
     """
     @brief One runtime integer value is required.
 
-    @param value One runtime value.
+    @param value Runtime value to check.
     @param selector Current built-in selector.
-    @return The checked runtime integer value.
+    @return Checked runtime integer value.
     """
     if isinstance(value, IntegerValue):
         return value
@@ -362,9 +358,9 @@ def _expect_string(value: RuntimeValue, selector: str) -> StringValue:
     """
     @brief One runtime string value is required.
 
-    @param value One runtime value.
+    @param value Runtime value to check.
     @param selector Current built-in selector.
-    @return The checked runtime string value.
+    @return Checked runtime string value.
     """
     if isinstance(value, StringValue):
         return value
@@ -383,8 +379,8 @@ def _make_runtime_string(
     @brief One runtime string value is created.
 
     @param value Wrapped textual payload.
-    @param object_factory A runtime value factory.
-    @return One runtime string value.
+    @param object_factory Factory used for runtime values.
+    @return Runtime string value.
     """
     return object_factory.new_string(value)
 
@@ -394,8 +390,8 @@ def _make_runtime_integer(value: int, object_factory: ObjectFactory) -> IntegerV
     @brief One runtime integer value is created.
 
     @param value Wrapped integer payload.
-    @param object_factory A runtime value factory.
-    @return One runtime integer value.
+    @param object_factory Factory used for runtime values.
+    @return Runtime integer value.
     """
     return object_factory.new_integer(value)
 
@@ -404,8 +400,8 @@ def _copy_runtime_slots(source: RuntimeValue, target: RuntimeValue) -> None:
     """
     @brief Regular instance slots are copied with shallow-copy semantics.
 
-    @param source One source runtime value.
-    @param target One target runtime value.
+    @param source Source runtime value.
+    @param target Target runtime value.
     """
     source_slots = source.slots
     if source_slots is None:

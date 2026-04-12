@@ -1,16 +1,15 @@
 """
 @file interpreter.py
-@brief The main interpreter object is defined.
-
-IPP: You must definitely modify this file. Bend it to your will.
-
-Author: Ondřej Ondryáš <iondryas@fit.vut.cz>
+@brief The main interpreter object is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-The source SOL-XML file is intended to be loaded, validated, converted
-to the AST model, and later executed through the program runner.
+IPP template note: You must definitely modify this file. Bend it to your will.
+Original template author: Ondřej Ondryáš <iondryas@fit.vut.cz>
+
+The source SOL-XML file is loaded, validated, converted to the AST model,
+and executed through the program runner.
 """
 
 from __future__ import annotations
@@ -36,17 +35,17 @@ logger = logging.getLogger(__name__)
 
 class Interpreter:
     """
-    @brief The main interpreter object is defined.
+    @brief The main interpreter object is implemented.
 
-    The source file is loaded, converted to the AST model, and later
-    forwarded to the program runner.
+    The source SOL-XML file is loaded, validated, converted to the AST model,
+    and executed through the program runner.
     """
 
     def __init__(self) -> None:
         """
         @brief The interpreter is initialized.
 
-        A program runner is prepared, and no program is loaded initially.
+        A program runner and XML validator are prepared, and no program is loaded initially.
         """
         self.program_runner = ProgramRunner()
         self.xml_validator = XmlValidator()
@@ -54,13 +53,12 @@ class Interpreter:
 
     def load_program(self, source_file_path: Path) -> None:
         """
-        @brief The source SOL-XML file is loaded and converted to AST.
+        @brief The source SOL-XML file is loaded and converted to the AST model.
 
-        The XML file is first parsed as a well-formed XML document. After that,
-        document-level SOL-XML checks are performed. Finally, the AST model is
-        built from the validated XML root.
+        The XML file is parsed first. After that, document-level SOL-XML checks are performed,
+        the AST model is built, and the parsed program is validated.
 
-        @param source_file_path A path to the source SOL-XML file.
+        @param source_file_path Path to the source SOL-XML file.
         """
         logger.info("Opening source file: %s", source_file_path)
 
@@ -76,9 +74,9 @@ class Interpreter:
 
     def execute(self, input_io: TextIO) -> None:
         """
-        @brief A previously loaded program is forwarded to the runner.
+        @brief A previously loaded program is executed.
 
-        @param input_io An input/output adapter.
+        @param input_io Standard input stream used to build the runtime I/O adapter.
         """
         runtime_io = self._build_runtime_io(input_io)
         program = self._require_loaded_program()
@@ -87,10 +85,10 @@ class Interpreter:
     @staticmethod
     def _parse_xml_tree(source_file_path: Path) -> etree._ElementTree:
         """
-        @brief One source XML tree is parsed from file.
+        @brief The source XML tree is parsed from file.
 
-        @param source_file_path A path to the source SOL-XML file.
-        @return One parsed XML tree.
+        @param source_file_path Path to the source SOL-XML file.
+        @return Parsed XML tree.
         @exception InterpreterError Raised when the XML document is not well formed.
         """
         try:
@@ -104,10 +102,10 @@ class Interpreter:
     @staticmethod
     def _build_program_from_xml_root(xml_root: etree._Element) -> Program:
         """
-        @brief One AST program is built from the validated XML root.
+        @brief The AST program is built from the validated XML root.
 
-        @param xml_root A validated SOL-XML root element.
-        @return One parsed AST program.
+        @param xml_root Validated SOL-XML root element.
+        @return Parsed AST program.
         @exception InterpreterError Raised when the SOL-XML structure is invalid.
         """
         try:
@@ -121,10 +119,10 @@ class Interpreter:
     @staticmethod
     def _build_runtime_io(input_io: TextIO) -> RuntimeIO:
         """
-        @brief One runtime input/output adapter is created.
+        @brief A runtime input/output adapter is created.
 
-        @param input_io A standard-input adapter.
-        @return One runtime input/output adapter.
+        @param input_io Standard input stream.
+        @return Runtime input/output adapter.
         """
         return RuntimeIO(
             stdin=input_io,
@@ -136,7 +134,7 @@ class Interpreter:
         """
         @brief The loaded program is returned.
 
-        @return The currently loaded AST program.
+        @return Currently loaded AST program.
         @exception InterpreterError Raised when no program has been loaded yet.
         """
         program = self.loaded_program

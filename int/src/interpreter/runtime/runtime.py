@@ -1,11 +1,11 @@
 """
 @file runtime.py
-@brief Runtime container is defined.
+@brief Runtime container is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-The runtime is used as a small container for the core runtime services.
+Core runtime services are grouped here.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ from .runtime_io import RuntimeIO
 
 class Runtime:
     """
-    @brief Core runtime services are grouped by this class.
+    @brief Core runtime services are grouped here.
     """
 
     def __init__(
@@ -31,10 +31,10 @@ class Runtime:
         """
         @brief The runtime container is initialized.
 
-        @param class_registry A runtime class registry.
-        @param builtin_registry A built-in registry.
-        @param object_factory A runtime object factory.
-        @param io A runtime input/output adapter.
+        @param class_registry Runtime class registry.
+        @param builtin_registry Built-in registry.
+        @param object_factory Runtime object factory.
+        @param io Runtime input/output adapter.
         """
         self.class_registry = class_registry
         self.builtin_registry = builtin_registry

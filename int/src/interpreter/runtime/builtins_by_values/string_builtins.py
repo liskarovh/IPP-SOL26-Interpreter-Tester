@@ -1,14 +1,13 @@
 """
 @file string_builtins.py
-@brief String built-in method callbacks and registration are defined.
+@brief String built-in callbacks and their registration are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
-String-related built-in runtime methods are grouped in this module.
-Shared helper utilities are intentionally reused from runtime.builtins_by_values
-so that the overall behavior remains unchanged.
+String instance-side and class-side built-in methods are grouped in this module.
+Shared helpers from runtime.builtins_by_values are reused to keep behavior unchanged.
 """
 
 from __future__ import annotations
@@ -52,10 +51,10 @@ def register_string_builtins(
     """
     @brief String built-ins are registered.
 
-    @param string_class The runtime class String.
-    @param builtin_registry A registry of canonical built-in values and methods.
-    @param object_factory A runtime value factory.
-    @param runtime_io A runtime input/output service.
+    @param string_class Runtime class for String.
+    @param builtin_registry Registry holding canonical values and built-in methods.
+    @param object_factory Factory used for runtime values.
+    @param runtime_io Runtime input/output service.
     """
     return_true = _make_return_true(builtin_registry)
     return_receiver = _make_return_receiver()
@@ -134,10 +133,10 @@ def register_string_builtins(
 
 def _make_string_print(runtime_io: RuntimeIO) -> InstanceBuiltinCallback:
     """
-    @brief One String>>print callback is created.
+    @brief Callback for String>>print is created.
 
-    @param runtime_io A runtime input/output service.
-    @return One String>>print callback.
+    @param runtime_io Runtime input/output service.
+    @return Callback implementing String>>print.
     """
 
     def builtin_string_print(
@@ -157,10 +156,10 @@ def _make_string_equal_to(
     builtin_registry: BuiltinRegistry,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One String>>equalTo: callback is created.
+    @brief Callback for String>>equalTo: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One String>>equalTo: callback.
+    @param builtin_registry Registry providing canonical boolean values.
+    @return Callback implementing String>>equalTo:.
     """
 
     def builtin_string_equal_to(
@@ -188,11 +187,11 @@ def _make_string_as_integer(
     object_factory: ObjectFactory,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One String>>asInteger callback is created.
+    @brief Callback for String>>asInteger is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @param object_factory A runtime value factory.
-    @return One String>>asInteger callback.
+    @param builtin_registry Registry providing canonical nil.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing String>>asInteger.
     """
 
     def builtin_string_as_integer(
@@ -204,6 +203,7 @@ def _make_string_as_integer(
         string_value = _expect_string(receiver, "asInteger")
         text = string_value.raw()
 
+        # failed parse returns nil
         try:
             parsed_value = int(text)
         except ValueError:
@@ -219,11 +219,11 @@ def _make_string_concatenate_with(
     object_factory: ObjectFactory,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One String>>concatenateWith: callback is created.
+    @brief Callback for String>>concatenateWith: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @param object_factory A runtime value factory.
-    @return One String>>concatenateWith: callback.
+    @param builtin_registry Registry providing canonical nil.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing String>>concatenateWith:.
     """
 
     def builtin_string_concatenate_with(
@@ -235,6 +235,7 @@ def _make_string_concatenate_with(
         left = _expect_string(receiver, "concatenateWith:")
         right = args[0]
 
+        # only accepts strings
         if not isinstance(right, StringValue):
             return _nil_value(builtin_registry)
 
@@ -248,11 +249,11 @@ def _make_string_starts_with_ends_before(
     object_factory: ObjectFactory,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One String>>startsWith:endsBefore: callback is created.
+    @brief Callback for String>>startsWith:endsBefore: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @param object_factory A runtime value factory.
-    @return One String>>startsWith:endsBefore: callback.
+    @param builtin_registry Registry providing canonical nil.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing String>>startsWith:endsBefore:.
     """
 
     def builtin_string_starts_with_ends_before(
@@ -265,6 +266,7 @@ def _make_string_starts_with_ends_before(
         start_value = args[0]
         end_value = args[1]
 
+        # if both not int then nil
         if not isinstance(start_value, IntegerValue):
             return _nil_value(builtin_registry)
 
@@ -281,6 +283,7 @@ def _make_string_starts_with_ends_before(
         slice_start = start_index - 1
         slice_end = min(end_index - 1, len(text))
 
+        # empty or inverted ranges produce empty string
         if slice_end - slice_start <= 0:
             return _make_runtime_string("", object_factory)
 
@@ -292,10 +295,10 @@ def _make_string_starts_with_ends_before(
 
 def _make_string_length(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
-    @brief One String>>length callback is created.
+    @brief Callback for String>>length is created.
 
-    @param object_factory A runtime value factory.
-    @return One String>>length callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing String>>length.
     """
 
     def builtin_string_length(
@@ -315,11 +318,11 @@ def _make_string_read(
     runtime_io: RuntimeIO,
 ) -> ClassBuiltinCallback:
     """
-    @brief One String class-side >>read callback is created.
+    @brief Callback for String class-side>>read is created.
 
-    @param object_factory A runtime value factory.
-    @param runtime_io A runtime input/output service.
-    @return One String class-side >>read callback.
+    @param object_factory Factory used for runtime values.
+    @param runtime_io Runtime input/output service.
+    @return Callback implementing String class-side>>read.
     """
 
     def builtin_string_read(
@@ -329,6 +332,8 @@ def _make_string_read(
     ) -> RuntimeValue:
         _require_arg_count(args, 0, "read")
         read_text = runtime_io.read_line()
+
+        # string read strips trailing input newline
         normalized_text = read_text.removesuffix("\n")
         return object_factory.new_string(normalized_text, receiver)
 

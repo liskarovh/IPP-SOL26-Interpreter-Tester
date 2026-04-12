@@ -1,12 +1,12 @@
 """
 @file typing_helpers.py
-@brief Shared typing aliases are defined for the interpreter package.
+@brief Shared typing aliases for the interpreter package are defined.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Only shared aliases needed across multiple interpreter modules are stored
-in this file. Forward references are used so that import cycles are avoided.
+Only shared aliases used across multiple interpreter modules are stored here.
+Forward references are used to avoid import cycles.
 """
 
 from __future__ import annotations

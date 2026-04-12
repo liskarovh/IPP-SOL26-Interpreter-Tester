@@ -1,11 +1,12 @@
 """
 @file object_factory.py
-@brief Runtime value creation is declared.
+@brief Runtime value creation is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-RuntimeValue children are intended to be created here.
+Runtime values are created here.
+Canonical built-in values and runtime objects are produced through this factory.
 """
 
 from __future__ import annotations
@@ -40,7 +41,7 @@ class ObjectFactory:
         @brief An object factory is initialized.
 
         @param class_registry Registry of runtime classes.
-        @param builtin_registry Registry of canonical builtin values and methods.
+        @param builtin_registry Registry of canonical built-in values and methods.
         """
         self.class_registry = class_registry
         self.builtin_registry = builtin_registry
@@ -55,11 +56,12 @@ class ObjectFactory:
         slot_storage = self._new_slot_storage()
         return UserObject(runtime_class, slot_storage)
 
-    def _new_slot_storage(self) -> ObjectSlots:
+    @staticmethod
+    def _new_slot_storage() -> ObjectSlots:
         """
-        @brief One empty instance slot storage is created.
+        @brief Empty instance slot storage is created.
 
-        @return One empty slot storage.
+        @return Empty slot storage.
         """
         return ObjectSlots({})
 
@@ -69,17 +71,20 @@ class ObjectFactory:
         runtime_class: RuntimeClass | None = None,
     ) -> IntegerValue:
         """
-        @brief One new integer runtime value is created.
+        @brief A new integer runtime value is created.
 
-        @param value One wrapped integer payload.
-        @param runtime_class One runtime class of the created integer, or None for builtin Integer.
-        @return One newly created integer runtime value.
+        @param value Wrapped integer payload.
+        @param runtime_class Runtime class of the created integer, or None for built-in Integer.
+        @return Newly created integer runtime value.
         """
         effective_class = runtime_class
         if effective_class is None:
             effective_class = self._require_builtin_class("Integer")
 
+        # primitive intiger - no slots
         slot_storage: ObjectSlots | None = None
+
+        # user subclass of Integer may have instance atrributes
         if effective_class.name != "Integer":
             slot_storage = self._new_slot_storage()
 
@@ -91,17 +96,20 @@ class ObjectFactory:
         runtime_class: RuntimeClass | None = None,
     ) -> StringValue:
         """
-        @brief One new string runtime value is created.
+        @brief A new string runtime value is created.
 
-        @param value One wrapped string payload.
-        @param runtime_class One runtime class of the created string, or None for builtin String.
-        @return One newly created string runtime value.
+        @param value Wrapped string payload.
+        @param runtime_class Runtime class of the created string, or None for built-in String.
+        @return Newly created string runtime value.
         """
         effective_class = runtime_class
         if effective_class is None:
             effective_class = self._require_builtin_class("String")
 
+        # primitive string - no slots
         slot_storage: ObjectSlots | None = None
+
+        # user subclass of String may have instance atrributes
         if effective_class.name != "String":
             slot_storage = self._new_slot_storage()
 
@@ -152,18 +160,18 @@ class ObjectFactory:
 
     def _require_builtin_class(self, class_name: str) -> RuntimeClass:
         """
-        @brief One builtin runtime class is required.
+        @brief A built-in runtime class is required.
 
-        @param class_name Name of the required builtin runtime class.
+        @param class_name Name of the required built-in runtime class.
         @return Resolved runtime class.
         """
         return self.class_registry.require(class_name)
 
     def new_empty_block_closure(self) -> BlockClosure:
         """
-        @brief One empty block closure is created.
+        @brief An empty block closure is created.
 
-        @return One new empty zero-arity block closure.
+        @return New zero-arity empty block closure.
         """
         runtime_class = self._require_builtin_class("Block")
         empty_block_ast = AstBlock(
@@ -185,10 +193,10 @@ class ObjectFactory:
 
     def copy_block_closure(self, source: BlockClosure) -> BlockClosure:
         """
-        @brief One block closure is shallow-copied.
+        @brief A block closure is shallow-copied.
 
-        @param source One source block closure.
-        @return One copied block closure.
+        @param source Source block closure.
+        @return Copied block closure.
         """
         runtime_class = self._require_builtin_class("Block")
         return BlockClosure(

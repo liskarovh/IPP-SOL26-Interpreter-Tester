@@ -1,6 +1,6 @@
 """
 @file lookup_helpers.py
-@brief Shared send-lookup helpers are defined here.
+@brief Shared send-lookup helpers are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
@@ -30,10 +30,10 @@ def resolve_lookup_start_class(
     """
     @brief The starting class for method lookup is resolved.
 
-    @param receiver A method receiver for which lookup is to be started.
-    @param lookup_mode One lookup mode of the current send.
-    @param ctx One invocation context carrying self/super information.
-    @return One runtime class from which method lookup should start.
+    @param receiver Method receiver for which lookup is started.
+    @param lookup_mode Lookup mode of the current send.
+    @param ctx Invocation context carrying self/super information.
+    @return Runtime class from which method lookup should start.
     """
     if lookup_mode == LookupMode.NORMAL:
         if isinstance(receiver, RuntimeClass):

@@ -1,14 +1,13 @@
 """
 @file object_builtins.py
-@brief Object built-in method callbacks and registration are defined.
+@brief Object built-in callbacks and their registration are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
-Object-related built-in runtime methods are grouped in this module.
-Shared helper utilities are intentionally reused from runtime.builtins_by_values
-so that the overall behavior remains unchanged.
+Object instance-side and class-side built-in methods are grouped in this module.
+Shared helpers from runtime.builtins_by_values are reused to keep behavior unchanged.
 """
 
 from __future__ import annotations
@@ -52,9 +51,9 @@ def register_object_builtins(
     """
     @brief Object built-ins are registered.
 
-    @param object_class The runtime class Object.
-    @param builtin_registry A registry of canonical built-in values and methods.
-    @param object_factory A runtime value factory.
+    @param object_class Runtime class for Object.
+    @param builtin_registry Registry holding canonical values and built-in methods.
+    @param object_factory Factory used for runtime values.
     """
     return_false = _make_return_false(builtin_registry)
 
@@ -131,10 +130,10 @@ def _make_object_identical_to(
     builtin_registry: BuiltinRegistry,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One Object>>identicalTo: callback is created.
+    @brief Callback for Object>>identicalTo: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One Object>>identicalTo: callback.
+    @param builtin_registry Registry providing canonical boolean values.
+    @return Callback implementing Object>>identicalTo:.
     """
 
     def builtin_object_identical_to(
@@ -147,6 +146,7 @@ def _make_object_identical_to(
         _require_arg_count(args, 1, "identicalTo:")
         other = args[0]
 
+        # identicalTo: returns true for identical objects
         if receiver is other:
             return _true_value(builtin_registry)
 
@@ -159,10 +159,10 @@ def _make_object_equal_to(
     builtin_registry: BuiltinRegistry,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One Object>>equalTo: callback is created.
+    @brief Callback for Object>>equalTo: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One Object>>equalTo: callback.
+    @param builtin_registry Registry providing canonical boolean values.
+    @return Callback implementing Object>>equalTo:.
     """
 
     def builtin_object_equal_to(
@@ -178,6 +178,7 @@ def _make_object_equal_to(
         if type(receiver) is not type(other):
             return _false_value(builtin_registry)
 
+        # primitive builtins compared by wrapper payload
         if isinstance(receiver, (IntegerValue, StringValue, BooleanValue)) and isinstance(
             other,
             (IntegerValue, StringValue, BooleanValue),
@@ -197,10 +198,10 @@ def _make_object_equal_to(
 
 def _make_object_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
-    @brief One Object>>asString callback is created.
+    @brief Callback for Object>>asString is created.
 
-    @param object_factory A runtime value factory.
-    @return One Object>>asString callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Object>>asString.
     """
 
     def builtin_object_as_string(
@@ -221,11 +222,11 @@ def _make_object_new(
     object_factory: ObjectFactory,
 ) -> ClassBuiltinCallback:
     """
-    @brief One Object class-side >>new callback is created.
+    @brief Callback for Object class-side>>new is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @param object_factory A runtime value factory.
-    @return One Object class-side >>new callback.
+    @param builtin_registry Registry providing canonical built-in values.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Object class-side>>new.
     """
 
     def builtin_object_new(
@@ -238,6 +239,7 @@ def _make_object_new(
         _require_arg_count(args, 0, "new")
         target_class = receiver
 
+        # reuse singleton nil
         if target_class.name == "Nil":
             return _nil_value(builtin_registry)
 
@@ -247,12 +249,14 @@ def _make_object_new(
         if target_class.inherits_from_name("String"):
             return object_factory.new_string("", target_class)
 
+        # reuse singleton true/false
         if target_class.name == "True":
             return _true_value(builtin_registry)
 
         if target_class.name == "False":
             return _false_value(builtin_registry)
 
+        # new empty callable block closure
         if target_class.name == "Block":
             return object_factory.new_empty_block_closure()
 
@@ -266,11 +270,11 @@ def _make_object_from(
     object_factory: ObjectFactory,
 ) -> ClassBuiltinCallback:
     """
-    @brief One Object class-side >>from: callback is created.
+    @brief Callback for Object class-side>>from: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @param object_factory A runtime value factory.
-    @return One Object class-side >>from: callback.
+    @param builtin_registry Registry providing canonical built-in values.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Object class-side>>from:.
     """
 
     def builtin_object_from(
@@ -284,9 +288,11 @@ def _make_object_from(
         source = args[0]
         target_class = receiver
 
+        # reuse singleton nil
         if target_class.name == "Nil":
             return _nil_value(builtin_registry)
 
+        # class can only inherit from class of same type
         if target_class.inherits_from_name("Integer"):
             source_integer = _expect_integer(source, "from:")
             new_integer = object_factory.new_integer(source_integer.raw(), target_class)
@@ -299,6 +305,7 @@ def _make_object_from(
             _copy_runtime_slots(source_string, new_string)
             return new_string
 
+        # reuse singleton true/false
         if target_class.name == "True":
             if isinstance(source, BooleanValue) and source.raw() is True:
                 return _true_value(builtin_registry)
@@ -315,6 +322,7 @@ def _make_object_from(
                 "False from: requires a false boolean payload.",
             )
 
+        # copy block closure
         if target_class.name == "Block":
             source_block = _expect_block_closure(source, "from:")
             return object_factory.copy_block_closure(source_block)

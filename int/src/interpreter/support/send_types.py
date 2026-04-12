@@ -1,12 +1,12 @@
 """
 @file send_types.py
-@brief Send-specific enumerations are defined.
+@brief Small send-specific enumerations are represented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Only small enumerations needed by the send layer are stored in this file.
-General typing aliases are intended to remain in typing_helpers.py.
+Only small enumerations needed by the send layer are stored here.
+General typing aliases stay in typing_helpers.py.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from enum import Enum, auto
 
 class LookupMode(Enum):
     """
-    @brief Lookup mode variants for send resolution are represented.
+    @brief Lookup mode variants used by send resolution are represented.
     """
 
     NORMAL = auto()

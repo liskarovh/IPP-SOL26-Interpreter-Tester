@@ -1,11 +1,12 @@
 """
 @file builtin_registry.py
-@brief Built-in runtime values and methods are declared.
+@brief Built-in runtime values and methods are stored.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Canonical built-in values and built-in methods are intended to be stored here.
+Canonical true, false, and nil values are stored here together with
+registered built-in methods.
 """
 
 from __future__ import annotations
@@ -22,7 +23,7 @@ if TYPE_CHECKING:
 
 class BuiltinRegistry:
     """
-    @brief Canonical built-in values and built-in methods are stored by this registry.
+    @brief Canonical built-in values and built-in methods are stored here.
     """
 
     true_value: BooleanValue | None
@@ -33,7 +34,7 @@ class BuiltinRegistry:
 
     def __init__(self) -> None:
         """
-        @brief A built-in registry is initialized.
+        @brief The built-in registry is initialized.
         """
         self.true_value = None
         self.false_value = None
@@ -102,11 +103,11 @@ class BuiltinRegistry:
         method: BuiltinMethod,
     ) -> None:
         """
-        @brief One instance built-in method is registered.
+        @brief One instance-side built-in method is registered.
 
-        @param class_name A runtime class name owning the built-in method.
-        @param selector A built-in method selector.
-        @param method A built-in runtime method instance.
+        @param class_name Name of the runtime class owning the built-in method.
+        @param selector Built-in method selector.
+        @param method Built-in runtime method instance.
         """
 
         dict_key = (class_name, selector)
@@ -124,11 +125,11 @@ class BuiltinRegistry:
         method: BuiltinMethod,
     ) -> None:
         """
-        @brief One class built-in method is registered.
+        @brief One class-side built-in method is registered.
 
-        @param class_name A runtime class name owning the built-in method.
-        @param selector A built-in method selector.
-        @param method A built-in runtime method instance.
+        @param class_name Name of the runtime class owning the built-in method.
+        @param selector Built-in method selector.
+        @param method Built-in runtime method instance.
         """
 
         dict_key = (class_name, selector)

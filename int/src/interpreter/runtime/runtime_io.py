@@ -1,12 +1,11 @@
 """
 @file runtime_io.py
-@brief Runtime input and output streams are declared.
+@brief Runtime input and output streams are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-The RuntimeIO class is declared here according to the current UML class
-diagram. Runtime standard input, output, and error streams are grouped here.
+Runtime standard input, output, and error streams are grouped here.
 """
 
 from __future__ import annotations
@@ -16,7 +15,7 @@ from typing import TextIO
 
 class RuntimeIO:
     """
-    @brief Runtime standard streams are represented by this class.
+    @brief Runtime standard streams are represented here.
     """
 
     stdin: TextIO
@@ -47,6 +46,6 @@ class RuntimeIO:
         """
         @brief Text is written to standard output.
 
-        @param text Text to be written.
+        @param text Text to write.
         """
         self.stdout.write(text)

@@ -1,14 +1,13 @@
 """
 @file integer_builtins.py
-@brief Integer built-in method callbacks and registration are defined.
+@brief Integer built-in callbacks and their registration are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
-Integer-related built-in runtime methods are grouped in this module.
-Shared helper utilities are intentionally reused from runtime.builtins_by_values
-so that the overall behavior remains unchanged.
+Integer instance-side built-in methods are grouped in this module.
+Shared helpers from runtime.builtins_by_values are reused to keep behavior unchanged.
 """
 
 from __future__ import annotations
@@ -134,10 +133,10 @@ def _make_integer_equal_to(
     builtin_registry: BuiltinRegistry,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>equalTo: callback is created.
+    @brief Callback for Integer>>equalTo: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One Integer>>equalTo: callback.
+    @param builtin_registry Registry providing canonical boolean values.
+    @return Callback implementing Integer>>equalTo:.
     """
 
     def builtin_integer_equal_to(
@@ -161,10 +160,10 @@ def _make_integer_greater_than(
     builtin_registry: BuiltinRegistry,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>greaterThan: callback is created.
+    @brief Callback for Integer>>greaterThan: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @return One Integer>>greaterThan: callback.
+    @param builtin_registry Registry providing canonical boolean values.
+    @return Callback implementing Integer>>greaterThan:.
     """
 
     def builtin_integer_greater_than(
@@ -186,10 +185,10 @@ def _make_integer_greater_than(
 
 def _make_integer_plus(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>plus: callback is created.
+    @brief Callback for Integer>>plus: is created.
 
-    @param object_factory A runtime value factory.
-    @return One Integer>>plus: callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Integer>>plus:.
     """
 
     def builtin_integer_plus(
@@ -207,10 +206,10 @@ def _make_integer_plus(object_factory: ObjectFactory) -> InstanceBuiltinCallback
 
 def _make_integer_minus(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>minus: callback is created.
+    @brief Callback for Integer>>minus: is created.
 
-    @param object_factory A runtime value factory.
-    @return One Integer>>minus: callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Integer>>minus:.
     """
 
     def builtin_integer_minus(
@@ -230,10 +229,10 @@ def _make_integer_multiply_by(
     object_factory: ObjectFactory,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>multiplyBy: callback is created.
+    @brief Callback for Integer>>multiplyBy: is created.
 
-    @param object_factory A runtime value factory.
-    @return One Integer>>multiplyBy: callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Integer>>multiplyBy:.
     """
 
     def builtin_integer_multiply_by(
@@ -251,10 +250,10 @@ def _make_integer_multiply_by(
 
 def _make_integer_div_by(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>divBy: callback is created.
+    @brief Callback for Integer>>divBy: is created.
 
-    @param object_factory A runtime value factory.
-    @return One Integer>>divBy: callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Integer>>divBy:.
     """
 
     def builtin_integer_div_by(
@@ -279,10 +278,10 @@ def _make_integer_div_by(object_factory: ObjectFactory) -> InstanceBuiltinCallba
 
 def _make_integer_as_string(object_factory: ObjectFactory) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>asString callback is created.
+    @brief Callback for Integer>>asString is created.
 
-    @param object_factory A runtime value factory.
-    @return One Integer>>asString callback.
+    @param object_factory Factory used for runtime values.
+    @return Callback implementing Integer>>asString.
     """
 
     def builtin_integer_as_string(
@@ -303,12 +302,12 @@ def _make_integer_times_repeat(
     send_one_arg_message: SendOneArgMessageCallback,
 ) -> InstanceBuiltinCallback:
     """
-    @brief One Integer>>timesRepeat: callback is created.
+    @brief Callback for Integer>>timesRepeat: is created.
 
-    @param builtin_registry A registry of canonical built-in values.
-    @param object_factory A runtime value factory.
-    @param send_one_arg_message One injected one-argument send helper.
-    @return One Integer>>timesRepeat: callback.
+    @param builtin_registry Registry providing canonical nil.
+    @param object_factory Factory used for runtime values.
+    @param send_one_arg_message Injected helper for one-argument runtime sends.
+    @return Callback implementing Integer>>timesRepeat:.
     """
 
     def builtin_integer_times_repeat(
@@ -322,12 +321,14 @@ def _make_integer_times_repeat(
         delayed_value = args[0]
         repeat_count = integer_receiver.raw()
 
+        # negative return nil
         if repeat_count <= 0:
             return _nil_value(builtin_registry)
 
         last_result: RuntimeValue = _nil_value(builtin_registry)
 
         for iteration_index in range(1, repeat_count + 1):
+            # passes iteration index to the block
             iteration_value = _make_runtime_integer(iteration_index, object_factory)
             current_result = _send_one_arg_runtime_message(
                 delayed_value,

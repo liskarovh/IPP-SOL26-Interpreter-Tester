@@ -9,7 +9,7 @@
  * test case type.
  */
 
-import { existsSync, readFileSync } from "fs";
+import { existsSync } from "fs";
 
 import { LoadedTestCase } from "../discovery/load_test_case_definitions.js";
 import { TestCaseType } from "../models.js";
@@ -45,34 +45,42 @@ export interface TestCaseExecutionResult {
 }
 
 /**
- * @brief Interpreter arguments are built from base arguments and XML file path.
+ * @brief Interpreter input file path is resolved from the loaded test case.
  *
- * @param baseArgs Base interpreter arguments.
- * @param xmlFilePath Path to the XML source file.
- * @returns Final interpreter argument list.
+ * If no stdin file is defined for the current test case, null is returned.
+ *
+ * @param request Input data needed to execute one loaded test case.
+ * @returns Path to the interpreter input file, or null when not defined.
  */
-function buildInterpreterArgs(baseArgs: string[], xmlFilePath: string): string[] {
-  return [...baseArgs, "-s", xmlFilePath];
+function getInterpreterInputFilePath(request: TestCaseExecutorRequest): string | null {
+  return request.loaded_test_case.definition.stdin_file;
 }
 
 /**
- * @brief Program input for the interpreter is loaded from the optional stdin file.
+ * @brief Interpreter arguments are built from base arguments and test case files.
  *
- * If the loaded test case definition does not reference any stdin file,
- * null is returned. Otherwise, file content is loaded as UTF-8 text.
+ * XML source is always passed through the -s option. If the loaded test case
+ * defines an input file for the interpreted program, that file is passed
+ * through the -i option as well.
  *
- * @param request Input data needed to execute one loaded test case.
- * @returns Program input text, or null when no stdin file is defined.
+ * @param baseArgs Base interpreter arguments.
+ * @param xmlFilePath Path to the XML source file.
+ * @param inputFilePath Path to the interpreted program input file, or null.
+ * @returns Final interpreter argument list.
  */
-function loadInterpreterInput(request: TestCaseExecutorRequest): string | null {
-  const inputFilePath = request.loaded_test_case.definition.stdin_file;
+function buildInterpreterArgs(
+  baseArgs: string[],
+  xmlFilePath: string,
+  inputFilePath: string | null
+): string[] {
+  const args = [...baseArgs, "-s", xmlFilePath];
 
-  //no interpreter input
-  if (inputFilePath === null) {
-    return null;
+  //program input file is passed through interpreter CLI
+  if (inputFilePath !== null) {
+    args.push("-i", inputFilePath);
   }
 
-  return readFileSync(inputFilePath, "utf8");
+  return args;
 }
 
 /**
@@ -94,6 +102,10 @@ function runCompilerStep(request: TestCaseExecutorRequest): Promise<CommandResul
 /**
  * @brief One interpreter step is executed over an XML file.
  *
+ * XML input is passed through a temporary file. Interpreted program input is
+ * passed through the interpreter CLI when a stdin file is defined for the test
+ * case. No program input is written to the interpreter process standard input.
+ *
  * @param request Input data needed to execute one loaded test case.
  * @param xmlFilePath Path to the XML file passed to the interpreter.
  * @returns Promise resolving to the interpreter command result.
@@ -102,10 +114,12 @@ function runInterpreterStep(
   request: TestCaseExecutorRequest,
   xmlFilePath: string
 ): Promise<CommandResult> {
+  const inputFilePath = getInterpreterInputFilePath(request);
+
   return runInterpreter({
     command: request.interpreter_command,
-    args: buildInterpreterArgs(request.interpreter_args, xmlFilePath),
-    input: loadInterpreterInput(request),
+    args: buildInterpreterArgs(request.interpreter_args, xmlFilePath, inputFilePath),
+    input: null,
   });
 }
 

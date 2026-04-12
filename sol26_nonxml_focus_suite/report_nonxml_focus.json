@@ -1,0 +1,1199 @@
+{
+  "discovered_test_cases": [
+    {
+      "name": "RT51_042_inheritance_miss_2",
+      "test_source_path": "/opt/tests/corrected_tests/30_runtime_errors/rt51/RT51_042_inheritance_miss_2.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Earlier colliding attribute creation should cause 54 before later super miss.",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "RT54_001_collision",
+      "test_source_path": "/opt/tests/corrected_tests/30_runtime_errors/rt54/RT54_001_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Fresh attribute creation with no colliding zero-argument method is valid.",
+      "category": "VALID_ATTR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SCOPE_027_spec_like",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/06_scope_closure/VAL_SCOPE_027_spec_like.test",
+      "stdin_file": "/opt/tests/corrected_tests/40_valid_programs/06_scope_closure/VAL_SCOPE_027_spec_like.in",
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/06_scope_closure/VAL_SCOPE_027_spec_like.out",
+      "test_type": 2,
+      "description": "Closure example derived from spec.",
+      "category": "VALID_SCOPE",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SCOPE_028_spec_like",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/06_scope_closure/VAL_SCOPE_028_spec_like.test",
+      "stdin_file": "/opt/tests/corrected_tests/40_valid_programs/06_scope_closure/VAL_SCOPE_028_spec_like.in",
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/06_scope_closure/VAL_SCOPE_028_spec_like.out",
+      "test_type": 2,
+      "description": "Closure example derived from spec.",
+      "category": "VALID_SCOPE",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_001_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_001_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_001_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_002_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_002_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_002_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_003_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_003_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_003_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_004_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_004_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_004_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_005_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_005_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_005_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_006_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_006_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_006_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_007_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_007_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_007_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_008_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_008_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_008_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_009_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_009_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_009_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_010_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_010_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_010_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_011_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_011_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_011_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_012_self_basic",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_012_self_basic.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_012_self_basic.out",
+      "test_type": 2,
+      "description": "self should refer to the real receiver.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_014_spec_super",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_014_spec_super.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_014_spec_super.out",
+      "test_type": 2,
+      "description": "super should start lookup in the parent chain.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_016_spec_super",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_016_spec_super.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_016_spec_super.out",
+      "test_type": 2,
+      "description": "super should start lookup in the parent chain.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_018_spec_super",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_018_spec_super.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_018_spec_super.out",
+      "test_type": 2,
+      "description": "super should start lookup in the parent chain.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_020_spec_super",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_020_spec_super.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_020_spec_super.out",
+      "test_type": 2,
+      "description": "super should start lookup in the parent chain.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_022_spec_super",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_022_spec_super.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_022_spec_super.out",
+      "test_type": 2,
+      "description": "super should start lookup in the parent chain.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_023_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_023_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_023_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_024_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_024_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_024_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_025_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_025_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_025_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_026_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_026_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_026_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_027_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_027_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_027_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_028_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_028_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_028_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_029_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_029_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_029_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_030_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_030_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_030_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_031_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_031_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_031_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_032_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_032_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_032_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_033_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_033_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_033_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_SELFSUP_034_parent_attr",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_034_parent_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/07_self_super/VAL_SELFSUP_034_parent_attr.out",
+      "test_type": 2,
+      "description": "super should allow access to parent-created attribute when child shadows it by method.",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_COMPLEX_003_spec_super_like",
+      "test_source_path": "/opt/tests/corrected_tests/40_valid_programs/11_complex/VAL_COMPLEX_003_spec_super_like.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/corrected_tests/40_valid_programs/11_complex/VAL_COMPLEX_003_spec_super_like.out",
+      "test_type": 2,
+      "description": "Complex mixed program.",
+      "category": "VALID_COMPLEX",
+      "points": 2,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "RT54_DEEP_007_collision_after_from_copy_then_method_call",
+      "test_source_path": "/opt/tests/corrected_tests/runtime_errors/RT54_DEEP/RT54_DEEP_007_collision_after_from_copy_then_method_call.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Copied receiver remains Object; later fresh attribute creation is valid.",
+      "category": "VALID_ATTR",
+      "points": 2,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "RT51_009_object_keyword",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/30_runtime_errors/rt51/RT51_009_object_keyword.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Receiver should not understand the message; expect 51.",
+      "category": "RT51",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        51
+      ]
+    },
+    {
+      "name": "RT51_012_user_object_keyword",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/30_runtime_errors/rt51/RT51_012_user_object_keyword.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Receiver should not understand the message; expect 51.",
+      "category": "RT51",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        51
+      ]
+    },
+    {
+      "name": "RT54_008_collision",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/30_runtime_errors/rt54/RT54_008_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Creating an attribute that collides with a method should cause 54.",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "RT54_009_collision",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/30_runtime_errors/rt54/RT54_009_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Creating an attribute that collides with a method should cause 54.",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "RT54_013_collision",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/30_runtime_errors/rt54/RT54_013_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Creating an attribute that collides with a method should cause 54.",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "VAL_ATTR_030_child_reads_parent_created_attr_via_super",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/40_valid_programs/08_attributes/VAL_ATTR_030_child_reads_parent_created_attr_via_super.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/valid_but_currently_failing/40_valid_programs/08_attributes/VAL_ATTR_030_child_reads_parent_created_attr_via_super.out",
+      "test_type": 2,
+      "description": "Additional attribute behavior.",
+      "category": "VALID_ATTR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_CTOR_010_subint_new_attr",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/40_valid_programs/09_ctors_copy/VAL_CTOR_010_subint_new_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/valid_but_currently_failing/40_valid_programs/09_ctors_copy/VAL_CTOR_010_subint_new_attr.out",
+      "test_type": 2,
+      "description": "Constructor and from: behavior.",
+      "category": "VALID_CTOR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "VAL_CTOR_012_substring_new_attr",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/40_valid_programs/09_ctors_copy/VAL_CTOR_012_substring_new_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/valid_but_currently_failing/40_valid_programs/09_ctors_copy/VAL_CTOR_012_substring_new_attr.out",
+      "test_type": 2,
+      "description": "Constructor and from: behavior.",
+      "category": "VALID_CTOR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "RT51_BASIC_002_unknown_keyword_on_object",
+      "test_source_path": "/opt/tests/valid_but_currently_failing/runtime_errors/RT51_BASIC/RT51_BASIC_002_unknown_keyword_on_object.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "Unknown keyword message on Object instance.",
+      "category": "RT51_BASIC",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        51
+      ]
+    }
+  ],
+  "unexecuted": {},
+  "results": {
+    "RT54": {
+      "total_points": 4,
+      "passed_points": 3,
+      "test_results": {
+        "RT51_042_inheritance_miss_2": {
+          "result": "int_fail",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 51,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"something\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"a:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"a\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"runChild\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"b\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"something\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"runChild\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 51: No method found for selector b\n",
+          "diff_output": null
+        },
+        "RT54_008_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"MyInt\" parent=\"Integer\">\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"m\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <send selector=\"new\">\n                  <expr>\n                    <literal class=\"class\" value=\"MyInt\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'foo' collides with a method.\n",
+          "diff_output": null
+        },
+        "RT54_009_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"MyString\" parent=\"String\">\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"m\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <send selector=\"new\">\n                  <expr>\n                    <literal class=\"class\" value=\"MyString\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'foo' collides with a method.\n",
+          "diff_output": null
+        },
+        "RT54_013_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"MyString\" parent=\"String\">\n    <method selector=\"length\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"1\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"length:\">\n              <expr>\n                <send selector=\"new\">\n                  <expr>\n                    <literal class=\"class\" value=\"MyString\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'length' collides with a method.\n",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_ATTR": {
+      "total_points": 4,
+      "passed_points": 4,
+      "test_results": {
+        "RT54_001_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "RT54_DEEP_007_collision_after_from_copy_then_method_call": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"o\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"from:\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"o\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"1\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_ATTR_030_child_reads_parent_created_attr_via_super": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParent\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParent\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_SCOPE": {
+      "total_points": 2,
+      "passed_points": 2,
+      "test_results": {
+        "VAL_SCOPE_027_spec_like": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"giveObjectWithBlock\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"asInteger\">\n              <expr>\n                <send selector=\"read\">\n                  <expr>\n                    <literal class=\"class\" value=\"String\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"y\"/>\n                <expr>\n                  <send selector=\"plus:\">\n                    <expr>\n                      <send selector=\"asInteger\">\n                        <expr>\n                          <send selector=\"read\">\n                            <expr>\n                              <literal class=\"class\" value=\"String\"/>\n                            </expr>\n                          </send>\n                        </expr>\n                      </send>\n                    </expr>\n                    <arg order=\"1\">\n                      <expr>\n                        <var name=\"x\"/>\n                      </expr>\n                    </arg>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"x\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"7\"/>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"z\"/>\n          <expr>\n            <send selector=\"block:\">\n              <expr>\n                <send selector=\"new\">\n                  <expr>\n                    <literal class=\"class\" value=\"Object\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"b\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"5\">\n          <var name=\"x\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"9\"/>\n          </expr>\n        </assign>\n        <assign order=\"6\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"z\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"o\"/>\n          <expr>\n            <send selector=\"giveObjectWithBlock\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"read\">\n              <expr>\n                <literal class=\"class\" value=\"String\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"r1\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <send selector=\"block\">\n                  <expr>\n                    <var name=\"o\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"r2\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <send selector=\"block\">\n                  <expr>\n                    <var name=\"o\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"5\">\n          <var name=\"s\"/>\n          <expr>\n            <send selector=\"concatenateWith:\">\n              <expr>\n                <send selector=\"asString\">\n                  <expr>\n                    <var name=\"r1\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\",\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"6\">\n          <var name=\"s\"/>\n          <expr>\n            <send selector=\"concatenateWith:\">\n              <expr>\n                <var name=\"s\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <send selector=\"asString\">\n                    <expr>\n                      <var name=\"r2\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"7\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"s\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "11,12",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SCOPE_028_spec_like": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"giveObjectWithBlock\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"asInteger\">\n              <expr>\n                <send selector=\"read\">\n                  <expr>\n                    <literal class=\"class\" value=\"String\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"y\"/>\n                <expr>\n                  <send selector=\"plus:\">\n                    <expr>\n                      <send selector=\"asInteger\">\n                        <expr>\n                          <send selector=\"read\">\n                            <expr>\n                              <literal class=\"class\" value=\"String\"/>\n                            </expr>\n                          </send>\n                        </expr>\n                      </send>\n                    </expr>\n                    <arg order=\"1\">\n                      <expr>\n                        <var name=\"x\"/>\n                      </expr>\n                    </arg>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"x\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"7\"/>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"z\"/>\n          <expr>\n            <send selector=\"block:\">\n              <expr>\n                <send selector=\"new\">\n                  <expr>\n                    <literal class=\"class\" value=\"Object\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"b\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"5\">\n          <var name=\"x\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"9\"/>\n          </expr>\n        </assign>\n        <assign order=\"6\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"z\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"o\"/>\n          <expr>\n            <send selector=\"giveObjectWithBlock\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"read\">\n              <expr>\n                <literal class=\"class\" value=\"String\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"r1\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <send selector=\"block\">\n                  <expr>\n                    <var name=\"o\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"r2\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <send selector=\"block\">\n                  <expr>\n                    <var name=\"o\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"5\">\n          <var name=\"s\"/>\n          <expr>\n            <send selector=\"concatenateWith:\">\n              <expr>\n                <send selector=\"asString\">\n                  <expr>\n                    <var name=\"r1\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\",\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"6\">\n          <var name=\"s\"/>\n          <expr>\n            <send selector=\"concatenateWith:\">\n              <expr>\n                <var name=\"s\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <send selector=\"asString\">\n                    <expr>\n                      <var name=\"r2\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"7\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"s\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "13,14",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_SELFSUP": {
+      "total_points": 29,
+      "passed_points": 29,
+      "test_results": {
+        "VAL_SELFSUP_001_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"setAndGet:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_002_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"setAndGet:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"2\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "2",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_003_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"setAndGet:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"3\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "3",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_004_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"setAndGet:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"4\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "4",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_005_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"setAndGet:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"5\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "5",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_006_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"setAndGet:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"6\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "6",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_007_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"b\"/>\n          <expr>\n            <send selector=\"makeBlock:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <var name=\"b\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_008_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"b\"/>\n          <expr>\n            <send selector=\"makeBlock:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"2\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <var name=\"b\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "2",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_009_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"b\"/>\n          <expr>\n            <send selector=\"makeBlock:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"3\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <var name=\"b\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "3",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_010_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"b\"/>\n          <expr>\n            <send selector=\"makeBlock:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"4\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <var name=\"b\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "4",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_011_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"b\"/>\n          <expr>\n            <send selector=\"makeBlock:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"5\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <var name=\"b\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "5",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_012_self_basic": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"setAndGet:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"makeBlock:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"v\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"val:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"v\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"b\"/>\n          <expr>\n            <block arity=\"0\">\n              <assign order=\"1\">\n                <var name=\"r\"/>\n                <expr>\n                  <send selector=\"val\">\n                    <expr>\n                      <var name=\"self\"/>\n                    </expr>\n                  </send>\n                </expr>\n              </assign>\n            </block>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <var name=\"b\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"b\"/>\n          <expr>\n            <send selector=\"makeBlock:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"6\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"value\">\n              <expr>\n                <var name=\"b\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "6",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_014_spec_super": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"r\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"B\" parent=\"A\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"ahoj\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"C\" parent=\"B\">\n    <method selector=\"u\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"super\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"print\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"bar\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"C\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"u\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"r\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "ahojbarbar",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_016_spec_super": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"r\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"B\" parent=\"A\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"ahoj\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"C\" parent=\"B\">\n    <method selector=\"u\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"super\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"print\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"bar\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"C\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"u\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"r\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "ahojbarbar",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_018_spec_super": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"r\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"B\" parent=\"A\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"ahoj\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"C\" parent=\"B\">\n    <method selector=\"u\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"super\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"print\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"bar\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"C\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"u\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"r\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "ahojbarbar",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_020_spec_super": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"r\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"B\" parent=\"A\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"ahoj\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"C\" parent=\"B\">\n    <method selector=\"u\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"super\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"print\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"bar\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"C\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"u\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"r\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "ahojbarbar",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_022_spec_super": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"r\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"B\" parent=\"A\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"ahoj\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"C\" parent=\"B\">\n    <method selector=\"u\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"super\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"print\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"bar\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"C\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"u\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"r\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "ahojbarbar",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_023_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo1\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_024_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello2\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo2\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello2",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_025_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello3\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo3\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello3",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_026_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello4\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo4\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello4",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_027_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello5\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo5\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello5",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_028_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello6\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo6\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello6",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_029_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello7\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo7\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello7",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_030_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello8\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo8\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello8",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_031_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello9\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo9\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello9",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_032_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello10\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo10\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello10",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_033_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello11\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo11\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello11",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_SELFSUP_034_parent_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello12\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo12\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"readParentAttr\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Child\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"readParentAttr\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello12",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_COMPLEX": {
+      "total_points": 2,
+      "passed_points": 2,
+      "test_results": {
+        "VAL_COMPLEX_003_spec_super_like": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"r\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"B\" parent=\"A\">\n    <method selector=\"m:\">\n      <block arity=\"1\">\n        <parameter order=\"1\" name=\"x\"/>\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"ahoj\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"C\" parent=\"B\">\n    <method selector=\"u\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"super\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"print\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"bar\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"C\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"m:\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"foo\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"u\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"r\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "ahojfooahojbarbar",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "RT51": {
+      "total_points": 2,
+      "passed_points": 0,
+      "test_results": {
+        "RT51_009_object_keyword": {
+          "result": "int_fail",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"nope:\">\n              <expr>\n                <send selector=\"new\">\n                  <expr>\n                    <literal class=\"class\" value=\"Object\"/>\n                  </expr>\n                </send>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "RT51_012_user_object_keyword": {
+          "result": "int_fail",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"ok\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <literal class=\"Nil\" value=\"nil\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"a\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"A\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"nope:\">\n              <expr>\n                <var name=\"a\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_CTOR": {
+      "total_points": 2,
+      "passed_points": 2,
+      "test_results": {
+        "VAL_CTOR_010_subint_new_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"MyInt\" parent=\"Integer\"/>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"MyInt\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"tag:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"z\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"tag\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "z",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "VAL_CTOR_012_substring_new_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"MyString\" parent=\"String\"/>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"MyString\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"tag:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"q\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"tag\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <var name=\"r\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "q",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "RT51_BASIC": {
+      "total_points": 1,
+      "passed_points": 0,
+      "test_results": {
+        "RT51_BASIC_002_unknown_keyword_on_object": {
+          "result": "int_fail",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"missing:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    }
+  }
+}

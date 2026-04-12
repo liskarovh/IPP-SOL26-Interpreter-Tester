@@ -1,0 +1,20 @@
+*** Returned block should retain captured local.
++++ VALID_SCOPE
+!C! 0
+!I! 0
+>>> 1
+
+
+class Main : Object {
+makeBlock [ |
+  x := 6.
+  b := [| y := x plus: 6. ].
+  _ := b.
+]
+
+  run [ |
+    b := self makeBlock.
+r := b value.
+_ := (r asString) print.
+  ]
+  }

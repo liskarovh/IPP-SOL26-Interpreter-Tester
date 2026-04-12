@@ -1,0 +1,13 @@
+*** RT51 BASIC 023 unknown message after valid attribute read
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+_ := self worker: (Object new).
+x := self worker.
+_ := x missing.
+]
+}

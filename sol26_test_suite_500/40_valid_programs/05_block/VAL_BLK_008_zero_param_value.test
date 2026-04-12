@@ -1,0 +1,14 @@
+*** Zero-parameter block should return its last value.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    b := [| x := '8'. ].
+r := b value.
+_ := r print.
+  ]
+  }

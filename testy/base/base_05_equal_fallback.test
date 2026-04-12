@@ -1,0 +1,18 @@
++++ BASE_OOP
+*** equalTo: funguje u Object jako identicalTo:
+!C! 0
+!I! 0
+>>> 1
+
+class MyClass : Object {}
+
+class Main : Object {
+  run [ | 
+    m1 := MyClass new.
+    m2 := MyClass new.
+    m3 := m1.
+    _ := ((m1 equalTo: m2) asString) print.
+    _ := ' ' print.
+    _ := ((m1 equalTo: m3) asString) print.
+  ]
+}

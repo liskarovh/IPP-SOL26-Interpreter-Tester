@@ -1,0 +1,22 @@
+*** Collision is delayed until second closure invocation.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+_ := self count: 0.
+b := [|
+c := self count.
+_ := self count: (c plus: 1).
+x := (c equalTo: 1) ifTrue: [| _ := self foo: 1. ] ifFalse: [| _ := 1. ].
+].
+_ := b value.
+_ := b value.
+]
+foo [|
+_ := 1.
+]
+
+}

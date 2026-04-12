@@ -1,0 +1,18 @@
+*** Returned closure fails only when later executed.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+b := self makeBad.
+_ := b value.
+]
+makeBad [|
+_ := [| _ := MyInt from: 'str'. ].
+]
+
+}

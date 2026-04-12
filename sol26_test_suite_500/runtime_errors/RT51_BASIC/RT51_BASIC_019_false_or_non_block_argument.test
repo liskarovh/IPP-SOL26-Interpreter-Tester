@@ -1,0 +1,11 @@
+*** RT51 BASIC 019 false or non block argument
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+_ := false or: 1.
+]
+}

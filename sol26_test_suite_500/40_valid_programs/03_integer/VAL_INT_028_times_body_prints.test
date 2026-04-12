@@ -1,0 +1,12 @@
+*** Integer timesRepeat behavior.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+run [ |
+  r := 2 timesRepeat: [ :i | _ := (i asString) print. ].
+]
+}

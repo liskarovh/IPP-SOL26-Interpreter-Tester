@@ -1,0 +1,14 @@
+*** Two-parameter block should consume value:value:.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    b := [ :x :y | r := x concatenateWith: y. ].
+v := b value: '4' value: 'x'.
+_ := v print.
+  ]
+  }

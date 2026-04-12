@@ -1,0 +1,13 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_undefined_var5
+!C! 0
+!I! 32
+>>> 1
+
+class Main : Object {
+    run [|
+        x := (1 plus: 1) plus: y.
+        y := 1.
+        z := y.
+    ]
+}

@@ -1,0 +1,12 @@
+*** Fresh attribute creation with no colliding zero-argument method is valid.
++++ VALID_ATTR
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+run [ |
+  x := self foo: 1.
+]
+}

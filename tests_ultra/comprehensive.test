@@ -1,0 +1,170 @@
++++ COMPREHENSIVE
+*** Full feature test - linked list, fizzbuzz, polymorphism, closures, strings
+!C! 0
+!I! 0
+>>> 5
+
+class Node : Object {
+  init:val: [ :next :val |
+    _ := self next: next.
+    _ := self val: val.
+  ]
+}
+
+class LinkedList : Object {
+  init [ |
+    _ := self head: nil.
+    _ := self size: 0.
+  ]
+
+  push: [ :value |
+    newNode := Node new.
+    _ := newNode init: (self head) val: value.
+    _ := self head: newNode.
+    _ := self size: ((self size) plus: 1).
+  ]
+
+  length [ | _ := self size. ]
+
+  printAll [ |
+    current := self head.
+    _ := [| done := (current isNil) not. ] whileTrue: [|
+      _ := ((current val) asString) print.
+      _ := ' ' print.
+      current := current next.
+    ].
+    _ := '\n' print.
+  ]
+
+  contains: [ :target |
+    current := self head.
+    found := false.
+    _ := [| 
+      notDone := ((current isNil) not) and: [| _ := found not. ].
+    ] whileTrue: [|
+      eq := (current val) equalTo: target.
+      _ := eq ifTrue: [| found := true. ] ifFalse: [| ].
+      current := current next.
+    ].
+    _ := found.
+  ]
+
+  sum [ |
+    current := self head.
+    total := 0.
+    _ := [| notDone := (current isNil) not. ] whileTrue: [|
+      total := total plus: (current val).
+      current := current next.
+    ].
+    _ := total.
+  ]
+}
+
+class FizzBuzz : Object {
+  run: [ :n |
+    _ := n timesRepeat: [ :i |
+      mod3 := i minus: ((i divBy: 3) multiplyBy: 3).
+      mod5 := i minus: ((i divBy: 5) multiplyBy: 5).
+      isDiv3 := mod3 equalTo: 0.
+      isDiv5 := mod5 equalTo: 0.
+      _ := (isDiv3 and: [| _ := isDiv5. ]) 
+        ifTrue: [| _ := 'FizzBuzz' print. ]
+        ifFalse: [| 
+          _ := isDiv3 
+            ifTrue: [| _ := 'Fizz' print. ]
+            ifFalse: [|
+              _ := isDiv5 
+                ifTrue: [| _ := 'Buzz' print. ]
+                ifFalse: [| _ := (i asString) print. ].
+            ].
+        ].
+      _ := ' ' print.
+    ].
+    _ := '\n' print.
+  ]
+}
+
+class Greeter : Object {
+  makeGreeter: [ :prefix |
+    _ := [ :name |
+      _ := prefix print.
+      _ := name print.
+      _ := '\n' print.
+    ].
+  ]
+}
+
+class Animal : Object {
+  speak [ | _ := '...' print. ]
+  name  [ | _ := 'Animal'. ]
+}
+
+class Dog : Animal {
+  speak [ | _ := 'Woof!' print. ]
+  name  [ | _ := 'Dog'. ]
+}
+
+class Cat : Animal {
+  speak [ | _ := 'Meow!' print. ]
+  name  [ | _ := 'Cat'. ]
+}
+
+class Main : Object {
+  run [ |
+    _ := '--- List ---\n' print.
+    list := LinkedList new.
+    _ := list init.
+    _ := list push: 10.
+    _ := list push: 20.
+    _ := list push: 30.
+    _ := list push: 40.
+    _ := 'Items: ' print.
+    _ := list printAll.
+    _ := 'Len: ' print.
+    _ := ((list length) asString) print.
+    _ := '\n' print.
+    _ := 'Sum: ' print.
+    _ := ((list sum) asString) print.
+    _ := '\n' print.
+    _ := 'Has 20: ' print.
+    _ := ((list contains: 20) asString) print.
+    _ := '\n' print.
+    _ := 'Has 99: ' print.
+    _ := ((list contains: 99) asString) print.
+    _ := '\n' print.
+
+    _ := '\n--- FizzBuzz ---\n' print.
+    fb := FizzBuzz new.
+    _ := fb run: 15.
+
+    _ := '\n--- Animals ---\n' print.
+    dog := Dog new.
+    cat := Cat new.
+    animal := Animal new.
+    _ := (dog name) print. _ := ': ' print. _ := dog speak. _ := '\n' print.
+    _ := (cat name) print. _ := ': ' print. _ := cat speak. _ := '\n' print.
+    _ := (animal name) print. _ := ': ' print. _ := animal speak. _ := '\n' print.
+
+    _ := '\n--- Closures ---\n' print.
+    greeter := Greeter new.
+    hello := greeter makeGreeter: 'Hello, '.
+    bye := greeter makeGreeter: 'Bye, '.
+    _ := hello value: 'World'.
+    _ := hello value: 'SOL26'.
+    _ := bye value: 'World'.
+
+    _ := '\n--- Strings ---\n' print.
+    s := 'Hello, World!'.
+    _ := 'Orig: ' print. _ := s print. _ := '\n' print.
+    _ := 'Len: ' print. _ := ((s length) asString) print. _ := '\n' print.
+    _ := 'Sub: ' print. _ := (s startsWith: 1 endsBefore: 6) print. _ := '\n' print.
+    _ := 'Cat: ' print. _ := (s concatenateWith: ' Cool!') print. _ := '\n' print.
+
+    _ := '\n--- Equality ---\n' print.
+    a := 42. b := 42. c := Integer from: 42.
+    _ := 'a==b: ' print. _ := ((a equalTo: b) asString) print. _ := '\n' print.
+    _ := 'a==c: ' print. _ := ((a equalTo: c) asString) print. _ := '\n' print.
+
+    _ := '\nDone!\n' print.
+  ]
+}

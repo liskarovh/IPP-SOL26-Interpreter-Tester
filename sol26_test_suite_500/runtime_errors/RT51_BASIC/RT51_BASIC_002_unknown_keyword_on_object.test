@@ -1,0 +1,12 @@
+*** Unknown keyword message on Object instance.
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+x := Object new.
+_ := x missing: 1.
+]
+}

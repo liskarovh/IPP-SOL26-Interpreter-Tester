@@ -1,0 +1,12 @@
+*** RT51 BASIC 010 unknown unary on block
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+x := [| _ := 1. ].
+_ := x missing.
+]
+}

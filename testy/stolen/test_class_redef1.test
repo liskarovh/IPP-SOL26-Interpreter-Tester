@@ -1,0 +1,11 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_class_redef1
+!C! 0
+!I! 35
+>>> 1
+
+class Main : Object {
+    run [|]
+}
+class A:Integer{}
+class A:Integer{}

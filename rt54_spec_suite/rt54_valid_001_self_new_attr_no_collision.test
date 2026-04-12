@@ -1,0 +1,12 @@
++++ VALID_ATTR
+*** self write is valid when no colliding zero-arg method exists
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+    run [|
+        _ := self foo: 1.
+        _ := ((self foo) asString) print.
+    ]
+}

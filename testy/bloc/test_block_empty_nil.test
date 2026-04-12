@@ -1,0 +1,12 @@
++++ BLOCKS
+*** Návratové hodnoty bloku (Sekce 1.2.6): test_block_empty_nil
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+    run [|
+        res := [|] value.
+        _ := ((res isNil) asString) print.
+    ]
+}

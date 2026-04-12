@@ -1,0 +1,13 @@
++++ VALID_ATTR
+*** unknown one-argument keyword on Object should create an attribute, not raise 51
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+    run [|
+        x := Object new.
+        _ := x nope: 1.
+        _ := ((x nope) asString) print.
+    ]
+}

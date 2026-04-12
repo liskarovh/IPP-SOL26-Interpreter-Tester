@@ -1,0 +1,25 @@
+*** Mixed object, attribute, block, and whileTrue scenario.
++++ VALID_COMPLEX
+!C! 0
+!I! 0
+>>> 2
+
+class Counter : Object {
+init [ |
+  _ := self value: 6.
+]
+step [ |
+  _ := self value: ((self value) minus: 1).
+  r := self value.
+]
+}
+
+class Main : Object {
+
+  run [ |
+    c := Counter new.
+_ := c init.
+cond := [| r := (c value) greaterThan: 0. ].
+_ := cond whileTrue: [| _ := ((c value) asString) print. _ := c step. ].
+  ]
+  }

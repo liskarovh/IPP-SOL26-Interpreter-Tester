@@ -1,0 +1,365 @@
++++ MEGA
+*** Mega test - all SOL26 features pushed to limits
+!C! 0
+!I! 0
+>>> 10
+
+"Stack implementation using linked list"
+class StackNode : Object {
+  make:val: [ :nxt :v |
+    _ := self nxt: nxt.
+    _ := self v: v.
+  ]
+}
+
+class Stack : Object {
+  create [ |
+    _ := self top: nil.
+    _ := self cnt: 0.
+  ]
+  push: [ :val |
+    node := StackNode new.
+    _ := node make: (self top) val: val.
+    _ := self top: node.
+    _ := self cnt: ((self cnt) plus: 1).
+  ]
+  pop [ |
+    result := (self top) v.
+    _ := self top: ((self top) nxt).
+    _ := self cnt: ((self cnt) minus: 1).
+    _ := result.
+  ]
+  peek [ | _ := (self top) v. ]
+  isEmpty [ | _ := (self top) isNil. ]
+  size [ | _ := self cnt. ]
+  printStack [ |
+    cur := self top.
+    _ := [| ok := (cur isNil) not. ] whileTrue: [|
+      _ := ((cur v) asString) print.
+      _ := ' ' print.
+      cur := cur nxt.
+    ].
+  ]
+}
+
+"Pair/Tuple - holds two values"
+class Pair : Object {
+  make:and: [ :a :b |
+    _ := self fst: a.
+    _ := self snd: b.
+  ]
+  swap [ |
+    tmp := self fst.
+    _ := self fst: (self snd).
+    _ := self snd: tmp.
+  ]
+  show [ |
+    _ := '(' print.
+    _ := ((self fst) asString) print.
+    _ := ', ' print.
+    _ := ((self snd) asString) print.
+    _ := ')' print.
+  ]
+}
+
+"Math utilities"
+class MyMath : Object {
+  abs: [ :n |
+    _ := (n greaterThan: 0) 
+      ifTrue: [| _ := n. ]
+      ifFalse: [| 
+        _ := (n equalTo: 0) ifTrue: [| _ := 0. ] ifFalse: [| _ := 0 minus: n. ].
+      ].
+  ]
+  max:and: [ :a :b |
+    _ := (a greaterThan: b) ifTrue: [| _ := a. ] ifFalse: [| _ := b. ].
+  ]
+  min:and: [ :a :b |
+    _ := (a greaterThan: b) ifTrue: [| _ := b. ] ifFalse: [| _ := a. ].
+  ]
+  pow:exp: [ :base :exp |
+    result := 1.
+    _ := exp timesRepeat: [ :i |
+      result := result multiplyBy: base.
+    ].
+    _ := result.
+  ]
+  fibonacci: [ :n |
+    _ := ((n equalTo: 0) or: [| _ := n equalTo: 1. ])
+      ifTrue: [| _ := n. ]
+      ifFalse: [|
+        a := 0. b := 1.
+        _ := (n minus: 1) timesRepeat: [ :i |
+          tmp := b.
+          b := a plus: b.
+          a := tmp.
+        ].
+        _ := b.
+      ].
+  ]
+  gcd:and: [ :a :b |
+    x := a. y := b.
+    _ := [| notZero := (y equalTo: 0) not. ] whileTrue: [|
+      temp := y.
+      y := x minus: ((x divBy: y) multiplyBy: y).
+      x := temp.
+    ].
+    _ := x.
+  ]
+  isPrime: [ :n |
+    _ := ((n greaterThan: 1) not)
+      ifTrue: [| _ := false. ]
+      ifFalse: [|
+        found := false.
+        i := 2.
+        _ := [| 
+          keep := ((i multiplyBy: i) greaterThan: n) not.
+          check := keep and: [| _ := found not. ].
+        ] whileTrue: [|
+          mod := n minus: ((n divBy: i) multiplyBy: i).
+          _ := (mod equalTo: 0) ifTrue: [| found := true. ] ifFalse: [| ].
+          i := i plus: 1.
+        ].
+        _ := found not.
+      ].
+  ]
+}
+
+"Factorial using Integer subclass"
+class Factorial : Integer {
+  factorial [ |
+    _ := (self equalTo: 0)
+      ifTrue: [| _ := Factorial from: 1. ]
+      ifFalse: [| _ := self multiplyBy: ((Factorial from: (self plus: -1)) factorial). ].
+  ]
+}
+
+"String builder using concatenation chain"
+class StringBuilder : Object {
+  init [ | _ := self buf: ''. ]
+  append: [ :s |
+    _ := self buf: ((self buf) concatenateWith: s).
+  ]
+  appendInt: [ :n |
+    _ := self buf: ((self buf) concatenateWith: (n asString)).
+  ]
+  build [ | _ := self buf. ]
+  length [ | _ := (self buf) length. ]
+}
+
+"Shape hierarchy"
+class Shape : Object {
+  area [ | _ := 0. ]
+  describe [ | _ := 'Shape'. ]
+}
+
+class Circle : Shape {
+  init: [ :r | _ := self radius: r. ]
+  area [ | _ := (self radius) multiplyBy: (self radius). _ := _ multiplyBy: 3. ]
+  describe [ | _ := 'Circle'. ]
+}
+
+class Rectangle : Shape {
+  init:h: [ :w :h |
+    _ := self width: w.
+    _ := self height: h.
+  ]
+  area [ | _ := (self width) multiplyBy: (self height). ]
+  describe [ | _ := 'Rectangle'. ]
+}
+
+class Square : Rectangle {
+  initSide: [ :s |
+    _ := self width: s.
+    _ := self height: s.
+  ]
+  describe [ | _ := 'Square'. ]
+}
+
+"Iterator pattern with closures"
+class Range : Object {
+  from:to: [ :start :end |
+    _ := self start: start.
+    _ := self end: end.
+  ]
+  forEach: [ :block |
+    i := self start.
+    _ := [| ok := ((i greaterThan: (self end)) not). ] whileTrue: [|
+      _ := block value: i.
+      i := i plus: 1.
+    ].
+  ]
+  map: [ :transform |
+    sb := StringBuilder new.
+    _ := sb init.
+    i := self start.
+    first := true.
+    _ := [| ok := ((i greaterThan: (self end)) not). ] whileTrue: [|
+      _ := first ifTrue: [| ] ifFalse: [| _ := sb append: ', '. ].
+      result := transform value: i.
+      _ := sb append: (result asString).
+      first := false.
+      i := i plus: 1.
+    ].
+    _ := sb build.
+  ]
+}
+
+"Deep inheritance chain"
+class A : Object {
+  whoami [ | _ := 'A'. ]
+  chain [ | _ := self whoami. ]
+}
+class B : A {
+  whoami [ | _ := 'B'. ]
+}
+class C : B {
+  whoami [ | _ := 'C'. ]
+}
+class D : C { }
+class E : D {
+  whoami [ | _ := 'E'. ]
+  callSuper [ | _ := super whoami. ]
+}
+
+"Accumulator closure"
+class AccumulatorFactory : Object {
+  make: [ :initial |
+    total := initial.
+    _ := [ :amount |
+      total := total plus: amount.
+      _ := total.
+    ].
+  ]
+}
+
+class Main : Object {
+  printLn: [ :s |
+    _ := s print.
+    _ := '\n' print.
+  ]
+
+  section: [ :title |
+    _ := '\n=== ' print.
+    _ := title print.
+    _ := ' ===\n' print.
+  ]
+
+  run [ |
+    "=== STACK ==="
+    _ := self section: 'Stack'.
+    stack := Stack new.
+    _ := stack create.
+    _ := stack push: 1.
+    _ := stack push: 2.
+    _ := stack push: 3.
+    _ := stack push: 4.
+    _ := stack push: 5.
+    _ := 'Stack: ' print.
+    _ := stack printStack.
+    _ := self printLn: ''.
+    _ := self printLn: ('Size: ' concatenateWith: ((stack size) asString)).
+    _ := self printLn: ('Peek: ' concatenateWith: ((stack peek) asString)).
+    popped := stack pop.
+    _ := self printLn: ('Popped: ' concatenateWith: (popped asString)).
+    _ := self printLn: ('After pop: ' concatenateWith: ((stack size) asString)).
+
+    "=== PAIRS ==="
+    _ := self section: 'Pairs'.
+    p := Pair new.
+    _ := p make: 10 and: 20.
+    _ := 'Pair: ' print. _ := p show. _ := self printLn: ''.
+    _ := p swap.
+    _ := 'Swapped: ' print. _ := p show. _ := self printLn: ''.
+
+    "=== MATH ==="
+    _ := self section: 'Math'.
+    math := MyMath new.
+    _ := self printLn: ('abs(-7): ' concatenateWith: ((math abs: -7) asString)).
+    _ := self printLn: ('max(3,9): ' concatenateWith: ((math max: 3 and: 9) asString)).
+    _ := self printLn: ('min(3,9): ' concatenateWith: ((math min: 3 and: 9) asString)).
+    _ := self printLn: ('pow(2,10): ' concatenateWith: ((math pow: 2 exp: 10) asString)).
+    _ := self printLn: ('fib(10): ' concatenateWith: ((math fibonacci: 10) asString)).
+    _ := self printLn: ('gcd(48,18): ' concatenateWith: ((math gcd: 48 and: 18) asString)).
+    _ := self printLn: ('prime(7): ' concatenateWith: ((math isPrime: 7) asString)).
+    _ := self printLn: ('prime(12): ' concatenateWith: ((math isPrime: 12) asString)).
+    _ := self printLn: ('prime(97): ' concatenateWith: ((math isPrime: 97) asString)).
+
+    "=== FACTORIAL ==="
+    _ := self section: 'Factorial'.
+    _ := 10 timesRepeat: [ :i |
+      f := Factorial from: i.
+      _ := (i asString) print.
+      _ := '! = ' print.
+      _ := self printLn: ((f factorial) asString).
+    ].
+
+    "=== STRING BUILDER ==="
+    _ := self section: 'StringBuilder'.
+    sb := StringBuilder new.
+    _ := sb init.
+    _ := sb append: 'Hello'.
+    _ := sb append: ' '.
+    _ := sb append: 'World'.
+    _ := sb append: '! '.
+    _ := sb appendInt: 42.
+    _ := self printLn: (sb build).
+    _ := self printLn: ('Length: ' concatenateWith: ((sb length) asString)).
+
+    "=== SHAPES ==="
+    _ := self section: 'Shapes'.
+    circle := Circle new. _ := circle init: 5.
+    rect := Rectangle new. _ := rect init: 4 h: 6.
+    sq := Square new. _ := sq initSide: 7.
+
+    _ := ((circle describe) concatenateWith: (' area=  ' concatenateWith: ((circle area) asString))) print.
+    _ := self printLn: ''.
+    _ := ((rect describe) concatenateWith: (' area= ' concatenateWith: ((rect area) asString))) print.
+    _ := self printLn: ''.
+    _ := ((sq describe) concatenateWith: (' area= ' concatenateWith: ((sq area) asString))) print.
+    _ := self printLn: ''.
+
+    "=== RANGE + MAP ==="
+    _ := self section: 'Range'.
+    rng := Range new.
+    _ := rng from: 1 to: 5.
+    _ := 'forEach: ' print.
+    _ := rng forEach: [ :x | _ := (x asString) print. _ := ' ' print. ].
+    _ := self printLn: ''.
+    mapped := rng map: [ :x | _ := x multiplyBy: x. ].
+    _ := self printLn: ('squares: ' concatenateWith: mapped).
+
+    "=== DEEP INHERITANCE ==="
+    _ := self section: 'Inheritance'.
+    e := E new.
+    _ := self printLn: ('E.whoami: ' concatenateWith: (e whoami)).
+    _ := self printLn: ('E.chain: ' concatenateWith: (e chain)).
+    _ := self printLn: ('E.callSuper: ' concatenateWith: (e callSuper)).
+    d := D new.
+    _ := self printLn: ('D.whoami: ' concatenateWith: (d whoami)).
+
+    "=== ACCUMULATOR ==="
+    _ := self section: 'Accumulator'.
+    factory := AccumulatorFactory new.
+    acc := factory make: 0.
+    _ := acc value: 5.
+    _ := acc value: 3.
+    result := acc value: 12.
+    _ := self printLn: ('Total: ' concatenateWith: (result asString)).
+
+    acc2 := factory make: 100.
+    _ := acc2 value: -50.
+    r2 := acc2 value: 25.
+    _ := self printLn: ('Acc2: ' concatenateWith: (r2 asString)).
+
+    "=== PRIMES 1-30 ==="
+    _ := self section: 'Primes'.
+    _ := 'Primes: ' print.
+    _ := 30 timesRepeat: [ :n |
+      _ := (math isPrime: n) ifTrue: [| _ := (n asString) print. _ := ' ' print. ] ifFalse: [| ].
+    ].
+    _ := self printLn: ''.
+
+    _ := self printLn: '\nAll done!'.
+  ]
+}

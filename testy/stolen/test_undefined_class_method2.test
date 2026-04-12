@@ -1,0 +1,11 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_undefined_class_method2
+!C! 0
+!I! 32
+>>> 1
+
+class Main : Object {
+    run [|
+        x := String b.
+    ]
+}

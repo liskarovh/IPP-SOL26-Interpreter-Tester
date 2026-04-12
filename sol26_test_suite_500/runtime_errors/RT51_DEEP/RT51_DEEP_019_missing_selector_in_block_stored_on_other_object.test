@@ -1,0 +1,13 @@
+*** Failure happens only after fetching stored block and executing it.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+o := (Object new) job: [| _ := (Object new) missing. ].
+b := o job.
+_ := b value.
+]
+}

@@ -1,0 +1,18 @@
+*** Closure first call is valid; second call divides by zero after state change.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+_ := self denom: 2.
+b := [|
+d := self denom.
+_ := self denom: 0.
+_ := 10 divBy: d.
+].
+_ := b value.
+_ := b value.
+]
+}

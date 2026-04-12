@@ -1,0 +1,12 @@
++++ ERRORS
+*** Chyba 34: Pokus o prirazeni do parametru bloku
+!C! 0
+!I! 34
+>>> 1
+
+class Main : Object {
+  run [ | 
+    b := [ :x | x := 42. ].
+    _ := (b value: 10).
+  ]
+}

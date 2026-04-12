@@ -1,0 +1,12 @@
+*** RT51 BASIC 008 unknown keyword on true
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+x := true.
+_ := x missing: 1.
+]
+}

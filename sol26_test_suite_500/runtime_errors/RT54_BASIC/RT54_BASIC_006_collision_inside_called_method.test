@@ -1,0 +1,18 @@
+*** Collision does not happen at top level but inside called method.
++++ RT54_BASIC
+!C! 0
+!I! 54
+>>> 1
+
+class Main : Object {
+run [|
+_ := self go.
+]
+go [|
+_ := self foo: 10.
+]
+foo [|
+_ := 1.
+]
+
+}

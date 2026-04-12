@@ -1,0 +1,11 @@
+*** Direct division by zero.
++++ RT53_BASIC
+!C! 0
+!I! 53
+>>> 1
+
+class Main : Object {
+run [|
+_ := 5 divBy: 0.
+]
+}

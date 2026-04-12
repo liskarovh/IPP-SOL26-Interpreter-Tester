@@ -1,0 +1,13 @@
+*** timesRepeat: hits bad value only on later iteration.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+_ := 3 timesRepeat: [ :i |
+x := (i equalTo: 2) ifTrue: [| _ := 1 divBy: 0. ] ifFalse: [| _ := 1. ].
+].
+]
+}

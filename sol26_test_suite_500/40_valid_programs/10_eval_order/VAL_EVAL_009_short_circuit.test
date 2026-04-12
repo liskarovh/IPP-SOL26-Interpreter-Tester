@@ -1,0 +1,15 @@
+*** Boolean builtins should short-circuit.
++++ VALID_EVAL
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := true or: [| _ := nil nope. ].
+y := false and: [| _ := nil nope. ].
+z := true ifTrue: [| r := '2'. ] ifFalse: [| _ := nil nope. ].
+_ := z print.
+  ]
+  }

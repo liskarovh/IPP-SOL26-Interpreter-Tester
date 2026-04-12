@@ -1,0 +1,12 @@
+*** Nested block reads name assigned only later.
++++ SEM32
+!C! 0
+!I! 32
+>>> 1
+
+class Main : Object {
+
+run [ |
+  b := [| x := later. ]. later := 1. _ := b value.
+]
+}

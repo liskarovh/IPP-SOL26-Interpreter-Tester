@@ -1,0 +1,10 @@
++++ ERRORS
+*** Chyba 33: Spatna arita bloku vuci selektoru
+!C! 0
+!I! 33
+>>> 1
+
+class Main : Object {
+  run [ | ]
+  metodaSPrametrem: [ | _ := 'Chybi parametr v bloku' print. ]
+}

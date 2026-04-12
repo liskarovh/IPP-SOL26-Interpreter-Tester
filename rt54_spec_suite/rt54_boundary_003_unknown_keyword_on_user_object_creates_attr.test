@@ -1,0 +1,19 @@
++++ VALID_ATTR
+*** unknown one-argument keyword on user object should create an attribute, not raise 51
+!C! 0
+!I! 0
+>>> 1
+
+class A : Object {
+    ok [|
+        r := nil.
+    ]
+}
+
+class Main : Object {
+    run [|
+        a := A new.
+        _ := a nope: 1.
+        _ := ((a nope) asString) print.
+    ]
+}

@@ -1,0 +1,16 @@
+*** Using super checks collisions only in ancestors, but here it still collides.
++++ RT54_BASIC
+!C! 0
+!I! 54
+>>> 1
+
+class Parent : Object {
+something [|
+_ := 1.
+]
+}
+class Main : Parent {
+run [|
+_ := super something: 1.
+]
+}

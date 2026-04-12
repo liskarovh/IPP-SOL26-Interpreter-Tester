@@ -1,0 +1,54 @@
+*** Long input batch machine with returned closure, mutable state, and copied attributes.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class Factory : Object {
+
+makeMachine [ |
+prefix := String read.
+count := 0.
+log := ''.
+next := [ |
+count := count plus: 1.
+raw := String read.
+chunk := prefix concatenateWith: ':'.
+chunk := chunk concatenateWith: raw.
+chunk := chunk concatenateWith: ':'.
+chunk := chunk concatenateWith: (count asString).
+sep := ((log length) equalTo: 0)
+ifTrue: [ | r := ''. ]
+ifFalse: [ | r := '|'. ].
+log := log concatenateWith: sep.
+log := log concatenateWith: chunk.
+_ := chunk.
+].
+snap := [ |
+_ := log.
+].
+m := Object new.
+_ := m next: next.
+_ := m snap: snap.
+_ := m.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+f := Factory new.
+m := f makeMachine.
+a := (m next) value.
+b := (m next) value.
+c := (m next) value.
+out := (m snap) value.
+out := out concatenateWith: '|'.
+out := out concatenateWith: a.
+out := out concatenateWith: '|'.
+out := out concatenateWith: c.
+_ := out print.
+]
+
+}

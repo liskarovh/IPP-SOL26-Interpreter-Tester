@@ -1,0 +1,50 @@
+*** Long looped report with whileTrue:, boolean branches, and attribute state.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class Counter : Object {
+
+makeReportFrom:downTo:prefix: [ :start :stop :prefix |
+_ := self n: start.
+_ := self stop: stop.
+_ := self prefix: prefix.
+_ := self log: ''.
+cond := [ |
+r := (self n) greaterThan: (self stop).
+].
+body := [ |
+sep := (((self log) length) equalTo: 0)
+ifTrue: [ | r := ''. ]
+ifFalse: [ | r := ','. ].
+chunk := (self prefix) concatenateWith: ((self n) asString).
+txt := (self log) concatenateWith: sep.
+txt := txt concatenateWith: chunk.
+flag := ((self n) greaterThan: 3)
+ifTrue: [ | r := 'H'. ]
+ifFalse: [ | r := 'L'. ].
+txt := txt concatenateWith: ':'.
+txt := txt concatenateWith: flag.
+_ := self log: txt.
+_ := self n: ((self n) minus: 1).
+_ := self log.
+].
+last := cond whileTrue: body.
+out := last concatenateWith: '|'.
+out := out concatenateWith: ((self n) asString).
+out := out concatenateWith: '|'.
+out := out concatenateWith: ((((self log) length) greaterThan: 0) asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+c := Counter new.
+out := c makeReportFrom: 5 downTo: 1 prefix: 'X'.
+_ := out print.
+]
+
+}

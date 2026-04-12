@@ -1,0 +1,15 @@
+*** String behavior.
++++ VALID_STRING
+!C! 0
+!I! 0
+>>> 1
+
+class MyString : String { }
+
+class Main : Object {
+
+  run [ |
+    x := 'ab' concatenateWith: (MyString from: 'cd').
+_ := x print.
+  ]
+  }

@@ -1,0 +1,11 @@
+*** RT51 BASIC 022 timesRepeat non value colon argument
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+_ := 3 timesRepeat: 1.
+]
+}

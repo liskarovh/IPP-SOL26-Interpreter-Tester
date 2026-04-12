@@ -1,0 +1,17 @@
+*** timesRepeat: triggers collision only on later iteration.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+_ := 3 timesRepeat: [ :i |
+x := (i equalTo: 2) ifTrue: [| _ := self foo: 1. ] ifFalse: [| _ := 1. ].
+].
+]
+foo [|
+_ := 1.
+]
+
+}

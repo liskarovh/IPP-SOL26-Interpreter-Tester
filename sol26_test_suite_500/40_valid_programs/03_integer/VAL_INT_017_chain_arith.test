@@ -1,0 +1,13 @@
+*** Integer behavior.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := (1 plus: 2) multiplyBy: 3.
+_ := (x asString) print.
+  ]
+  }

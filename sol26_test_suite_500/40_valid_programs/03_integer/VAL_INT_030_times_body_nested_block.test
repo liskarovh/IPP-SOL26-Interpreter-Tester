@@ -1,0 +1,14 @@
+*** Integer timesRepeat behavior.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    _ := self out: ''.
+r := 2 timesRepeat: [ :i | b := [| _ := self out: ((self out) concatenateWith: (i asString)). ]. _ := b value. ].
+_ := (self out) print.
+  ]
+  }

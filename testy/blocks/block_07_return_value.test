@@ -1,0 +1,15 @@
++++ BLOCKS
+*** Blok vraci posledni vyhodnoceny vyraz
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    b := [ | 
+      _ := 1.
+      _ := 2.
+    ].
+    _ := ((b value) asString) print.
+  ]
+}

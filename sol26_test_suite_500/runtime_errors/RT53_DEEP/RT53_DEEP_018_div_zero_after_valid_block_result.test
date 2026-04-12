@@ -1,0 +1,12 @@
+*** Bad divisor comes from previously valid block result.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+d := [| _ := 0. ] value.
+_ := 5 divBy: d.
+]
+}

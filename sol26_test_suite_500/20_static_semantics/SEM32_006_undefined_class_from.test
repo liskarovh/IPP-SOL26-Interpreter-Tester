@@ -1,0 +1,12 @@
+*** Undefined class from: should cause 32.
++++ SEM32
+!C! 0
+!I! 32
+>>> 1
+
+class Main : Object {
+
+run [ |
+  x := Missing from: 1.
+]
+}

@@ -1,0 +1,49 @@
+*** Long boolean orchestra mixing whileTrue:, and:, or:, ifTrue:ifFalse:, and counters.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class Engine : Object {
+
+run [ |
+_ := self n: 4.
+_ := self sum: 0.
+_ := self out: ''.
+cond := [ |
+r := (self n) greaterThan: 0.
+].
+body := [ |
+ok := true and: [ | r := ((self n) greaterThan: 2). ].
+part := ok
+ifTrue: [ | r := 'H'. ]
+ifFalse: [ | r := 'L'. ].
+sep := (((self out) length) equalTo: 0)
+ifTrue: [ | r := ''. ]
+ifFalse: [ | r := ','. ].
+txt := (self out) concatenateWith: sep.
+txt := txt concatenateWith: part.
+_ := self out: txt.
+_ := self sum: ((self sum) plus: (self n)).
+_ := self n: ((self n) minus: 1).
+_ := txt.
+].
+last := cond whileTrue: body.
+flag := false or: [ | r := ((self sum) greaterThan: 5). ].
+out := last concatenateWith: '|'.
+out := out concatenateWith: (flag asString).
+out := out concatenateWith: '|'.
+out := out concatenateWith: ((self sum) asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+e := Engine new.
+out := e run.
+_ := out print.
+]
+
+}

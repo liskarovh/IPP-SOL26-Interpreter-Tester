@@ -1,0 +1,15 @@
++++ BASE_OOP
+*** Vytvareni instanci pomoci new
+!C! 0
+!I! 0
+>>> 1
+
+class MyClass : Object {}
+
+class Main : Object {
+  run [ | 
+    o := Object new.
+    m := MyClass new.
+    _ := 'DONE' print.
+  ]
+}

@@ -1,0 +1,12 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_arity3
+!C! 0
+!I! 33
+>>> 1
+
+class Main : Object {
+    run [|
+        x := self p3: 2.
+    ]
+    p3: [:a :b|]
+}

@@ -1,0 +1,26 @@
+*** Prime search up to 200
++++ VALID
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+    run [|
+        search_limit := 200.
+        _ := search_limit timesRepeat: [:i|
+            _ := (i equalTo: 1) ifTrue: [|]
+                ifFalse: [|
+                    divisors := 0.
+                    _ := i timesRepeat: [:j|
+                        div := (i divBy: j).
+                        mult := div multiplyBy: j.
+                        add := (i equalTo: mult) ifTrue: [| _ := 1.] ifFalse: [| _ := 0.].
+                        divisors := divisors plus: add.
+                    ].
+                    _ := (divisors equalTo: 2)
+                        ifTrue: [| _ := ((i asString) concatenateWith: ' is a prime.') print.]
+                        ifFalse: [|].
+                ].
+        ].
+    ]
+}

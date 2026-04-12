@@ -1,0 +1,12 @@
+*** RT51 BASIC 013 zero param block called with value colon
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+b := [| _ := 1. ].
+_ := b value: 1.
+]
+}

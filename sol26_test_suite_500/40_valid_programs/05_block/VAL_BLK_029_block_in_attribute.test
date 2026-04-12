@@ -1,0 +1,14 @@
+*** Block behavior.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    _ := self blk: [| x := 'a'. ].
+r := (self blk) value.
+_ := r print.
+  ]
+  }

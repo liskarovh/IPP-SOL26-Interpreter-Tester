@@ -1,0 +1,13 @@
+*** Unknown class-side message on user class should cause 32.
++++ SEM32
+!C! 0
+!I! 32
+>>> 1
+
+class A : Object { }
+
+class Main : Object {
+run [ |
+  x := A nope.
+]
+}

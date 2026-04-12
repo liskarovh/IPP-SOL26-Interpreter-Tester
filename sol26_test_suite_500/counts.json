@@ -1,0 +1,31 @@
+{
+  "total": 500,
+  "cli": 12,
+  "xml_and_static": 88,
+  "runtime": 72,
+  "valid": 328,
+  "by_category": {
+    "CLI": 12,
+    "XML20": 18,
+    "XML42": 30,
+    "SEM31": 8,
+    "SEM32": 12,
+    "SEM33": 6,
+    "SEM34": 5,
+    "SEM35": 9,
+    "RT51": 44,
+    "RT53": 14,
+    "RT54": 14,
+    "VALID_MIN": 20,
+    "VALID_OBJBOOL": 28,
+    "VALID_INTEGER": 48,
+    "VALID_STRING": 46,
+    "VALID_BLOCK": 40,
+    "VALID_SCOPE": 32,
+    "VALID_SELFSUP": 34,
+    "VALID_ATTR": 30,
+    "VALID_CTOR": 18,
+    "VALID_EVAL": 14,
+    "VALID_COMPLEX": 18
+  }
+}

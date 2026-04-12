@@ -1,0 +1,20 @@
+*** Overloading same selector is not supported.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : Object {
+foo: [ :x |
+  _ := x.
+]
+foo: [ :y |
+  _ := y.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

@@ -1,0 +1,21 @@
+*** Program does valid parent work first; collision happens later.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Parent : Object {
+prepare [|
+_ := self ok: 1.
+]
+}
+class Main : Parent {
+run [|
+_ := super prepare.
+_ := self foo: 1.
+]
+foo [|
+_ := 1.
+]
+
+}

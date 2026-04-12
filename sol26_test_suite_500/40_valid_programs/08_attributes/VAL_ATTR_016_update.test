@@ -1,0 +1,15 @@
+*** Existing attribute should be updated by the same keyword message.
++++ VALID_ATTR
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    _ := self a: 6.
+_ := self a: (6 plus: 6).
+r := self a.
+_ := (r asString) print.
+  ]
+  }

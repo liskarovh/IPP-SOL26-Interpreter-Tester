@@ -1,0 +1,13 @@
+*** Failure appears only after valid attribute chain read.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := self first: ((Object new) second: (Object new)).
+x := (self first) second.
+_ := x missing.
+]
+}

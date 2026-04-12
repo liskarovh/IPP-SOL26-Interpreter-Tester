@@ -1,0 +1,21 @@
++++ RT54
+*** ordinary receiver write must fail when receiver class defines inherited zero-arg method
+!C! 0
+!I! 54
+>>> 1
+
+class Parent : Object {
+    foo [|
+        r := 'method'.
+    ]
+}
+
+class Child : Parent {
+}
+
+class Main : Object {
+    run [|
+        c := Child new.
+        _ := c foo: 1.
+    ]
+}

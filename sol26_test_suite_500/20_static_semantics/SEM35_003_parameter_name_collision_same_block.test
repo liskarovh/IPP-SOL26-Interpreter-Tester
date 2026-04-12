@@ -1,0 +1,17 @@
+*** Duplicate parameter names should cause 35.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : Object {
+foo:bar: [ :x :x |
+  _ := x.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

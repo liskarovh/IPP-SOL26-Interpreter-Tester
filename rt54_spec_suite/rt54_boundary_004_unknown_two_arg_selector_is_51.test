@@ -1,0 +1,12 @@
++++ RT51
+*** unknown multi-keyword selector cannot be treated as an attribute write and must raise 51
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+    run [|
+        x := Object new.
+        _ := x missing: 1 and: 2.
+    ]
+}

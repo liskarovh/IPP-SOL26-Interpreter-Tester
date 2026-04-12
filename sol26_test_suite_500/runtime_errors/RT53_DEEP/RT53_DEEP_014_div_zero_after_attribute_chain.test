@@ -1,0 +1,14 @@
+*** Bad divisor comes from nested attribute chain.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+inner := (Object new) denom: 0.
+outer := (Object new) inner: inner.
+d := (outer inner) denom.
+_ := 10 divBy: d.
+]
+}

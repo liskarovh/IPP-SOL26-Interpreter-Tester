@@ -1,0 +1,33 @@
+*** from: on a String subclass should preserve copied attributes and support further string operations.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class Fancy : String {
+
+labelSlice [ |
+txt := '[' concatenateWith: self.
+txt := txt concatenateWith: ']'.
+txt := txt concatenateWith: '|'.
+txt := txt concatenateWith: (self startsWith: 2 endsBefore: 5).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+base := Fancy from: 'abcdef'.
+meta := Object new.
+_ := meta note: 'N'.
+_ := base meta: meta.
+copy := Fancy from: base.
+same := ((copy meta) identicalTo: meta).
+txt := copy labelSlice.
+txt := txt concatenateWith: '|'.
+txt := txt concatenateWith: (same asString).
+_ := txt print.
+]
+
+}

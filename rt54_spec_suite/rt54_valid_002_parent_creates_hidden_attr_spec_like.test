@@ -1,0 +1,23 @@
++++ VALID_SELFSUP
+*** spec-like parent method may create attribute hidden behind child method and super can read it later
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+    something [|
+        _ := self p: 'hello'.
+        _ := (self p) print.
+    ]
+}
+
+class Main : Parent {
+    run [|
+        _ := super something.
+        _ := '\n' print.
+        _ := (super p) print.
+    ]
+    p [|
+        r := 'foo'.
+    ]
+}

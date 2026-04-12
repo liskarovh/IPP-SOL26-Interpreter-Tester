@@ -1,0 +1,14 @@
+*** Block behavior.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    b := [| a := String read. r := a. ].
+v := b value.
+_ := v print.
+  ]
+  }

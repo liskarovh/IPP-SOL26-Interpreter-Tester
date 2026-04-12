@@ -1,0 +1,14 @@
+*** Creating attribute collides with own unary method.
++++ RT54_BASIC
+!C! 0
+!I! 54
+>>> 1
+
+class Main : Object {
+run [|
+_ := self foo: 10.
+]
+foo [|
+_ := 1.
+]
+}

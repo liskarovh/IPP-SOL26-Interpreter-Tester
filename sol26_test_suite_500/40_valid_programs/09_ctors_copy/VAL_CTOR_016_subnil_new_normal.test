@@ -1,0 +1,16 @@
+*** Constructor and from: behavior.
++++ VALID_CTOR
+!C! 0
+!I! 0
+>>> 1
+
+class MyNil : Nil { }
+
+class Main : Object {
+
+  run [ |
+    x := MyNil new.
+y := x identicalTo: nil.
+_ := (y asString) print.
+  ]
+  }

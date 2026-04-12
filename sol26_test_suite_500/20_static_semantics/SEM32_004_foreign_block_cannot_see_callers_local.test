@@ -1,0 +1,21 @@
+*** Foreign block cannot see caller locals.
++++ SEM32
+!C! 0
+!I! 32
+>>> 1
+
+class A : Object {
+foo: [ :blk |
+  _ := blk value.
+]
+}
+
+class Main : Object {
+
+run [ |
+  x := 1.
+  b := [| y := x plus: z. ].
+  a := A new.
+  _ := a foo: b.
+]
+}

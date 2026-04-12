@@ -1,0 +1,14 @@
+*** Keyword run does not satisfy required unary run.
++++ SEM31
+!C! 0
+!I! 31
+>>> 1
+
+class Main : Object {
+run: [ :x |
+  _ := x.
+]
+foo [ |
+  _ := nil.
+]
+}

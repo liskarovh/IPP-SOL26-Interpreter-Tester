@@ -1,0 +1,12 @@
++++ ADVANCED_OOP
+*** Vytvoreni a cteni instancniho atributu
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    _ := (self myVal: 42).
+    _ := (((self myVal) asString) print).
+  ]
+}

@@ -1,0 +1,17 @@
+*** Indirect cycle of three classes should cause 35.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : B { }
+
+class B : C { }
+
+class C : A { }
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

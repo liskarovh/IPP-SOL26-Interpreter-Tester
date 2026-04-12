@@ -1,0 +1,31 @@
+*** super should allow access to parent-created attribute when child shadows it by method.
++++ VALID_SELFSUP
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+make [ |
+  _ := self p: 'hello4'.
+]
+}
+
+class Child : Parent {
+
+p [ |
+  _ := 'foo4'.
+]
+
+readParentAttr [ |
+  _ := super make.
+  r := super p.
+]
+}
+
+class Main : Child {
+
+  run [ |
+    r := self readParentAttr.
+_ := r print.
+  ]
+  }

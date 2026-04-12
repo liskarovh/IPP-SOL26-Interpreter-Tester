@@ -1,0 +1,52 @@
+*** Long Integer subclass graph with ordinary attributes and shallow copies.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class TaggedInt : Integer {
+
+describe [ |
+txt := self asString.
+txt := txt concatenateWith: '#'.
+txt := txt concatenateWith: ((self tagObj) name).
+txt := txt concatenateWith: '#'.
+txt := txt concatenateWith: ((self noteObj) note).
+]
+
+bumpTimes: [ :n |
+_ := n timesRepeat: [ :i |
+_ := self seen: ((self seen) plus: i).
+_ := self seen.
+].
+out := (self describe) concatenateWith: '|'.
+out := out concatenateWith: ((self seen) asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+x := TaggedInt from: 4.
+tag := Object new.
+_ := tag name: 'seed'.
+note := Object new.
+_ := note note: 'ok'.
+_ := x tagObj: tag.
+_ := x noteObj: note.
+_ := x seen: 0.
+y := TaggedInt from: x.
+z := TaggedInt from: y.
+sameTag := (z tagObj) identicalTo: tag.
+sameNote := (z noteObj) identicalTo: note.
+_ := tag name: 'seedX'.
+out := z bumpTimes: 3.
+out := out concatenateWith: '|'.
+out := out concatenateWith: (sameTag asString).
+out := out concatenateWith: '|'.
+out := out concatenateWith: (sameNote asString).
+_ := out print.
+]
+
+}

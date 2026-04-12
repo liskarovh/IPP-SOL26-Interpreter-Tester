@@ -1,0 +1,18 @@
+*** Using super still collides with ancestor unary method.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Grand : Object {
+foo [|
+_ := 1.
+]
+}
+class Parent : Grand {
+}
+class Main : Parent {
+run [|
+_ := super foo: 1.
+]
+}

@@ -1,0 +1,29 @@
++++ VALID_SELFSUP
+*** updating an already existing hidden attribute must stay valid
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+    make [|
+        _ := self p: 'hello'.
+        _ := self p: 'world'.
+    ]
+}
+
+class Child : Parent {
+    p [|
+        r := 'foo'.
+    ]
+    read [|
+        r := super p.
+    ]
+}
+
+class Main : Object {
+    run [|
+        c := Child new.
+        _ := c make.
+        _ := (c read) print.
+    ]
+}

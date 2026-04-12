@@ -1,0 +1,19 @@
+*** Nested returned block fails later on attribute collision.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+outer := self makeOuter.
+inner := outer value.
+_ := inner value.
+]
+foo [|
+_ := 1.
+]
+makeOuter [|
+_ := [| _ := [| _ := self foo: 1. ]. ].
+]
+}

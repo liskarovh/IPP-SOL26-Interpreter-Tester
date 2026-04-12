@@ -1,0 +1,15 @@
+*** Bad argument value created inside method argument evaluation.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+_ := self use: (5 divBy: 0).
+]
+use: [ :x |
+_ := x.
+]
+
+}

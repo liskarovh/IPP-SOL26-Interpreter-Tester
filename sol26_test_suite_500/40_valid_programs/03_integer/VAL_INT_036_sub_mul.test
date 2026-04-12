@@ -1,0 +1,16 @@
+*** Integer subclass behavior.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class MyInt : Integer { }
+
+class Main : Object {
+
+  run [ |
+    x := MyInt from: 5.
+y := x multiplyBy: 2.
+_ := (y asString) print.
+  ]
+  }

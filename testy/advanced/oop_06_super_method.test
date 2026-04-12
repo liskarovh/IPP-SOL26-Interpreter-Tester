@@ -1,0 +1,13 @@
++++ ADVANCED_OOP
+*** Volani prekonane metody pomoci super
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+  hello [ | _ := 'Parent' print. ]
+}
+class Main : Parent {
+  hello [ | _ := super hello. ]
+  run [ | _ := self hello. ]
+}

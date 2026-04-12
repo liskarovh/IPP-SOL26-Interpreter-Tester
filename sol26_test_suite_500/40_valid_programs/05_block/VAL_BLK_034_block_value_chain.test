@@ -1,0 +1,15 @@
+*** Block behavior.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    b1 := [ :x | r := x plus: 1. ].
+b2 := [ :f :x | y := f value: x. ].
+r := b2 value: b1 value: 3.
+_ := (r asString) print.
+  ]
+  }

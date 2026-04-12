@@ -1,0 +1,12 @@
+*** The final error is explicit; first branch demonstrates ignored invalid value object.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := false and: 1.
+_ := true missing.
+]
+}

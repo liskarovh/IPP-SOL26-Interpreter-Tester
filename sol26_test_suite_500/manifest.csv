@@ -1,0 +1,501 @@
+name,path,category,type,compiler_codes,interpreter_codes,points,has_in,has_out,description
+CLI_001_missing_required_param,00_cli_cases/CLI_001_missing_required_param.sh,CLI,cli-shell,,10,1,False,False,Missing required CLI parameter should end with 10
+CLI_002_forbidden_param_combination,00_cli_cases/CLI_002_forbidden_param_combination.sh,CLI,cli-shell,,10,1,False,False,Forbidden parameter combination should end with 10
+CLI_003_unknown_param_form,00_cli_cases/CLI_003_unknown_param_form.sh,CLI,cli-shell,,10,1,False,False,Unknown parameter should end with 10
+CLI_004_missing_input_after_param,00_cli_cases/CLI_004_missing_input_after_param.sh,CLI,cli-shell,,10,1,False,False,Missing argument after CLI parameter should end with 10
+CLI_005_nonexistent_input_file,00_cli_cases/CLI_005_nonexistent_input_file.sh,CLI,cli-shell,,11,1,False,False,Nonexistent input file should end with 11
+CLI_006_unreadable_input_file,00_cli_cases/CLI_006_unreadable_input_file.sh,CLI,cli-shell,,11,1,False,False,Unreadable input file should end with 11
+CLI_007_input_is_directory,00_cli_cases/CLI_007_input_is_directory.sh,CLI,cli-shell,,11,1,False,False,Directory used as input should end with 11
+CLI_008_relative_path_smoke,00_cli_cases/CLI_008_relative_path_smoke.sh,CLI,cli-shell,,0,1,False,False,Relative-path smoke case template
+CLI_009_absolute_path_smoke,00_cli_cases/CLI_009_absolute_path_smoke.sh,CLI,cli-shell,,0,1,False,False,Absolute-path smoke case template
+CLI_010_help_only,00_cli_cases/CLI_010_help_only.sh,CLI,cli-shell,,0,1,False,False,Help-only invocation should print help and exit cleanly
+CLI_011_stderr_only_for_errors,00_cli_cases/CLI_011_stderr_only_for_errors.sh,CLI,cli-shell,,10,1,False,False,Failing CLI invocation should not pollute stdout
+CLI_012_no_stdout_on_file_error,00_cli_cases/CLI_012_no_stdout_on_file_error.sh,CLI,cli-shell,,11,1,False,False,File-opening failure must not pollute stdout
+XML20_001_missing_closing_tag,10_xml_wellformed/XML20_001_missing_closing_tag.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_002_mismatched_closing_tag,10_xml_wellformed/XML20_002_mismatched_closing_tag.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_003_unclosed_attribute_quote,10_xml_wellformed/XML20_003_unclosed_attribute_quote.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_004_invalid_amp_entity,10_xml_wellformed/XML20_004_invalid_amp_entity.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_005_two_root_elements,10_xml_wellformed/XML20_005_two_root_elements.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_006_truncated_document,10_xml_wellformed/XML20_006_truncated_document.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_007_invalid_comment_syntax,10_xml_wellformed/XML20_007_invalid_comment_syntax.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_008_invalid_processing_instruction,10_xml_wellformed/XML20_008_invalid_processing_instruction.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_009_bad_xml_declaration,10_xml_wellformed/XML20_009_bad_xml_declaration.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_010_invalid_lt_in_text,10_xml_wellformed/XML20_010_invalid_lt_in_text.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_011_invalid_lt_in_attribute,10_xml_wellformed/XML20_011_invalid_lt_in_attribute.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_012_attribute_without_value,10_xml_wellformed/XML20_012_attribute_without_value.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_013_illegal_control_char,10_xml_wellformed/XML20_013_illegal_control_char.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_014_broken_self_closing,10_xml_wellformed/XML20_014_broken_self_closing.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_015_duplicate_xml_decl,10_xml_wellformed/XML20_015_duplicate_xml_decl.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_016_text_before_decl,10_xml_wellformed/XML20_016_text_before_decl.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_017_unescaped_quote_in_attr,10_xml_wellformed/XML20_017_unescaped_quote_in_attr.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML20_018_broken_cdata,10_xml_wellformed/XML20_018_broken_cdata.test,XML20,soltest,,20,1,False,False,Malformed XML should cause exit code 20.
+XML42_001_root_not_program,11_xml_structure/XML42_001_root_not_program.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_002_program_missing_language,11_xml_structure/XML42_002_program_missing_language.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_003_program_language_not_SOL26,11_xml_structure/XML42_003_program_language_not_SOL26.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_004_program_language_wrong_case,11_xml_structure/XML42_004_program_language_wrong_case.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_005_program_unexpected_child,11_xml_structure/XML42_005_program_unexpected_child.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_006_class_missing_name,11_xml_structure/XML42_006_class_missing_name.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_007_class_missing_parent,11_xml_structure/XML42_007_class_missing_parent.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_008_class_unexpected_child,11_xml_structure/XML42_008_class_unexpected_child.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_009_method_missing_selector,11_xml_structure/XML42_009_method_missing_selector.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_010_method_missing_block,11_xml_structure/XML42_010_method_missing_block.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_011_method_two_blocks,11_xml_structure/XML42_011_method_two_blocks.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_012_block_missing_arity,11_xml_structure/XML42_012_block_missing_arity.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_013_block_negative_arity,11_xml_structure/XML42_013_block_negative_arity.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_014_block_nonnumeric_arity,11_xml_structure/XML42_014_block_nonnumeric_arity.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_015_parameter_missing_name,11_xml_structure/XML42_015_parameter_missing_name.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_016_parameter_missing_order,11_xml_structure/XML42_016_parameter_missing_order.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_017_parameter_order_gap,11_xml_structure/XML42_017_parameter_order_gap.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_018_parameter_order_duplicate,11_xml_structure/XML42_018_parameter_order_duplicate.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_019_assign_missing_order,11_xml_structure/XML42_019_assign_missing_order.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_020_assign_order_gap,11_xml_structure/XML42_020_assign_order_gap.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_021_assign_order_duplicate,11_xml_structure/XML42_021_assign_order_duplicate.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_022_assign_missing_var,11_xml_structure/XML42_022_assign_missing_var.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_023_assign_missing_expr,11_xml_structure/XML42_023_assign_missing_expr.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_024_expr_empty,11_xml_structure/XML42_024_expr_empty.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_025_expr_two_children,11_xml_structure/XML42_025_expr_two_children.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_026_literal_missing_class,11_xml_structure/XML42_026_literal_missing_class.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_027_literal_missing_value,11_xml_structure/XML42_027_literal_missing_value.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_028_send_missing_selector,11_xml_structure/XML42_028_send_missing_selector.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_029_arg_missing_order,11_xml_structure/XML42_029_arg_missing_order.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+XML42_030_arg_missing_expr,11_xml_structure/XML42_030_arg_missing_expr.test,XML42,soltest,,42,1,False,False,Unexpected XML structure should cause exit code 42.
+SEM31_001_no_main_class,20_static_semantics/SEM31_001_no_main_class.test,SEM31,soltest,0,31,1,False,False,Missing Main class should cause 31.
+SEM31_002_main_without_run,20_static_semantics/SEM31_002_main_without_run.test,SEM31,soltest,0,31,1,False,False,Main without run should cause 31.
+SEM31_003_main_run_one_param,20_static_semantics/SEM31_003_main_run_one_param.test,SEM31,soltest,0,31,1,False,False,Main run with one parameter should cause 31.
+SEM31_004_main_run_two_params,20_static_semantics/SEM31_004_main_run_two_params.test,SEM31,soltest,0,31,1,False,False,Main run with two parameters should cause 31.
+SEM31_005_only_lowercase_main,20_static_semantics/SEM31_005_only_lowercase_main.test,SEM31,soltest,0,31,1,False,False,Lowercase main does not satisfy Main.
+SEM31_006_only_Run_wrong_case,20_static_semantics/SEM31_006_only_Run_wrong_case.test,SEM31,soltest,0,31,1,False,False,Wrong-cased Run does not satisfy run.
+SEM31_007_main_exists_only_keyword_run,20_static_semantics/SEM31_007_main_exists_only_keyword_run.test,SEM31,soltest,0,31,1,False,False,Keyword run does not satisfy required unary run.
+SEM31_008_main_self_parent_no_unary_run,20_static_semantics/SEM31_008_main_self_parent_no_unary_run.test,SEM31,soltest,0,31,1,False,False,Main in invalid shape without unary run.
+SEM32_001_read_local_before_assignment,20_static_semantics/SEM32_001_read_local_before_assignment.test,SEM32,soltest,0,32,1,False,False,Reading local before assignment should cause 32.
+SEM32_002_read_outer_before_assignment,20_static_semantics/SEM32_002_read_outer_before_assignment.test,SEM32,soltest,0,32,1,False,False,Nested block reading outer before assignment should cause 32.
+SEM32_003_read_after_scope_end,20_static_semantics/SEM32_003_read_after_scope_end.test,SEM32,soltest,0,32,1,False,False,Reading finished inner-scope name should cause 32.
+SEM32_004_foreign_block_cannot_see_callers_local,20_static_semantics/SEM32_004_foreign_block_cannot_see_callers_local.test,SEM32,soltest,0,32,1,False,False,Foreign block cannot see caller locals.
+SEM32_005_undefined_class_new,20_static_semantics/SEM32_005_undefined_class_new.test,SEM32,soltest,0,32,1,False,False,Undefined class new should cause 32.
+SEM32_006_undefined_class_from,20_static_semantics/SEM32_006_undefined_class_from.test,SEM32,soltest,0,32,1,False,False,Undefined class from: should cause 32.
+SEM32_007_unknown_class_message_on_user_class,20_static_semantics/SEM32_007_unknown_class_message_on_user_class.test,SEM32,soltest,0,32,1,False,False,Unknown class-side message on user class should cause 32.
+SEM32_008_unknown_class_message_on_builtin_class,20_static_semantics/SEM32_008_unknown_class_message_on_builtin_class.test,SEM32,soltest,0,32,1,False,False,Unknown class-side message on builtin class should cause 32.
+SEM32_009_undefined_parent_class,20_static_semantics/SEM32_009_undefined_parent_class.test,SEM32,soltest,0,32,1,False,False,Undefined parent class should cause 32.
+SEM32_010_read_nonexistent_parameter_name,20_static_semantics/SEM32_010_read_nonexistent_parameter_name.test,SEM32,soltest,0,32,1,False,False,Reading nonexistent parameter name should cause 32.
+SEM32_011_nested_read_not_yet_defined_outer,20_static_semantics/SEM32_011_nested_read_not_yet_defined_outer.test,SEM32,soltest,0,32,1,False,False,Nested block reads name assigned only later.
+SEM32_012_undefined_class_literal_nested,20_static_semantics/SEM32_012_undefined_class_literal_nested.test,SEM32,soltest,0,32,1,False,False,Undefined class literal used in nested send should cause 32.
+SEM33_001_unary_selector_block_one_param,20_static_semantics/SEM33_001_unary_selector_block_one_param.test,SEM33,soltest,0,33,1,False,False,Unary selector with one block parameter should cause 33.
+SEM33_002_unary_selector_block_two_params,20_static_semantics/SEM33_002_unary_selector_block_two_params.test,SEM33,soltest,0,33,1,False,False,Unary selector with two block parameters should cause 33.
+SEM33_003_keyword_selector_zero_params,20_static_semantics/SEM33_003_keyword_selector_zero_params.test,SEM33,soltest,0,33,1,False,False,Keyword selector with zero block parameters should cause 33.
+SEM33_004_two_keyword_selector_one_param,20_static_semantics/SEM33_004_two_keyword_selector_one_param.test,SEM33,soltest,0,33,1,False,False,Two-keyword selector with one parameter should cause 33.
+SEM33_005_two_keyword_selector_three_params,20_static_semantics/SEM33_005_two_keyword_selector_three_params.test,SEM33,soltest,0,33,1,False,False,Two-keyword selector with three parameters should cause 33.
+SEM33_006_repeated_selector_parts_wrong_arity,20_static_semantics/SEM33_006_repeated_selector_parts_wrong_arity.test,SEM33,soltest,0,33,1,False,False,Repeated selector parts still must match block arity.
+SEM34_001_assign_to_method_parameter,20_static_semantics/SEM34_001_assign_to_method_parameter.test,SEM34,soltest,0,34,1,False,False,Assigning to method parameter should cause 34.
+SEM34_002_assign_to_block_parameter,20_static_semantics/SEM34_002_assign_to_block_parameter.test,SEM34,soltest,0,34,1,False,False,Assigning to block parameter should cause 34.
+SEM34_003_assign_to_nested_block_parameter,20_static_semantics/SEM34_003_assign_to_nested_block_parameter.test,SEM34,soltest,0,34,1,False,False,Assigning to nested block parameter should cause 34.
+SEM34_004_assign_to_parameter_named_underscore,20_static_semantics/SEM34_004_assign_to_parameter_named_underscore.test,SEM34,soltest,0,34,1,False,False,Assigning to underscore parameter should cause 34.
+SEM34_005_assign_outer_param_inside_inner_block,20_static_semantics/SEM34_005_assign_outer_param_inside_inner_block.test,SEM34,soltest,0,34,1,False,False,Inner block assigning captured parameter should cause 34.
+SEM35_001_duplicate_class_name,20_static_semantics/SEM35_001_duplicate_class_name.test,SEM35,soltest,0,35,1,False,False,Duplicate class name should cause 35.
+SEM35_002_duplicate_method_selector_same_class,20_static_semantics/SEM35_002_duplicate_method_selector_same_class.test,SEM35,soltest,0,35,1,False,False,Duplicate method selector in same class should cause 35.
+SEM35_003_parameter_name_collision_same_block,20_static_semantics/SEM35_003_parameter_name_collision_same_block.test,SEM35,soltest,0,35,1,False,False,Duplicate parameter names should cause 35.
+SEM35_004_direct_inheritance_cycle,20_static_semantics/SEM35_004_direct_inheritance_cycle.test,SEM35,soltest,0,35,1,False,False,Direct inheritance cycle should cause 35.
+SEM35_005_indirect_cycle_two,20_static_semantics/SEM35_005_indirect_cycle_two.test,SEM35,soltest,0,35,1,False,False,Indirect cycle of two classes should cause 35.
+SEM35_006_indirect_cycle_three,20_static_semantics/SEM35_006_indirect_cycle_three.test,SEM35,soltest,0,35,1,False,False,Indirect cycle of three classes should cause 35.
+SEM35_007_self_parent_inheritance,20_static_semantics/SEM35_007_self_parent_inheritance.test,SEM35,soltest,0,35,1,False,False,Class inheriting from itself should cause 35.
+SEM35_008_overloading_attempt_same_selector,20_static_semantics/SEM35_008_overloading_attempt_same_selector.test,SEM35,soltest,0,35,1,False,False,Overloading same selector is not supported.
+SEM35_009_duplicate_parameter_nonadjacent,20_static_semantics/SEM35_009_duplicate_parameter_nonadjacent.test,SEM35,soltest,0,35,1,False,False,Duplicate parameter names need not be adjacent to be invalid.
+RT51_001_integer_unary,30_runtime_errors/rt51/RT51_001_integer_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_002_integer_keyword,30_runtime_errors/rt51/RT51_002_integer_keyword.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_003_string_unary,30_runtime_errors/rt51/RT51_003_string_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_004_string_keyword,30_runtime_errors/rt51/RT51_004_string_keyword.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_005_nil_unary,30_runtime_errors/rt51/RT51_005_nil_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_006_true_unary,30_runtime_errors/rt51/RT51_006_true_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_007_false_keyword,30_runtime_errors/rt51/RT51_007_false_keyword.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_008_object_unary,30_runtime_errors/rt51/RT51_008_object_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_009_object_keyword,30_runtime_errors/rt51/RT51_009_object_keyword.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_010_block_unary,30_runtime_errors/rt51/RT51_010_block_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_011_user_object_unary,30_runtime_errors/rt51/RT51_011_user_object_unary.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_012_user_object_keyword,30_runtime_errors/rt51/RT51_012_user_object_keyword.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_013_undefined_attr_self,30_runtime_errors/rt51/RT51_013_undefined_attr_self.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_014_undefined_attr_after_other_attr,30_runtime_errors/rt51/RT51_014_undefined_attr_after_other_attr.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_015_undefined_attr_user_obj,30_runtime_errors/rt51/RT51_015_undefined_attr_user_obj.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_016_undefined_attr_after_from_copy,30_runtime_errors/rt51/RT51_016_undefined_attr_after_from_copy.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_017_super_missing_1,30_runtime_errors/rt51/RT51_017_super_missing_1.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_018_super_missing_2,30_runtime_errors/rt51/RT51_018_super_missing_2.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_019_super_missing_3,30_runtime_errors/rt51/RT51_019_super_missing_3.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_020_super_missing_4,30_runtime_errors/rt51/RT51_020_super_missing_4.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_021_block_arity,30_runtime_errors/rt51/RT51_021_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_022_block_arity,30_runtime_errors/rt51/RT51_022_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_023_block_arity,30_runtime_errors/rt51/RT51_023_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_024_block_arity,30_runtime_errors/rt51/RT51_024_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_025_block_arity,30_runtime_errors/rt51/RT51_025_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_026_block_arity,30_runtime_errors/rt51/RT51_026_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_027_block_arity,30_runtime_errors/rt51/RT51_027_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_028_block_arity,30_runtime_errors/rt51/RT51_028_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_029_block_arity,30_runtime_errors/rt51/RT51_029_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_030_block_arity,30_runtime_errors/rt51/RT51_030_block_arity.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_031_builtin_arg,30_runtime_errors/rt51/RT51_031_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_032_builtin_arg,30_runtime_errors/rt51/RT51_032_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_033_builtin_arg,30_runtime_errors/rt51/RT51_033_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_034_builtin_arg,30_runtime_errors/rt51/RT51_034_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_035_builtin_arg,30_runtime_errors/rt51/RT51_035_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_036_builtin_arg,30_runtime_errors/rt51/RT51_036_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_037_builtin_arg,30_runtime_errors/rt51/RT51_037_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_038_builtin_arg,30_runtime_errors/rt51/RT51_038_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_039_builtin_arg,30_runtime_errors/rt51/RT51_039_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_040_builtin_arg,30_runtime_errors/rt51/RT51_040_builtin_arg.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_041_inheritance_miss_1,30_runtime_errors/rt51/RT51_041_inheritance_miss_1.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_042_inheritance_miss_2,30_runtime_errors/rt51/RT51_042_inheritance_miss_2.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_043_inheritance_miss_3,30_runtime_errors/rt51/RT51_043_inheritance_miss_3.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT51_044_inheritance_miss_4,30_runtime_errors/rt51/RT51_044_inheritance_miss_4.test,RT51,soltest,0,51,1,False,False,Receiver should not understand the message; expect 51.
+RT53_001_bad_value,30_runtime_errors/rt53/RT53_001_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_002_bad_value,30_runtime_errors/rt53/RT53_002_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_003_bad_value,30_runtime_errors/rt53/RT53_003_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_004_bad_value,30_runtime_errors/rt53/RT53_004_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_005_bad_value,30_runtime_errors/rt53/RT53_005_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_006_bad_value,30_runtime_errors/rt53/RT53_006_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_007_bad_value,30_runtime_errors/rt53/RT53_007_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_008_bad_value,30_runtime_errors/rt53/RT53_008_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_009_bad_value,30_runtime_errors/rt53/RT53_009_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_010_bad_value,30_runtime_errors/rt53/RT53_010_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_011_bad_value,30_runtime_errors/rt53/RT53_011_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_012_bad_value,30_runtime_errors/rt53/RT53_012_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_013_bad_value,30_runtime_errors/rt53/RT53_013_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT53_014_bad_value,30_runtime_errors/rt53/RT53_014_bad_value.test,RT53,soltest,0,53,1,False,False,Bad argument value should cause 53.
+RT54_001_collision,30_runtime_errors/rt54/RT54_001_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_002_collision,30_runtime_errors/rt54/RT54_002_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_003_collision,30_runtime_errors/rt54/RT54_003_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_004_collision,30_runtime_errors/rt54/RT54_004_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_005_collision,30_runtime_errors/rt54/RT54_005_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_006_collision,30_runtime_errors/rt54/RT54_006_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_007_collision,30_runtime_errors/rt54/RT54_007_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_008_collision,30_runtime_errors/rt54/RT54_008_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_009_collision,30_runtime_errors/rt54/RT54_009_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_010_collision,30_runtime_errors/rt54/RT54_010_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_011_collision,30_runtime_errors/rt54/RT54_011_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_012_collision,30_runtime_errors/rt54/RT54_012_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_013_collision,30_runtime_errors/rt54/RT54_013_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+RT54_014_collision,30_runtime_errors/rt54/RT54_014_collision.test,RT54,soltest,0,54,1,False,False,Creating an attribute that collides with a method should cause 54.
+VAL_MIN_001_print_string,40_valid_programs/01_minimal/VAL_MIN_001_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_002_print_string,40_valid_programs/01_minimal/VAL_MIN_002_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_003_print_string,40_valid_programs/01_minimal/VAL_MIN_003_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_004_print_string,40_valid_programs/01_minimal/VAL_MIN_004_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_005_print_string,40_valid_programs/01_minimal/VAL_MIN_005_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_006_print_string,40_valid_programs/01_minimal/VAL_MIN_006_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_007_print_string,40_valid_programs/01_minimal/VAL_MIN_007_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_008_print_string,40_valid_programs/01_minimal/VAL_MIN_008_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_009_print_string,40_valid_programs/01_minimal/VAL_MIN_009_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_010_print_string,40_valid_programs/01_minimal/VAL_MIN_010_print_string.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints a fixed string.
+VAL_MIN_011_print_integer,40_valid_programs/01_minimal/VAL_MIN_011_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_012_print_integer,40_valid_programs/01_minimal/VAL_MIN_012_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_013_print_integer,40_valid_programs/01_minimal/VAL_MIN_013_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_014_print_integer,40_valid_programs/01_minimal/VAL_MIN_014_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_015_print_integer,40_valid_programs/01_minimal/VAL_MIN_015_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_016_print_integer,40_valid_programs/01_minimal/VAL_MIN_016_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_017_print_integer,40_valid_programs/01_minimal/VAL_MIN_017_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_018_print_integer,40_valid_programs/01_minimal/VAL_MIN_018_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_019_print_integer,40_valid_programs/01_minimal/VAL_MIN_019_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_MIN_020_print_integer,40_valid_programs/01_minimal/VAL_MIN_020_print_integer.test,VALID_MIN,soltest,0,0,1,False,True,Minimal valid program prints an integer via asString.
+VAL_OBJBOOL_001_object_asString_length,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_001_object_asString_length.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_002_object_isNumber,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_002_object_isNumber.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_003_object_isString,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_003_object_isString.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_004_object_isBlock,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_004_object_isBlock.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_005_object_isNil,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_005_object_isNil.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_006_object_isBoolean,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_006_object_isBoolean.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_007_identical_same_object,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_007_identical_same_object.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_008_identical_different_objects,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_008_identical_different_objects.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_009_equal_same_object,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_009_equal_same_object.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_010_equal_different_no_internal,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_010_equal_different_no_internal.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_011_nil_asString,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_011_nil_asString.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_012_nil_isNil,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_012_nil_isNil.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_013_nil_new_singleton,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_013_nil_new_singleton.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_014_nil_from_singleton,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_014_nil_from_singleton.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_015_subclass_of_nil_not_singleton,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_015_subclass_of_nil_not_singleton.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_016_true_asString,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_016_true_asString.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_017_false_asString,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_017_false_asString.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_018_true_isBoolean,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_018_true_isBoolean.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_019_false_isBoolean,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_019_false_isBoolean.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_020_true_not,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_020_true_not.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_021_false_not,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_021_false_not.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_022_true_and_true,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_022_true_and_true.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_023_true_and_false,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_023_true_and_false.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_024_false_and_short,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_024_false_and_short.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_025_true_or_short,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_025_true_or_short.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_026_false_or_true,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_026_false_or_true.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_027_ifTrueIfFalse_true,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_027_ifTrueIfFalse_true.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_OBJBOOL_028_ifTrueIfFalse_false,40_valid_programs/02_object_nil_bool/VAL_OBJBOOL_028_ifTrueIfFalse_false.test,VALID_OBJBOOL,soltest,0,0,1,False,True,Built-in Object/Nil/Boolean behavior.
+VAL_INT_001_new_zero,40_valid_programs/03_integer/VAL_INT_001_new_zero.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_002_plus_1_2,40_valid_programs/03_integer/VAL_INT_002_plus_1_2.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_003_plus_neg,40_valid_programs/03_integer/VAL_INT_003_plus_neg.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_004_minus_5_2,40_valid_programs/03_integer/VAL_INT_004_minus_5_2.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_005_minus_neg,40_valid_programs/03_integer/VAL_INT_005_minus_neg.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_006_mul_3_4,40_valid_programs/03_integer/VAL_INT_006_mul_3_4.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_007_mul_zero,40_valid_programs/03_integer/VAL_INT_007_mul_zero.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_008_mul_neg,40_valid_programs/03_integer/VAL_INT_008_mul_neg.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_009_div_9_2,40_valid_programs/03_integer/VAL_INT_009_div_9_2.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_010_gt_true,40_valid_programs/03_integer/VAL_INT_010_gt_true.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_011_gt_false,40_valid_programs/03_integer/VAL_INT_011_gt_false.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_012_gt_equal_false,40_valid_programs/03_integer/VAL_INT_012_gt_equal_false.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_013_equal_literal,40_valid_programs/03_integer/VAL_INT_013_equal_literal.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_014_equal_from,40_valid_programs/03_integer/VAL_INT_014_equal_from.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_015_asString_neg,40_valid_programs/03_integer/VAL_INT_015_asString_neg.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_016_asInteger_self,40_valid_programs/03_integer/VAL_INT_016_asInteger_self.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_017_chain_arith,40_valid_programs/03_integer/VAL_INT_017_chain_arith.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_018_chain_arith_2,40_valid_programs/03_integer/VAL_INT_018_chain_arith_2.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_019_from_base,40_valid_programs/03_integer/VAL_INT_019_from_base.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_020_neg_literal,40_valid_programs/03_integer/VAL_INT_020_neg_literal.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer behavior.
+VAL_INT_021_times_zero,40_valid_programs/03_integer/VAL_INT_021_times_zero.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_022_times_negative,40_valid_programs/03_integer/VAL_INT_022_times_negative.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_023_times_one_output,40_valid_programs/03_integer/VAL_INT_023_times_one_output.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_024_times_three_output,40_valid_programs/03_integer/VAL_INT_024_times_three_output.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_025_times_return_last,40_valid_programs/03_integer/VAL_INT_025_times_return_last.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_026_times_accumulate_commas,40_valid_programs/03_integer/VAL_INT_026_times_accumulate_commas.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_027_times_body_uses_plus,40_valid_programs/03_integer/VAL_INT_027_times_body_uses_plus.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_028_times_body_prints,40_valid_programs/03_integer/VAL_INT_028_times_body_prints.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_029_times_body_attr_state,40_valid_programs/03_integer/VAL_INT_029_times_body_attr_state.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_030_times_body_nested_block,40_valid_programs/03_integer/VAL_INT_030_times_body_nested_block.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer timesRepeat behavior.
+VAL_INT_031_sub_from,40_valid_programs/03_integer/VAL_INT_031_sub_from.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_032_sub_equal_base,40_valid_programs/03_integer/VAL_INT_032_sub_equal_base.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_033_sub_equal_subclass,40_valid_programs/03_integer/VAL_INT_033_sub_equal_subclass.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_034_sub_plus,40_valid_programs/03_integer/VAL_INT_034_sub_plus.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_035_sub_minus,40_valid_programs/03_integer/VAL_INT_035_sub_minus.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_036_sub_mul,40_valid_programs/03_integer/VAL_INT_036_sub_mul.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_037_sub_gt,40_valid_programs/03_integer/VAL_INT_037_sub_gt.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_038_sub_asInteger,40_valid_programs/03_integer/VAL_INT_038_sub_asInteger.test,VALID_INTEGER,soltest,0,0,1,False,True,Integer subclass behavior.
+VAL_INT_039_combo,40_valid_programs/03_integer/VAL_INT_039_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_040_combo,40_valid_programs/03_integer/VAL_INT_040_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_041_combo,40_valid_programs/03_integer/VAL_INT_041_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_042_combo,40_valid_programs/03_integer/VAL_INT_042_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_043_combo,40_valid_programs/03_integer/VAL_INT_043_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_044_combo,40_valid_programs/03_integer/VAL_INT_044_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_045_combo,40_valid_programs/03_integer/VAL_INT_045_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_046_combo,40_valid_programs/03_integer/VAL_INT_046_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_047_combo,40_valid_programs/03_integer/VAL_INT_047_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_INT_048_combo,40_valid_programs/03_integer/VAL_INT_048_combo.test,VALID_INTEGER,soltest,0,0,1,False,True,Additional integer combination case.
+VAL_STR_001_new_empty_len,40_valid_programs/04_string/VAL_STR_001_new_empty_len.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_002_empty_literal_len,40_valid_programs/04_string/VAL_STR_002_empty_literal_len.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_003_simple_literal_print,40_valid_programs/04_string/VAL_STR_003_simple_literal_print.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_004_quote_escape,40_valid_programs/04_string/VAL_STR_004_quote_escape.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_005_backslash_escape,40_valid_programs/04_string/VAL_STR_005_backslash_escape.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_006_newline_escape_length,40_valid_programs/04_string/VAL_STR_006_newline_escape_length.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_007_equal_same,40_valid_programs/04_string/VAL_STR_007_equal_same.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_008_equal_diff,40_valid_programs/04_string/VAL_STR_008_equal_diff.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_009_asString_self,40_valid_programs/04_string/VAL_STR_009_asString_self.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_010_asInteger_valid,40_valid_programs/04_string/VAL_STR_010_asInteger_valid.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_011_asInteger_negative,40_valid_programs/04_string/VAL_STR_011_asInteger_negative.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_012_asInteger_zero,40_valid_programs/04_string/VAL_STR_012_asInteger_zero.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_013_asInteger_invalid_alpha,40_valid_programs/04_string/VAL_STR_013_asInteger_invalid_alpha.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_014_asInteger_invalid_empty,40_valid_programs/04_string/VAL_STR_014_asInteger_invalid_empty.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_015_concat_empty_empty,40_valid_programs/04_string/VAL_STR_015_concat_empty_empty.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_016_concat_basic,40_valid_programs/04_string/VAL_STR_016_concat_basic.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_017_concat_with_nonstring_nil,40_valid_programs/04_string/VAL_STR_017_concat_with_nonstring_nil.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_018_sub_full,40_valid_programs/04_string/VAL_STR_018_sub_full.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_019_sub_middle,40_valid_programs/04_string/VAL_STR_019_sub_middle.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_020_sub_prefix,40_valid_programs/04_string/VAL_STR_020_sub_prefix.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_021_sub_suffix,40_valid_programs/04_string/VAL_STR_021_sub_suffix.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_022_sub_equal_indices_empty,40_valid_programs/04_string/VAL_STR_022_sub_equal_indices_empty.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_023_sub_reversed_empty,40_valid_programs/04_string/VAL_STR_023_sub_reversed_empty.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_024_sub_zero_nil,40_valid_programs/04_string/VAL_STR_024_sub_zero_nil.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_025_sub_negative_nil,40_valid_programs/04_string/VAL_STR_025_sub_negative_nil.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_026_length_basic,40_valid_programs/04_string/VAL_STR_026_length_basic.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_027_length_quote_escape,40_valid_programs/04_string/VAL_STR_027_length_quote_escape.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_028_read_single,40_valid_programs/04_string/VAL_STR_028_read_single.test,VALID_STRING,soltest,0,0,1,True,True,String behavior.
+VAL_STR_029_read_two_lines_first_only,40_valid_programs/04_string/VAL_STR_029_read_two_lines_first_only.test,VALID_STRING,soltest,0,0,1,True,True,String behavior.
+VAL_STR_030_read_twice_concat,40_valid_programs/04_string/VAL_STR_030_read_twice_concat.test,VALID_STRING,soltest,0,0,1,True,True,String behavior.
+VAL_STR_031_subclass_from_print,40_valid_programs/04_string/VAL_STR_031_subclass_from_print.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_032_subclass_equal_base,40_valid_programs/04_string/VAL_STR_032_subclass_equal_base.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_033_subclass_concat,40_valid_programs/04_string/VAL_STR_033_subclass_concat.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_034_subclass_substring,40_valid_programs/04_string/VAL_STR_034_subclass_substring.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_035_concat_chain,40_valid_programs/04_string/VAL_STR_035_concat_chain.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_036_print_no_newline_twice,40_valid_programs/04_string/VAL_STR_036_print_no_newline_twice.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_037_length_after_concat,40_valid_programs/04_string/VAL_STR_037_length_after_concat.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_038_sub_after_concat,40_valid_programs/04_string/VAL_STR_038_sub_after_concat.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_039_asInteger_roundtrip,40_valid_programs/04_string/VAL_STR_039_asInteger_roundtrip.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_040_concat_with_subclass_arg,40_valid_programs/04_string/VAL_STR_040_concat_with_subclass_arg.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_041_sub_end_past_length,40_valid_programs/04_string/VAL_STR_041_sub_end_past_length.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_042_read_asInteger_valid,40_valid_programs/04_string/VAL_STR_042_read_asInteger_valid.test,VALID_STRING,soltest,0,0,1,True,True,String behavior.
+VAL_STR_043_length_after_newline_escape_and_text,40_valid_programs/04_string/VAL_STR_043_length_after_newline_escape_and_text.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_044_concat_empty_nonempty,40_valid_programs/04_string/VAL_STR_044_concat_empty_nonempty.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_045_concat_nonempty_empty,40_valid_programs/04_string/VAL_STR_045_concat_nonempty_empty.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_STR_046_subclass_length,40_valid_programs/04_string/VAL_STR_046_subclass_length.test,VALID_STRING,soltest,0,0,1,False,True,String behavior.
+VAL_BLK_001_zero_param_value,40_valid_programs/05_block/VAL_BLK_001_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_002_zero_param_value,40_valid_programs/05_block/VAL_BLK_002_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_003_zero_param_value,40_valid_programs/05_block/VAL_BLK_003_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_004_zero_param_value,40_valid_programs/05_block/VAL_BLK_004_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_005_zero_param_value,40_valid_programs/05_block/VAL_BLK_005_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_006_zero_param_value,40_valid_programs/05_block/VAL_BLK_006_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_007_zero_param_value,40_valid_programs/05_block/VAL_BLK_007_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_008_zero_param_value,40_valid_programs/05_block/VAL_BLK_008_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_009_zero_param_value,40_valid_programs/05_block/VAL_BLK_009_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_010_zero_param_value,40_valid_programs/05_block/VAL_BLK_010_zero_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Zero-parameter block should return its last value.
+VAL_BLK_011_one_param_value,40_valid_programs/05_block/VAL_BLK_011_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_012_one_param_value,40_valid_programs/05_block/VAL_BLK_012_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_013_one_param_value,40_valid_programs/05_block/VAL_BLK_013_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_014_one_param_value,40_valid_programs/05_block/VAL_BLK_014_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_015_one_param_value,40_valid_programs/05_block/VAL_BLK_015_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_016_one_param_value,40_valid_programs/05_block/VAL_BLK_016_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_017_one_param_value,40_valid_programs/05_block/VAL_BLK_017_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_018_one_param_value,40_valid_programs/05_block/VAL_BLK_018_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_019_one_param_value,40_valid_programs/05_block/VAL_BLK_019_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_020_one_param_value,40_valid_programs/05_block/VAL_BLK_020_one_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,One-parameter block should consume value:.
+VAL_BLK_021_two_param_value,40_valid_programs/05_block/VAL_BLK_021_two_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Two-parameter block should consume value:value:.
+VAL_BLK_022_two_param_value,40_valid_programs/05_block/VAL_BLK_022_two_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Two-parameter block should consume value:value:.
+VAL_BLK_023_two_param_value,40_valid_programs/05_block/VAL_BLK_023_two_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Two-parameter block should consume value:value:.
+VAL_BLK_024_two_param_value,40_valid_programs/05_block/VAL_BLK_024_two_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Two-parameter block should consume value:value:.
+VAL_BLK_025_two_param_value,40_valid_programs/05_block/VAL_BLK_025_two_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Two-parameter block should consume value:value:.
+VAL_BLK_026_two_param_value,40_valid_programs/05_block/VAL_BLK_026_two_param_value.test,VALID_BLOCK,soltest,0,0,1,False,True,Two-parameter block should consume value:value:.
+VAL_BLK_027_Block_new_nil,40_valid_programs/05_block/VAL_BLK_027_Block_new_nil.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_028_block_isBlock,40_valid_programs/05_block/VAL_BLK_028_block_isBlock.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_029_block_in_attribute,40_valid_programs/05_block/VAL_BLK_029_block_in_attribute.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_030_block_as_argument,40_valid_programs/05_block/VAL_BLK_030_block_as_argument.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_031_nested_block_simple,40_valid_programs/05_block/VAL_BLK_031_nested_block_simple.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_032_nested_block_capture,40_valid_programs/05_block/VAL_BLK_032_nested_block_capture.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_033_block_result_nil,40_valid_programs/05_block/VAL_BLK_033_block_result_nil.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_034_block_value_chain,40_valid_programs/05_block/VAL_BLK_034_block_value_chain.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_035_whileTrue_zero,40_valid_programs/05_block/VAL_BLK_035_whileTrue_zero.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_036_whileTrue_countdown,40_valid_programs/05_block/VAL_BLK_036_whileTrue_countdown.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_037_whileTrue_return_last,40_valid_programs/05_block/VAL_BLK_037_whileTrue_return_last.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_038_block_reads_input,40_valid_programs/05_block/VAL_BLK_038_block_reads_input.test,VALID_BLOCK,soltest,0,0,1,True,True,Block behavior.
+VAL_BLK_039_block_multiarg_mixed,40_valid_programs/05_block/VAL_BLK_039_block_multiarg_mixed.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_BLK_040_block_in_ifTrue,40_valid_programs/05_block/VAL_BLK_040_block_in_ifTrue.test,VALID_BLOCK,soltest,0,0,1,False,True,Block behavior.
+VAL_SCOPE_001_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_001_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_002_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_002_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_003_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_003_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_004_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_004_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_005_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_005_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_006_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_006_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_007_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_007_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_008_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_008_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_009_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_009_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_010_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_010_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_011_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_011_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_012_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_012_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_013_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_013_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_014_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_014_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_015_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_015_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_016_capture_basic,40_valid_programs/06_scope_closure/VAL_SCOPE_016_capture_basic.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should capture outer local.
+VAL_SCOPE_017_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_017_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_018_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_018_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_019_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_019_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_020_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_020_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_021_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_021_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_022_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_022_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_023_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_023_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_024_survives_return,40_valid_programs/06_scope_closure/VAL_SCOPE_024_survives_return.test,VALID_SCOPE,soltest,0,0,1,False,True,Returned block should retain captured local.
+VAL_SCOPE_025_spec_like,40_valid_programs/06_scope_closure/VAL_SCOPE_025_spec_like.test,VALID_SCOPE,soltest,0,0,1,True,True,Closure example derived from spec.
+VAL_SCOPE_026_spec_like,40_valid_programs/06_scope_closure/VAL_SCOPE_026_spec_like.test,VALID_SCOPE,soltest,0,0,1,True,True,Closure example derived from spec.
+VAL_SCOPE_027_spec_like,40_valid_programs/06_scope_closure/VAL_SCOPE_027_spec_like.test,VALID_SCOPE,soltest,0,0,1,True,True,Closure example derived from spec.
+VAL_SCOPE_028_spec_like,40_valid_programs/06_scope_closure/VAL_SCOPE_028_spec_like.test,VALID_SCOPE,soltest,0,0,1,True,True,Closure example derived from spec.
+VAL_SCOPE_029_stateful,40_valid_programs/06_scope_closure/VAL_SCOPE_029_stateful.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should preserve and reuse state.
+VAL_SCOPE_030_stateful,40_valid_programs/06_scope_closure/VAL_SCOPE_030_stateful.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should preserve and reuse state.
+VAL_SCOPE_031_stateful,40_valid_programs/06_scope_closure/VAL_SCOPE_031_stateful.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should preserve and reuse state.
+VAL_SCOPE_032_stateful,40_valid_programs/06_scope_closure/VAL_SCOPE_032_stateful.test,VALID_SCOPE,soltest,0,0,1,False,True,Closure should preserve and reuse state.
+VAL_SELFSUP_001_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_001_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_002_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_002_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_003_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_003_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_004_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_004_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_005_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_005_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_006_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_006_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_007_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_007_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_008_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_008_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_009_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_009_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_010_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_010_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_011_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_011_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_012_self_basic,40_valid_programs/07_self_super/VAL_SELFSUP_012_self_basic.test,VALID_SELFSUP,soltest,0,0,1,False,True,self should refer to the real receiver.
+VAL_SELFSUP_013_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_013_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_014_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_014_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_015_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_015_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_016_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_016_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_017_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_017_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_018_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_018_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_019_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_019_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_020_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_020_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_021_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_021_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_022_spec_super,40_valid_programs/07_self_super/VAL_SELFSUP_022_spec_super.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should start lookup in the parent chain.
+VAL_SELFSUP_023_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_023_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_024_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_024_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_025_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_025_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_026_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_026_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_027_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_027_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_028_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_028_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_029_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_029_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_030_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_030_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_031_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_031_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_032_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_032_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_033_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_033_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_SELFSUP_034_parent_attr,40_valid_programs/07_self_super/VAL_SELFSUP_034_parent_attr.test,VALID_SELFSUP,soltest,0,0,1,False,True,super should allow access to parent-created attribute when child shadows it by method.
+VAL_ATTR_001_basic,40_valid_programs/08_attributes/VAL_ATTR_001_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_002_basic,40_valid_programs/08_attributes/VAL_ATTR_002_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_003_basic,40_valid_programs/08_attributes/VAL_ATTR_003_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_004_basic,40_valid_programs/08_attributes/VAL_ATTR_004_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_005_basic,40_valid_programs/08_attributes/VAL_ATTR_005_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_006_basic,40_valid_programs/08_attributes/VAL_ATTR_006_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_007_basic,40_valid_programs/08_attributes/VAL_ATTR_007_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_008_basic,40_valid_programs/08_attributes/VAL_ATTR_008_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_009_basic,40_valid_programs/08_attributes/VAL_ATTR_009_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_010_basic,40_valid_programs/08_attributes/VAL_ATTR_010_basic.test,VALID_ATTR,soltest,0,0,1,False,True,Attribute should be created by keyword message and read by unary message.
+VAL_ATTR_011_update,40_valid_programs/08_attributes/VAL_ATTR_011_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_012_update,40_valid_programs/08_attributes/VAL_ATTR_012_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_013_update,40_valid_programs/08_attributes/VAL_ATTR_013_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_014_update,40_valid_programs/08_attributes/VAL_ATTR_014_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_015_update,40_valid_programs/08_attributes/VAL_ATTR_015_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_016_update,40_valid_programs/08_attributes/VAL_ATTR_016_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_017_update,40_valid_programs/08_attributes/VAL_ATTR_017_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_018_update,40_valid_programs/08_attributes/VAL_ATTR_018_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_019_update,40_valid_programs/08_attributes/VAL_ATTR_019_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_020_update,40_valid_programs/08_attributes/VAL_ATTR_020_update.test,VALID_ATTR,soltest,0,0,1,False,True,Existing attribute should be updated by the same keyword message.
+VAL_ATTR_021_instance_isolated,40_valid_programs/08_attributes/VAL_ATTR_021_instance_isolated.test,VALID_ATTR,soltest,0,0,1,False,True,Attributes should be per-instance.
+VAL_ATTR_022_instance_isolated,40_valid_programs/08_attributes/VAL_ATTR_022_instance_isolated.test,VALID_ATTR,soltest,0,0,1,False,True,Attributes should be per-instance.
+VAL_ATTR_023_instance_isolated,40_valid_programs/08_attributes/VAL_ATTR_023_instance_isolated.test,VALID_ATTR,soltest,0,0,1,False,True,Attributes should be per-instance.
+VAL_ATTR_024_instance_isolated,40_valid_programs/08_attributes/VAL_ATTR_024_instance_isolated.test,VALID_ATTR,soltest,0,0,1,False,True,Attributes should be per-instance.
+VAL_ATTR_025_instance_isolated,40_valid_programs/08_attributes/VAL_ATTR_025_instance_isolated.test,VALID_ATTR,soltest,0,0,1,False,True,Attributes should be per-instance.
+VAL_ATTR_026_from_copies_attr,40_valid_programs/08_attributes/VAL_ATTR_026_from_copies_attr.test,VALID_ATTR,soltest,0,0,1,False,True,Additional attribute behavior.
+VAL_ATTR_027_from_copies_two_attrs,40_valid_programs/08_attributes/VAL_ATTR_027_from_copies_two_attrs.test,VALID_ATTR,soltest,0,0,1,False,True,Additional attribute behavior.
+VAL_ATTR_028_attr_block_value,40_valid_programs/08_attributes/VAL_ATTR_028_attr_block_value.test,VALID_ATTR,soltest,0,0,1,False,True,Additional attribute behavior.
+VAL_ATTR_029_parent_created_attr,40_valid_programs/08_attributes/VAL_ATTR_029_parent_created_attr.test,VALID_ATTR,soltest,0,0,1,False,True,Additional attribute behavior.
+VAL_ATTR_030_child_reads_parent_created_attr_via_super,40_valid_programs/08_attributes/VAL_ATTR_030_child_reads_parent_created_attr_via_super.test,VALID_ATTR,soltest,0,0,1,False,True,Additional attribute behavior.
+VAL_CTOR_001_Object_new,40_valid_programs/09_ctors_copy/VAL_CTOR_001_Object_new.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_002_Object_from,40_valid_programs/09_ctors_copy/VAL_CTOR_002_Object_from.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_003_Integer_new,40_valid_programs/09_ctors_copy/VAL_CTOR_003_Integer_new.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_004_Integer_from,40_valid_programs/09_ctors_copy/VAL_CTOR_004_Integer_from.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_005_String_new,40_valid_programs/09_ctors_copy/VAL_CTOR_005_String_new.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_006_String_from,40_valid_programs/09_ctors_copy/VAL_CTOR_006_String_from.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_007_Block_new,40_valid_programs/09_ctors_copy/VAL_CTOR_007_Block_new.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_008_user_new,40_valid_programs/09_ctors_copy/VAL_CTOR_008_user_new.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_009_user_from_attr,40_valid_programs/09_ctors_copy/VAL_CTOR_009_user_from_attr.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_010_subint_new_attr,40_valid_programs/09_ctors_copy/VAL_CTOR_010_subint_new_attr.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_011_subint_from_valid,40_valid_programs/09_ctors_copy/VAL_CTOR_011_subint_from_valid.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_012_substring_new_attr,40_valid_programs/09_ctors_copy/VAL_CTOR_012_substring_new_attr.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_013_substring_from_valid,40_valid_programs/09_ctors_copy/VAL_CTOR_013_substring_from_valid.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_014_nil_new_singleton,40_valid_programs/09_ctors_copy/VAL_CTOR_014_nil_new_singleton.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_015_nil_from_singleton,40_valid_programs/09_ctors_copy/VAL_CTOR_015_nil_from_singleton.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_016_subnil_new_normal,40_valid_programs/09_ctors_copy/VAL_CTOR_016_subnil_new_normal.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_017_shallow_copy_shared_obj,40_valid_programs/09_ctors_copy/VAL_CTOR_017_shallow_copy_shared_obj.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_CTOR_018_copy_then_dispatch,40_valid_programs/09_ctors_copy/VAL_CTOR_018_copy_then_dispatch.test,VALID_CTOR,soltest,0,0,1,False,True,Constructor and from: behavior.
+VAL_EVAL_001_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_001_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_002_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_002_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_003_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_003_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_004_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_004_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_005_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_005_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_006_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_006_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_007_left_to_right,40_valid_programs/10_eval_order/VAL_EVAL_007_left_to_right.test,VALID_EVAL,soltest,0,0,1,False,True,Regular send arguments should be evaluated left to right.
+VAL_EVAL_008_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_008_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_EVAL_009_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_009_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_EVAL_010_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_010_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_EVAL_011_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_011_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_EVAL_012_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_012_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_EVAL_013_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_013_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_EVAL_014_short_circuit,40_valid_programs/10_eval_order/VAL_EVAL_014_short_circuit.test,VALID_EVAL,soltest,0,0,1,False,True,Boolean builtins should short-circuit.
+VAL_COMPLEX_001_spec_closure_like,40_valid_programs/11_complex/VAL_COMPLEX_001_spec_closure_like.test,VALID_COMPLEX,soltest,0,0,2,True,True,Complex mixed program.
+VAL_COMPLEX_002_factorial_like,40_valid_programs/11_complex/VAL_COMPLEX_002_factorial_like.test,VALID_COMPLEX,soltest,0,0,2,False,True,Complex mixed program.
+VAL_COMPLEX_003_spec_super_like,40_valid_programs/11_complex/VAL_COMPLEX_003_spec_super_like.test,VALID_COMPLEX,soltest,0,0,2,False,True,Complex mixed program.
+VAL_COMPLEX_004_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_004_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_005_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_005_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_006_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_006_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_007_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_007_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_008_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_008_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_009_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_009_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_010_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_010_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_011_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_011_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_012_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_012_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_013_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_013_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_014_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_014_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_015_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_015_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_016_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_016_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_017_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_017_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."
+VAL_COMPLEX_018_counter_loop,40_valid_programs/11_complex/VAL_COMPLEX_018_counter_loop.test,VALID_COMPLEX,soltest,0,0,2,False,True,"Mixed object, attribute, block, and whileTrue scenario."

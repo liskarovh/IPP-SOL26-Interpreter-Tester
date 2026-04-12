@@ -1,0 +1,13 @@
++++ BASE_OOP
+*** Object asString vraci prazdny retezec
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    o := Object new.
+    s := o asString.
+    _ := ((s length) asString) print.
+  ]
+}

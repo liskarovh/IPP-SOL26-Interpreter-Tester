@@ -1,0 +1,13 @@
++++ BASE_OOP
+*** identicalTo: na stejnou instanci
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    o1 := Object new.
+    o2 := o1.
+    _ := ((o1 identicalTo: o2) asString) print.
+  ]
+}

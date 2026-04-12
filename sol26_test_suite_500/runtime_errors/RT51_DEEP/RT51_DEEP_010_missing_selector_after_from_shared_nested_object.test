@@ -1,0 +1,16 @@
+*** Shallow copy keeps shared nested object; later mutation triggers failure.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+holder := (Object new) target: [| _ := 1. ].
+o := (Object new) holder: holder.
+c := Object from: o.
+_ := holder target: 1.
+x := ((c holder) target).
+_ := x value.
+]
+}

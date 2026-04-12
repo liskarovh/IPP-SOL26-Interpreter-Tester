@@ -1,0 +1,17 @@
+*** Third argument expression causes runtime bad-value error.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+_ := self use: 1 and: 2 and: (MyInt from: 'str').
+]
+use:and:and: [ :x :y :z |
+_ := x.
+]
+
+}

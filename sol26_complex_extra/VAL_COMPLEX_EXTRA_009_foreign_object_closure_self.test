@@ -1,0 +1,29 @@
+*** A foreign object executing a block should still observe the original lexical self.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class A : Object {
+foo: [ :blk |
+  _ := blk value: 'foo'.
+]
+}
+
+class Main : Object {
+run [ |
+  a := A new.
+  z := nil.
+  b := [ :arg |
+    _ := self attr: arg.
+    z := self.
+  ].
+  _ := a foo: b.
+  same := z identicalTo: self.
+  txt := self attr.
+  txt := txt concatenateWith: '|'.
+  sameTxt := same asString.
+  txt := txt concatenateWith: sameTxt.
+  _ := txt print.
+]
+}

@@ -1,0 +1,16 @@
+*** RT51 BASIC 012 super selector missing in parent
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Parent : Object {
+ok [|
+_ := 1.
+]
+}
+class Main : Parent {
+run [|
+_ := super missing.
+]
+}

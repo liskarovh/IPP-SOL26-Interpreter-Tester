@@ -1,0 +1,18 @@
++++ RT54
+*** write must fail when subclass defines zero-arg method length and write tries to create length attribute
+!C! 0
+!I! 54
+>>> 1
+
+class MyString : String {
+    length [|
+        r := 1.
+    ]
+}
+
+class Main : Object {
+    run [|
+        x := MyString new.
+        _ := x length: 1.
+    ]
+}

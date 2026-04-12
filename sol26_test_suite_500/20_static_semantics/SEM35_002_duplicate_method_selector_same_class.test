@@ -1,0 +1,20 @@
+*** Duplicate method selector in same class should cause 35.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : Object {
+foo [ |
+  _ := nil.
+]
+foo [ |
+  _ := 1.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

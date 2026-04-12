@@ -1,0 +1,18 @@
+*** Parent-created attribute is valid, next message on resulting string fails.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Parent : Object {
+prepare [|
+_ := self p: 'hello'.
+]
+}
+class Main : Parent {
+run [|
+_ := super prepare.
+x := super p.
+_ := x missing.
+]
+}

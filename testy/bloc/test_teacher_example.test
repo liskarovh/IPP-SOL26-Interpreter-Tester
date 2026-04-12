@@ -1,0 +1,31 @@
++++ BLOCKS
+*** Návratové hodnoty bloku (Sekce 1.2.6): test_teacher_example
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+    run [|
+        a := self foo: 4.
+        _ := (a asString) print.
+        _ := '\n' print.
+        
+        b := [ :x | _ := 42. ].
+        c := b value: 16.
+        _ := (c asString) print.
+        _ := '\n' print.
+        
+        d := 'ahoj' print.
+        _ := '\n' print.
+        
+        jeStejne := d print.
+        _ := '\n' print.
+        
+        jeStejne := jeStejne equalTo: 'ahoj'.
+        _ := (jeStejne asString) print.
+    ]
+    
+    foo: [ :x |
+        u := x plus: 10.
+    ]
+}

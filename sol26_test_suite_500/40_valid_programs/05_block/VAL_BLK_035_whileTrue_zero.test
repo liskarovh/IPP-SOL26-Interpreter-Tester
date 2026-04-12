@@ -1,0 +1,14 @@
+*** Block behavior.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    c := [| r := false. ].
+v := c whileTrue: [| x := 'a'. ].
+_ := ((v isNil) asString) print.
+  ]
+  }

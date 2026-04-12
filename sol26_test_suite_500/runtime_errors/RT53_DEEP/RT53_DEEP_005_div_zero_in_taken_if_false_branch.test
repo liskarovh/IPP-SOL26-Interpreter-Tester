@@ -1,0 +1,11 @@
+*** Bad value arises only in executed false branch.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+x := false ifTrue: [| _ := 1. ] ifFalse: [| _ := 1 divBy: 0. ].
+]
+}

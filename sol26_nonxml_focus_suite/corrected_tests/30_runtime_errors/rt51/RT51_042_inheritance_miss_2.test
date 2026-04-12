@@ -1,0 +1,32 @@
+*** Earlier colliding attribute creation should cause 54 before later super miss.
++++ RT54
+!C! 0
+!I! 54
+>>> 1
+
+class Parent : Object {
+
+something [ |
+  _ := self a: 1.
+]
+}
+
+class Child : Parent {
+
+a [ |
+  _ := 'method'.
+]
+
+runChild [ |
+  x := super b.
+]
+}
+
+class Main : Object {
+
+  run [ |
+    c := Child new.
+_ := c something.
+x := c runChild.
+  ]
+  }

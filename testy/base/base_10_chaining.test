@@ -1,0 +1,11 @@
++++ BASE_OOP
+*** Zretezeni a uzavorkovani zprav
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    _ := ((((Object new) asString) length) asString) print.
+  ]
+}

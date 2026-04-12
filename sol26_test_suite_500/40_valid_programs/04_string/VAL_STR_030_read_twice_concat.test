@@ -1,0 +1,15 @@
+*** String behavior.
++++ VALID_STRING
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    a := String read.
+b := String read.
+x := a concatenateWith: b.
+_ := x print.
+  ]
+  }

@@ -1,0 +1,22 @@
+*** Valid attribute work happens first; later collision must still be detected.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Parent : Object {
+setup [|
+_ := self a: 1.
+_ := self b: 2.
+]
+}
+class Main : Parent {
+run [|
+_ := super setup.
+_ := self foo: 1.
+]
+foo [|
+_ := 1.
+]
+
+}

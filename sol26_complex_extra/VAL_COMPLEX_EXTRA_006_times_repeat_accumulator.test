@@ -1,0 +1,36 @@
+*** timesRepeat: should pass the iteration number and allow nested stateful updates.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class Acc : Object {
+
+runN: [ :n |
+_ := self total: 0.
+_ := self log: ''.
+_ := n timesRepeat: [ :i |
+_ := self total: ((self total) plus: i).
+sep := (((self log) length) equalTo: 0)
+ifTrue: [ | r := ''. ]
+ifFalse: [ | r := ';'. ].
+txt := (self log) concatenateWith: sep.
+txt := txt concatenateWith: (i asString).
+_ := self log: txt.
+_ := self total.
+].
+txt := (self log) concatenateWith: '|'.
+txt := txt concatenateWith: ((self total) asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+a := Acc new.
+txt := a runN: 5.
+_ := txt print.
+]
+
+}

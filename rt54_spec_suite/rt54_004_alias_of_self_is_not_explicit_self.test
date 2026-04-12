@@ -1,0 +1,15 @@
++++ RT54
+*** alias of self should behave like ordinary receiver and still collide with local zero-arg method
+!C! 0
+!I! 54
+>>> 1
+
+class Main : Object {
+    run [|
+        x := self.
+        _ := x foo: 1.
+    ]
+    foo [|
+        r := 'method'.
+    ]
+}

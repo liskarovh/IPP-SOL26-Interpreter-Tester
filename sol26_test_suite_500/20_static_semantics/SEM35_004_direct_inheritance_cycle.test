@@ -1,0 +1,17 @@
+*** Direct inheritance cycle should cause 35.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : A {
+foo [ |
+  _ := nil.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

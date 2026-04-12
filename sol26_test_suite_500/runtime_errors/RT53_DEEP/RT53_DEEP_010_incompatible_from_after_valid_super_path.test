@@ -1,0 +1,19 @@
+*** Valid super dispatch returns incompatible object for from:.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Parent : Object {
+source [|
+_ := 'str'.
+]
+}
+class Main : Parent {
+run [|
+x := super source.
+_ := MyInt from: x.
+]
+}

@@ -1,0 +1,23 @@
+*** Duplicate class name should cause 35.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : Object {
+foo [ |
+  _ := nil.
+]
+}
+
+class A : Object {
+bar [ |
+  _ := nil.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

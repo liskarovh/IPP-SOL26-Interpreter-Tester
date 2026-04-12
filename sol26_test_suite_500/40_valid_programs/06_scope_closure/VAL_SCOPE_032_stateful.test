@@ -1,0 +1,15 @@
+*** Closure should preserve and reuse state.
++++ VALID_SCOPE
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := 5.
+b := [| y := x. ].
+r := b value.
+_ := (r asString) print.
+  ]
+  }

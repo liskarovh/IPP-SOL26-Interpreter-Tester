@@ -1,0 +1,15 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_method_redef2
+!C! 0
+!I! 35
+>>> 1
+
+class Main : Object {
+    run [|
+        x := 1.
+        y := 1.
+        z := y.
+    ]
+    pepa:jak:se: [:a:b:c|]
+    pepa:jak:se: [:a:b:c|]
+}

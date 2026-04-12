@@ -1,0 +1,12 @@
++++ ERRORS
+*** Chyba 54: Pokus o vytvoreni atributu, ktery koliduje s metodou
+!C! 0
+!I! 54
+>>> 1
+
+class Main : Object {
+  mojeMetoda [ | ]
+  run [ | 
+    _ := (self mojeMetoda: 42).
+  ]
+}

@@ -1,0 +1,17 @@
+*** Repeated selector parts still must match block arity.
++++ SEM33
+!C! 0
+!I! 33
+>>> 1
+
+class A : Object {
+foo:foo: [ :x |
+  _ := x.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

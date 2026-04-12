@@ -1,0 +1,12 @@
++++ ADVANCED_OOP
+*** Vicenasobna dedicnost a retezene super
+!C! 0
+!I! 0
+>>> 1
+
+class A : Object { m [ | _ := 'A' print. ] }
+class B : A { m [ | _ := super m. ] }
+class Main : B {
+  m [ | _ := super m. ]
+  run [ | _ := self m. ]
+}

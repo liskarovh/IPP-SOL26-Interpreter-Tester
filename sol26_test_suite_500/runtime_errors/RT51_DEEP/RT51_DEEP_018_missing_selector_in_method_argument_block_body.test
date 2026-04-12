@@ -1,0 +1,15 @@
+*** Method evaluates block argument; failure is inside block body.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := self consume: [| _ := (Object new) missing. ].
+]
+consume: [ :b |
+_ := b value.
+]
+
+}

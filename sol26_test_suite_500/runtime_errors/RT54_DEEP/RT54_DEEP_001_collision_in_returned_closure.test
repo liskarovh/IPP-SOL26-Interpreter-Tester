@@ -1,0 +1,18 @@
+*** Returned closure attempts to create colliding attribute later.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+b := self makeBad.
+_ := b value.
+]
+foo [|
+_ := 1.
+]
+makeBad [|
+_ := [| _ := self foo: 1. ].
+]
+}

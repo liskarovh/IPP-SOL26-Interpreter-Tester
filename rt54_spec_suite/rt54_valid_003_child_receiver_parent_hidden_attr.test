@@ -1,0 +1,28 @@
++++ VALID_SELFSUP
+*** parent method may create attribute on child receiver and child may later read it via super
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+    make [|
+        _ := self p: 'hello'.
+    ]
+}
+
+class Child : Parent {
+    p [|
+        r := 'foo'.
+    ]
+    read [|
+        r := super p.
+    ]
+}
+
+class Main : Object {
+    run [|
+        c := Child new.
+        _ := c make.
+        _ := (c read) print.
+    ]
+}

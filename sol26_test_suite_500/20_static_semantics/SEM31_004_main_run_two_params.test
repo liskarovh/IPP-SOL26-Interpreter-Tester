@@ -1,0 +1,11 @@
+*** Main run with two parameters should cause 31.
++++ SEM31
+!C! 0
+!I! 31
+>>> 1
+
+class Main : Object {
+run:and: [ :x :y |
+  _ := x.
+]
+}

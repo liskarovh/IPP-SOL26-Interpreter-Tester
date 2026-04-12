@@ -1,0 +1,11 @@
++++ ERRORS
+*** Chyba 52: Spatny typ operandu (scitani cisla a stringu)
+!C! 0
+!I! 52
+>>> 1
+
+class Main : Object {
+  run [ | 
+    _ := (10 plus: '20').
+  ]
+}

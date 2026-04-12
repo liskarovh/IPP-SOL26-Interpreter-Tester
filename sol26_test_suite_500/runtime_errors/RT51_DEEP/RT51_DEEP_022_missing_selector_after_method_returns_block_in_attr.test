@@ -1,0 +1,17 @@
+*** Block stored in returned object fails later because of wrong arity.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+o := self makeHolder.
+b := o worker.
+_ := b value: 1.
+]
+makeHolder [|
+_ := (Object new) worker: [| _ := 1. ].
+]
+
+}

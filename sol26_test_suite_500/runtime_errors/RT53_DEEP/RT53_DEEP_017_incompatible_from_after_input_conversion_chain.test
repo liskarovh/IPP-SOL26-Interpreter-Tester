@@ -1,0 +1,15 @@
+*** Program does valid work first, then fails on incompatible from:.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+s := String read.
+n := s asInteger.
+_ := MyInt from: s.
+]
+}

@@ -1,0 +1,13 @@
+*** Directly mirrors the incompatible from: example from the specification.
++++ RT53_BASIC
+!C! 0
+!I! 53
+>>> 1
+
+class Factorial : Integer {
+}
+class Main : Object {
+run [|
+_ := Factorial from: 'str'.
+]
+}

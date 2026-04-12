@@ -1,0 +1,13 @@
+*** timesRepeat: fails only on later iteration inside executed branch.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := 3 timesRepeat: [ :i |
+x := (i equalTo: 2) ifTrue: [| _ := (Object new) missing. ] ifFalse: [| _ := 1. ].
+].
+]
+}

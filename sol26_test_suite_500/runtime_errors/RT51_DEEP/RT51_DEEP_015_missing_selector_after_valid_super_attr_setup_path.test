@@ -1,0 +1,18 @@
+*** Failure occurs after parent path creates attribute and later chained send.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Parent : Object {
+setup [|
+_ := self worker: (Object new).
+]
+}
+class Main : Parent {
+run [|
+_ := super setup.
+x := super worker.
+_ := x missing.
+]
+}

@@ -1,0 +1,19 @@
+*** Block argument fails on attribute collision only when executed.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Parent : Object {
+foo [|
+_ := 1.
+]
+}
+class Main : Parent {
+run [|
+_ := self consume: [| _ := self foo: 1. ].
+]
+consume: [ :b |
+_ := b value.
+]
+}

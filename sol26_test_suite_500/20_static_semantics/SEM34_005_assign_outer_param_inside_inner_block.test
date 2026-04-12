@@ -1,0 +1,12 @@
+*** Inner block assigning captured parameter should cause 34.
++++ SEM34
+!C! 0
+!I! 34
+>>> 1
+
+class Main : Object {
+
+run [ |
+  b := [ :x | c := [| x := 1. ]. _ := c value. ]. _ := b value: 2.
+]
+}

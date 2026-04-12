@@ -1,0 +1,47 @@
+*** A returned nested block should preserve both self and super from its defining method context.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class A : Object {
+
+print [ |
+_ := 'A' print.
+]
+
+}
+
+class B : A {
+
+makeBlock [ |
+b := [ |
+_ := super print.
+_ := self print.
+].
+_ := b.
+]
+
+print [ |
+_ := 'B' print.
+]
+
+}
+
+class C : B {
+
+print [ |
+_ := 'C' print.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+c := C new.
+b := c makeBlock.
+_ := b value.
+]
+
+}

@@ -1,0 +1,21 @@
+*** Complex mixed program.
++++ VALID_COMPLEX
+!C! 0
+!I! 0
+>>> 2
+
+class Fact : Integer {
+fact [ |
+  r := (self equalTo: 0) ifTrue: [| r := Fact from: 1. ]
+       ifFalse: [| r := self multiplyBy: ((Fact from: (self minus: 1)) fact). ].
+]
+}
+
+class Main : Object {
+
+  run [ |
+    x := Fact from: 4.
+y := x fact.
+_ := (y asString) print.
+  ]
+  }

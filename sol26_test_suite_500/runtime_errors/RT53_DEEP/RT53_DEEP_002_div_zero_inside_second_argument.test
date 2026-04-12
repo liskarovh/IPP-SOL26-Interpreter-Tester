@@ -1,0 +1,15 @@
+*** Second argument expression produces runtime bad-value error.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+_ := self use: 1 and: (5 divBy: 0).
+]
+use:and: [ :x :y |
+_ := x.
+]
+
+}

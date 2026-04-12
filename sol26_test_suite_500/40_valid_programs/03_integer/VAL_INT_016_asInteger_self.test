@@ -1,0 +1,15 @@
+*** Integer behavior.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := 17.
+y := x asInteger.
+z := x equalTo: y.
+_ := (z asString) print.
+  ]
+  }

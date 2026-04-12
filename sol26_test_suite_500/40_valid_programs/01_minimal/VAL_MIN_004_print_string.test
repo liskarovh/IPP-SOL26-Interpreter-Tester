@@ -1,0 +1,12 @@
+*** Minimal valid program prints a fixed string.
++++ VALID_MIN
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+run [ |
+  _ := 'ok4' print.
+]
+}

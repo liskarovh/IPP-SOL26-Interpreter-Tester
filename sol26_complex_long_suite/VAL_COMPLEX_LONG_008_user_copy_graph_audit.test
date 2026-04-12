@@ -1,0 +1,47 @@
+*** Long user-class from: copy graph with shallow nested object identity and loops.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class Record : Object {
+
+audit [ |
+txt := (self name) concatenateWith: '#'.
+txt := txt concatenateWith: ((self child) label).
+txt := txt concatenateWith: '#'.
+txt := txt concatenateWith: ((self score) asString).
+]
+
+raiseTimes: [ :n |
+_ := n timesRepeat: [ :i |
+_ := self score: ((self score) plus: i).
+_ := self score.
+].
+out := self audit.
+out := out concatenateWith: '|'.
+out := out concatenateWith: ((self score) asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+r1 := Record new.
+child := Object new.
+_ := child label: 'root'.
+_ := r1 name: 'R'.
+_ := r1 child: child.
+_ := r1 score: 1.
+r2 := Record from: r1.
+r3 := Record from: r2.
+same1 := (r3 child) identicalTo: child.
+_ := child label: 'rootX'.
+out := r3 raiseTimes: 4.
+out := out concatenateWith: '|'.
+out := out concatenateWith: (same1 asString).
+_ := out print.
+]
+
+}

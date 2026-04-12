@@ -1,0 +1,15 @@
++++ ADVANCED_OOP
+*** Super jako argument se chova jako self
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+  getArg: [ :x | _ := x. ]
+}
+class Main : Parent {
+  run [ | 
+    res := (super getArg: super).
+    _ := (((res identicalTo: self) asString) print).
+  ]
+}

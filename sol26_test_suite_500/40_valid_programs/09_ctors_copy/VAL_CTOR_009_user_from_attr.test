@@ -1,0 +1,17 @@
+*** Constructor and from: behavior.
++++ VALID_CTOR
+!C! 0
+!I! 0
+>>> 1
+
+class Box : Object { }
+
+class Main : Object {
+
+  run [ |
+    x := Box new.
+_ := x v: 'a'.
+y := Box from: x.
+_ := (y v) print.
+  ]
+  }

@@ -1,0 +1,16 @@
+*** RT51 BASIC 024 unknown message after valid method result
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+x := self make.
+_ := x missing.
+]
+make [|
+_ := Object new.
+]
+
+}

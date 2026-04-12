@@ -1,0 +1,15 @@
+*** Unknown selector arises inside argument expression receiver chain.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := self use: ((Object new) missing).
+]
+use: [ :x |
+_ := x.
+]
+
+}

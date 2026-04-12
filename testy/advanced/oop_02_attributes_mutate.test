@@ -1,0 +1,13 @@
++++ ADVANCED_OOP
+*** Zmena hodnoty a typu existujiciho atributu
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    _ := (self data: 10).
+    _ := (self data: 'zmena').
+    _ := ((self data) print).
+  ]
+}

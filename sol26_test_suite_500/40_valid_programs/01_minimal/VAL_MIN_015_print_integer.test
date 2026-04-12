@@ -1,0 +1,13 @@
+*** Minimal valid program prints an integer via asString.
++++ VALID_MIN
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := 4.
+_ := (x asString) print.
+  ]
+  }

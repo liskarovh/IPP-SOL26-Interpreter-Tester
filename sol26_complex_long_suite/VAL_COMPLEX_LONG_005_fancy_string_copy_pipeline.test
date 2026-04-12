@@ -1,0 +1,38 @@
+*** Long String subclass pipeline with slices, copied attributes, and shallow identity.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class Fancy : String {
+
+report [ |
+part := self startsWith: 2 endsBefore: 5.
+txt := '[' concatenateWith: self.
+txt := txt concatenateWith: ']'.
+txt := txt concatenateWith: '|'.
+txt := txt concatenateWith: part.
+txt := txt concatenateWith: '|'.
+txt := txt concatenateWith: ((self meta) note).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+base := Fancy from: 'abcdef'.
+meta := Object new.
+_ := meta note: 'N'.
+_ := base meta: meta.
+copy1 := Fancy from: base.
+copy2 := Fancy from: copy1.
+same := (copy2 meta) identicalTo: meta.
+_ := meta note: 'NX'.
+out := copy2 report.
+out := out concatenateWith: '|'.
+out := out concatenateWith: (same asString).
+_ := out print.
+]
+
+}

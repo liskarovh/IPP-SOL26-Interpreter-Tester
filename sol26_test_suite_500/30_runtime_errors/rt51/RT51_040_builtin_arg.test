@@ -1,0 +1,12 @@
+*** Receiver should not understand the message; expect 51.
++++ RT51
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+
+run [ |
+  x := false ifTrue: [| _ := nil. ] ifFalse: 1.
+]
+}

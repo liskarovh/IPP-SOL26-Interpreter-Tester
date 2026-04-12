@@ -1,0 +1,14 @@
+*** Attribute is valid first, then replaced and later used as block.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := self worker: [| _ := 1. ].
+_ := self worker: 1.
+x := self worker.
+_ := x value.
+]
+}

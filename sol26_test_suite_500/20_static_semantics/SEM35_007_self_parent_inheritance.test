@@ -1,0 +1,13 @@
+*** Class inheriting from itself should cause 35.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : A { }
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

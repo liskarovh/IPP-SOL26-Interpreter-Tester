@@ -1,0 +1,11 @@
+*** or: evaluates taken branch by sending value to non-block object.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := false or: 1.
+]
+}

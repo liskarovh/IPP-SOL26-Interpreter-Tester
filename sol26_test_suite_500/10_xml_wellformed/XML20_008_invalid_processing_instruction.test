@@ -1,0 +1,6 @@
+*** Malformed XML should cause exit code 20.
++++ XML20
+!I! 20
+>>> 1
+
+<?xml version="1.0" encoding="UTF-8"?><?bad ?><program language="SOL26">

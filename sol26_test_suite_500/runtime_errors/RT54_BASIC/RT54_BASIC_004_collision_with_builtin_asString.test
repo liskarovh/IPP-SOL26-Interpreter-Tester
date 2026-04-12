@@ -1,0 +1,11 @@
+*** Creating attribute collides with inherited unary method asString.
++++ RT54_BASIC
+!C! 0
+!I! 54
+>>> 1
+
+class Main : Object {
+run [|
+_ := self asString: 10.
+]
+}

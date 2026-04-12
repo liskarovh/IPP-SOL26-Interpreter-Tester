@@ -1,0 +1,9 @@
++++ ERRORS
+*** Chyba 31: Chybi trida Main
+!C! 0
+!I! 31
+>>> 1
+
+class NotMain : Object {
+  run [ | _ := 'Nic' print. ]
+}

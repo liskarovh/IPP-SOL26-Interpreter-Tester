@@ -1,0 +1,22 @@
+*** Additional attribute behavior.
++++ VALID_ATTR
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+make [ |
+  _ := self p: 'parent'.
+]
+}
+class Child : Parent { }
+
+class Main : Object {
+
+  run [ |
+    c := Child new.
+_ := c make.
+r := c p.
+_ := r print.
+  ]
+  }

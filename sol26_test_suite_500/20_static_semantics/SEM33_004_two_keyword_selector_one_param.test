@@ -1,0 +1,17 @@
+*** Two-keyword selector with one parameter should cause 33.
++++ SEM33
+!C! 0
+!I! 33
+>>> 1
+
+class A : Object {
+foo:bar: [ :x |
+  _ := x.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

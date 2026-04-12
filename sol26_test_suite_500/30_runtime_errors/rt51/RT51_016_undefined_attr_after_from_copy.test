@@ -1,0 +1,15 @@
+*** Receiver should not understand the message; expect 51.
++++ RT51
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    a := Object new.
+_ := a a: 1.
+b := Object from: a.
+x := b missing.
+  ]
+  }

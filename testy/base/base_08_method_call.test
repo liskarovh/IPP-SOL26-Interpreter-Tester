@@ -1,0 +1,16 @@
++++ BASE_OOP
+*** Zavolani vlastni bezparametricke metody
+!C! 0
+!I! 0
+>>> 1
+
+class Helper : Object {
+  hello [ | _ := 'Hi' print. ]
+}
+
+class Main : Object {
+  run [ | 
+    h := Helper new.
+    _ := h hello.
+  ]
+}

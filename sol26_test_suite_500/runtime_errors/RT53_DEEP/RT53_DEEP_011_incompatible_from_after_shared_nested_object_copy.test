@@ -1,0 +1,17 @@
+*** from: incompatibility appears through shallow-copied nested object.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+holder := (Object new) source: 'str'.
+o := (Object new) holder: holder.
+c := Object from: o.
+x := (c holder) source.
+_ := MyInt from: x.
+]
+}

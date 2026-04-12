@@ -1,0 +1,19 @@
+*** Attributes should be per-instance.
++++ VALID_ATTR
+!C! 0
+!I! 0
+>>> 1
+
+class Box : Object { }
+
+class Main : Object {
+
+  run [ |
+    a := Box new.
+b := Box new.
+_ := a val: '2'.
+_ := b val: 'x2'.
+r := a val.
+_ := r print.
+  ]
+  }

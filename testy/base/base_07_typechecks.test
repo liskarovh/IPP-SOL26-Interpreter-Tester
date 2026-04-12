@@ -1,0 +1,16 @@
++++ BASE_OOP
+*** Object typove dotazy
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    o := Object new.
+    _ := ((o isNumber) asString) print.
+    _ := ((o isString) asString) print.
+    _ := ((o isBlock) asString) print.
+    _ := ((o isBoolean) asString) print.
+    _ := ((o isNil) asString) print.
+  ]
+}

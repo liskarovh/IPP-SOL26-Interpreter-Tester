@@ -1,0 +1,12 @@
+*** RT51 BASIC 009 unknown unary on false
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+x := false.
+_ := x missing.
+]
+}

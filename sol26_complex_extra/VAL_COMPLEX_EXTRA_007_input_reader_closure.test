@@ -1,0 +1,39 @@
+*** Returned closures should retain both input-derived prefix and mutable counters.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class Factory : Object {
+
+makeReader [ |
+prefix := String read.
+count := 0.
+next := [ |
+count := count plus: 1.
+raw := String read.
+txt := prefix concatenateWith: ':'.
+txt := txt concatenateWith: raw.
+txt := txt concatenateWith: ':'.
+txt := txt concatenateWith: (count asString).
+].
+o := Object new.
+_ := o next: next.
+_ := o.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+f := Factory new.
+r := f makeReader.
+a := ((r next) value).
+b := ((r next) value).
+txt := a concatenateWith: '|'.
+txt := txt concatenateWith: b.
+_ := txt print.
+]
+
+}

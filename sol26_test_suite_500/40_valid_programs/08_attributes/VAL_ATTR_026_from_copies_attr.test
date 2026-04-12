@@ -1,0 +1,16 @@
+*** Additional attribute behavior.
++++ VALID_ATTR
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    a := Object new.
+_ := a val: 'copy'.
+b := Object from: a.
+r := b val.
+_ := r print.
+  ]
+  }

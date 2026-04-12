@@ -1,0 +1,15 @@
+*** Second argument expression fails during eager evaluation.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := self use: (Object new) and: ((Object new) missing).
+]
+use:and: [ :x :y |
+_ := x.
+]
+
+}

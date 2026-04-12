@@ -1,0 +1,13 @@
+*** String behavior.
++++ VALID_STRING
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := 'abcd' startsWith: 1 endsBefore: 3.
+_ := x print.
+  ]
+  }

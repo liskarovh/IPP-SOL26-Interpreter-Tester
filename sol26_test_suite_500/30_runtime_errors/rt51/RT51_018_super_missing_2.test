@@ -1,0 +1,19 @@
+*** Receiver should not understand the message; expect 51.
++++ RT51
+!C! 0
+!I! 51
+>>> 1
+
+class Parent : Object {
+
+p [ |
+  _ := 'parent'.
+]
+}
+
+class Main : Object {
+
+run [ |
+  x := super q.
+]
+}

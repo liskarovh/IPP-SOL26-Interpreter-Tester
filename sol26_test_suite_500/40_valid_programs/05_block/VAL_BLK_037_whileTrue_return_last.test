@@ -1,0 +1,15 @@
+*** Block behavior.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    _ := self n: 2.
+c := [| r := (self n) greaterThan: 0. ].
+v := c whileTrue: [| _ := self n: ((self n) minus: 1). r := (self n) asString. ].
+_ := v print.
+  ]
+  }

@@ -1,0 +1,40 @@
+*** Returned blocks should share and mutate captured state.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class Maker : Object {
+
+makePairFrom: [ :start |
+base := start.
+total := 0.
+inc := [ :delta |
+base := base plus: delta.
+total := total plus: base.
+_ := base.
+].
+snapshot := [ |
+txt := (base asString) concatenateWith: ':'.
+txt := txt concatenateWith: (total asString).
+].
+o := Object new.
+_ := o inc: inc.
+_ := o snapshot: snapshot.
+_ := o.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+m := Maker new.
+p := m makePairFrom: 2.
+a := ((p inc) value: 3).
+b := ((p inc) value: 4).
+c := ((p snapshot) value).
+_ := c print.
+]
+
+}

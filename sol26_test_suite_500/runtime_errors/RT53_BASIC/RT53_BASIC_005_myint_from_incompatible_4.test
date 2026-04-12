@@ -1,0 +1,13 @@
+*** MyInt from incompatible source [| _ := 1. ].
++++ RT53_BASIC
+!C! 0
+!I! 53
+>>> 1
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+_ := MyInt from: [| _ := 1. ].
+]
+}

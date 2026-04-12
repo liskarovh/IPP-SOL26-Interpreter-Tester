@@ -1,0 +1,14 @@
++++ IO
+*** Nacteni cisel ze vstupu a jejich secteni
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    a := ((String read) asInteger).
+    b := ((String read) asInteger).
+    res := (a plus: b).
+    _ := ((res asString) print).
+  ]
+}

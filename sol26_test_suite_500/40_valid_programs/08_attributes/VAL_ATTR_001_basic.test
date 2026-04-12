@@ -1,0 +1,14 @@
+*** Attribute should be created by keyword message and read by unary message.
++++ VALID_ATTR
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    _ := self a: '1'.
+r := self a.
+_ := r print.
+  ]
+  }

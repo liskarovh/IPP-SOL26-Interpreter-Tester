@@ -1,0 +1,17 @@
+*** Duplicate parameter names need not be adjacent to be invalid.
++++ SEM35
+!C! 0
+!I! 35
+>>> 1
+
+class A : Object {
+foo:bar:baz: [ :x :y :x |
+  _ := y.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

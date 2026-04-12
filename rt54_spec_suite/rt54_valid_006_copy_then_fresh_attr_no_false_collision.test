@@ -1,0 +1,17 @@
++++ VALID_ATTR
+*** copied Object receiver remains Object and fresh attribute write stays valid even if Main defines same zero-arg method
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+    run [|
+        o := Object new.
+        c := Object from: o.
+        _ := c foo: 1.
+        _ := ((c foo) asString) print.
+    ]
+    foo [|
+        r := 'method'.
+    ]
+}

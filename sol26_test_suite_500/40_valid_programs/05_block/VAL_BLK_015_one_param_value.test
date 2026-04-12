@@ -1,0 +1,14 @@
+*** One-parameter block should consume value:.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    b := [ :x | y := x plus: 5. ].
+r := b value: 5.
+_ := (r asString) print.
+  ]
+  }

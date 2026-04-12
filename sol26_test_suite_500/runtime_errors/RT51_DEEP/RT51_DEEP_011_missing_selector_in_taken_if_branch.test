@@ -1,0 +1,11 @@
+*** Error appears only in executed ifTrue branch.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+x := true ifTrue: [| _ := (Object new) missing. ] ifFalse: [| _ := 1. ].
+]
+}

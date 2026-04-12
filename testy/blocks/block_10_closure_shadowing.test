@@ -1,0 +1,14 @@
++++ BLOCKS
+*** Zastineni promenne parametrem
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    x := 1.
+    b := [ :x | _ := (x asString) print. ].
+    _ := b value: 2.
+    _ := (x asString) print.
+  ]
+}

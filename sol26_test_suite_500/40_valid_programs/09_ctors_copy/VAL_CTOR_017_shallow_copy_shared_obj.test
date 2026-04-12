@@ -1,0 +1,18 @@
+*** Constructor and from: behavior.
++++ VALID_CTOR
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    a := Object new.
+child := Object new.
+_ := child v: 'q'.
+_ := a c: child.
+b := Object from: a.
+r := ((b c) v).
+_ := r print.
+  ]
+  }

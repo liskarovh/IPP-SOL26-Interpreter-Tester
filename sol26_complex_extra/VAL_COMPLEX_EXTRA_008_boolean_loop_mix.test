@@ -1,0 +1,41 @@
+*** Boolean short-circuiting should combine correctly with whileTrue: driven state updates.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class Gate : Object {
+
+compute [ |
+_ := self n: 3.
+_ := self out: ''.
+cond := [ |
+r := (self n) greaterThan: 0.
+].
+body := [ |
+ok := true and: [ | r := ((self n) greaterThan: 1). ].
+part := ok
+ifTrue: [ | r := 'H'. ]
+ifFalse: [ | r := 'L'. ].
+txt := (self out) concatenateWith: part.
+_ := self out: txt.
+_ := self n: ((self n) minus: 1).
+_ := txt.
+].
+_ := cond whileTrue: body.
+z := false or: [ | r := ((self out) length) greaterThan: 2. ].
+txt := (self out) concatenateWith: '|'.
+txt := txt concatenateWith: (z asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+g := Gate new.
+txt := g compute.
+_ := txt print.
+]
+
+}

@@ -1,0 +1,24 @@
++++ RT54
+*** super write must fail when parent chain already defines the zero-arg method
+!C! 0
+!I! 54
+>>> 1
+
+class Parent : Object {
+    p [|
+        r := 'method'.
+    ]
+}
+
+class Child : Parent {
+    touch [|
+        _ := super p: 'hello'.
+    ]
+}
+
+class Main : Object {
+    run [|
+        c := Child new.
+        _ := c touch.
+    ]
+}

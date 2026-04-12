@@ -1,0 +1,14 @@
+*** MyInt from input string.
++++ RT53_BASIC
+!C! 0
+!I! 53
+>>> 1
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+x := String read.
+_ := MyInt from: x.
+]
+}

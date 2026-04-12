@@ -1,0 +1,17 @@
+*** Undefined parent class should cause 32.
++++ SEM32
+!C! 0
+!I! 32
+>>> 1
+
+class A : MissingParent {
+foo [ |
+  _ := nil.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

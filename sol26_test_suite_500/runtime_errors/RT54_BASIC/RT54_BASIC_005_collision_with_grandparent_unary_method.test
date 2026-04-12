@@ -1,0 +1,18 @@
+*** Collision with unary method inherited from grandparent.
++++ RT54_BASIC
+!C! 0
+!I! 54
+>>> 1
+
+class Grand : Object {
+foo [|
+_ := 1.
+]
+}
+class Parent : Grand {
+}
+class Main : Parent {
+run [|
+_ := self foo: 10.
+]
+}

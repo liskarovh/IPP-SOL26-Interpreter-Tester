@@ -1,0 +1,14 @@
++++ RT54
+*** self write must fail when the same class already defines a zero-arg method
+!C! 0
+!I! 54
+>>> 1
+
+class Main : Object {
+    run [|
+        _ := self foo: 1.
+    ]
+    foo [|
+        r := 'method'.
+    ]
+}

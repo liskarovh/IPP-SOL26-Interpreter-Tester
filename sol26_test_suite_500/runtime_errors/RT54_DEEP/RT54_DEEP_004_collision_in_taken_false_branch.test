@@ -1,0 +1,15 @@
+*** Collision occurs only in executed false branch.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+x := false ifTrue: [| _ := 1. ] ifFalse: [| _ := self foo: 1. ].
+]
+foo [|
+_ := 1.
+]
+
+}

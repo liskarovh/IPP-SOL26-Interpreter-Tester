@@ -1,0 +1,12 @@
++++ ADVANCED_OOP
+*** Dedicnost metody od rodice
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+  hello [ | _ := 'Hi' print. ]
+}
+class Main : Parent {
+  run [ | _ := self hello. ]
+}

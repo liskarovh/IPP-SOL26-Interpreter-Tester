@@ -1,0 +1,12 @@
+*** RT51 BASIC 017 three param block called with two args
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+b := [ :x :y :z | _ := x. ].
+_ := b value: 1 value: 2.
+]
+}

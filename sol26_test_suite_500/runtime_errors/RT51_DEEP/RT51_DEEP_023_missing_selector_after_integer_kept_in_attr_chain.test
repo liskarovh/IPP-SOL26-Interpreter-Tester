@@ -1,0 +1,14 @@
+*** Nested attribute chain ends in integer; later selector is unknown.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+inner := (Object new) value: 1.
+outer := (Object new) inner: inner.
+x := (outer inner) value.
+_ := x missing.
+]
+}

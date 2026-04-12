@@ -1,0 +1,18 @@
+*** Block argument reads input and fails when evaluated later.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+_ := self consume: [|
+x := (String read) asInteger.
+_ := 1 divBy: x.
+].
+]
+consume: [ :b |
+_ := b value.
+]
+
+}

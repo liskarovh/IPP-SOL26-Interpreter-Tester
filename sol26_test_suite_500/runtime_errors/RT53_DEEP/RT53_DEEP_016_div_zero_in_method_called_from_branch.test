@@ -1,0 +1,15 @@
+*** Branch is valid syntactically; runtime error is hidden in called method.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+x := true ifTrue: [| _ := self explode. ] ifFalse: [| _ := 1. ].
+]
+explode [|
+_ := 1 divBy: 0.
+]
+
+}

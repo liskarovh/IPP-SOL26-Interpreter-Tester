@@ -1,0 +1,17 @@
+*** from: incompatibility appears only in later argument.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+_ := self use: 1 and: (MyInt from: 'str').
+]
+use:and: [ :x :y |
+_ := x.
+]
+
+}

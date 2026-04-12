@@ -1,0 +1,10 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_collision_var2
+!C! 0
+!I! 35
+>>> 1
+
+class Main : Object {
+    run [|]
+    a2:b2: [:x :x | a := 1.]
+}

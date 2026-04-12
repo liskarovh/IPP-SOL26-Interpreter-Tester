@@ -1,0 +1,41 @@
+*** whileTrue: should drive an attribute-based loop and return the last body value.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class Counter : Object {
+
+buildLogFrom:to: [ :start :stop |
+_ := self n: start.
+_ := self stop: stop.
+_ := self log: ''.
+cond := [ |
+r := (self n) greaterThan: (self stop).
+].
+body := [ |
+prefix := (((self log) length) equalTo: 0)
+ifTrue: [ | r := ''. ]
+ifFalse: [ | r := ','. ].
+txt := (self log) concatenateWith: prefix.
+txt := txt concatenateWith: ((self n) asString).
+_ := self log: txt.
+_ := self n: ((self n) minus: 1).
+_ := self log.
+].
+result := cond whileTrue: body.
+txt := result concatenateWith: '|'.
+txt := txt concatenateWith: ((self n) asString).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+c := Counter new.
+txt := c buildLogFrom: 4 to: 0.
+_ := txt print.
+]
+
+}

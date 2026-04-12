@@ -1,0 +1,17 @@
+*** Constructor and from: behavior.
++++ VALID_CTOR
+!C! 0
+!I! 0
+>>> 1
+
+class MyString : String { }
+
+class Main : Object {
+
+  run [ |
+    x := MyString new.
+_ := x tag: 'q'.
+r := x tag.
+_ := r print.
+  ]
+  }

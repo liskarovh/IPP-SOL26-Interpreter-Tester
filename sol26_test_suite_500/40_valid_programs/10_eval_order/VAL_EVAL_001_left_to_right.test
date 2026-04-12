@@ -1,0 +1,27 @@
+*** Regular send arguments should be evaluated left to right.
++++ VALID_EVAL
+!C! 0
+!I! 0
+>>> 1
+
+
+class Main : Object {
+emit: [ :s |
+  _ := self out: ((self out) concatenateWith: s).
+]
+first [ |
+  _ := self emit: 'A1'.
+]
+second [ |
+  _ := self emit: 'B1'.
+]
+combine:and: [ :x :y |
+  _ := self out.
+]
+
+  run [ |
+    _ := self out: ''.
+_ := self combine: (self first) and: (self second).
+_ := (self out) print.
+  ]
+  }

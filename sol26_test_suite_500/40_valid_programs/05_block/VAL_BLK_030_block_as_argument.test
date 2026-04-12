@@ -1,0 +1,16 @@
+*** Block behavior.
++++ VALID_BLOCK
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  use: [ :blk |
+    r := blk value.
+  ]
+
+  run [ |
+    r := self use: [| x := 'u'. ].
+_ := r print.
+  ]
+  }

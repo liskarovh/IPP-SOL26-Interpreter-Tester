@@ -1,0 +1,14 @@
++++ ADVANCED_OOP
+*** Kopirovaci konstruktor from: (shallow copy atributu)
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    o1 := Object new.
+    _ := (o1 prop: 99).
+    o2 := (Object from: o1).
+    _ := (((o2 prop) asString) print).
+  ]
+}

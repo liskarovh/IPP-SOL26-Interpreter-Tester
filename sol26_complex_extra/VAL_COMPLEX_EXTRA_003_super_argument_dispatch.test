@@ -1,0 +1,62 @@
+*** super as argument should still denote the same receiver object.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class A : Object {
+
+m: [ :x |
+_ := 'A' print.
+_ := x print.
+]
+
+r [ |
+_ := self print.
+]
+
+print [ |
+_ := 'a' print.
+]
+
+}
+
+class B : A {
+
+m: [ :x |
+_ := 'B' print.
+_ := super m: x.
+]
+
+callSuperAsArg [ |
+_ := self m: super.
+]
+
+print [ |
+_ := 'b' print.
+]
+
+}
+
+class C : B {
+
+print [ |
+_ := 'c' print.
+]
+
+runMix [ |
+_ := self m: 'X'.
+_ := self callSuperAsArg.
+_ := self r.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+c := C new.
+_ := c runMix.
+]
+
+}

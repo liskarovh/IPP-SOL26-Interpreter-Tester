@@ -1,0 +1,12 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_circular_inheritance3
+!C! 0
+!I! 35
+>>> 1
+
+class A : B {}
+class B : C {}
+class C : A {}
+class Main : Object {
+    run [|]
+}

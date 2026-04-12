@@ -1,0 +1,31 @@
+*** from: on an Integer subclass should copy both the internal value and instance attributes.
++++ VALID_COMPLEX_EXTRA
+!C! 0
+!I! 0
+>>> 3
+
+class TaggedInt : Integer {
+
+summary [ |
+txt := (self asString) concatenateWith: '#'.
+txt := txt concatenateWith: ((self tagObj) name).
+]
+
+}
+
+class Main : Object {
+
+run [ |
+x := TaggedInt from: 7.
+tag := Object new.
+_ := tag name: 'seed'.
+_ := x tagObj: tag.
+y := TaggedInt from: x.
+same := ((y tagObj) identicalTo: tag).
+txt := y summary.
+txt := txt concatenateWith: '|'.
+txt := txt concatenateWith: (same asString).
+_ := txt print.
+]
+
+}

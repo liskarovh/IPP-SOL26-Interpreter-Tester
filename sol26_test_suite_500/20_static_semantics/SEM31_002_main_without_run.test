@@ -1,0 +1,11 @@
+*** Main without run should cause 31.
++++ SEM31
+!C! 0
+!I! 31
+>>> 1
+
+class Main : Object {
+foo [ |
+  _ := nil.
+]
+}

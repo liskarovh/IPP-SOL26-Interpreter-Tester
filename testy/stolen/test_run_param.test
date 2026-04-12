@@ -1,0 +1,11 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_run_param
+!C! 0
+!I! 33
+>>> 1
+
+class Main : Object {
+    run [:a|
+        x := a.
+    ]
+}

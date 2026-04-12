@@ -1,0 +1,25 @@
++++ VALID_SELFSUP
+*** super write should ignore child method and only consider parent chain for collision
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+}
+
+class Child : Parent {
+    p [|
+        r := 'foo'.
+    ]
+    make [|
+        _ := super p: 'hello'.
+        r := super p.
+    ]
+}
+
+class Main : Object {
+    run [|
+        c := Child new.
+        _ := (c make) print.
+    ]
+}

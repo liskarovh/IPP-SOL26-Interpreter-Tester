@@ -1,0 +1,89 @@
+*** Long inheritance audit mixing self, super, argument dispatch, and returned blocks.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class A : Object {
+
+stamp [ |
+_ := 'A'.
+]
+
+mix: [ :x |
+left := 'A'.
+left := left concatenateWith: x.
+]
+
+print [ |
+_ := 'a' print.
+]
+
+}
+
+class B : A {
+
+stamp [ |
+pre := 'B'.
+pre := pre concatenateWith: (super stamp).
+]
+
+mix: [ :x |
+left := 'B'.
+left := left concatenateWith: (super mix: x).
+]
+
+makeBlock [ |
+b := [ |
+first := super stamp.
+second := self stamp.
+out := first concatenateWith: ':'.
+out := out concatenateWith: second.
+].
+_ := b.
+]
+
+print [ |
+_ := 'b' print.
+]
+
+}
+
+class C : B {
+
+stamp [ |
+pre := 'C'.
+pre := pre concatenateWith: (super stamp).
+]
+
+mix: [ :x |
+left := 'C'.
+left := left concatenateWith: (super mix: x).
+]
+
+runAudit [ |
+blk := self makeBlock.
+p1 := self mix: 'X'.
+p2 := blk value.
+p3 := super mix: 'Y'.
+out := p1 concatenateWith: '|'.
+out := out concatenateWith: p2.
+out := out concatenateWith: '|'.
+out := out concatenateWith: p3.
+]
+
+print [ |
+_ := 'c' print.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+c := C new.
+out := c runAudit.
+_ := out print.
+]
+
+}

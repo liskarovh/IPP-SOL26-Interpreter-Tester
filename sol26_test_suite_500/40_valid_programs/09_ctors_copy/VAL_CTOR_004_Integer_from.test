@@ -1,0 +1,13 @@
+*** Constructor and from: behavior.
++++ VALID_CTOR
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := Integer from: 7.
+_ := (x asString) print.
+  ]
+  }

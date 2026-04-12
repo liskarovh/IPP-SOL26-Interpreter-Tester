@@ -1,0 +1,17 @@
++++ BASE_OOP
+*** Test klicoveho slova self
+!C! 0
+!I! 0
+>>> 1
+
+class Helper : Object {
+  getSelf [ | _ := self. ]
+}
+
+class Main : Object {
+  run [ | 
+    h := Helper new.
+    h2 := h getSelf.
+    _ := ((h identicalTo: h2) asString) print.
+  ]
+}

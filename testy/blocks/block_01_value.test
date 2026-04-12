@@ -1,0 +1,12 @@
++++ BLOCKS
+*** Zakladni volani bloku
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    b := [ | _ := 'B1' print. ].
+    _ := b value.
+  ]
+}

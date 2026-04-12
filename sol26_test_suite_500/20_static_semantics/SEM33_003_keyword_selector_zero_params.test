@@ -1,0 +1,17 @@
+*** Keyword selector with zero block parameters should cause 33.
++++ SEM33
+!C! 0
+!I! 33
+>>> 1
+
+class A : Object {
+foo: [ |
+  _ := nil.
+]
+}
+
+class Main : Object {
+run [ |
+  _ := nil.
+]
+}

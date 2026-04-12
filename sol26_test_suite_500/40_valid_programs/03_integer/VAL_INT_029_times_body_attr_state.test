@@ -1,0 +1,14 @@
+*** Integer timesRepeat behavior.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    _ := self sum: 0.
+r := 3 timesRepeat: [ :i | _ := self sum: ((self sum) plus: i). ].
+_ := ((self sum) asString) print.
+  ]
+  }

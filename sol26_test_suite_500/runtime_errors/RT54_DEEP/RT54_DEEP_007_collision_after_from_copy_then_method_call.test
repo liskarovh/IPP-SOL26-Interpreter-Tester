@@ -1,0 +1,16 @@
+*** Copied object is still same class; later colliding attribute creation fails.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+o := Object new.
+c := Object from: o.
+_ := c foo: 1.
+]
+foo [|
+_ := 1.
+]
+}

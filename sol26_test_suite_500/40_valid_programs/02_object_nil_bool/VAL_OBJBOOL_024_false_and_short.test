@@ -1,0 +1,13 @@
+*** Built-in Object/Nil/Boolean behavior.
++++ VALID_OBJBOOL
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := false and: [| r := nil nope. ].
+_ := (x asString) print.
+  ]
+  }

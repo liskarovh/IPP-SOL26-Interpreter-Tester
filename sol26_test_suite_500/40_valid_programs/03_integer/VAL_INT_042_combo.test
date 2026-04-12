@@ -1,0 +1,13 @@
+*** Additional integer combination case.
++++ VALID_INTEGER
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := 15 divBy: 5.
+_ := (x asString) print.
+  ]
+  }

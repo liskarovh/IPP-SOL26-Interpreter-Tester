@@ -1,0 +1,17 @@
+*** Failure occurs only after valid super dispatch returns an object.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Parent : Object {
+make [|
+_ := Object new.
+]
+}
+class Main : Parent {
+run [|
+x := super make.
+_ := x missing.
+]
+}

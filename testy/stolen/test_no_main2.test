@@ -1,0 +1,12 @@
++++ FRIEND_STATIC_ERRORS
+*** Test od kamarada: test_no_main2
+!C! 0
+!I! 31
+>>> 1
+
+class MyInt : Integer {}
+class Man2 : Object {
+    run [|
+        x := 1.
+    ]
+}

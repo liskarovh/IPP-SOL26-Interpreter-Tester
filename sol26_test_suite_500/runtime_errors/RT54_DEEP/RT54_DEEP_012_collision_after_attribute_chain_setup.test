@@ -1,0 +1,17 @@
+*** Prior valid state changes must not hide later collision.
++++ RT54_DEEP
+!C! 0
+!I! 54
+>>> 2
+
+class Main : Object {
+run [|
+holder := Object new.
+_ := self holder: holder.
+_ := self foo: 1.
+]
+foo [|
+_ := 1.
+]
+
+}

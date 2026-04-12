@@ -1,0 +1,17 @@
+*** Outer block returns inner block that later divides by zero.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class Main : Object {
+run [|
+outer := self makeOuter.
+inner := outer value.
+_ := inner value.
+]
+makeOuter [|
+_ := [| _ := [| _ := 1 divBy: 0. ]. ].
+]
+
+}

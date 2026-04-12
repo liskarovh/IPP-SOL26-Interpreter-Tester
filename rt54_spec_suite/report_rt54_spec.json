@@ -1,0 +1,453 @@
+{
+  "discovered_test_cases": [
+    {
+      "name": "rt54_001_self_local_method_collision",
+      "test_source_path": "/opt/tests/rt54_001_self_local_method_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "self write must fail when the same class already defines a zero-arg method",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "rt54_002_self_inherited_method_collision",
+      "test_source_path": "/opt/tests/rt54_002_self_inherited_method_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "self write must fail when an inherited zero-arg method already exists",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "rt54_003_ordinary_receiver_method_collision",
+      "test_source_path": "/opt/tests/rt54_003_ordinary_receiver_method_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "ordinary receiver write must fail when receiver class defines inherited zero-arg method",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "rt54_004_alias_of_self_is_not_explicit_self",
+      "test_source_path": "/opt/tests/rt54_004_alias_of_self_is_not_explicit_self.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "alias of self should behave like ordinary receiver and still collide with local zero-arg method",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "rt54_005_super_write_parent_method_collision",
+      "test_source_path": "/opt/tests/rt54_005_super_write_parent_method_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "super write must fail when parent chain already defines the zero-arg method",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "rt54_006_string_subclass_builtin_like_collision",
+      "test_source_path": "/opt/tests/rt54_006_string_subclass_builtin_like_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "write must fail when subclass defines zero-arg method length and write tries to create length attribute",
+      "category": "RT54",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        54
+      ]
+    },
+    {
+      "name": "rt54_boundary_001_parent_write_then_later_super_miss_is_51",
+      "test_source_path": "/opt/tests/rt54_boundary_001_parent_write_then_later_super_miss_is_51.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "parent write behind child method is valid; later unrelated super miss should still be 51",
+      "category": "BOUNDARY",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        51
+      ]
+    },
+    {
+      "name": "rt54_boundary_002_unknown_keyword_on_object_creates_attr",
+      "test_source_path": "/opt/tests/rt54_boundary_002_unknown_keyword_on_object_creates_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_boundary_002_unknown_keyword_on_object_creates_attr.out",
+      "test_type": 2,
+      "description": "unknown one-argument keyword on Object should create an attribute, not raise 51",
+      "category": "VALID_ATTR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_boundary_003_unknown_keyword_on_user_object_creates_attr",
+      "test_source_path": "/opt/tests/rt54_boundary_003_unknown_keyword_on_user_object_creates_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_boundary_003_unknown_keyword_on_user_object_creates_attr.out",
+      "test_type": 2,
+      "description": "unknown one-argument keyword on user object should create an attribute, not raise 51",
+      "category": "VALID_ATTR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_boundary_004_unknown_two_arg_selector_is_51",
+      "test_source_path": "/opt/tests/rt54_boundary_004_unknown_two_arg_selector_is_51.test",
+      "stdin_file": null,
+      "expected_stdout_file": null,
+      "test_type": 2,
+      "description": "unknown multi-keyword selector cannot be treated as an attribute write and must raise 51",
+      "category": "RT51",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        51
+      ]
+    },
+    {
+      "name": "rt54_valid_001_self_new_attr_no_collision",
+      "test_source_path": "/opt/tests/rt54_valid_001_self_new_attr_no_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_valid_001_self_new_attr_no_collision.out",
+      "test_type": 2,
+      "description": "self write is valid when no colliding zero-arg method exists",
+      "category": "VALID_ATTR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_valid_002_parent_creates_hidden_attr_spec_like",
+      "test_source_path": "/opt/tests/rt54_valid_002_parent_creates_hidden_attr_spec_like.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_valid_002_parent_creates_hidden_attr_spec_like.out",
+      "test_type": 2,
+      "description": "spec-like parent method may create attribute hidden behind child method and super can read it later",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_valid_003_child_receiver_parent_hidden_attr",
+      "test_source_path": "/opt/tests/rt54_valid_003_child_receiver_parent_hidden_attr.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_valid_003_child_receiver_parent_hidden_attr.out",
+      "test_type": 2,
+      "description": "parent method may create attribute on child receiver and child may later read it via super",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_valid_004_existing_slot_update_behind_child_method",
+      "test_source_path": "/opt/tests/rt54_valid_004_existing_slot_update_behind_child_method.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_valid_004_existing_slot_update_behind_child_method.out",
+      "test_type": 2,
+      "description": "updating an already existing hidden attribute must stay valid",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_valid_005_super_write_ignores_child_method",
+      "test_source_path": "/opt/tests/rt54_valid_005_super_write_ignores_child_method.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_valid_005_super_write_ignores_child_method.out",
+      "test_type": 2,
+      "description": "super write should ignore child method and only consider parent chain for collision",
+      "category": "VALID_SELFSUP",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    },
+    {
+      "name": "rt54_valid_006_copy_then_fresh_attr_no_false_collision",
+      "test_source_path": "/opt/tests/rt54_valid_006_copy_then_fresh_attr_no_false_collision.test",
+      "stdin_file": null,
+      "expected_stdout_file": "/opt/tests/rt54_valid_006_copy_then_fresh_attr_no_false_collision.out",
+      "test_type": 2,
+      "description": "copied Object receiver remains Object and fresh attribute write stays valid even if Main defines same zero-arg method",
+      "category": "VALID_ATTR",
+      "points": 1,
+      "expected_parser_exit_codes": [
+        0
+      ],
+      "expected_interpreter_exit_codes": [
+        0
+      ]
+    }
+  ],
+  "unexecuted": {},
+  "results": {
+    "RT54": {
+      "total_points": 6,
+      "passed_points": 6,
+      "test_results": {
+        "rt54_001_self_local_method_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'foo' collides with a method.\n",
+          "diff_output": null
+        },
+        "rt54_002_self_inherited_method_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Parent\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'foo' collides with a method.\n",
+          "diff_output": null
+        },
+        "rt54_003_ordinary_receiver_method_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\"/>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'foo' collides with a method.\n",
+          "diff_output": null
+        },
+        "rt54_004_alias_of_self_is_not_explicit_self": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <var name=\"self\"/>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'foo' collides with a method.\n",
+          "diff_output": null
+        },
+        "rt54_005_super_write_parent_method_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"touch\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"touch\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'p' collides with a method.\n",
+          "diff_output": null
+        },
+        "rt54_006_string_subclass_builtin_like_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 54,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"MyString\" parent=\"String\">\n    <method selector=\"length\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"Integer\" value=\"1\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"MyString\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"length:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 54: Instance attribute 'length' collides with a method.\n",
+          "diff_output": null
+        }
+      }
+    },
+    "BOUNDARY": {
+      "total_points": 1,
+      "passed_points": 1,
+      "test_results": {
+        "rt54_boundary_001_parent_write_then_later_super_miss_is_51": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 51,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"something\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"a:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"a\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"runChild\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"b\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"something\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"runChild\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 51: No method found for selector b\n",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_ATTR": {
+      "total_points": 4,
+      "passed_points": 4,
+      "test_results": {
+        "rt54_boundary_002_unknown_keyword_on_object_creates_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"nope:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"asString\">\n                  <expr>\n                    <send selector=\"nope\">\n                      <expr>\n                        <var name=\"x\"/>\n                      </expr>\n                    </send>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "rt54_boundary_003_unknown_keyword_on_user_object_creates_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"A\" parent=\"Object\">\n    <method selector=\"ok\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"Nil\" value=\"nil\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"a\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"A\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"nope:\">\n              <expr>\n                <var name=\"a\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"asString\">\n                  <expr>\n                    <send selector=\"nope\">\n                      <expr>\n                        <var name=\"a\"/>\n                      </expr>\n                    </send>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "rt54_valid_001_self_new_attr_no_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"asString\">\n                  <expr>\n                    <send selector=\"foo\">\n                      <expr>\n                        <var name=\"self\"/>\n                      </expr>\n                    </send>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "rt54_valid_006_copy_then_fresh_attr_no_false_collision": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"o\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"from:\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <var name=\"o\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"foo:\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"4\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"asString\">\n                  <expr>\n                    <send selector=\"foo\">\n                      <expr>\n                        <var name=\"c\"/>\n                      </expr>\n                    </send>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"foo\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"method\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "1",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    },
+    "RT51": {
+      "total_points": 1,
+      "passed_points": 1,
+      "test_results": {
+        "rt54_boundary_004_unknown_two_arg_selector_is_51": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 51,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"x\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Object\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"missing:and:\">\n              <expr>\n                <var name=\"x\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"Integer\" value=\"1\"/>\n                </expr>\n              </arg>\n              <arg order=\"2\">\n                <expr>\n                  <literal class=\"Integer\" value=\"2\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "",
+          "interpreter_stderr": "Error 51: No method found for selector missing:and:\n",
+          "diff_output": null
+        }
+      }
+    },
+    "VALID_SELFSUP": {
+      "total_points": 4,
+      "passed_points": 4,
+      "test_results": {
+        "rt54_valid_002_parent_creates_hidden_attr_spec_like": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"something\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"p\">\n                  <expr>\n                    <var name=\"self\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Parent\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"something\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <literal class=\"String\" value=\"&#10;\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"p\">\n                  <expr>\n                    <var name=\"super\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "foo\nhello",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "rt54_valid_003_child_receiver_parent_hidden_attr": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"read\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"read\">\n                  <expr>\n                    <var name=\"c\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "rt54_valid_004_existing_slot_update_behind_child_method": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\">\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"self\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"world\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"read\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"make\">\n              <expr>\n                <var name=\"c\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"3\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"read\">\n                  <expr>\n                    <var name=\"c\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "world",
+          "interpreter_stderr": "",
+          "diff_output": null
+        },
+        "rt54_valid_005_super_write_ignores_child_method": {
+          "result": "passed",
+          "parser_exit_code": 0,
+          "interpreter_exit_code": 0,
+          "parser_stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<program language=\"SOL26\">\n  <class name=\"Parent\" parent=\"Object\"/>\n  <class name=\"Child\" parent=\"Parent\">\n    <method selector=\"p\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"r\"/>\n          <expr>\n            <literal class=\"String\" value=\"foo\"/>\n          </expr>\n        </assign>\n      </block>\n    </method>\n    <method selector=\"make\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"p:\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n              <arg order=\"1\">\n                <expr>\n                  <literal class=\"String\" value=\"hello\"/>\n                </expr>\n              </arg>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"r\"/>\n          <expr>\n            <send selector=\"p\">\n              <expr>\n                <var name=\"super\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n  <class name=\"Main\" parent=\"Object\">\n    <method selector=\"run\">\n      <block arity=\"0\">\n        <assign order=\"1\">\n          <var name=\"c\"/>\n          <expr>\n            <send selector=\"new\">\n              <expr>\n                <literal class=\"class\" value=\"Child\"/>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n        <assign order=\"2\">\n          <var name=\"_\"/>\n          <expr>\n            <send selector=\"print\">\n              <expr>\n                <send selector=\"make\">\n                  <expr>\n                    <var name=\"c\"/>\n                  </expr>\n                </send>\n              </expr>\n            </send>\n          </expr>\n        </assign>\n      </block>\n    </method>\n  </class>\n</program>\n",
+          "parser_stderr": "",
+          "interpreter_stdout": "hello",
+          "interpreter_stderr": "",
+          "diff_output": null
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
++++ ADVANCED_OOP
+*** Pozdni vazba u self (metoda rodice vola metodu z potomka)
+!C! 0
+!I! 0
+>>> 1
+
+class Parent : Object {
+  doIt [ | _ := self getName. ]
+  getName [ | _ := 'ParentName' print. ]
+}
+class Main : Parent {
+  getName [ | _ := 'ChildName' print. ]
+  run [ | _ := self doIt. ]
+}

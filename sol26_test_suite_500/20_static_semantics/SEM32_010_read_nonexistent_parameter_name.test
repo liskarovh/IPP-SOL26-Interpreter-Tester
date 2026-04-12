@@ -1,0 +1,18 @@
+*** Reading nonexistent parameter name should cause 32.
++++ SEM32
+!C! 0
+!I! 32
+>>> 1
+
+class A : Object {
+foo: [ :x |
+  y := z.
+]
+}
+
+class Main : Object {
+run [ |
+  a := A new.
+  _ := a foo: 1.
+]
+}

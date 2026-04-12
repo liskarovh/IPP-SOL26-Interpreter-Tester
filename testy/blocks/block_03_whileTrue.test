@@ -1,0 +1,15 @@
++++ BLOCKS
+*** Cyklus whileTrue:
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    i := 3.
+    _ := [ | ret := i greaterThan: 0. ] whileTrue: [ | 
+      _ := ((i asString) concatenateWith: ' ') print.
+      i := i minus: 1.
+    ].
+  ]
+}

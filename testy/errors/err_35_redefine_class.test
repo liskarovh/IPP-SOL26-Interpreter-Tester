@@ -1,0 +1,8 @@
++++ ERRORS
+*** Chyba 35: Redefinice existujici tridy
+!C! 0
+!I! 35
+>>> 1
+
+class Main : Object { run [|] }
+class Main : Object { }

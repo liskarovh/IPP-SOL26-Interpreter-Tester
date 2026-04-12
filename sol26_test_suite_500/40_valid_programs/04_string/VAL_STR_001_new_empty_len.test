@@ -1,0 +1,13 @@
+*** String behavior.
++++ VALID_STRING
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    s := String new.
+_ := ((s length) asString) print.
+  ]
+  }

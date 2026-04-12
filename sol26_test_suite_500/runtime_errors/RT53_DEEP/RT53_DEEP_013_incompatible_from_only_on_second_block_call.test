@@ -1,0 +1,20 @@
+*** Bad from: appears only on second closure invocation.
++++ RT53_DEEP
+!C! 0
+!I! 53
+>>> 2
+
+class MyInt : Integer {
+}
+class Main : Object {
+run [|
+_ := self state: 0.
+b := [|
+s := self state.
+_ := self state: (s plus: 1).
+x := (s equalTo: 1) ifTrue: [| _ := MyInt from: 'str'. ] ifFalse: [| _ := 1. ].
+].
+_ := b value.
+_ := b value.
+]
+}

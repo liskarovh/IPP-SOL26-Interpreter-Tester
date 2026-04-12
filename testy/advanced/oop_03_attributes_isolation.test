@@ -1,0 +1,16 @@
++++ ADVANCED_OOP
+*** Dve ruzne instance maji oddelene atributy
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    o1 := Object new.
+    o2 := Object new.
+    _ := (o1 val: 1).
+    _ := (o2 val: 2).
+    _ := ((((o1 val) asString) concatenateWith: ' ') print).
+    _ := (((o2 val) asString) print).
+  ]
+}

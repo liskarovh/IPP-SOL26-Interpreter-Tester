@@ -1,0 +1,17 @@
++++ RT54
+*** self write must fail when an inherited zero-arg method already exists
+!C! 0
+!I! 54
+>>> 1
+
+class Parent : Object {
+    foo [|
+        r := 'method'.
+    ]
+}
+
+class Main : Parent {
+    run [|
+        _ := self foo: 1.
+    ]
+}

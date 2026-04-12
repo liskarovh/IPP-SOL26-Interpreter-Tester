@@ -1,0 +1,27 @@
+*** Closure example derived from spec.
++++ VALID_SCOPE
+!C! 0
+!I! 0
+>>> 1
+
+
+class Main : Object {
+giveObjectWithBlock [ |
+  x := ((String read) asInteger).
+  b := [| y := ((String read) asInteger) plus: x. ].
+  x := 7.
+  z := ((Object new) block: b).
+  x := 9.
+  _ := z.
+]
+
+  run [ |
+    o := self giveObjectWithBlock.
+_ := String read.
+r1 := ((o block) value).
+r2 := ((o block) value).
+s := ((r1 asString) concatenateWith: ',').
+s := s concatenateWith: (r2 asString).
+_ := s print.
+  ]
+  }

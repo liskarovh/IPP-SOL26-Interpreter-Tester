@@ -1,0 +1,19 @@
+*** Creating an attribute that collides with a method should cause 54.
++++ RT54
+!C! 0
+!I! 54
+>>> 1
+
+class MyString : String {
+
+foo [ |
+  _ := 'm'.
+]
+}
+
+class Main : Object {
+
+run [ |
+  x := (MyString new) foo: 1.
+]
+}

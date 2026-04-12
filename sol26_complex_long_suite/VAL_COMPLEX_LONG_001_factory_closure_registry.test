@@ -1,0 +1,60 @@
+*** Long registry of returned closures with shared mutable state.
++++ VALID_COMPLEX_LONG
+!C! 0
+!I! 0
+>>> 5
+
+class Factory : Object {
+
+makeBoxFrom:label: [ :start :label |
+base := start.
+total := 0.
+name := label.
+incBlk := [ :delta |
+base := base plus: delta.
+total := total plus: base.
+_ := base.
+].
+decBlk := [ :delta |
+base := base minus: delta.
+total := total plus: base.
+_ := base.
+].
+stepNBlk := [ :n |
+_ := n timesRepeat: [ :i |
+_ := incBlk value: i.
+_ := total.
+].
+_ := total.
+].
+snapBlk := [ |
+left := name concatenateWith: ':'.
+mid := left concatenateWith: (base asString).
+mid := mid concatenateWith: ':'.
+mid := mid concatenateWith: (total asString).
+].
+box := Object new.
+_ := box inc: incBlk.
+_ := box dec: decBlk.
+_ := box stepN: stepNBlk.
+_ := box snap: snapBlk.
+_ := box.
+]
+
+}
+
+class Main : Object {
+
+run [ |
+f := Factory new.
+box := f makeBoxFrom: 2 label: 'alpha'.
+a := (box inc) value: 3.
+b := (box stepN) value: 3.
+c := (box dec) value: 1.
+out := (box snap) value.
+out := out concatenateWith: '|'.
+out := out concatenateWith: (c asString).
+_ := out print.
+]
+
+}

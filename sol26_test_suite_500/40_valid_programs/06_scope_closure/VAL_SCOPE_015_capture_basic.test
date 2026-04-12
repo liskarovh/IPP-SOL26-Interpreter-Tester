@@ -1,0 +1,15 @@
+*** Closure should capture outer local.
++++ VALID_SCOPE
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+
+  run [ |
+    x := 15.
+b := [| y := x plus: 16. ].
+r := b value.
+_ := (r asString) print.
+  ]
+  }

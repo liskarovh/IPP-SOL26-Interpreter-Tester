@@ -1,0 +1,20 @@
++++ BLOCKS
+*** Vraceni bloku z bloku (vyssi rad)
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    b1 := [ :x | 
+      b2 := [ :y | 
+        res := x plus: y.
+        _ := res.
+      ].
+      _ := b2.
+    ].
+    inner := b1 value: 10.
+    ans := inner value: 5.
+    _ := (ans asString) print.
+  ]
+}

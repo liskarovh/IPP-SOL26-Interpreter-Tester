@@ -1,0 +1,18 @@
+*** Closure fails only on second invocation after captured state changes.
++++ RT51_DEEP
+!C! 0
+!I! 51
+>>> 2
+
+class Main : Object {
+run [|
+_ := self count: 0.
+b := [|
+x := self count.
+_ := self count: (x plus: 1).
+y := (x equalTo: 1) ifTrue: [| _ := (Object new) missing. ] ifFalse: [| _ := 1. ].
+].
+_ := b value.
+_ := b value.
+]
+}

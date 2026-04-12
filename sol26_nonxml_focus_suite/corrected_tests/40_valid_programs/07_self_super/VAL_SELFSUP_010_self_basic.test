@@ -1,0 +1,25 @@
+*** self should refer to the real receiver.
++++ VALID_SELFSUP
+!C! 0
+!I! 0
+>>> 1
+
+
+
+class Main : Object {
+setAndGet: [ :v |
+  _ := self val: v.
+  _ := self val.
+]
+makeBlock: [ :v |
+  _ := self val: v.
+  b := [| r := self val. ].
+  _ := b.
+]
+
+  run [ |
+    b := self makeBlock: '4'.
+r := b value.
+_ := r print.
+  ]
+  }

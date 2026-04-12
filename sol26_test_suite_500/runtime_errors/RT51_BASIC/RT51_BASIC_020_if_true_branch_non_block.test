@@ -1,0 +1,11 @@
+*** RT51 BASIC 020 if true branch non block
++++ RT51_BASIC
+!C! 0
+!I! 51
+>>> 1
+
+class Main : Object {
+run [|
+_ := true ifTrue: 1 ifFalse: [| _ := 2. ].
+]
+}

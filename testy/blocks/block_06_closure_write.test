@@ -1,0 +1,14 @@
++++ BLOCKS
+*** Uzaver (closure) - modifikace promenne z vnejsku
+!C! 0
+!I! 0
+>>> 1
+
+class Main : Object {
+  run [ | 
+    x := 10.
+    b := [ | x := 99. ].
+    _ := b value.
+    _ := (x asString) print.
+  ]
+}

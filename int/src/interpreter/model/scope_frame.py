@@ -1,12 +1,12 @@
 """
 @file scope_frame.py
-@brief Lexical scope frames are declared.
+@brief Lexical scope frames are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Lexical scope frames are intended to store variable bindings with metadata
-and to support lexical parent chaining.
+Lexical scope frames store variable bindings with metadata
+and support lexical parent chaining during execution.
 """
 
 from __future__ import annotations
@@ -38,6 +38,8 @@ class ScopeFrame:
         @param bindings_by_name Initial binding dictionary of the frame.
         @param parent Lexical parent frame or None.
         """
+
+        # each frame owns its local bindings
         self.bindings_by_name = {} if bindings_by_name is None else bindings_by_name
         self.parent = parent
 
@@ -51,6 +53,8 @@ class ScopeFrame:
 
         if name in self.bindings_by_name:
             return True
+
+        # binding lookup upward
         if self.parent is not None:
             return self.parent.contains(name)
         return False
@@ -78,8 +82,10 @@ class ScopeFrame:
         @param value Runtime value to be stored.
         """
 
+        # update
         if self.contains(name):
             self.set(name, value)
+        # create
         else:
             self.define(name, value)
 
@@ -148,8 +154,19 @@ class ScopeFrame:
         self._bind_parameters(parameters, args, True)
 
     def _resolve(self, name: str) -> BindingRecord:
+        """
+        @brief One binding record is resolved through the lexical chain.
+
+        @param name Name of the requested binding.
+        @return Resolved binding record.
+        @throws InterpreterError If the binding does not exist in the lexical chain.
+        """
+
+        # local binding wins over parent
         if name in self.bindings_by_name:
             return self.bindings_by_name[name]
+
+        # binding lookup upward
         if self.parent is not None:
             return self.parent._resolve(name)
         raise InterpreterError(ErrorCode.SEM_UNDEF, f"Variable {name} is not defined.")
@@ -163,9 +180,14 @@ class ScopeFrame:
         """
         @brief Runtime arguments are bound to declared parameters.
 
+        This helper is shared by method calls and block calls.
+        The difference is whether created bindings should carry
+        parameter metadata.
+
         @param parameters Declared AST parameters.
         @param args Actual runtime arguments.
-        @param bind_as_parameters True for immutable parameter bindings.
+        @param bind_as_parameters True when bound names should be marked
+                                  as parameter bindings.
         """
         parameter_count = len(parameters)
         index = 0
@@ -174,6 +196,7 @@ class ScopeFrame:
             parameter = parameters[index]
             argument_value = args[index]
 
+            # block calls and method calls differ in binding metadata
             if bind_as_parameters:
                 self.define_parameter(parameter.name, argument_value)
             else:

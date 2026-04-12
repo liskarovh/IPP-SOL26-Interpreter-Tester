@@ -1,13 +1,11 @@
 """
 @file runtime_builder.py
-@brief Runtime construction from the validated AST program is defined.
+@brief Runtime construction from the validated AST program is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-A validated AST program is intended to be converted into runtime structures
-in this module. Only runtime construction is expected to be performed here.
-No execution of the program is expected to be started here.
+A validated AST program is converted into runtime structures here.
 """
 
 from __future__ import annotations
@@ -47,11 +45,14 @@ class RuntimeBuilder:
         @return A newly built runtime container.
         """
         new_runtime = self._create_empty_runtime(input_io)
+
+        # builtins have to exist before user classes and methods
         self._register_builtin_runtime_content(
             new_runtime,
             send_zero_arg_message,
             send_one_arg_message,
         )
+
         self._register_user_runtime_classes(program, new_runtime)
         self._attach_user_runtime_methods(program, new_runtime)
         return new_runtime
@@ -90,6 +91,8 @@ class RuntimeBuilder:
         """
         RuntimeBuilder._register_builtin_runtime_classes(runtime)
         RuntimeBuilder._register_canonical_builtin_values(runtime)
+
+        # builtin methods last - they depend on builtin classes and values
         RuntimeBuilder._register_builtin_runtime_methods(
             runtime,
             send_zero_arg_message,
@@ -130,6 +133,7 @@ class RuntimeBuilder:
         false_class = runtime.class_registry.require("False")
         nil_class = runtime.class_registry.require("Nil")
 
+        # singleton values stored in the builtin registry
         true_value = BooleanValue(true_class, True)
         false_value = BooleanValue(false_class, False)
         nil_value = NilValue(nil_class)
@@ -171,6 +175,8 @@ class RuntimeBuilder:
         @param program A validated AST program.
         @param runtime A runtime container that is being built.
         """
+
+        # two-phase registration avoids parent lookup before all user classes exist
         self._register_user_runtime_class_shells(program, runtime)
         self._attach_user_runtime_class_parents(program, runtime)
 

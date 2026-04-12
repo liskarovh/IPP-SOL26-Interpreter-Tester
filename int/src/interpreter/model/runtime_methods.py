@@ -1,12 +1,12 @@
 """
 @file runtime_methods.py
-@brief Runtime method abstractions are defined.
+@brief Runtime method abstractions are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Runtime methods are represented by a small hierarchy. User-defined methods
-and built-in methods share a common selector/owner interface.
+Runtime methods are represented by a small hierarchy.
+User-defined methods and built-in methods share the same selector/owner interface.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ if TYPE_CHECKING:
 
 class RuntimeMethod(ABC):
     """
-    @brief A runtime method base abstraction is defined.
+    @brief A runtime method base abstraction is represented.
     """
 
     def __init__(self, selector: str, owner: RuntimeClass) -> None:
@@ -104,6 +104,7 @@ class UserMethod(RuntimeMethod):
         @param ctx An invocation context.
         @return A produced runtime value.
         """
+        # receiver already carried by the invocation context during block execution
         _ = receiver
 
         block_executor = self.block_executor
@@ -115,9 +116,11 @@ class UserMethod(RuntimeMethod):
 
         method_block = self.method_ast.block
 
+        # for each method call fresh local frame for its parameters and locals
         frame = ScopeFrame()
         frame.bind_method_parameters(method_block.parameters, args)
 
+        # delegate method body execution to the block executor
         return block_executor.execute(method_block, frame, ctx)
 
     def arity(self) -> int:
@@ -171,6 +174,8 @@ class BuiltinMethod(RuntimeMethod):
         @param ctx An invocation context.
         @return A produced runtime value.
         """
+
+        # builtin execution delegated to stored implementation
         return self.impl.invoke(receiver, args, ctx)
 
     def arity(self) -> int:

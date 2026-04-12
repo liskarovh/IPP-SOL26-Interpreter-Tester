@@ -1,14 +1,14 @@
 """
 @file block_builtins.py
-@brief Block built-in method callbacks and registration are defined.
+@brief Block built-in method callbacks and registration are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
 Block-related built-in runtime methods are grouped in this module.
-Shared helper utilities are intentionally reused from runtime.builtins_by_values
-so that the overall behavior remains unchanged.
+Shared helper utilities from runtime.builtins are reused here
+so the existing behavior stays unchanged.
 """
 
 from __future__ import annotations
@@ -59,6 +59,8 @@ def register_block_builtins(
         builtin_callback=return_true,
         builtin_registry=builtin_registry,
     )
+
+    # whileTrue: is built from runtime send helpers
     _register_one_instance_builtin(
         owner=block_class,
         selector="whileTrue:",
@@ -89,8 +91,11 @@ def _make_block_while_true(
     ) -> RuntimeValue:
         _require_arg_count(args, 1, "whileTrue:")
 
+        # receiver is condition block, first argument is loop body block
         condition_target = receiver
         body_target = args[0]
+
+        # SOL26 whileTrue: returns nil when body never runs
         last_result: RuntimeValue = _nil_value(builtin_registry)
 
         while True:
@@ -100,6 +105,8 @@ def _make_block_while_true(
                 ctx=ctx,
                 send_zero_arg_message=send_zero_arg_message,
             )
+
+            # whileTrue: requires the condition result to be a boolean
             condition_boolean = _expect_boolean(
                 condition_value,
                 "whileTrue:",
@@ -108,6 +115,7 @@ def _make_block_while_true(
             if not condition_boolean.raw():
                 return last_result
 
+            # result is always the last body evaluation result
             last_result = _send_zero_arg_runtime_message(
                 target_value=body_target,
                 selector="value",

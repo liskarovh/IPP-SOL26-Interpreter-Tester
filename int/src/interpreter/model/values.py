@@ -1,13 +1,12 @@
 """
 @file values.py
-@brief Core runtime value classes are declared.
+@brief Core runtime value classes are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-The core runtime value hierarchy is declared here according to the current
-UML class diagram. UserObject and BlockClosure are intentionally kept in
-their own files.
+The core runtime value hierarchy is implemented here.
+UserObject and BlockClosure are intentionally kept in separate files.
 """
 
 from __future__ import annotations
@@ -36,6 +35,7 @@ class RuntimeValue:
         @param slots Optional instance slot storage of the value.
         """
         self.runtime_class = runtime_class
+        # only values that own instance attributes need slot storage
         self.slots = slots
 
     def get_class(self) -> RuntimeClass:

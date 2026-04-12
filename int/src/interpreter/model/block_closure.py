@@ -1,9 +1,12 @@
 """
 @file block_closure.py
-@brief The runtime block closure class is declared.
+@brief Runtime block closure is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
+
+A runtime block closure stores one block AST together with
+its captured lexical frame and invocation context.
 """
 
 from __future__ import annotations
@@ -58,9 +61,11 @@ class BlockClosure(RuntimeValue):
         """
         self._validate_arity(args)
 
+        # new lexical scope frame is created for the block call
         call_frame = self._create_call_frame()
         self._bind_arguments(call_frame, args)
 
+        # block body runs in the captured frame and context
         return block_executor.execute(
             self.block_ast,
             call_frame,

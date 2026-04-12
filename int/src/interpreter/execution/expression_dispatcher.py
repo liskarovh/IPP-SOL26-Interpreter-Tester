@@ -5,8 +5,9 @@
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Non-send expression kinds are intended to be evaluated here first.
-Send evaluation is intended to be delegated later.
+Expression evaluation is coordinated in this module.
+Variables, literals, blocks, and sends are distinguished here,
+while actual send dispatch is delegated to specialized send evaluators.
 """
 
 from __future__ import annotations
@@ -45,6 +46,7 @@ def _decode_string_literal(raw_value: str) -> str:
     decoded_chars: list[str] = []
     is_escape = False
 
+    # handling of escape sequences
     for char in raw_value:
         if is_escape:
             if char == "n":
@@ -78,24 +80,48 @@ def _decode_string_literal(raw_value: str) -> str:
 
 
 def _if_var_get_name(expr: AstExpr) -> str | None:
+    """
+    @brief Variable name is returned when the expression is a variable branch.
+
+    @param expr One AST expression to be inspected.
+    @return Variable name, or None when the expression is not a variable branch.
+    """
     if expr.var is not None:
         return expr.var.name
     return None
 
 
 def _if_literal_get_class_id(expr: AstExpr) -> str | None:
+    """
+    @brief Literal class identifier is returned when the expression is a literal branch.
+
+    @param expr One AST expression to be inspected.
+    @return Literal class identifier, or None when the expression is not a literal branch.
+    """
     if expr.literal is not None:
         return expr.literal.class_id
     return None
 
 
 def _if_block_return(expr: AstExpr) -> AstBlock | None:
+    """
+    @brief Block AST is returned when the expression is a block branch.
+
+    @param expr One AST expression to be inspected.
+    @return Block AST, or None when the expression is not a block branch.
+    """
     if expr.block is not None:
         return expr.block
     return None
 
 
 def _set_lookup_mode(expr: AstExpr) -> LookupMode:
+    """
+    @brief Lookup mode for one send receiver expression is resolved.
+
+    @param expr One AST expression used as the send receiver.
+    @return Lookup mode derived from the receiver syntax.
+    """
     receiver_name = _if_var_get_name(expr)
     if receiver_name == "super":
         return LookupMode.SUPER
@@ -121,6 +147,13 @@ def _resolve_receiver_origin(expr: AstExpr) -> ReceiverOrigin:
 
 
 def _require_runtime_self_value(receiver: MethodReceiver) -> RuntimeValue:
+    """
+    @brief Runtime self-value is required for ordinary expression evaluation.
+
+    @param receiver One method receiver value.
+    @return Runtime receiver value usable as a normal expression result.
+    @throws InterpreterError When a class receiver leaks into ordinary self/super evaluation.
+    """
     if isinstance(receiver, RuntimeClass):
         raise InterpreterError(
             ErrorCode.INT_STRUCTURE,
@@ -169,6 +202,8 @@ class ExpressionDispatcher:
         @param ctx An invocation context carrying self/super information.
         @return A runtime value produced by the expression.
         """
+
+        # expression kind resolved by checking AST branch
         var_name = _if_var_get_name(expr_ast)
         if var_name is not None:
             return self._evaluate_var(var_name, frame, ctx)
@@ -202,6 +237,7 @@ class ExpressionDispatcher:
         @param ctx One invocation context carrying self/super information.
         @return One runtime value stored under the variable name.
         """
+        # self and super read from invocation context
         if var_name == "self" or var_name == "super":
             return _require_runtime_self_value(ctx.self_value())
 
@@ -226,6 +262,7 @@ class ExpressionDispatcher:
         @param literal One literal AST node.
         @return One runtime value produced from the literal.
         """
+        # runtime literal creation delegated to object factory
         if class_id == "Integer":
             value = literal.value
             return self.object_factory.new_integer(int(value))
@@ -277,10 +314,14 @@ class ExpressionDispatcher:
         @param ctx One invocation context carrying self/super information.
         @return One resolved send receiver.
         """
+
+        # receiver syntax determines origin and  lookup
         lookup_mode = _set_lookup_mode(receiver_expr)
         receiver_origin = _resolve_receiver_origin(receiver_expr)
 
         receiver_name = _if_var_get_name(receiver_expr)
+
+        # self and super keep current runtime receiver and change lookup mode
         if receiver_name == "self" or receiver_name == "super":
             return ResolvedReceiver(
                 ctx.self_value(),
@@ -288,6 +329,7 @@ class ExpressionDispatcher:
                 receiver_origin,
             )
 
+        # direct convert to runtime class
         literal = receiver_expr.literal
         if literal is not None and literal.class_id == "class":
             runtime_class = self.object_factory.class_registry.require(literal.value)
@@ -297,6 +339,7 @@ class ExpressionDispatcher:
                 receiver_origin,
             )
 
+        # evaluate receiver expression
         receiver_value = self.evaluate(receiver_expr, frame, ctx)
         return ResolvedReceiver(
             receiver_value,
@@ -327,6 +370,7 @@ class ExpressionDispatcher:
 
         selector = send.selector
 
+        # runtime classes represent class side sends and use class send evaluator
         if isinstance(resolved_receiver.receiver, RuntimeClass):
             return self.class_send_evaluator.dispatch_send(
                 resolved_receiver,
@@ -335,6 +379,7 @@ class ExpressionDispatcher:
                 ctx,
             )
 
+        # all non class receivers handled as instance sends
         return self.instance_send_evaluator.dispatch_send(
             resolved_receiver,
             selector,

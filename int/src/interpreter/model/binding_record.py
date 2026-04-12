@@ -1,11 +1,11 @@
 """
 @file binding_record.py
-@brief Variable-binding metadata is declared.
+@brief Variable-binding metadata is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-A binding record is intended to store one variable binding together with
+One binding record stores a runtime value together with
 its initialization and parameter metadata.
 """
 

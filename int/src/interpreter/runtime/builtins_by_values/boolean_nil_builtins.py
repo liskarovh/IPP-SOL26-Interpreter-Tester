@@ -1,14 +1,14 @@
 """
 @file boolean_nil_builtins.py
-@brief Boolean and Nil built-in method callbacks and registration are defined.
+@brief Boolean and Nil built-in method callbacks and registration are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 REPETITIVE PARTS OF THIS FILE HAVE BEEN AI GENERATED - CHATGPT CHAT HERE https://chatgpt.com/share/69d2e81e-87d0-838e-afb8-efddf21b5d69
 
-Nil-, True-, and False-related built-in runtime methods are grouped in this
-module. Shared helper utilities are intentionally reused from runtime.builtins_by_values
-so that the overall behavior remains unchanged.
+Nil-, True-, and False-related built-in runtime methods are grouped in this module.
+Shared helper utilities from runtime.builtins are reused here
+so the existing behavior stays unchanged.
 """
 
 from __future__ import annotations
@@ -347,10 +347,12 @@ def _make_boolean_if_true_if_false(
         true_branch = args[0]
         false_branch = args[1]
 
+        # only one branch selected
         selected_branch = false_branch
         if boolean_receiver.raw():
             selected_branch = true_branch
 
+        # selected branch is activated by value
         return _send_zero_arg_runtime_message(
             target_value=selected_branch,
             selector="value",

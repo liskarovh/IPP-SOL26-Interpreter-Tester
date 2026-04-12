@@ -1,9 +1,13 @@
 """
 @file xml_validator.py
-@brief XML structure validation is coordinated here - error code 42.
+@brief XML structure validation is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
+
+Document-level and AST-level XML structure checks are performed here.
+This module raises InterpreterError with INT_STRUCTURE for XML structure
+and lexical-form violations detected before semantic validation.
 """
 
 from __future__ import annotations
@@ -42,7 +46,7 @@ def _read_xml_prefix(source_file_path: Path) -> bytes:
     @brief A short initial XML file prefix is read.
 
     Only a small byte prefix is read so that the XML declaration can
-    be checked without loading the entire file for that purpose.
+    be checked without loading the entire file.
 
     @param source_file_path A path to the source SOL-XML file.
     @return A short initial byte prefix of the source file.
@@ -95,9 +99,6 @@ def _validate_xml_declaration(
 def _validate_root_tag(xml_root: etree._Element) -> None:
     """
     @brief The XML root tag is validated.
-
-    The root tag is expected to be checked before the XML tree is converted
-    into the AST model.
 
     @param xml_root A parsed XML root element.
     """
@@ -258,10 +259,12 @@ def _validate_selector_lexeme(selector: str) -> None:
             "Selector must not be empty.",
         )
 
+    # unary selectors
     if ":" not in selector:
         _validate_identifier_lexeme(selector, "selector")
         return
 
+    # keyword selectors must end with :
     if not selector.endswith(":"):
         raise InterpreterError(
             ErrorCode.INT_STRUCTURE,
@@ -295,6 +298,7 @@ def _validate_integer_literal_value(value: str) -> None:
             "Integer literal value must not be empty.",
         )
 
+    # optional sign
     start_index = 0
     if value[0] in {"+", "-"}:
         if len(value) == 1:
@@ -304,6 +308,7 @@ def _validate_integer_literal_value(value: str) -> None:
             )
         start_index = 1
 
+    # remaining charactershave to be decimals only
     for character in value[start_index:]:
         if not character.isdigit():
             raise InterpreterError(
@@ -518,6 +523,7 @@ class XmlValidator:
 
         @param block A block AST node to be inspected.
         """
+        # block parameters must use correct XML order values
         parameter_orders = [parameter.order for parameter in block.parameters]
         _validate_order_values(parameter_orders, "block parameter order")
 
@@ -528,6 +534,7 @@ class XmlValidator:
         _validate_order_values(assign_orders, "assign order")
 
         for assign in block.assigns:
+            # assignment validated recursively thru expression structure
             self._validate_assign_xml_ast(assign)
 
     def _validate_assign_xml_ast(self, assign: AstAssign) -> None:
@@ -583,9 +590,11 @@ class XmlValidator:
 
         @param send A send AST node to be inspected.
         """
+        # selector and receiver must be valid
         _validate_selector_lexeme(send.selector)
         self._validate_expr_xml_ast(send.receiver)
 
+        # send arguments must use correct XML order values
         arg_orders = [arg.order for arg in send.args]
         _validate_order_values(arg_orders, "send argument order")
 

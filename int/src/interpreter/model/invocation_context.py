@@ -1,12 +1,12 @@
 """
 @file invocation_context.py
-@brief Invocation context objects are declared.
+@brief Invocation context objects are implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Invocation context is intended to carry the current receiver and the current
-method owner for self/super semantics during execution.
+Invocation context stores the current receiver and current method owner.
+These values are used for self/super semantics during execution.
 """
 
 from __future__ import annotations

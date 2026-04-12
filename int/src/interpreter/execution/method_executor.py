@@ -1,14 +1,13 @@
 """
 @file method_executor.py
-@brief Method execution is coordinated here.
+@brief Method execution is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-A runtime method is executed here by validating the supplied argument count,
-creating one invocation context for the method call and then calling
-the method with the effective receiver, the evaluated arguments and the
-created invocation context.
+A runtime method is executed here by validating argument count,
+creating one invocation context for the method call, and delegating
+the actual method body execution to the runtime method object.
 """
 
 from __future__ import annotations
@@ -92,11 +91,14 @@ class MethodExecutor:
         """
         _validate_argument_count(method, args)
 
+        # user methods must run with object receiver
         if isinstance(method, UserMethod) and isinstance(receiver, RuntimeClass):
             raise InterpreterError(
                 ErrorCode.GENERAL_OTHER,
                 "Class receiver is not valid for a user method execution.",
             )
 
+        # self and super semantics for this call fixed
         ctx = _create_invocation_context(receiver, method.owner)
+        # execution delegated to runtime method object
         return method.call(receiver, args, ctx)

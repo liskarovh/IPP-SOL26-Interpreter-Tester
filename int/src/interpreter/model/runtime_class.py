@@ -1,12 +1,12 @@
 """
 @file runtime_class.py
-@brief Runtime class representation is defined.
+@brief Runtime class representation is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
 A runtime class stores its name, parent reference, and runtime methods.
-Method lookup over the inheritance chain is intended to be performed here.
+Method lookup over the inheritance chain is performed here.
 """
 
 from __future__ import annotations
@@ -30,12 +30,14 @@ class RuntimeClass:
         """
         self.name = name
         self.parent = parent
+
+        # class side and instance side methods are stored separately
         self.class_methods_by_selector: dict[str, RuntimeMethod] = {}
         self.instance_methods_by_selector: dict[str, RuntimeMethod] = {}
 
     def inherits_from_name(self, ancestor_name: str) -> bool:
         """
-        @brief Whether this runtime class is one named ancestor or inherits from it is checked.
+        @brief Whether this runtime class is or inherits from one named ancestor is checked.
 
         @param ancestor_name One ancestor class name to be checked.
         @return True when this class is the named ancestor or inherits from it, otherwise False.
@@ -57,6 +59,8 @@ class RuntimeClass:
         @param method A runtime method to be attached to this class.
         """
         selector = method.selector
+
+        # duplicate selectors rejected in local instance table
         if selector in self.instance_methods_by_selector:
             raise InterpreterError(
                 ErrorCode.GENERAL_OTHER,
@@ -72,6 +76,8 @@ class RuntimeClass:
         """
 
         selector = method.selector
+
+        # duplicate selectors rejected in local class table
         if selector in self.class_methods_by_selector:
             raise InterpreterError(
                 ErrorCode.GENERAL_OTHER,
@@ -112,6 +118,7 @@ class RuntimeClass:
         """
         current: RuntimeClass | None = self
 
+        # lookup starts on current class and climbs through parents
         while current is not None:
             if class_side:
                 local_method = current._lookup_class_local(selector)

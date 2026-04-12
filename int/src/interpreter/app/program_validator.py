@@ -1,12 +1,19 @@
 """
 @file program_validator.py
-@brief Static validation of a loaded AST program is defined.
+@brief Static validation of a loaded AST program is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-The validator is responsible only for static checks over the AST model.
-No runtime structures are built here, and no expressions are executed here.
+Only static checks over the AST model are performed here.
+
+This module may raise InterpreterError with these codes:
+- INT_STRUCTURE for invalid top-level program structure
+- SEM_ERROR for general static semantic errors
+- SEM_ARITY for selector/block arity mismatches
+- SEM_MAIN for missing or invalid entry point
+- SEM_COLLISION for assignment to a block parameter
+- SEM_UNDEF for undefined classes, selectors, or variables
 """
 
 from __future__ import annotations
@@ -44,6 +51,7 @@ class ProgramValidator:
 
         self._class_index: dict[str, AstClassDef] = {}
 
+        # class side selectors accepted on every known class
         self._class_side_selectors_on_all_classes: set[str] = {
             "new",
             "from:",
@@ -53,6 +61,7 @@ class ProgramValidator:
             "read",
         }
 
+        # names that cant appear on left side of assignment
         self._special_immutable_names: set[str] = {
             "self",
             "super",
@@ -85,8 +94,7 @@ class ProgramValidator:
         """
         @brief The top-level program header is validated.
 
-        Only program-level checks are expected to be performed here.
-        Class-level and method-level checks should be kept in later steps.
+        Only program-level checks are performed here.
 
         @param program A loaded AST program to be inspected.
         """
@@ -100,8 +108,8 @@ class ProgramValidator:
         """
         @brief Program-shape validation is executed.
 
-        Class-name uniqueness is validated first. After that, the class index
-        is prepared for later validation phases.
+        Class-name uniqueness is validated first.
+        Class index is prepared for later phases.
 
         @param program A loaded AST program to be inspected.
         """
@@ -171,10 +179,10 @@ class ProgramValidator:
         """
         @brief All methods of one class are validated.
 
-        Duplicate selectors are checked first. After that, method signatures
-        and method bodies are validated in the original program order.
+        Duplicate selectors are checked first.
+        Method signatures and bodies are then validated in program order.
 
-        @param class_def A class whose methods are to be inspected.
+        @param class_def A class whose methods are inspected.
         """
         seen_selectors: set[str] = set()
 
@@ -208,6 +216,8 @@ class ProgramValidator:
         """
         @brief The required program entry point is validated.
         """
+
+        # SOL26 requires the entry point Main>>run
         main_class = self._class_index.get("Main")
 
         if main_class is None:
@@ -282,15 +292,15 @@ class ProgramValidator:
         """
         @brief One block is validated in its lexical visibility context.
 
-        The current lexical scope is represented by visible names, parameter
-        names and special immutable names. No runtime structures are expected
-        to be used here.
+        Current lexical scope is represented by visible names,
+        parameter names, and special immutable names.
 
         @param block A block to be validated.
         @param visible_names Names that may currently be read.
-        @param parameter_names Formal block parameters visible in the current scope.
+        @param parameter_names Formal block parameters visible in current scope.
         @param special_immutable_names Special names that must never be assigned to.
         """
+        # each block gets its own lexical extension of the incoming scope
         local_block_parameter_names = self._validate_one_block_parameters(block)
 
         (
@@ -343,9 +353,9 @@ class ProgramValidator:
         @brief Lexical scope for one nested block is created.
 
         @param visible_names Names that may currently be read.
-        @param parameter_names Formal block parameters visible in the current scope.
+        @param parameter_names Formal block parameters visible in current scope.
         @param special_immutable_names Special names that must never be assigned to.
-        @param local_block_parameter_names Unique parameter names of the current block.
+        @param local_block_parameter_names Unique parameter names of current block.
         @return Extended local visible names, local parameter names,
                 and local immutable names.
         """
@@ -353,6 +363,7 @@ class ProgramValidator:
         local_parameter_names = set(parameter_names)
         local_special_immutable_names = set(special_immutable_names)
 
+        # block parameters become visible inside the block body
         local_visible_names.update(local_block_parameter_names)
         local_parameter_names.update(local_block_parameter_names)
 
@@ -372,12 +383,12 @@ class ProgramValidator:
         """
         @brief All assignments of one block are validated.
 
-        Assignment targets are added to visible names only after the
-        corresponding assignment has been validated.
+        Assignment targets are added to visible names only after
+        the corresponding assignment has been validated.
 
-        @param block A block whose assignments are to be inspected.
+        @param block A block whose assignments are inspected.
         @param visible_names Names that may currently be read.
-        @param parameter_names Formal block parameters visible in the current scope.
+        @param parameter_names Formal block parameters visible in current scope.
         @param special_immutable_names Special names that must never be assigned to.
         """
         for assign in block.assigns:
@@ -387,6 +398,8 @@ class ProgramValidator:
                 parameter_names,
                 special_immutable_names,
             )
+
+            # name becomes visible
             visible_names.add(target_name)
 
     def _validate_assign(
@@ -399,16 +412,16 @@ class ProgramValidator:
         """
         @brief One assignment is validated.
 
-        The assignment target is classified first. Formal block parameters
-        are rejected with SEM_COLLISION. Special built-in names are rejected
-        with SEM_ERROR. The right-hand expression is validated only after
-        the target is accepted.
+        Assignment target is classified first.
+        Formal block parameters are rejected with SEM_COLLISION.
+        Special built-in names are rejected with SEM_ERROR.
+        Right-hand expression is validated only after target is accepted.
 
         @param assign An assignment to be inspected.
         @param visible_names Names that may currently be read.
-        @param parameter_names Formal block parameters visible in the current scope.
+        @param parameter_names Formal block parameters visible in current scope.
         @param special_immutable_names Special names that must never be assigned to.
-        @return The validated assignment target name.
+        @return Validated assignment target name.
         """
         target_name = assign.target.name
 

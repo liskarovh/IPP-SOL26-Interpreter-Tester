@@ -1,9 +1,12 @@
 """
 @file user_object.py
-@brief The runtime user object class is declared.
+@brief Runtime user object is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
+
+Runtime user objects are represented here as runtime values
+with attached slot storage.
 """
 
 from __future__ import annotations

@@ -1,11 +1,11 @@
 """
 @file object_slots.py
-@brief Object slot storage is declared.
+@brief Object slot storage is implemented.
 @author Hana Liškařová xliskah00
 
 DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-Slot storage for user objects is represented here.
+Slot storage for runtime user objects is represented here.
 """
 
 from __future__ import annotations
@@ -85,6 +85,7 @@ class ObjectSlots:
         @param target A target slot store receiving all current slot bindings.
         """
         for slot_name, slot_value in self.slots_by_name.items():
+            # target define preserves same duplicate-slot rules as normal slot creation
             target.define(slot_name, slot_value)
 
     def _require_existing_slot(self, name: str) -> None:

@@ -1,11 +1,12 @@
 """
 @file program_runner.py
-@brief Program execution orchestration is defined.
+@brief Program execution orchestration is implemented.
+@author Hana Liškařová xliskah00
 
-DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME.
+DOXYGEN COMMENTS WERE AI GENERATED AND PROOFREAD BY ME
 
-A loaded AST program is validated, converted into a runtime, resolved
-to the program entry point, and then executed.
+A loaded AST program is validated, converted into a runtime,
+resolved to the program entry point, and executed here.
 """
 
 from __future__ import annotations
@@ -36,8 +37,8 @@ class ProgramRunner:
         """
         @brief Stateless pipeline collaborators are initialized.
 
-        The execution chain is not created here, because it must be bound
-        to the concrete runtime instance built for one program run.
+        The execution chain is not created here because it must be bound
+        to the concrete runtime built for one program run.
         """
         self.program_validator = ProgramValidator()
         self.runtime_builder = RuntimeBuilder()
@@ -50,9 +51,12 @@ class ProgramRunner:
         """
         @brief One block executor is wired into all user-defined runtime methods.
 
-        @param runtime A runtime containing registered runtime classes.
+        @param runtime A runtime with registered runtime classes.
         @param block_executor A block executor used for user-method execution.
         """
+
+        # user methods created during runtime build and wired after
+        # avoid circular dependencies between runtime and execution classes
         for runtime_class in runtime.class_registry.classes.values():
             for method in runtime_class.instance_methods_by_selector.values():
                 if isinstance(method, UserMethod):
@@ -66,14 +70,15 @@ class ProgramRunner:
         """
         @brief One loaded program is validated, built, resolved, and executed.
 
-        The program is validated first. A runtime is then built, the
-        runtime entry point is resolved, and the entry method is executed.
+        The program is validated first. A runtime is then built,
+        the entry point is resolved, and the entry method is executed.
 
         @param program A previously loaded AST program.
         @param input_io An input/output adapter passed from the interpreter.
         """
         self.program_validator.validate(program)
 
+        # send evaluation wiring
         attribute_resolver = AttributeDispatchResolver()
         attribute_accessor = AttributeAccessor()
 
@@ -89,6 +94,7 @@ class ProgramRunner:
             attribute_accessor,
         )
 
+        # runtime builtins need callbacks for instance sends
         def send_zero_arg_message(
             target_value: RuntimeValue,
             selector: str,
@@ -104,6 +110,7 @@ class ProgramRunner:
                 ctx,
             )
 
+        # runtime build binds builtin send callbacks
         def send_one_arg_message(
             target_value: RuntimeValue,
             selector: str,
@@ -120,6 +127,7 @@ class ProgramRunner:
                 ctx,
             )
 
+        # runtime model creation
         runtime = self.runtime_builder.build(
             program,
             input_io,
@@ -127,6 +135,7 @@ class ProgramRunner:
             send_one_arg_message,
         )
 
+        # execution chain creation
         expression_dispatcher = ExpressionDispatcher(
             runtime.object_factory,
             instance_send_evaluator,
@@ -141,5 +150,6 @@ class ProgramRunner:
 
         self._wire_user_methods(runtime, block_executor)
 
+        # execution starts from the resolved SOL26 entry point
         entry_receiver, entry_method = EntryPointResolver.resolve(runtime)
         method_executor.execute(entry_method, entry_receiver, [])

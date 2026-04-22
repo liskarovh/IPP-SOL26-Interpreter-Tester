@@ -6,8 +6,7 @@
 **User:**   
 **Created:** 4/6/2026 0:31:28  
 **Updated:** 4/21/2026 17:14:43  
-**Exported:** 4/21/2026 20:54:26  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d2e2ad-7c34-8384-beb3-4b03151baa1e](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d2e2ad-7c34-8384-beb3-4b03151baa1e)  
+**Exported:** 4/21/2026 20:54:26
 
 ## Prompt:
 6. 4. 2026 0:31:26
@@ -3829,7 +3828,6 @@ Piš česky.
 **Created:** 4/10/2026 11:02:45  
 **Updated:** 4/21/2026 19:00:09  
 **Exported:** 4/21/2026 20:45:38  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d8bc8e-72e8-838d-b909-2c7a22dc7506](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d8bc8e-72e8-838d-b909-2c7a22dc7506)  
 
 ## Prompt:
 10. 4. 2026 11:02:10
@@ -4162,7 +4160,6 @@ Piš česky.
 **Created:** 4/11/2026 17:21:14  
 **Updated:** 4/21/2026 19:02:36  
 **Exported:** 4/21/2026 20:45:26  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69da66c2-d8ac-8388-abef-a1a94f0882fd](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69da66c2-d8ac-8388-abef-a1a94f0882fd)  
 
 ## Prompt:
 11. 4. 2026 17:21:12
@@ -4385,7 +4382,6 @@ Piš česky.
 **Created:** 4/6/2026 12:42:20  
 **Updated:** 4/21/2026 17:16:29  
 **Exported:** 4/21/2026 20:54:00  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d38dff-4cf0-8397-8486-566dd302b51c](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d38dff-4cf0-8397-8486-566dd302b51c)  
 
 ## Prompt:
 6. 4. 2026 12:42:18
@@ -4959,7 +4955,6 @@ Tento chat sloužil k přesnému vyjasnění, jak v SOL26 funguje arita bloků a
 
 ---
 
-```
 
 ## 5. chat konverzace/ChatGPT-Redefinice třídy SOL26.md
 
@@ -4970,7 +4965,6 @@ Tento chat sloužil k přesnému vyjasnění, jak v SOL26 funguje arita bloků a
 **Created:** 3/23/2026 23:11:45  
 **Updated:** 4/21/2026 17:22:51  
 **Exported:** 4/21/2026 20:52:18  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69c1ba88-f038-838d-8978-091b42bfeb43](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69c1ba88-f038-838d-8978-091b42bfeb43)  
 
 ## Prompt:
 23. 3. 2026 23:11:44
@@ -5176,7 +5170,6 @@ Tento chat sloužil k ujasnění, jak v SOL26 fungují chyby související s def
 **Created:** 4/12/2026 0:46:33  
 **Updated:** 4/21/2026 19:05:39  
 **Exported:** 4/21/2026 20:43:38  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69dacf31-2d7c-8392-a927-1dcd515a61dc](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69dacf31-2d7c-8392-a927-1dcd515a61dc)  
 
 ## Prompt:
 12. 4. 2026 1:14:36
@@ -5719,7 +5712,6 @@ Piš česky.
 **Created:** 3/26/2026 21:41:29  
 **Updated:** 4/21/2026 18:51:37  
 **Exported:** 4/21/2026 20:46:25  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69c599e9-cb40-838d-9577-057c81e75efc](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69c599e9-cb40-838d-9577-057c81e75efc)  
 
 ## Prompt:
 26. 3. 2026 21:41:27
@@ -6879,7 +6871,6 @@ Piš česky.
 **Created:** 3/23/2026 18:21:31  
 **Updated:** 4/21/2026 17:23:13  
 **Exported:** 4/21/2026 20:52:08  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69c17679-bab0-8394-8438-fc419ae15659](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69c17679-bab0-8394-8438-fc419ae15659)  
 
 ## Prompt:
 23. 3. 2026 18:21:29
@@ -8050,8 +8041,7 @@ Tento chat sloužil jako konkrétní a příkladový úvod do základů OOP v Py
 **User:**   
 **Created:** 4/7/2026 21:07:16  
 **Updated:** 4/21/2026 17:14:02  
-**Exported:** 4/21/2026 20:54:43  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d5556e-6668-8388-9a13-9d8f6330a081](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d5556e-6668-8388-9a13-9d8f6330a081)  
+**Exported:** 4/21/2026 20:54:43
 
 ## Prompt:
 7. 4. 2026 21:07:14
@@ -14030,7 +14020,6 @@ Tento chat sloužil jako průběžná analytická kontrola výsledků testů SOL
 **Created:** 3/20/2026 12:25:17  
 **Updated:** 4/21/2026 17:21:37  
 **Exported:** 4/21/2026 20:52:47  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69bd2e90-c868-8396-83c2-77adc55eaa68](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69bd2e90-c868-8396-83c2-77adc55eaa68)  
 
 ## Prompt:
 20. 3. 2026 12:26:12
@@ -15983,8 +15972,7 @@ Tento chat sloužil jako konkrétní technická diagnostika checker chyb a Docke
 **User:**   
 **Created:** 3/17/2026 12:01:33  
 **Updated:** 4/21/2026 17:26:52  
-**Exported:** 4/21/2026 20:49:10  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69b93470-2aa0-8395-a722-39c2fc6f45d0](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69b93470-2aa0-8395-a722-39c2fc6f45d0)  
+**Exported:** 4/21/2026 20:49:10
 
 ## Prompt:
 17. 3. 2026 12:01:32
@@ -16240,7 +16228,7 @@ Cílový stav, ke kterému mířit
 
 Podle vaší domluvené struktury bych tester držel takto:
 
-```
+
 tester/
   package.json
   tsconfig.json
@@ -16273,7 +16261,7 @@ tester/
       fs_utils.ts
       temp_files.ts
       text_utils.ts
-```
+
 
 Neříkám, že musíš mít přesně tyto názvy. Říkám, že **tuhle granularitu** bych držel. Jedna vrstva = jedna odpovědnost.
 
@@ -19812,7 +19800,6 @@ Piš česky.
 **Created:** 4/7/2026 21:14:50  
 **Updated:** 4/21/2026 17:28:16  
 **Exported:** 4/21/2026 20:47:15  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d55771-2214-8386-84ed-bd2bb6ee2d47](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d55771-2214-8386-84ed-bd2bb6ee2d47)  
 
 ## Prompt:
 7. 4. 2026 21:14:46
@@ -24524,7 +24511,6 @@ Piš česky.
 **Created:** 3/31/2026 11:24:34  
 **Updated:** 4/21/2026 17:25:33  
 **Exported:** 4/21/2026 20:50:31  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69cb92bf-c97c-8387-b94b-0717cf6a9d7f](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69cb92bf-c97c-8387-b94b-0717cf6a9d7f)  
 
 ## Prompt:
 31. 3. 2026 11:24:32
@@ -25153,7 +25139,6 @@ Piš česky.
 **Created:** 4/11/2026 13:41:59  
 **Updated:** 4/21/2026 19:12:48  
 **Exported:** 4/21/2026 20:42:49  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69da3379-aeec-8390-bc67-20136ef10965](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69da3379-aeec-8390-bc67-20136ef10965)  
 
 ## Prompt:
 9. 3. 2026 18:41:16
@@ -29911,7 +29896,6 @@ Tento chat sloužil k tomu, abyste spolu postupně navrhli co nejčistší a obh
 **Created:** 3/10/2026 11:33:53  
 **Updated:** 4/21/2026 17:26:19  
 **Exported:** 4/21/2026 20:50:07  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69aff338-1738-8386-a897-c51d8a492114](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69aff338-1738-8386-a897-c51d8a492114)  
 
 ## Prompt:
 10. 3. 2026 11:33:52
@@ -38316,8 +38300,7 @@ Piš česky.
 **User:**   
 **Created:** 4/6/2026 0:50:41  
 **Updated:** 4/21/2026 17:29:41  
-**Exported:** 4/21/2026 20:46:56  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d2e6ee-44a4-838b-a3ec-d6b4e1c1186a](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d2e6ee-44a4-838b-a3ec-d6b4e1c1186a)  
+**Exported:** 4/21/2026 20:46:56
 
 ## Prompt:
 6. 4. 2026 0:50:38
@@ -39339,8 +39322,7 @@ Piš česky.
 **User:**   
 **Created:** 4/16/2026 23:54:49  
 **Updated:** 4/21/2026 19:08:57  
-**Exported:** 4/21/2026 20:43:16  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e15aa1-8a9c-8397-a2fc-d926071a0dc5](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e15aa1-8a9c-8397-a2fc-d926071a0dc5)  
+**Exported:** 4/21/2026 20:43:16
 
 ## Prompt:
 16. 4. 2026 23:58:38
@@ -41304,7 +41286,6 @@ Piš česky.
 **Created:** 4/17/2026 20:53:51  
 **Updated:** 4/21/2026 17:24:37  
 **Exported:** 4/21/2026 20:51:21  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e28182-e680-83eb-88de-44a82546223a](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e28182-e680-83eb-88de-44a82546223a)  
 
 ## Prompt:
 17. 4. 2026 20:53:50
@@ -42151,7 +42132,6 @@ Piš česky.
 **Created:** 3/18/2026 15:45:23  
 **Updated:** 4/21/2026 17:27:14  
 **Exported:** 4/21/2026 20:48:39  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69baba4f-7f40-8386-a911-645f09c44cb1](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69baba4f-7f40-8386-a911-645f09c44cb1)  
 
 ## Prompt:
 18. 3. 2026 15:45:21
@@ -44418,7 +44398,6 @@ Piš česky.
 **Created:** 4/12/2026 14:10:44  
 **Updated:** 4/21/2026 17:15:26  
 **Exported:** 4/21/2026 20:54:07  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69db8b65-9984-8388-86b2-60fa82b80ba7](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69db8b65-9984-8388-86b2-60fa82b80ba7)  
 
 ## Prompt:
 12. 4. 2026 14:10:42
@@ -45892,7 +45871,6 @@ Tento chat sloužil k detailnímu rozebrání, proč checker `is_archive_ok.sh` 
 **Created:** 3/22/2026 13:40:14  
 **Updated:** 4/21/2026 17:21:06  
 **Exported:** 4/21/2026 20:52:58  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69bfe31c-0fa4-838b-b320-e3cdc8878515](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69bfe31c-0fa4-838b-b320-e3cdc8878515)  
 
 ## Prompt:
 22. 3. 2026 13:40:12
@@ -46685,7 +46663,6 @@ Tento konkrétní chat sloužil k odhalení, proč v Docker `check` stage nefung
 **Created:** 3/21/2026 12:26:04  
 **Updated:** 4/21/2026 17:23:37  
 **Exported:** 4/21/2026 20:51:59  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69be8049-6478-8387-b52b-db5208be99f5](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69be8049-6478-8387-b52b-db5208be99f5)  
 
 ## Prompt:
 21. 3. 2026 12:26:02
@@ -51945,8 +51922,7 @@ Tento chat sloužil k praktickému rozběhání a ověření dry run vrstvy test
 **User:**   
 **Created:** 3/21/2026 16:05:15  
 **Updated:** 4/21/2026 17:22:01  
-**Exported:** 4/21/2026 20:52:29  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69beb391-1124-8388-af46-4d197260de1b](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69beb391-1124-8388-af46-4d197260de1b)  
+**Exported:** 4/21/2026 20:52:29
 
 ## Prompt:
 21. 3. 2026 16:05:14
@@ -52274,7 +52250,6 @@ Tento chat sloužil k vytvoření a následnému přehlednému vypsání balíč
 **Created:** 4/21/2026 16:58:13  
 **Updated:** 4/21/2026 20:37:23  
 **Exported:** 4/21/2026 20:39:57  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e78fda-a7fc-8391-ab35-0fedbe9c76dd](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e78fda-a7fc-8391-ab35-0fedbe9c76dd)  
 
 ## Prompt:
 21. 4. 2026 16:58:10
@@ -52588,7 +52563,6 @@ Soubor je tady: chatgpt-full.md
 **Created:** 3/30/2026 16:16:45  
 **Updated:** 4/21/2026 17:27:36  
 **Exported:** 4/21/2026 20:47:47  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69ca85ad-ca90-838f-9469-c6c6e70be786](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69ca85ad-ca90-838f-9469-c6c6e70be786)  
 
 ## Prompt:
 30. 3. 2026 16:16:39
@@ -52983,8 +52957,7 @@ Piš česky.
 **User:**   
 **Created:** 4/5/2026 19:55:04  
 **Updated:** 4/21/2026 17:20:05  
-**Exported:** 4/21/2026 20:53:13  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d2a1ec-1ad4-8397-b0ce-5df0e5ac5376](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d2a1ec-1ad4-8397-b0ce-5df0e5ac5376)  
+**Exported:** 4/21/2026 20:53:13
 
 ## Prompt:
 5. 4. 2026 19:55:02
@@ -53286,7 +53259,6 @@ Tento chat sloužil k vysvětlení, co je kruhový import v Pythonu, proč vznik
 **Created:** 4/17/2026 21:25:50  
 **Updated:** 4/21/2026 19:13:45  
 **Exported:** 4/21/2026 20:41:54  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e2892a-6da8-83eb-a6fc-4d8bdf89460b](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e2892a-6da8-83eb-a6fc-4d8bdf89460b)  
 
 ## Prompt:
 17. 4. 2026 21:25:49
@@ -53689,7 +53661,6 @@ Piš česky a buď konkrétní.
 **Created:** 4/8/2026 21:02:58  
 **Updated:** 4/21/2026 17:17:25  
 **Exported:** 4/21/2026 20:53:55  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d6a64a-f824-8391-b7f5-5af090505e7c](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d6a64a-f824-8391-b7f5-5af090505e7c)  
 
 ## Prompt:
 8. 4. 2026 21:02:57
@@ -53972,7 +53943,6 @@ Tento chat sloužil ke kontrole jednoho konkrétního SOL26 testu a k ověření
 **Created:** 3/21/2026 17:23:13  
 **Updated:** 4/21/2026 17:30:13  
 **Exported:** 4/21/2026 20:46:39  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69bec5da-f8ec-838d-930f-bad170af85e9](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69bec5da-f8ec-838d-930f-bad170af85e9)  
 
 ## Prompt:
 21. 3. 2026 17:23:11
@@ -55640,8 +55610,6 @@ Piš česky.
 
 ---
 
-```
-
 ## 30. chat konverzace/ChatGPT-Testování interpretu a testeru.md
 
 ```md
@@ -55651,7 +55619,6 @@ Piš česky.
 **Created:** 3/29/2026 16:00:04  
 **Updated:** 4/21/2026 17:17:55  
 **Exported:** 4/21/2026 20:53:42  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69c93008-cab4-838c-844c-86048ffa64ea](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69c93008-cab4-838c-844c-86048ffa64ea)  
 
 ## Prompt:
 29. 3. 2026 16:00:02
@@ -63077,7 +63044,6 @@ Piš česky.
 **Created:** 3/9/2026 18:41:17  
 **Updated:** 4/21/2026 19:15:24  
 **Exported:** 4/21/2026 20:41:32  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69af05fd-0e1c-8391-bec1-1b6d063da800](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69af05fd-0e1c-8391-bec1-1b6d063da800)  
 
 ## Prompt:
 9. 3. 2026 18:41:16
@@ -67763,7 +67729,6 @@ Piš česky.
 **Created:** 4/5/2026 13:10:03  
 **Updated:** 4/21/2026 17:20:25  
 **Exported:** 4/21/2026 20:53:05  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d24305-4ed8-8387-ba9e-53fad4b19471](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69d24305-4ed8-8387-ba9e-53fad4b19471)  
 
 ## Prompt:
 5. 4. 2026 13:10:02
@@ -68337,7 +68302,6 @@ Tento chat sloužil k tomu, aby se čistě podle specifikace SOL26 ujasnilo, **j
 **Created:** 3/15/2026 17:08:56  
 **Updated:** 4/21/2026 17:24:04  
 **Exported:** 4/21/2026 20:51:38  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69b6d963-24ac-8385-a0a7-3152be169d1f](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e/c/69b6d963-24ac-8385-a0a7-3152be169d1f)  
 
 ## Prompt:
 15. 3. 2026 17:08:55
@@ -71522,8 +71486,7 @@ Piš česky.
 **User:**   
 **Created:** 4/8/2026 21:17:17  
 **Updated:** 4/21/2026 17:27:56  
-**Exported:** 4/21/2026 20:47:28  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d6a9aa-9700-838e-b946-6b3a826fe4bb](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69d6a9aa-9700-838e-b946-6b3a826fe4bb)  
+**Exported:** 4/21/2026 20:47:2
 
 ## Prompt:
 8. 4. 2026 21:17:00
@@ -73234,8 +73197,7 @@ Piš česky.
 **User:**   
 **Created:** 4/17/2026 10:38:10  
 **Updated:** 4/21/2026 17:25:14  
-**Exported:** 4/21/2026 20:51:04  
-**Link:** [https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e1f16f-5938-83eb-ac34-0b739dc5bdb7](https://chatgpt.com/g/g-p-69de168ad8e08191bf423881fc114d3e-ipp-sol26-interpreter/c/69e1f16f-5938-83eb-ac34-0b739dc5bdb7)  
+**Exported:** 4/21/2026 20:51:04
 
 ## Prompt:
 17. 4. 2026 10:38:08
@@ -73471,7 +73433,7 @@ Je to už dost dobré obsahově, ale na body za **stylistiku, pochopitelnost, st
 Upravená verze
 --------------
 
-```
+
 \section{Možnosti rozšíření}
 
 \subsection{Mechanismus výjimek}
@@ -73515,7 +73477,7 @@ Hlavní nutné změny by tedy byly:
     \item ukládání uživatelsky definovaných třídních metod do třídní části \ident{RuntimeClass},
     \item doplnění samostatného úložiště pro třídní atributy přímo do \ident{RuntimeClass}.
 \end{enumerate}
-```
+
 
 Co bych vytkl v původní verzi
 -----------------------------
@@ -73607,7 +73569,7 @@ Seznam „Hlavní nutné změny“ je dobrý. U technické dokumentace to zlepš
 
 Například:
 
-```
+
 Tato část shrnuje dvě vybraná rozšíření a ukazuje, jak by je bylo možné doplnit při zachování stávající architektury interpretu.
 ```
 

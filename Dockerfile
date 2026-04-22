@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-ARG PYTHON_IMAGE=python:3.14-bookworm
-ARG NODE_IMAGE=node:24.12-bookworm
+ARG PYTHON_IMAGE=python:3.14-slim-bookworm
+ARG NODE_IMAGE=node:24.12-bookworm-slim
 
 # -----------------------------------------------------------------------------
 # Shared Node.js toolchain
